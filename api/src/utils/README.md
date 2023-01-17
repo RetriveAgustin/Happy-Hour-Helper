@@ -1,0 +1,1 @@
+acá van las funciones modularizadas de los distintos controladores
