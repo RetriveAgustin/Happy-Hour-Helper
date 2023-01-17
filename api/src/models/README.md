@@ -53,15 +53,17 @@ Product:
 --> bulk-discount: numeric (allowNull: true)
 --> stock: numeric (allowNull: true)
 --> rating: ENUM (0-5) (allowNull: true)
---> discount: boolean (allowNull: true)
---> doscount-rate: numeric (allowNull: true)
 --> show: boolean
+
+Discount:
+--> id: uuid v4
+--> initial-date: date
+--> expiration-date: date
+--> discount-amount: numeric
 
 Brand:
 --> id: uuid v4
 --> name: string
---> discount: boolean (allowNull: true)
---> discount-rate: numeric (allowNull: true)
 --> show: boolean
 
 Category:
@@ -83,4 +85,5 @@ Order 1:n Product
 Offers 1:n Product
 Brand 1:n Product
 Product 1:n Category
+Product n:n Discount
 Category 1:n Sub-category
