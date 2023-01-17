@@ -3,23 +3,27 @@ const { DataTypes, Sequelize } = require("sequelize");
 module.exports = (sequelize) => {
 
     sequelize.define(
-        "Adress",
+        "Order",
         {
             id: {
                 type: Sequelize.UUID,
                 defaultValue: Sequelize.UUIDV4,
                 primaryKey: true
               },
-              street: {
-                type: Sequelize.STRING
+              date: {
+                type: Sequelize.DATE
               },
-              number: {
-                type: Sequelize.INTEGER,
-                allowNull: true
+              delivered: {
+                type: Sequelize.BOOLEAN
               },
-              description: {
-                type: Sequelize.STRING,
-                allowNull: true
+              canceled: {
+                type: Sequelize.BOOLEAN
+              },
+              adress: {
+                type: Sequelize.UUID,
+              },
+              payment_method: {
+                type: Sequelize.UUID,
               },
         },
         {
@@ -28,5 +32,3 @@ module.exports = (sequelize) => {
         }
     );
 };
-
-
