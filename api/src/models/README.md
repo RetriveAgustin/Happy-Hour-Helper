@@ -81,7 +81,7 @@ User 1:n Adress
 User 1:n Payment-method
 User 1:n Order
 Order 1:n Offers
-Order 1:n Product
+Order n:n Product
 Offers 1:n Product
 Brand 1:n Product
 Product 1:n Category
