@@ -10,14 +10,14 @@ module.exports = (sequelize) => {
         primaryKey: true,
       },
       street: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
       },
       number: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: true,
       },
       description: {
-        type: Sequelize.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },
