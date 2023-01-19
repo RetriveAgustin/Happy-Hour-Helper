@@ -62,9 +62,17 @@ const deleteModels = async (model, id) => {
     else return null;
 }
 
+<<<<<<< HEAD
 const restoreModels = async (model, id) => {
   if (id) {
     const recoveredInstance = await Model.restore({where: {id}});
+=======
+
+
+const restoreModels = async (model, id) => {
+  if (id) {
+    const recoveredInstance = await model.restore({where: {id}});
+>>>>>>> 30274779585dff9a799bcf3a369f03382bf6a828
     return recoveredInstance;
   }
   else {
@@ -72,10 +80,15 @@ const restoreModels = async (model, id) => {
   }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 30274779585dff9a799bcf3a369f03382bf6a828
 module.exports = {
   getModels,
   getModelsById,
   postModels,
   putModels,
-  deleteModels
+  deleteModels,
+  restoreModels
 };

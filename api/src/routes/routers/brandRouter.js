@@ -19,4 +19,6 @@ brandRouter.put("/putBrand", putBrand);
 
 brandRouter.delete("/deleteBrand", deleteBrand);
 
+brandRouter.get("/recuperarModels", restoreBrand );
+
 module.exports = brandRouter;
