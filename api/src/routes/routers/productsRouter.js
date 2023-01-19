@@ -18,7 +18,7 @@ productRouter.post("/postProducts", postProduct);
 
 productRouter.put("/putProducts", putProduct);
 
-productRouter.put("/deleteProducts", deleteProduct);
+productRouter.delete("/deleteProducts", deleteProduct);
 
 productRouter.get('/products/filterByBrand', filterProductByBrand)
 

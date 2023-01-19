@@ -14,6 +14,6 @@ brandRouter.post("/postBrand", postBrand);
 
 brandRouter.put("/putBrand", putBrand);
 
-brandRouter.put("/deleteBrand", deleteBrand);
+brandRouter.delete("/deleteBrand", deleteBrand);
 
 module.exports = brandRouter;

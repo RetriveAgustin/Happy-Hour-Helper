@@ -14,6 +14,6 @@ ordersRouter.post("/postOrder", postOrder);
 
 ordersRouter.put("/putOrder", putOrder);
 
-ordersRouter.put("/deleteOrder", deleteOrder);
+ordersRouter.delete("/deleteOrder", deleteOrder);
 
 module.exports = ordersRouter;

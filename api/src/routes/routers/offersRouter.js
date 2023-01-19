@@ -14,6 +14,6 @@ offerRouter.post("/postOffer", postOffer);
 
 offerRouter.put("/putOffer", putOffer);
 
-offerRouter.put("/deleteOffer", deleteOffer);
+offerRouter.delete("/deleteOffer", deleteOffer);
 
 module.exports = offerRouter;

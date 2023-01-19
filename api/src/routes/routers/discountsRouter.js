@@ -14,7 +14,7 @@ discounRouter.post("/postDiscount", postDiscount);
 
 discounRouter.put("/putDiscount", putDiscount);
 
-discounRouter.put("/deleteDiscount", deleteDiscount);
+discounRouter.delete("/deleteDiscount", deleteDiscount);
 
 module.exports = discounRouter;
 

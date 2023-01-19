@@ -14,6 +14,6 @@ subCategoryRouter.post("/postSubCategory", postSubCategory);
 
 subCategoryRouter.put("/putSubCategory", putSubCategory);
 
-subCategoryRouter.put("/deleteSubCategory", deleteSubCategory);
+subCategoryRouter.delete("/deleteSubCategory", deleteSubCategory);
 
 module.exports = subCategoryRouter;

@@ -14,6 +14,6 @@ paymentRouter.post("/postPayment", postPayment);
 
 paymentRouter.put("/putPayment", putPayment);
 
-paymentRouter.put("/deletePayment", deletePayment);
+paymentRouter.delete("/deletePayment", deletePayment);
 
 module.exports = paymentRouter;

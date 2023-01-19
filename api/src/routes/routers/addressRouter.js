@@ -14,6 +14,6 @@ addressRouter.post("/postAddress", postAddress);
 
 addressRouter.put("/putAddress", putAddress);
 
-addressRouter.put("/deleteAddress", deleteAddress);
+addressRouter.delete("/deleteAddress", deleteAddress);
 
 module.exports = addressRouter;
