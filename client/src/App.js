@@ -1,5 +1,5 @@
 import './App.css';
-import { LandingScreen } from './pages/LandingScreen';
+import { LandingScreen } from './views/LandingScreen';
 
 function App() {
   return (
