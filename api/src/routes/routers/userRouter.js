@@ -6,14 +6,17 @@ const {
   postUser,
   putUser,
   deleteUser,
+  restoreUser
 } = require("../controllers/UserController");
 
-userRouter.get("/getUsers", getUser);
+userRouter.get("/getUser", getUser);
 
-userRouter.post("/postUsers", postUser);
+userRouter.get("/restoreUser", restoreUser);
 
-userRouter.put("/putUsers", putUser);
+userRouter.post("/postUser", postUser);
 
-userRouter.delete("/deleteUsers", deleteUser);
+userRouter.put("/putUser", putUser);
+
+userRouter.delete("/deleteUser", deleteUser);
 
 module.exports = userRouter;

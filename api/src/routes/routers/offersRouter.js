@@ -6,9 +6,12 @@ const {
   postOffer,
   putOffer,
   deleteOffer,
+  restoreOffer
 } = require("../controllers/OfferController");
 
 offerRouter.get("/getOffer", getOffer);
+
+offerRouter.get("/restoreOffer", restoreOffer);
 
 offerRouter.post("/postOffer", postOffer);
 

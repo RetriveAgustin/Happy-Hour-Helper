@@ -6,9 +6,12 @@ const {
   postCategory,
   putCategory,
   deleteCategory,
+  restoreCategory
 } = require("../controllers/categoryController");
 
 categoryRouter.get("/getCategory", getCategory);
+
+categoryRouter.get("/restoreCategory", restoreCategory);
 
 categoryRouter.post("/postCategory", postCategory);
 

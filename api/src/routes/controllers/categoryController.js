@@ -5,6 +5,7 @@ const {
   postModels,
   putModels,
   deleteModels,
+  restoreModels
 } = require("../utils/mainUtils");
 
 const getCategory = async (req, res) => {
@@ -44,16 +45,27 @@ const putCategory = async (req, res) => {
 const deleteCategory = async (req, res) => {
   try {
     const { id } = req.body;
-    const category = deleteModels(Category, id);
+    const category = await deleteModels(Category, id);
     res.status(200).json(category);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+const restoreCategory = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Category, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getCategory,
   postCategory,
   putCategory,
   deleteCategory,
+  restoreCategory
 };

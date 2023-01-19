@@ -5,10 +5,13 @@ const {
     getDiscount,
     postDiscount,
     putDiscount,
-    deleteDiscount
+    deleteDiscount,
+    restoreDiscount
 } = require("../controllers/discountController");
 
 discounRouter.get("/getDiscount", getDiscount);
+
+discounRouter.get("/restoreDiscount", restoreDiscount);
 
 discounRouter.post("/postDiscount", postDiscount);
 

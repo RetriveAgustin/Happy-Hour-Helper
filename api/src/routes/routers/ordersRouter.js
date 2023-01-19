@@ -6,9 +6,12 @@ const {
   postOrder,
   putOrder,
   deleteOrder,
+  restoreOrder
 } = require("../controllers/orderController");
 
 ordersRouter.get("/getOrder", getOrder);
+
+ordersRouter.get("/restoreOrder", restoreOrder);
 
 ordersRouter.post("/postOrder", postOrder);
 

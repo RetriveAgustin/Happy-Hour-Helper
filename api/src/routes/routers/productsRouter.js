@@ -6,24 +6,27 @@ const {
   postProduct,
   putProduct,
   deleteProduct,
+  restoreProduct,
   filterProductByBrand,
   filterProductBySubCategory,
   filterProductByCategory
   
 } = require("../controllers/productController");
 
-productRouter.get("/getProducts", getProduct);
+productRouter.get("/getProduct", getProduct);
 
-productRouter.post("/postProducts", postProduct);
+productRouter.get("/restoreProduct", restoreProduct);
 
-productRouter.put("/putProducts", putProduct);
+productRouter.post("/postProduct", postProduct);
 
-productRouter.delete("/deleteProducts", deleteProduct);
+productRouter.put("/putProduct", putProduct);
 
-productRouter.get('/products/filterByBrand', filterProductByBrand)
+productRouter.delete("/deleteProduct", deleteProduct);
 
-productRouter.get('/products/filterBySubCategory', filterProductBySubCategory)
+productRouter.get('/product/filterByBrand', filterProductByBrand)
 
-productRouter.get('/products/filterByCategory', filterProductByCategory)
+productRouter.get('/product/filterBySubCategory', filterProductBySubCategory)
+
+productRouter.get('/product/filterByCategory', filterProductByCategory)
 
 module.exports = productRouter;

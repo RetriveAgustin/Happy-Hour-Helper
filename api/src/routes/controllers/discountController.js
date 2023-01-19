@@ -5,6 +5,7 @@ const {
   postModels,
   putModels,
   deleteModels,
+  restoreModels
 } = require("../utils/mainUtils");
 
 const getDiscount = async (req, res) => {
@@ -44,16 +45,27 @@ const putDiscount = async (req, res) => {
 const deleteDiscount = async (req, res) => {
     try {
         const { id } = req.body;
-        const updated = deleteModels(Discount, id);
+        const updated = await deleteModels(Discount, id);
         res.status(200).json(updated)
       } catch (err) {
         res.status(400).json({error: err.message})
       }
 }
 
+const restoreDiscount = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Discount, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
     getDiscount,
     postDiscount,
     putDiscount,
-    deleteDiscount
+    deleteDiscount,
+    restoreDiscount
 }

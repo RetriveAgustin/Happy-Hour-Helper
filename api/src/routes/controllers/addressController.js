@@ -1,5 +1,5 @@
 const { Address } = require("../../db");
-const { getModels, getModelsById, postModels, putModels, deleteModels } = require("../utils/mainUtils");
+const { getModels, getModelsById, postModels, putModels, deleteModels, restoreModels } = require("../utils/mainUtils");
 
 const getAddress = async (req, res) => {
   try {
@@ -45,9 +45,20 @@ const deleteAddress = (req, res) => {
   }
 };
 
+const restoreAddress = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Address, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getAddress,
   postAddress,
   putAddress,
   deleteAddress,
+  restoreAddress
 };

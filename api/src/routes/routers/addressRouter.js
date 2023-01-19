@@ -6,9 +6,12 @@ const {
   postAddress,
   putAddress,
   deleteAddress,
+  restoreAddress
 } = require("../controllers/addressController");
 
 addressRouter.get("/getAddress", getAddress);
+
+addressRouter.get("/restoreAddress", restoreAddress);
 
 addressRouter.post("/postAddress", postAddress);
 

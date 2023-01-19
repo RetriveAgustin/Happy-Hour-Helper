@@ -6,9 +6,12 @@ const {
   postPayment,
   putPayment,
   deletePayment,
+  restorePayment
 } = require("../controllers/payment_methodController");
 
 paymentRouter.get("/getPayment", getPayment);
+
+paymentRouter.get("/restorePayment", restorePayment);
 
 paymentRouter.post("/postPayment", postPayment);
 

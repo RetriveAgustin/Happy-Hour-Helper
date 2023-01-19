@@ -5,6 +5,7 @@ const {
   postModels,
   putModels,
   deleteModels,
+  restoreModels
 } = require("../utils/mainUtils");
 
 const getBrand = async (req, res) => {
@@ -44,16 +45,27 @@ const putBrand = async (req, res) => {
 const deleteBrand = async (req, res) => {
   try {
     const { id } = req.body;
-    const updated = deleteModels(Brand, id);
+    const updated = await deleteModels(Brand, id);
     res.status(200).json(updated);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+const restoreBrand = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Brand, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getBrand,
   postBrand,
   putBrand,
   deleteBrand,
+  restoreBrand
 };

@@ -5,6 +5,7 @@ const {
   postModels,
   putModels,
   deleteModels,
+  restoreModels
 } = require("../utils/mainUtils");
 
 const getPayment = async (req, res) => {
@@ -53,16 +54,27 @@ const putPayment = async (req, res) => {
 const deletePayment = async (req, res) => {
   try {
     const { id } = req.body;
-    const updated = deleteModels(Payment_method, id);
+    const updated = await deleteModels(Payment_method, id);
     res.status(200).json(updated);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+const restorePayment = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Payment_method, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getPayment,
   postPayment,
   putPayment,
   deletePayment,
+  restorePayment
 };

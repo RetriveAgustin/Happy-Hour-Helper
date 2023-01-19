@@ -52,16 +52,27 @@ const putOffer = async (req, res) => {
 const deleteOffer = async (req, res) => {
   try {
     const { id } = req.body;
-    const updated = deleteModels(Offer, id);
+    const updated = await deleteModels(Offer, id);
     res.status(200).json(updated);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+const restoreOffer = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const restored = await restoreModels(Offer, id);
+    res.status(200).json(restored)
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getOffer,
   postOffer,
   putOffer,
   deleteOffer,
+  restoreOffer
 };

@@ -6,9 +6,12 @@ const {
   postSubCategory,
   putSubCategory,
   deleteSubCategory,
+  restoreSubCategory
 } = require("../controllers/sub_categoryController");
 
 subCategoryRouter.get("/getSubCategory", getSubCategory);
+
+subCategoryRouter.get("/restoreSubCategory", restoreSubCategory);
 
 subCategoryRouter.post("/postSubCategory", postSubCategory);
 
