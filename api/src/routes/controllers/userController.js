@@ -66,9 +66,8 @@ const postUser = async (req, res) => {
 const putUser = async (req, res) => {
   try {
     const { id, properties } = req.query;
-    const user = getModelsById(User, id);
-    const updatedUser = putModels(user, properties);
-    res.status(200).json(updatedUser);
+    const result = await putModels(User, id, properties);
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }

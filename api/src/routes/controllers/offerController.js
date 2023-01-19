@@ -42,9 +42,8 @@ const postOffer = async (req, res) => {
 const putOffer = async (req, res) => {
   try {
     const { id, properties } = req.query;
-    const offer = getModelsById(Offer, id);
-    const updatedOffer = putModels(offer, properties);
-    res.status(200).json(updatedOffer);
+    const result = await putModels(Offer, id, properties);
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }

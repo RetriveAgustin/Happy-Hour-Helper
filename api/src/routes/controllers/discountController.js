@@ -34,9 +34,8 @@ const postDiscount = async (req, res) => {
 const putDiscount = async (req, res) => {
     try {
         const { id, properties } = req.query;
-        const discount = getModelsById(Discount, id);
-        const updatedDiscount = putModels(discount, properties);
-        res.status(200).json(updatedDiscount)
+        const result = await putModels(Discount, id, properties);
+        res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: err.message });
     }

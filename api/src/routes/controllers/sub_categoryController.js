@@ -34,9 +34,8 @@ const postSubCategory = async (req, res) => {
 const putSubCategory = async (req, res) => {
     try {
         const { id, properties } = req.query;
-        const subCategory = getModelsById(Sub_category, id);
-        const updatedSubCategory = putModels(subCategory, properties);
-        res.status(200).json(updatedSubCategory)
+        const result = await putModels(Sub_category, id, properties);
+        res.status(200).json(result);
     } catch (error) {
         res.status(400).json({ error: err.message });
     }

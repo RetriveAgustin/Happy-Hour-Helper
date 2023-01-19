@@ -43,9 +43,8 @@ const postPayment = async (req, res) => {
 const putPayment = async (req, res) => {
   try {
     const { id, properties } = req.query;
-    const payment = getModelsById(Payment_method, id);
-    const updatedPayment = putModels(payment, properties);
-    res.status(200).json(updatedPayment);
+    const result = await putModels(Payment_method, id, properties);
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }

@@ -25,12 +25,11 @@ const postAddress = async (req, res) => {
   }
 };
 
-const putAddress = (req, res) => {
+const putAddress = async (req, res) => {
   try {
     const { id, properties } = req.body;
-    const instance = getModelsById(Address, id)
-    const result = putModels(instance, properties);
-    res.status(200).json(result)
+    const result = await putModels(Address, id, properties);
+    res.status(200).json(result);
   } catch (err) {
     res.status(400).json({error: err.message})
   }

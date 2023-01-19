@@ -100,9 +100,8 @@ const filterProductBySubCategory = async (req, res) => {
 const putProduct = async (req, res) => {
   try {
     const { id, properties } = req.query;
-    const product = getModelsById(Product, id);
-    const updatedProduct = putModels(product, properties);
-    res.status(200).json(updatedProduct);
+    const result = await putModels(Product, id, properties);
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }

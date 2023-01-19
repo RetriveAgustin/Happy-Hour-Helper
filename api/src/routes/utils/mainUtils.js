@@ -56,12 +56,8 @@ const putModels = async (model, id, properties) => {
 
 const deleteModels = async (model, id) => {
     if (id) {
-        const instance = await getModelsById(model, id);
-        if (instance[0]) {
-            const updatedInstance = await instance.update({paranoid: false},{where: {}})
-            return updatedInstance;
-        }
-        else return null;
+        const updatedInstance = await model.update({paranoid: false},{where: {id}})
+        return updatedInstance;
     }
     else return null;
 }

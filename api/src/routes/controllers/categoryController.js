@@ -34,9 +34,8 @@ const postCategory = async (req, res) => {
 const putCategory = async (req, res) => {
   try {
     const { id, properties } = req.query;
-    const category = getModelsById(Category, id);
-    const updatedCategory = putModels(category, properties);
-    res.status(200).json(updatedCategory);
+    const result = await putModels(Category, id, properties);
+    res.status(200).json(result);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }
