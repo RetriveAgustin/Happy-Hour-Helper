@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
         type: DataTypes.DATE,
       },
       discount_amount: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.INTEGER,
       },
     },
     {

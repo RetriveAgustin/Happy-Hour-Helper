@@ -38,6 +38,10 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("0", "1", "2", "3", "4", "5"),
         allowNull: true,
       },
+      has_discount: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
     },
     {
       paranoid: true,

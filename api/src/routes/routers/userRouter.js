@@ -1,21 +1,19 @@
-const { Router } = require('express');
-const { User } = require('../db.js');
-const { Op } = require('sequelize');
-const bcryptjs = require('bcryptjs');
-const admin = require('../config/firebase.js');
-const router = Router();
+const { Router } = require("express");
+const userRouter = Router();
 
-router.post('/', async (req, res) => {
-    const { token } = req.body;
-    try {
-        if (token) {
-            const userInfo = await admin.auth().verifyIdToken(token)
-            console.log(userInfo)
-        }
-    } catch (error) {
-        console.log(error)
-    }
-    
-})
+const {
+  getUser,
+  postUser,
+  putUser,
+  deleteUser,
+} = require("../controllers/UserController");
 
-module.exports = router;
+userRouter.get("/getUsers", getUser);
+
+userRouter.post("/postUsers", postUser);
+
+userRouter.put("/putUsers", putUser);
+
+userRouter.put("/deleteUsers", deleteUser);
+
+module.exports = userRouter;

@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const adressRouter = Router();
+const addressRouter = Router();
 
 const {
   getAddress,
@@ -8,10 +8,12 @@ const {
   deleteAddress,
 } = require("../controllers/addressController");
 
-adressRouter.get("/getAddress", getAddress);
+addressRouter.get("/getAddress", getAddress);
 
-adressRouter.post("/postAddress", postAddress);
+addressRouter.post("/postAddress", postAddress);
 
-adressRouter.put("/putAddress", putAddress);
+addressRouter.put("/putAddress", putAddress);
 
-adressRouter.put("/deleteAddress", deleteAddress);
+addressRouter.put("/deleteAddress", deleteAddress);
+
+module.exports = addressRouter;

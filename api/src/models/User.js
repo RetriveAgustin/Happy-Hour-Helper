@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      fauvourites: {
+      favourites: {
         type: Sequelize.ARRAY(Sequelize.INTEGER),
         allowNull: true,
       },

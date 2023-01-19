@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
       },
+      has_discount: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
     },
     {
       paranoid: true,
