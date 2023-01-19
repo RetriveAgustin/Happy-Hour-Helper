@@ -6,12 +6,15 @@ const {
   postUser,
   putUser,
   deleteUser,
-  restoreUser
+  restoreUser,
+  getUserById
 } = require("../controllers/UserController");
 
 userRouter.get("/getUser", getUser);
 
-userRouter.get("/restoreUser", restoreUser);
+userRouter.get("/getUserById", getUserById);
+
+userRouter.get("/getUserById", getUserById);
 
 userRouter.post("/postUser", postUser);
 

@@ -11,7 +11,7 @@ const {
 const getCategory = async (req, res) => {
   try {
     const { name } = req.query;
-    const category = name ? getModels(Category, name) : getModels(Category);
+    const category = await getModels(Category, name);
     res.status(200).json(category);
   } catch (error) {
     res.status(400).json({ error: err.message });
@@ -20,8 +20,8 @@ const getCategory = async (req, res) => {
 
 const postCategory = async (req, res) => {
   try {
-    const { name } = req.body;
-    const category = await postModels(Category, { name });
+    const { name, has_discount } = req.body;
+    const category = await postModels(Category, {name, has_discount});
     if (category) {
       res.status(200).json(category);
     } else {
@@ -34,7 +34,7 @@ const postCategory = async (req, res) => {
 
 const putCategory = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(Category, id, properties);
     res.status(200).json(result);
   } catch (error) {

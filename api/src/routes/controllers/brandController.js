@@ -1,7 +1,6 @@
 const { Brand } = require("../../db");
 const {
   getModels,
-  getModelsById,
   postModels,
   putModels,
   deleteModels,

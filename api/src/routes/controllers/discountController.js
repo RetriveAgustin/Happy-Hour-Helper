@@ -11,7 +11,7 @@ const {
 const getDiscount = async (req, res) => {
     try {
         const { name } = req.query;
-        const discounts = name ? getModels(Discount, name) : getModels(Discount);
+        const discounts = await getModels(Discount, name);
         res.status(200).json(discounts)
     } catch (error) {
         res.status(400).json({ error: err.message });
@@ -34,7 +34,7 @@ const postDiscount = async (req, res) => {
 
 const putDiscount = async (req, res) => {
     try {
-        const { id, properties } = req.query;
+        const { id, properties } = req.body;
         const result = await putModels(Discount, id, properties);
         res.status(200).json(result);
     } catch (error) {

@@ -3,13 +3,16 @@ const offerRouter = Router();
 
 const {
   getOffer,
+  getOfferById,
   postOffer,
   putOffer,
   deleteOffer,
-  restoreOffer
+  restoreOffer,
 } = require("../controllers/OfferController");
 
 offerRouter.get("/getOffer", getOffer);
+
+offerRouter.get("/getOfferById", getOfferById);
 
 offerRouter.get("/restoreOffer", restoreOffer);
 

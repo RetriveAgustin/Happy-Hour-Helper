@@ -74,6 +74,15 @@ const restoreModels = async (model, id) => {
   }
 }
 
+// const filterModelByRelation = async (firstModel, secondModel, param, id) => {
+//   const instace = firstModel.findAll({
+//     where: {
+//       param,
+//     },
+//     include: [{ model: secondModel, where: { param: id } }],
+//   })
+// }
+
 module.exports = {
   getModels,
   getModelsById,

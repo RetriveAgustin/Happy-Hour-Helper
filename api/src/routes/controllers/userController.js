@@ -12,10 +12,20 @@ const {
 const getUser = async (req, res) => {
   try {
     const { name } = req.query;
-    const users = name ? getModels(User, name) : getModels(User);
+    const users = await getModels(User, name);
     res.status(200).json(users);
   } catch (error) {
     res.status(400).json({ error: err.message });
+  }
+};
+
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = getModelsById(User, id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({error: error.message });
   }
 };
 
@@ -66,7 +76,7 @@ const postUser = async (req, res) => {
 
 const putUser = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(User, id, properties);
     res.status(200).json(result);
   } catch (error) {
@@ -96,6 +106,7 @@ const restoreUser = async (req, res) => {
 
 module.exports = {
   getUser,
+  getUserById,
   postUser,
   putUser,
   deleteUser,

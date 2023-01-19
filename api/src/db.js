@@ -50,8 +50,8 @@ Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id
 Offer.hasMany(Product, { foreignKey: 'offer_id' });
 Product.belongsTo(Offer, { foreignKey: 'offer_id' });
 
-Brand.hasMany(Product, { foreignKey: 'brand_id' });
-Product.belongsTo(Brand, { foreignKey: 'brand_id' });
+Brand.belongsToMany(Product, { through: 'Brand_Product', foreignKey: 'brand_id' });
+Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'brand_id' });
 
 Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
 Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });

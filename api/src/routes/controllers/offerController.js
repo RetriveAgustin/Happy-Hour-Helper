@@ -10,7 +10,17 @@ const {
 const getOffer = async (req, res) => {
   try {
     const { name } = req.query;
-    const offer = name ? getModels(Offer, name) : getModels(Offer);
+    const offer = await getModels(Offer, name);
+    res.status(200).json(offer);
+  } catch (error) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+const getOfferById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const offer = getModelsById(Offer, id);
     res.status(200).json(offer);
   } catch (error) {
     res.status(400).json({ error: err.message });
@@ -41,7 +51,7 @@ const postOffer = async (req, res) => {
 
 const putOffer = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(Offer, id, properties);
     res.status(200).json(result);
   } catch (error) {
@@ -63,16 +73,17 @@ const restoreOffer = async (req, res) => {
   try {
     const { id } = req.body;
     const restored = await restoreModels(Offer, id);
-    res.status(200).json(restored)
+    res.status(200).json(restored);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }
-}
+};
 
 module.exports = {
   getOffer,
+  getOfferById,
   postOffer,
   putOffer,
   deleteOffer,
-  restoreOffer
+  restoreOffer,
 };

@@ -11,9 +11,7 @@ const {
 const getPayment = async (req, res) => {
   try {
     const { name } = req.query;
-    const payment = name
-      ? getModels(Payment_method, name)
-      : getModels(Payment_method);
+    const payment = await getModels(Payment_method, name);
     res.status(200).json(payment);
   } catch (error) {
     res.status(400).json({ error: err.message });
@@ -43,7 +41,7 @@ const postPayment = async (req, res) => {
 
 const putPayment = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(Payment_method, id, properties);
     res.status(200).json(result);
   } catch (error) {

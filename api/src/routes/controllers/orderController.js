@@ -11,7 +11,7 @@ const {
 const getOrder = async (req, res) => {
   try {
     const { name } = req.query;
-    const orders = name ? getModels(Order, name) : getModels(Order);
+    const orders = await getModels(Order, name);
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: err.message });
@@ -40,7 +40,7 @@ const postOrder = async (req, res) => {
 
 const putOrder = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(Order, id, properties);
     res.status(200).json(result);
   } catch (error) {

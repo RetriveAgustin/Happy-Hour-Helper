@@ -1,7 +1,6 @@
 const { Sub_category } = require("../../db");
 const {
   getModels,
-  getModelsById,
   postModels,
   putModels,
   deleteModels,
@@ -11,7 +10,7 @@ const {
 const getSubCategory = async (req, res) => {
     try {
         const { name } = req.query;
-        const subCategory = name ? getModels(Sub_category, name) : getModels(Sub_category);
+        const subCategory = await getModels(Sub_category, name);
         res.status(200).json(subCategory)
     } catch (error) {
         res.status(400).json({ error: err.message });
@@ -34,7 +33,7 @@ const postSubCategory = async (req, res) => {
 
 const putSubCategory = async (req, res) => {
     try {
-        const { id, properties } = req.query;
+        const { id, properties } = req.body;
         const result = await putModels(Sub_category, id, properties);
         res.status(200).json(result);
     } catch (error) {

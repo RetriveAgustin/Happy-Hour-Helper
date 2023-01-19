@@ -11,10 +11,20 @@ const {
 const getProduct = async (req, res) => {
   try {
     const { name } = req.query;
-    const product = name ? getModels(Product, name) : getModels(Product);
+    const product = await getModels(Product, name);
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({ error: err.message });
+  }
+};
+
+const getProductById = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const product = getModelsById(Product, id);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(400).json({error: error.message });
   }
 };
 
@@ -46,9 +56,9 @@ const postProduct = async (req, res) => {
       has_discount,
     });
 
-    product.addBrand(brand);
-    product.addCategory(category);
-    product.addSub_category(subcategory);
+    await product.addBrand(brand);
+    await product.addCategory(category);
+    await product.addSub_category(subcategory);
 
     if (product) {
       res.status(200).json(product);
@@ -100,7 +110,7 @@ const filterProductBySubCategory = async (req, res) => {
 
 const putProduct = async (req, res) => {
   try {
-    const { id, properties } = req.query;
+    const { id, properties } = req.body;
     const result = await putModels(Product, id, properties);
     res.status(200).json(result);
   } catch (error) {
@@ -130,6 +140,7 @@ const restoreProduct = async (req, res) => {
 
 module.exports = {
   getProduct,
+  getProductById,
   postProduct,
   putProduct,
   deleteProduct,
