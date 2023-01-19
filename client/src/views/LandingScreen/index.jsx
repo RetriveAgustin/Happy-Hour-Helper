@@ -5,11 +5,9 @@ import response from "./data.json";
 
 import { Header } from "../../components/Header";
 import { SectionContainer } from "../../components/SectionContainer";
-import { Footer } from "../../components/Footer";
 
 export const LandingScreen = () => {
   const [data, setData] = useState();
-
   const getData = async () => {
     setTimeout(() => {
       setData(response);
@@ -29,7 +27,6 @@ export const LandingScreen = () => {
         data.map(d => {
           return <SectionContainer key={d.title} title={d.title} data={d.data}/>;
         })}
-      <Footer />
     </Background>
   );
 };
