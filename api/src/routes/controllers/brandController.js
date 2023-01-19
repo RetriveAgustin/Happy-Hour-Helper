@@ -68,5 +68,4 @@ module.exports = {
   putBrand,
   deleteBrand,
   restoreBrand
-  restoreBrand
 };
