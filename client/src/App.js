@@ -1,9 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
+import { LandingScreen } from './pages/LandingScreen';
 
 function App() {
   return (
     <div className="App">
+      <LandingScreen />
     </div>
   );
 }
