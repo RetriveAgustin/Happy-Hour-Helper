@@ -1,0 +1,60 @@
+const { Sub_category } = require("../../db");
+const {
+  getModels,
+  getModelsById,
+  postModels,
+  putModels,
+  deleteModels,
+} = require("../utils/mainUtils");
+
+const getSubCategory = async (req, res) => {
+    try {
+        const { name } = req.query;
+        const subCategory = name ? getModels(Sub_category, name) : getModels(Sub_category);
+        res.status(200).json(subCategory)
+    } catch (error) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+const postSubCategory = async (req, res) => {
+  try {
+    const { name, has_discount } = req.body;
+    const subCategory = await postModels(Sub_category, {name, has_discount});
+    if (subCategory) {
+      res.status(200).json(subCategory);
+    } else {
+      res.status(400).json("Sub-category couldn't be created");
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
+const putSubCategory = async (req, res) => {
+    try {
+        const { id, properties } = req.query;
+        const subCategory = getModelsById(Sub_category, id);
+        const updatedSubCategory = putModels(subCategory, properties);
+        res.status(200).json(updatedSubCategory)
+    } catch (error) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+const deleteSubCategory = async (req, res) => {
+    try {
+        const { id } = req.body;
+        const updated = deleteModels(Sub_category, id);
+        res.status(200).json(updated)
+      } catch (err) {
+        res.status(400).json({error: err.message})
+      }
+}
+
+module.exports = {
+    getSubCategory,
+    postSubCategory,
+    putSubCategory,
+    deleteSubCategory
+}
