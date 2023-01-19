@@ -1,5 +1,5 @@
 const { User } = require("../../db");
-const admin = require('../utils/firebase-config.js');
+const admin = require("../utils/firebase-config.js");
 const {
   getModels,
   getModelsById,
@@ -20,12 +20,39 @@ const getUser = async (req, res) => {
 
 const postUser = async (req, res) => {
   // try {
-  //   const { id, token, name, lastname, mail, password, favourites, created_in_google } = req.body;
+  //   const {
+  //     id,
+  //     token,
+  //     name,
+  //     lastname,
+  //     mail,
+  //     password,
+  //     favourites,
+  //     created_in_google,
+  //   } = req.body;
   //   let userInfo;
   //   if (token) {
-  //     userInfo = await admin.auth().verifyIdToken(token) // trae credenciales/datos de usuario
-  // }
-  //   const user = token ? await postModels(User, {id, name, lastname, mail, password, favourites, created_in_google}) : await postModels(User, {id, name, lastname, mail, password, favourites, created_in_google});
+  //     userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
+  //   }
+  //   const user = token
+  //     ? await postModels(User, {
+  //         id,
+  //         name,
+  //         lastname,
+  //         mail,
+  //         password,
+  //         favourites,
+  //         created_in_google,
+  //       })
+  //     : await postModels(User, {
+  //         id,
+  //         name,
+  //         lastname,
+  //         mail,
+  //         password,
+  //         favourites,
+  //         created_in_google,
+  //       });
   //   if (user) {
   //     res.status(200).json(user);
   //   } else {

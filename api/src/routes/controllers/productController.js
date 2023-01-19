@@ -1,4 +1,4 @@
-const { Product } = require("../../db");
+const { Product, Brand ,Category, Sub_category } = require("../../db");
 const {
   getModels,
   getModelsById,
@@ -29,6 +29,9 @@ const postProduct = async (req, res) => {
       stock,
       rating,
       has_discount,
+      brand,
+      category,
+      subcategory,
     } = req.body;
     const product = await postModels(Product, {
       name,
@@ -41,6 +44,11 @@ const postProduct = async (req, res) => {
       rating,
       has_discount,
     });
+
+    product.addBrand(brand);
+    product.addCategory(category);
+    product.addSub_category(subcategory);
+
     if (product) {
       res.status(200).json(product);
     } else {
@@ -49,6 +57,44 @@ const postProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
+};
+
+const filterProductByBrand = async (req, res) => {
+  try {
+    const { brand } = req.query;
+    Product.findAll({
+      where: {
+        brand,
+      },
+      include: [{ model: Brand, where: { name: brand } }],
+    }).then((products) => res.status(200).json(products));
+  } catch (error) {
+    res.status(400).error.message;
+  }
+};
+
+const filterProductByCategory = async (req, res) => {
+  try {
+    const { category } = req.query;
+    Product.findAll({
+      where: {
+        category,
+      },
+      include: [{ model: Category, where: { name: category } }],
+    }).then((products) => res.status(200).json(products));
+  } catch (error) {
+    res.status(400).error.message;
+  }
+};
+
+const filterProductBySubCategory = async (req, res) => {
+  const { subcategory } = req.query;
+  Product.findAll({
+    where: {
+      subcategory: subcategory,
+    },
+    include: [{ model: Sub_category, where: { name: subcategory } }],
+  }).then((products) => res.json(products));
 };
 
 const putProduct = async (req, res) => {
@@ -77,4 +123,7 @@ module.exports = {
   postProduct,
   putProduct,
   deleteProduct,
+  filterProductByBrand,
+  filterProductByCategory,
+  filterProductBySubCategory,
 };

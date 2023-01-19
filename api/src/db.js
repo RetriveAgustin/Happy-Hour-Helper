@@ -56,11 +56,12 @@ Product.belongsTo(Brand, { foreignKey: 'brand_id' });
 Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
 Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });
 
+Product.belongsToMany(Sub_category, { through: "Sub_category_Product" });
+Sub_category.belongsToMany(Product, { through: "Sub_category_Product" });
+
 Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
 Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
 
-Category.hasMany(Sub_category, { foreignKey: 'category_id' });
-Sub_category.belongsTo(Category, { foreignKey: 'category_id' });
 
 
 

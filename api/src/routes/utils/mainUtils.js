@@ -3,11 +3,11 @@ const getModels = async (model, name) => {
 
   if (model) {
     if (name) {
-      results = model.findAll({
-        where: { name },
+      results = await model.findAll({
+        where: { name: name },
       });
     } else {
-      results = model.findAll();
+      results = await model.findAll();
     }
   } else {
     return null;
@@ -21,7 +21,7 @@ const getModelsById = async (model, id) => {
 
   if (model) {
     if (id) {
-      results = model.findAll({
+      results = await model.findAll({
         where: { id },
       });
     } else {
@@ -43,17 +43,20 @@ const postModels = async (model, properties) => {
   }
 };
 
-const putModels = async (instance, properties) => {
+const putModels = async (model, id, properties) => {
   if (properties) {
-    const updated = await instance.update(properties);
+    const updated = await model.update(properties, {where: {id}});
     return updated;
   }
   else return null;
 };
 
+
+
+
 const deleteModels = async (model, id) => {
     if (id) {
-        const instance = getModelsById(model, id);
+        const instance = await getModelsById(model, id);
         if (instance[0]) {
             const updatedInstance = await instance.update({paranoid: false},{where: {}})
             return updatedInstance;

@@ -10,7 +10,7 @@ const {
 const getBrand = async (req, res) => {
   try {
     const { name } = req.query;
-    const brands = getModels(Brand, name);
+    const brands = await getModels(Brand, name);
     res.status(200).json(brands);
   } catch (err) {
     res.status(400).json({ error: err.message });
@@ -34,8 +34,7 @@ const postBrand = async (req, res) => {
 const putBrand = async (req, res) => {
   try {
     const { id, properties } = req.body;
-    const instance = getModelsById(Brand, id);
-    const result = putModels(instance, properties);
+    const result = await putModels(Brand, id, properties);
     res.status(200).json(result);
   } catch (err) {
     res.status(400).json({ error: err.message });
