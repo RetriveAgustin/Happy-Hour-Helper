@@ -5,6 +5,8 @@ const {
   postModels,
   putModels,
   deleteModels,
+  restoreModels
+  
 } = require("../utils/mainUtils");
 
 const getBrand = async (req, res) => {
@@ -51,9 +53,20 @@ const deleteBrand = async (req, res) => {
   }
 };
 
+const restoreBrand = async (req, res ) => {
+  try {
+    const { id } = req.body;
+    const recuperado =  restoreModels(Brand, id);
+    res.status(200).json(recuperado);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
 module.exports = {
   getBrand,
   postBrand,
   putBrand,
   deleteBrand,
+  restoreBrand
 };

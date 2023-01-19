@@ -6,6 +6,7 @@ const {
   postBrand,
   putBrand,
   deleteBrand,
+  restoreBrand
 } = require("../controllers/brandController");
 
 brandRouter.get("/getBrand", getBrand);
@@ -15,5 +16,7 @@ brandRouter.post("/postBrand", postBrand);
 brandRouter.put("/putBrand", putBrand);
 
 brandRouter.delete("/deleteBrand", deleteBrand);
+
+brandRouter.get("/recuperarModels", restoreBrand );
 
 module.exports = brandRouter;

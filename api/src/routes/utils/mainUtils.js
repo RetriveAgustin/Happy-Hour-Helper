@@ -62,10 +62,24 @@ const deleteModels = async (model, id) => {
     else return null;
 }
 
+
+
+const restoreModels = async (model, id) => {
+  if (id) {
+    const recoveredInstance = await model.restore({where: {id}});
+    return recoveredInstance;
+  }
+  else {
+    return null;
+  }
+}
+
+
 module.exports = {
   getModels,
   getModelsById,
   postModels,
   putModels,
-  deleteModels
+  deleteModels,
+  restoreModels
 };
