@@ -6,7 +6,7 @@ import {
   PaymentMethods,
   Contact,
   Navigation,
-} from "./index.styles";
+} from "./Footer.styles";
 import mediosDePago from "../../assets/pagosAceptados.png";
 
 export const Footer = () => {

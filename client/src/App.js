@@ -1,11 +1,11 @@
-import './App.css';
-import { LandingScreen } from './views/LandingScreen';
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./Views/LandingPage/LandingPage";
 
 function App() {
   return (
-    <div className="App">
-      <LandingScreen />
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+    </Routes>
   );
 }
 
