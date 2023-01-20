@@ -30,10 +30,10 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User, Adress, Brand, Category, Discount, Offer, Order, Payment_method, Product, Sub_category } = sequelize.models;
+const { User, Address, Brand, Category, Discount, Offer, Order, Payment_method, Product, Sub_category } = sequelize.models;
 // Aca vendrian las relaciones
-User.hasMany(Adress, { foreignKey: 'user_id' });
-Adress.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Address, { foreignKey: 'user_id' });
+Address.belongsTo(User, { foreignKey: 'user_id' });
 
 User.hasMany(Payment_method, { foreignKey: 'user_id' });
 Payment_method.belongsTo(User, { foreignKey: 'user_id' });
@@ -50,17 +50,18 @@ Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id
 Offer.hasMany(Product, { foreignKey: 'offer_id' });
 Product.belongsTo(Offer, { foreignKey: 'offer_id' });
 
-Brand.hasMany(Product, { foreignKey: 'brand_id' });
-Product.belongsTo(Brand, { foreignKey: 'brand_id' });
+Brand.belongsToMany(Product, { through: 'Brand_Product', foreignKey: 'brand_id' });
+Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'brand_id' });
 
 Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
 Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });
 
+Product.belongsToMany(Sub_category, { through: "Sub_category_Product" });
+Sub_category.belongsToMany(Product, { through: "Sub_category_Product" });
+
 Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
 Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
 
-Category.hasMany(Sub_category, { foreignKey: 'category_id' });
-Sub_category.belongsTo(Category, { foreignKey: 'category_id' });
 
 
 
