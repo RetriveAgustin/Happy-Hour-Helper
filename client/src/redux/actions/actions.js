@@ -86,6 +86,7 @@ export const createCategory = (payload) => {
 };
 
 export const createProduct = (payload) => {
+  console.log(payload)
   return async function () {
     const post = await axios.post(
       "http://localhost:3001/product/postProduct",

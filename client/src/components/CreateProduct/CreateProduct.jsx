@@ -15,27 +15,56 @@ import {
   SubmitButton,
 } from "./CreateProduct.styles";
 
-const CreateProduct = () => {
+export default function CreateProduct () {
   
-  // const dispatch = useDispatch()
-  // const brandsState = useSelector((state) => state.brands)
-  // const categories = useSelector((state) => state.categories)
-  // const subCategories = useSelector((state) => state.subCategories)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(getAllCategories());
+    dispatch(getAllBrands());
+    dispatch(getAllSubCategories());
+}, [dispatch])
+  const brandsState = useSelector((state) => state.brands)
+  const categories = useSelector((state) => state.categories)
+  const subCategories = useSelector((state) => state.subCategories) 
 
+  console.log(brandsState)
+  console.log(categories)
+  console.log(subCategories)
 
+  const [info, setInfo] = useState({
+    name: "",
+    img: "",
+    price: "",
+    capacity: "",
+    minimum_amount_for_bulk: "",
+    bulk_discount: "",
+    stock: "",
+    rating: "",
+    has_discount: false,
+    brand: [],
+    category: [],
+    subcategory: [],
+  });
 
-  const brands = [
-    "Jack Daniels",
-    "Budweiser",
-    "Brahma",
-    "Coca-Cola",
-    "Drehen",
-    "Baileys",
-    "Bacardi",
-  ];
-
-  const handleSubmit = () => {
-    console.log("Submitted");
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (info.name && info.img && info.price && info.capacity && info.minimum_amount_for_bulk && info.bulk_discount && info.stock && info.has_discount && info.rating&& info.brand&& info.category&& info.subcategory) 
+    dispatch(createProduct(info));
+    alert('El producto ha sido creado');
+    setInfo({
+    name: "",
+    img: "",
+    price: "",
+    capacity: "",
+    minimum_amount_for_bulk: "",
+    bulk_discount: "",
+    stock: "",
+    rating: "",
+    has_discount: false,
+    brand: [],
+    category: [],
+    subcategory: [],
+    })
   };
 
   const handleChange = (e) => {
@@ -72,27 +101,9 @@ const CreateProduct = () => {
     });
   };
 
-  const [info, setInfo] = useState({
-    name: "",
-    img: "",
-    price: "",
-    capacity: "",
-    minimum_amount_for_bulk: "",
-    bulk_discount: "",
-    stock: "",
-    rating: "",
-    has_discount: false,
-    brand: [],
-    category: [],
-    subcategory: [],
-  });
+  
 
   console.log(info); 
-
-  
-  // useEffect(() => {
-  //   dispatch(getAllCategories())
-  // }, []);
 
 
   
@@ -181,28 +192,26 @@ const CreateProduct = () => {
       <BrandContainer>
         <Selector name="brand" onChange={(e) => handleSelect(e)}>
           <option hidden>Marca</option>
-          {brands.map((e) => {
-            return <option key={e}>{e}</option>;
+          {brandsState.map((brand) => {
+            return <option value={brand.id}>{brand.name}</option>;
           })}
         </Selector>
         <Selector name="category" onChange={(e) => handleSelect(e)}>
           <option hidden>Categoría</option>
-          {brands.map((e) => {
-            return <option key={e}>{e}</option>;
+          {categories.map((cat) => {
+            return <option value={cat.id}>{cat.name}</option>;
           })}
         </Selector>
         <Selector name="subcategory" onChange={(e) => handleSelect(e)}>
           <option hidden>Sub-Categoría</option>
-          {brands.map((e) => {
-            return <option key={e}>{e}</option>;
+          {subCategories.map((sub) => {
+            return <option value={sub.id}>{sub.name}</option>;
           })}
         </Selector>
       </BrandContainer>
       <BrandContainer>
-        <SubmitButton onClick={() => handleSubmit()}>Crear</SubmitButton>
+        <SubmitButton onClick={(e) => handleSubmit(e)}>Crear</SubmitButton>
       </BrandContainer>
     </FormContainer>
   );
-};
-
-export default CreateProduct;
+}
