@@ -1,13 +1,13 @@
+import { Link } from "react-router-dom";
+import { Card } from '../../components/Card/Card'
+
 const LandingPage = () => {
   return (
-    <></>
-    
-    // <Background>
-    //   <ImageBackground>
-    //     <h1>Bienvenido a Happy Hour Helper</h1>
-    //   </ImageBackground>
-    // </Background>
-  );
-};
+    <>
+      <Link to='/form'>
+        <button>Create</button>
+      </Link>
+      <Card />
+    </>
 
 export default LandingPage;
