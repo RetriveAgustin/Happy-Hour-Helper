@@ -1,4 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createProduct, getAllCategories, getAllSubCategories, getAllBrands } from "./../../redux/actions/actions";
+
+
 import {
   FormContainer,
   ColumnFieldContainer,
@@ -12,6 +16,14 @@ import {
 } from "./CreateProduct.styles";
 
 const CreateProduct = () => {
+  
+  // const dispatch = useDispatch()
+  // const brandsState = useSelector((state) => state.brands)
+  // const categories = useSelector((state) => state.categories)
+  // const subCategories = useSelector((state) => state.subCategories)
+
+
+
   const brands = [
     "Jack Daniels",
     "Budweiser",
@@ -77,6 +89,13 @@ const CreateProduct = () => {
 
   console.log(info); 
 
+  
+  // useEffect(() => {
+  //   dispatch(getAllCategories())
+  // }, []);
+
+
+  
   return (
     <FormContainer>
       <ColumnFieldContainer>

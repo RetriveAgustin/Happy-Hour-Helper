@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import { Card } from "../../components/Card/Card";
+import styles from "./Home.module.css";
 
-const LandingPage = () => {
+const Home = () => {
   return (
-    <>
-      <Link to="/form">
+    <div className={styles.background}>
+      <Link to="/admin">
         <button>Create</button>
       </Link>
       <Card />
-    </>
+    </div>
   )
 }
-export default LandingPage;
+export default Home;

@@ -39,7 +39,7 @@ export const getAllProducts = () => {
       .then((response) => response.json())
       .then((data) => {
         dispatch({
-          type: GET_ALLPRODUCTS,
+          type: GET_ALL_PRODUCTS,
           payload: data,
         });
       })

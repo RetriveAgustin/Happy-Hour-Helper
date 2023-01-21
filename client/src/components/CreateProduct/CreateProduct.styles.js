@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const FormContainer = styled.div`
     display: inline-block;
-    width: 100%;
-    height: 80rem;
+    width: 100vw;
+    height: 100vh;
     background-color: #171717;
 `
 export const TextInput = styled.input`
