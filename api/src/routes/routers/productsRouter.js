@@ -23,10 +23,10 @@ productRouter.put("/putProduct", putProduct);
 
 productRouter.delete("/deleteProduct", deleteProduct);
 
-productRouter.get('/product/filterByBrand', filterProductByBrand)
+productRouter.get('/filterByBrand', filterProductByBrand)
 
-productRouter.get('/product/filterBySubCategory', filterProductBySubCategory)
+productRouter.get('/filterBySubCategory', filterProductBySubCategory)
 
-productRouter.get('/product/filterByCategory', filterProductByCategory)
+productRouter.get('/filterByCategory', filterProductByCategory)
 
 module.exports = productRouter;

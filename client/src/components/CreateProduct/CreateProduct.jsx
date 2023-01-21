@@ -27,9 +27,6 @@ export default function CreateProduct () {
   const categories = useSelector((state) => state.categories)
   const subCategories = useSelector((state) => state.subCategories) 
 
-  console.log(brandsState)
-  console.log(categories)
-  console.log(subCategories)
 
   const [info, setInfo] = useState({
     name: "",
@@ -39,17 +36,17 @@ export default function CreateProduct () {
     minimum_amount_for_bulk: "",
     bulk_discount: "",
     stock: "",
-    rating: "",
     has_discount: false,
-    brand: [],
-    category: [],
-    subcategory: [],
+    brand: "",
+    category: "",
+    subcategory: "",
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (info.name && info.img && info.price && info.capacity && info.minimum_amount_for_bulk && info.bulk_discount && info.stock && info.has_discount && info.rating&& info.brand&& info.category&& info.subcategory) 
-    dispatch(createProduct(info));
+    if (info.name && info.price && info.capacity && info.has_discount && info.brand && info.category && info.subcategory)
+    console.log("este es el estado" + info) 
+      dispatch(createProduct(info));
     alert('El producto ha sido creado');
     setInfo({
     name: "",
@@ -59,11 +56,10 @@ export default function CreateProduct () {
     minimum_amount_for_bulk: "",
     bulk_discount: "",
     stock: "",
-    rating: "",
     has_discount: false,
-    brand: [],
-    category: [],
-    subcategory: [],
+    brand: "",
+    category: "",
+    subcategory: "",
     })
   };
 
@@ -164,7 +160,7 @@ export default function CreateProduct () {
           value={info.stock}
           onChange={(e) => handleChange(e)}
         />
-        <TextInput
+        {/* <TextInput
           type="number"
           name="rating"
           placeholder="Calificación"
@@ -172,7 +168,7 @@ export default function CreateProduct () {
           max='5'
           value={info.rating}
           onChange={(e) => handleChange(e)}
-        />
+        /> */}
         <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
           <CheckContainer>
             <h3 style={{ color: "white" }}>¿Descuento?</h3>

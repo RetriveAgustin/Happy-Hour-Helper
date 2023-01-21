@@ -86,11 +86,10 @@ export const createCategory = (payload) => {
 };
 
 export const createProduct = (payload) => {
-  console.log(payload)
+  console.log("payload" + payload)
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/product/postProduct",
-      payload
+      "http://localhost:3001/products", payload
     );
     return post;
   };
