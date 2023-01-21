@@ -1,6 +1,4 @@
 import { Routes, Route } from "react-router-dom";
-// import LandingPage from "./Views/LandingPage/LandingPage";
-// import CreateProduct from "./components/CreateProduct/CreateProduct";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
