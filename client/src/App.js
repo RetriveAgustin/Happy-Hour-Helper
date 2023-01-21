@@ -1,11 +1,13 @@
-import './App.css';
-import { LandingScreen } from './views/LandingScreen';
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./Views/LandingPage/LandingPage";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
 
 function App() {
   return (
-    <div className="App">
-      <LandingScreen />
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/form" element={<CreateProduct />} />
+    </Routes>
   );
 }
 
