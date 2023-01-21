@@ -1,13 +1,11 @@
-const LandingPage = () => {
+import React from "react";
+
+function LandingPage() {
   return (
-    <></>
-    
-    // <Background>
-    //   <ImageBackground>
-    //     <h1>Bienvenido a Happy Hour Helper</h1>
-    //   </ImageBackground>
-    // </Background>
+    <div>
+      <h1>Landing Page</h1>
+    </div>
   );
-};
+}
 
 export default LandingPage;
