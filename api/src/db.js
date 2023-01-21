@@ -41,26 +41,26 @@ Payment_method.belongsTo(User, { foreignKey: 'user_id' });
 User.hasMany(Order, { foreignKey: 'user_id' });
 Order.belongsTo(User, { foreignKey: 'user_id' });
 
-Order.belongsToMany(Offer, { through: 'Offers_Order', foreignKey: 'order_id' });
-Offer.belongsToMany(Order, { through: 'Offers_Order', foreignKey: 'offer_id' });
+Order.belongsToMany(Offer, { through: 'Offers_Order' });
+Offer.belongsToMany(Order, { through: 'Offers_Order' });
 
-Order.belongsToMany(Product, { through: 'Product_Order', foreignKey: 'order_id' });
-Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id' });
+Order.belongsToMany(Product, { through: 'Product_Order' });
+Product.belongsToMany(Order, { through: 'Product_Order' });
 
 Offer.hasMany(Product, { foreignKey: 'offer_id' });
 Product.belongsTo(Offer, { foreignKey: 'offer_id' });
 
-Brand.belongsToMany(Product, { through: 'Brand_Product', foreignKey: 'brand_id' });
-Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'brand_id' });
+Brand.belongsToMany(Product, { through: 'Brand_Product' });
+Product.belongsToMany(Brand, { through: 'Brand_Product' });
 
-Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
-Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });
+Product.belongsToMany(Category, { through: 'Category_Product' });
+Category.belongsToMany(Product, { through: 'Category_Product' });
 
 Product.belongsToMany(Sub_category, { through: "Sub_category_Product" });
 Sub_category.belongsToMany(Product, { through: "Sub_category_Product" });
 
-Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
-Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
+Product.belongsToMany(Discount, { through: 'Discount_Product' });
+Discount.belongsToMany(Product, { through: 'Discount_Product' });
 
 
 

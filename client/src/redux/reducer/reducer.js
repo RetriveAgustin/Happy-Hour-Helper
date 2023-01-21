@@ -1,4 +1,4 @@
-import { GET_CATEGORIES, GET_BRANDS, GET_OFFERS, GET_SUB_CATEGORIES, GET_ALL_PRODUCTS} from "./actions";
+import { GET_CATEGORIES, GET_BRANDS, GET_OFFERS, GET_SUB_CATEGORIES, GET_ALL_PRODUCTS} from "./../actions/actions";
 
 const initialState = {
     categories: [],
@@ -6,7 +6,6 @@ const initialState = {
     brands: [],
     products: [],
     offers: [],
-
 };
 
 const rootReducer = (state = initialState, action) => {

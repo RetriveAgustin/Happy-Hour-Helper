@@ -39,7 +39,7 @@ export const getAllProducts = () => {
       .then((response) => response.json())
       .then((data) => {
         dispatch({
-          type: GET_ALLPRODUCTS,
+          type: GET_ALL_PRODUCTS,
           payload: data,
         });
       })
@@ -86,10 +86,10 @@ export const createCategory = (payload) => {
 };
 
 export const createProduct = (payload) => {
+  console.log("payload" + payload)
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/product/postProduct",
-      payload
+      "http://localhost:3001/products", payload
     );
     return post;
   };

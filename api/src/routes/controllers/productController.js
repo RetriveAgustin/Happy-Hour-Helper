@@ -21,7 +21,7 @@ const getProduct = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const { id } = req.body;
-    const product = getModelsById(Product, id);
+    const product = await getModelsById(Product, id);
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -38,7 +38,6 @@ const postProduct = async (req, res) => {
       minimum_amount_for_bulk,
       bulk_discount,
       stock,
-      rating,
       has_discount,
       brand,
       category,
@@ -52,7 +51,6 @@ const postProduct = async (req, res) => {
       minimum_amount_for_bulk,
       bulk_discount,
       stock,
-      rating,
       has_discount,
     });
 
