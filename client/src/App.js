@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
-import LandingPage from "./Views/LandingPage/LandingPage";
+import { Home } from "./Views/Home/Home";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<LandingPage />} />
+      <Route path="/" element={<Home />} />
       <Route path="/form" element={<CreateProduct />} />
     </Routes>
   );

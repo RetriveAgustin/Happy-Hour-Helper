@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   width: 1200px;
   margin: auto;
+  margin: 50px auto;
 `;
 
 export const CardContainer = styled.div`
@@ -13,6 +14,8 @@ export const CardContainer = styled.div`
 
 export const H1 = styled.h1`
   background-color: #d9d9d9;
+  text-align: center;
   width: 100%;
   height: 80px;
+  margin-bottom: 30px;
 `;
