@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var admin = require("firebase-admin");
+=======
+/* var admin = require("firebase-admin");
+>>>>>>> f6234c92f7265e1727e62c808b1be545c9930094
 require("dotenv").config();
 const {
   PRIVATE_KEY_ID,
@@ -29,4 +33,8 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
+<<<<<<< HEAD
 module.exports = admin;
+=======
+module.exports = admin; */
+>>>>>>> f6234c92f7265e1727e62c808b1be545c9930094

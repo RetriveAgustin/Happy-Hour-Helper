@@ -15,7 +15,11 @@ module.exports = (sequelize) => {
     },
     {
       paranoid: true,
+<<<<<<< HEAD
       timestamps: false,
+=======
+      timestamps: true,
+>>>>>>> f6234c92f7265e1727e62c808b1be545c9930094
     }
   );
 };

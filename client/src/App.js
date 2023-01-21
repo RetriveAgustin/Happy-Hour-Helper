@@ -1,10 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from "react-router-dom";
+import LandingPage from "./Views/LandingPage/LandingPage";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
 
 function App() {
   return (
-    <div className="App">
-    </div>
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/form" element={<CreateProduct />} />
+    </Routes>
   );
 }
 
