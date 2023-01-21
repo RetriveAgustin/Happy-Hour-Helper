@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { ImageBackground, Background } from "./Home.styles";
-import response from "./fakeApi.json";
 
 import { Header } from "../../components/Header/Header";
 import { Section } from "../../components/Section/Section";
 import { Footer } from "../../components/Footer/Footer";
 
-export const Home = () => {
+const Home = () => {
   const [data, setData] = useState();
 
-  const getData = async () => {
-    setTimeout(() => {
-      setData(response);
-    }, 1000);
-  };
+  // const getData = async () => {
+  //   setTimeout(() => {
+  //     setData(response);
+  //   }, 1000);
+  // };
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
   return (
     <Background>
       <Header />
@@ -33,3 +32,5 @@ export const Home = () => {
     </Background>
   );
 };
+
+export default Home;
