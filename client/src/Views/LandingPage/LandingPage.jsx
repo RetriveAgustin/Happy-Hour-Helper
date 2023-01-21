@@ -9,7 +9,6 @@ const LandingPage = () => {
       </Link>
       <Card />
     </>
-  );
-};
-
+  )
+}
 export default LandingPage;
