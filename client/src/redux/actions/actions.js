@@ -86,7 +86,6 @@ export const createCategory = (payload) => {
 };
 
 export const createProduct = (payload) => {
-  console.log("payload" + payload)
   return async function () {
     const post = await axios.post(
       "http://localhost:3001/products", payload
@@ -98,7 +97,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/sub-category/postProducts",
+      "http://localhost:3001/sub-category",
       payload
     );
     return post;
@@ -108,7 +107,7 @@ export const createSubCategory = (payload) => {
 export const createOffer = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/offer/postOffer",
+      "http://localhost:3001/offer",
       payload
     );
     return post;
@@ -118,7 +117,7 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/brand/postBrand",
+      "http://localhost:3001/brand",
       payload
     );
     return post;
