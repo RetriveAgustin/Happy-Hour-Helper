@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-
 import {
   ImageBackground,
   Background,
@@ -31,7 +30,7 @@ const Home = () => {
       <TextContent>
         <h1>Bienvenido a Happy Hour Helper</h1>
       </TextContent>
-      <ImageBackground></ImageBackground>
+      <ImageBackground />
       <ContainerFilter>
         <Filters setActualFilter={setActualFilter} />
         <SectionCards>
