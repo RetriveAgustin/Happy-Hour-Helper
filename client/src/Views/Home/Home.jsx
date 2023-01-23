@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+
 import {
   ImageBackground,
   Background,
@@ -14,6 +15,7 @@ import Filters from "../../components/Filters/Filters";
 import { getAllProducts } from "../../redux/actions/actions";
 
 const Home = () => {
+
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
@@ -22,6 +24,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
 
 
   return (
