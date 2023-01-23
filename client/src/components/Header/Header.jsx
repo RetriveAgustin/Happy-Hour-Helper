@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const navigate = useNavigate();
@@ -65,8 +65,11 @@ function Header() {
     <>
       <NavContainer>
         <Title onClick={() => navigate("/")}>Happy Hour Helper</Title>
+        <Link to='/detail'>
+          <button>Detail</button>
+        </Link>
         <LinkDiv>
-          <StyledLink onClick={() => navigate("/Home")}>Home</StyledLink>
+          <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
           <StyledLink onClick={() => navigate("/Packages")}>
             Packages
