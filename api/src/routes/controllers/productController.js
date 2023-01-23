@@ -43,6 +43,7 @@ const postProduct = async (req, res) => {
       category,
       subcategory,
     } = req.body;
+
     const product = await postModels(Product, {
       name,
       img,
@@ -57,7 +58,7 @@ const postProduct = async (req, res) => {
     await product.addBrand(brand);
     await product.addCategory(category);
     await product.addSub_category(subcategory);
-
+   
     if (product) {
       res.status(200).json(product);
     } else {
