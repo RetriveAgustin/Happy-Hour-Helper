@@ -1,29 +1,39 @@
-import { GET_CATEGORIES, GET_BRANDS, GET_OFFERS, GET_SUB_CATEGORIES, GET_ALL_PRODUCTS} from "./../actions/actions";
+import {
+  GET_CATEGORIES,
+  GET_BRANDS,
+  GET_OFFERS,
+  GET_SUB_CATEGORIES,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCTS_BY_CATEGORY,
+} from "./../actions/actions";
 
 const initialState = {
-    categories: [],
-    subCategories: [],
-    brands: [],
-    products: [],
-    offers: [],
+  categories: [],
+  subCategories: [],
+  brands: [],
+  products: [],
+  offers: [],
+  productsByCategory: []
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
-        return {...state, categories: action.payload}
-    case GET_BRANDS: 
-        return {...state, brands: action.payload}
+      return { ...state, categories: action.payload };
+    case GET_BRANDS:
+      return { ...state, brands: action.payload };
     case GET_OFFERS:
-        return {...state, offers: action.payload}
+      return { ...state, offers: action.payload };
     case GET_SUB_CATEGORIES:
-        return {...state, subCategories: action.payload}
+      return { ...state, subCategories: action.payload };
     case GET_ALL_PRODUCTS:
-        return {...state, products: action.payload}
+      return { ...state, products: action.payload };
+    case GET_PRODUCTS_BY_CATEGORY:
+      return { ...state, productsByCategory: action.payload };
     default:
-        return {
-            ...state,
-        };
+      return {
+        ...state,
+      };
   }
 };
 

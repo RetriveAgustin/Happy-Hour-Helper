@@ -8,7 +8,7 @@ export const Section = ({ title, data }) => {
       <H1>{title}</H1>
       <CardContainer>
         {
-          data && data.map((d) => <Card key={d.id} />)
+          data && data.map((d) => <Card key={d.id} name={d.name} img={d.img} price={d.price}/>)
         }
       </CardContainer>
     </Container>
