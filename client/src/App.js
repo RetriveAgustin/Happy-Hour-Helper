@@ -7,6 +7,7 @@ import Admin from "./Views/Admin/Admin";
 import User from "./Views/User/User";
 import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
+import LayoutUser from "./components/Header/LayoutUser";
 import "./App.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="*" element={<Home />} />
+      <Route path="/userDetails" element={<LayoutUser />}/>
     </Routes>
   );
 }
