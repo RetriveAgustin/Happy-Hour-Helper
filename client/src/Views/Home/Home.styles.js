@@ -18,3 +18,12 @@ export const ImageBackground = styled.div`
     color: white;
   }
 `;
+
+export const ContainerFilter = styled.div`
+  display: flex;
+  position: relative;
+`;
+
+export const SectionCards = styled.div`
+  width: 100%;
+`;
