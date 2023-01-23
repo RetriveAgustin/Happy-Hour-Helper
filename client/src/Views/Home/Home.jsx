@@ -6,24 +6,24 @@ import {
   ContainerFilter,
   SectionCards,
 } from "./Home.styles";
-
+import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
 import { Section } from "../../components/Section/Section";
 import { Footer } from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
+import { getAllProducts } from "../../redux/actions/actions";
 
 const Home = () => {
-  const [data, setData] = useState();
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
 
-  // const getData = async () => {
-  //   setTimeout(() => {
-  //     setData(response);
-  //   }, 1000);
-  // };
+  const [actualFilter, setActualFilter] = useState("Todos los productos");
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+
   return (
     <Background>
       <Header />
@@ -31,12 +31,13 @@ const Home = () => {
         <h1>Bienvenido a Happy Hour Helper</h1>
       </ImageBackground>
       <ContainerFilter>
-        <Filters />
+        <Filters setActualFilter={setActualFilter}/>
         <SectionCards>
-          {data &&
-            data.map((d) => {
-              return <Section key={d.title} title={d.title} data={d.data} />;
-            })}
+          <Section data={products} title={actualFilter}/>
+          {/* {products &&
+            products.map((d) => {
+              return <Section key={d.name} title={d.title} data={d.data} />;
+            })} */}
         </SectionCards>
       </ContainerFilter>
       <Footer />
