@@ -6,6 +6,7 @@ export const Background = styled.div`
 `;
 
 export const ImageBackground = styled.div`
+  filter: blur(3px);
   background: url(${img});
   background-size: 100%;
   width: 100%;
@@ -13,10 +14,7 @@ export const ImageBackground = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  & h1 {
-    margin: 0;
-    color: white;
-  }
+  
 `;
 
 export const ContainerFilter = styled.div`
@@ -27,3 +25,13 @@ export const ContainerFilter = styled.div`
 export const SectionCards = styled.div`
   width: 100%;
 `;
+
+export const TextContent = styled.h1`
+  color: white;
+  /* text-align: center; */
+
+  padding-top: 340px;
+  padding-left: 280px;
+  position: absolute; 
+  z-index: 1;
+`

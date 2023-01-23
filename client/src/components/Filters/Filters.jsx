@@ -6,12 +6,11 @@ import {
   getAllBrands,
   // getAllProductsByCategory,
 } from "../../redux/actions/actions";
-import { Filt, FilterTitle, EachFilter, Types } from "./Filters.styles";
+import { Filt, FilterTitle, EachFilter, Types, InputsMaxMin } from "./Filters.styles";
 
-export default function Filters({setActualFilter}) {
+export default function Filters({ setActualFilter }) {
   const dispatch = useDispatch();
 
-  
   // const [filterByCategory, setFilterByCategory] = useState();
   // const [filterBySubCategory, setFilterBySubCategory] = useState();
   // const [filterByBrand, setFilterByBrand] = useState();
@@ -23,16 +22,17 @@ export default function Filters({setActualFilter}) {
   const brands = useSelector((state) => state.brands);
 
   const handleFilterByCategory = (e) => {
+    console.log("valor de filterbycategory", e.target.value);
     // dispatch(getAllProductsByCategory(e.target.value))
-    setActualFilter(e.target.value)
+    setActualFilter(e.target.value);
   };
 
   const handleFilterBySubCategory = (e) => {
-    setActualFilter(e.target.value)
+    setActualFilter(e.target.value);
   };
 
   const handleFilterByBrand = (e) => {
-    setActualFilter(e.target.value)
+    setActualFilter(e.target.value);
   };
 
   // const handleFilters = (e, type) => {
@@ -51,56 +51,86 @@ export default function Filters({setActualFilter}) {
 
   return (
     <Filt>
-      <FilterTitle>Filtrá tu busqueda</FilterTitle>
+      <FilterTitle>Filtrá tu búsqueda</FilterTitle>
       <div>
         <Types>
-          <EachFilter>Category</EachFilter>
-          <select onChange={handleFilterByCategory}>
-            <option defaultValue={null}>Categorías</option>
+          <EachFilter>Categoría</EachFilter>
+          <ul style={{ color: "white" }}>
             {categories &&
-              categories.map((c) => (
-                <option key={c.id} value={c.name}>
-                  {c.name}
+              categories.map((cat) => (
+                <option
+                  onClick={(e) => handleFilterByCategory(e)}
+                  style={{ padding: "4px", cursor: "pointer" }}
+                  value={cat.name}
+                >
+                  {cat.name}
                 </option>
               ))}
-            {/* 
-            <option>Beer</option>
-            <option>Fernet</option>
-            <option>Wine</option>
-            <option>Whiskies</option> */}
-          </select>
+          </ul>
         </Types>
         <Types>
-          <EachFilter>Subcategory</EachFilter>
-          <select onChange={handleFilterBySubCategory}>
-            <option defaultValue={null}>SubCategorías</option>
+          <EachFilter>Subcategoría</EachFilter>
+          <ul style={{ color: "white" }}>
             {subCategories &&
-              subCategories.map((c) => (
-                <option key={c.id} value={c.name}>
-                  {c.name}
-                </option>
-              ))}
-            {/* <option>OptionOne</option>
-            <option>OptionTwo</option>
-            <option>OptionThree</option>
-            <option>OptionFour</option> */}
-          </select>
+              subCategories.map((sub) => {
+                return (
+                  <option
+                    onClick={(e) => handleFilterBySubCategory(e)}
+                    style={{ padding: "4px", cursor: "pointer" }}
+                    value={sub.name}
+                  >
+                    {sub.name}
+                  </option>
+                );
+              })}
+          </ul>
         </Types>
         <Types>
-          <EachFilter>Brand </EachFilter>
-          <select onChange={handleFilterByBrand}>
-            <option defaultValue={null}>Marcas</option>
-            {brands &&
-              brands.map((c) => (
-                <option key={c.id} value={c.name}>
-                  {c.name}
+          <EachFilter>Marca</EachFilter>
+          <ul style={{ color: "white" }}>
+            {brands.map((brand) => {
+              return (
+                <option
+                  onClick={(e) => handleFilterByBrand(e)}
+                  style={{ padding: "4px", cursor: "pointer" }}
+                  value={brand.name}
+                >
+                  {brand.name}
                 </option>
-              ))}
-            {/* <option>OptionOne</option>
-            <option>OptionTwo</option>
-            <option>OptionThree</option>
-            <option>OptionFour</option> */}
-          </select>
+              );
+            })}
+          </ul>
+        </Types>
+        <Types>
+          <EachFilter>Precio</EachFilter>
+          <option
+            style={{ padding: "4px", cursor: "pointer", color: "white" }}
+            value="De mayor a menor"
+          >
+            De mayor a menor
+          </option>
+          <option style={{ padding: "4px", cursor: "pointer", color: "white" }}>
+            De menor a mayor
+          </option>
+          <InputsMaxMin>
+            <input type="number" placeholder="Máximo" />
+            <input type="number" placeholder="Minimo" />
+          </InputsMaxMin>
+        </Types>
+        <Types>
+          <EachFilter>Ofertas</EachFilter>
+          <option
+            style={{ padding: "4px", cursor: "pointer", color: "white" }}
+            value="De mayor a menor"
+          >
+            Desde 10% Off
+          </option>
+          <option style={{ padding: "4px", cursor: "pointer", color: "white" }}>
+            Desde 15% Off
+          </option>
+        </Types>
+        <Types>
+          <EachFilter>Ofertas</EachFilter>
         </Types>
       </div>
     </Filt>

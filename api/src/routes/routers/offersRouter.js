@@ -8,7 +8,7 @@ const {
   putOffer,
   deleteOffer,
   restoreOffer,
-} = require("../controllers/OfferController");
+} = require("../controllers/offerController");
 
 offerRouter.get("/getOffer", getOffer);
 
