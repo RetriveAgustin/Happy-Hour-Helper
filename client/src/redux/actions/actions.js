@@ -1,9 +1,12 @@
 import axios from "axios";
-export const GET_CATEGORIES = "GET_CATEGORIES"
-export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES"
-export const GET_BRANDS = "GET_BRANDS"
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
-export const GET_OFFERS = "GET_OFFERS"
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
+export const GET_BRANDS = "GET_BRANDS";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_OFFERS = "GET_OFFERS";
+export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
+export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
+export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -35,7 +38,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/product/getProduct")
+    fetch("http://localhost:3001/products/getProduct")
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -53,7 +56,7 @@ export const getAllBrands = () => {
       .then((response) => response.json())
       .then((data) => {
         dispatch({
-          type: GET_BRANDS ,
+          type: GET_BRANDS,
           payload: data,
         });
       })
@@ -87,9 +90,7 @@ export const createCategory = (payload) => {
 
 export const createProduct = (payload) => {
   return async function () {
-    const post = await axios.post(
-      "http://localhost:3001/products", payload
-    );
+    const post = await axios.post("http://localhost:3001/products/postProduct", payload);
     return post;
   };
 };
@@ -97,7 +98,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/sub-category",
+      "http://localhost:3001/sub-category/postSubCategory",
       payload
     );
     return post;
@@ -106,10 +107,7 @@ export const createSubCategory = (payload) => {
 
 export const createOffer = (payload) => {
   return async function () {
-    const post = await axios.post(
-      "http://localhost:3001/offer",
-      payload
-    );
+    const post = await axios.post("http://localhost:3001/offer", payload);
     return post;
   };
 };
@@ -117,9 +115,39 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/brand",
+      "http://localhost:3001/brand/postBrand",
       payload
     );
     return post;
   };
 };
+
+// export const getAllProductsByCategory = (category) => {
+//   return async function (dispatch) {
+//     const { data } = await axios(`http://localhost:3001/products/filterByCategory?category=${category}`)
+//     dispatch({
+//       type: GET_PRODUCTS_BY_CATEGORY,
+//       payload: data,
+//     });
+//   };
+// };
+
+// export const getProductsBySubCategory = () => {
+//   return async function (dispatch) {
+//     const { data } = await axios (`http://localhost:3001/products/filterByBrand`)
+//     dispatch({
+//       type: GET_PRODUCTS_BY_SUBCATEGORY,
+//       payload : data,
+//     })
+//   };
+// };
+
+// export const getFilterByBrand = () => {
+//   return async function(dispatch) {
+//     const { data } = await axios (`http://localhost:3001/products/filterByBrand`)
+//     dispatch({
+//       type: GET_FILTER_BY_BRAND,
+//       payload: data
+//     })
+//   }
+// };
