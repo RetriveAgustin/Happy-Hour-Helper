@@ -1,11 +1,11 @@
-const { Product, Brand ,Category, Sub_category } = require("../../db");
+const { Product, Brand, Category, Sub_category } = require("../../db");
 const {
   getModels,
   getModelsById,
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
 } = require("../utils/mainUtils");
 
 const getProduct = async (req, res) => {
@@ -24,7 +24,7 @@ const getProductById = async (req, res) => {
     const product = await getModelsById(Product, id);
     res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({error: error.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ const postProduct = async (req, res) => {
     await product.addBrand(brand);
     await product.addCategory(category);
     await product.addSub_category(subcategory);
-   
+
     if (product) {
       res.status(200).json(product);
     } else {
@@ -66,6 +66,44 @@ const postProduct = async (req, res) => {
     }
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+};
+
+const bulkProduct = async (req, res) => {
+  try {
+    const { instances } = req.body;
+    for (let i = 0; i < instances.length; i++) {
+      const {
+        name,
+        img,
+        price,
+        capacity,
+        minimum_amount_for_bulk,
+        bulk_discount,
+        stock,
+        has_discount,
+        brand,
+        category,
+        subcategory,
+      } = instances[i];
+      ins = await postModels(Product, {
+        name,
+        img,
+        price,
+        capacity,
+        minimum_amount_for_bulk,
+        bulk_discount,
+        stock,
+        has_discount,
+      });
+
+      await ins.addBrand(brand);
+      await ins.addCategory(category);
+      await ins.addSub_category(subcategory);
+    }
+    res.status(200).json("Done");
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -134,11 +172,11 @@ const restoreProduct = async (req, res) => {
   try {
     const { id } = req.body;
     const restored = await restoreModels(Product, id);
-    res.status(200).json(restored)
+    res.status(200).json(restored);
   } catch (error) {
     res.status(400).json({ error: err.message });
   }
-}
+};
 
 module.exports = {
   getProduct,
@@ -149,5 +187,6 @@ module.exports = {
   restoreProduct,
   filterProductByBrand,
   filterProductByCategory,
-  filterProductBySubCategory
+  filterProductBySubCategory,
+  bulkProduct,
 };
