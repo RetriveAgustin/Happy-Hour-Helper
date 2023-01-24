@@ -115,6 +115,7 @@ export default function Filters({ setActualFilter }) {
           <InputsMaxMin>
             <input type="number" placeholder="Máximo" />
             <input type="number" placeholder="Minimo" />
+            {/* <button></button> */}
           </InputsMaxMin>
         </Types>
         <Types>
