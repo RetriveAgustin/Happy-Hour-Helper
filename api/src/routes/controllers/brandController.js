@@ -1,4 +1,4 @@
-const { Brand } = require("../../db");
+const { Brand, Category, Sub_category } = require("../../db");
 const {
   getModels,
   postModels,

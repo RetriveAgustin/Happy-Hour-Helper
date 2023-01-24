@@ -1,4 +1,4 @@
-require('dotenv').config();
+-require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
@@ -65,7 +65,8 @@ Sub_category.belongsToMany(Product, { through: "Sub_category_Product", foreignKe
 Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
 Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
 
-
+Category.hasMany(Sub_category, { foreignKey: 'category_id' });
+Sub_category.belongsTo(Category, { foreignKey: 'category_id' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
