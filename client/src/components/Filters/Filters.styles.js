@@ -3,18 +3,9 @@ import styled from "styled-components";
 export const Filt = styled.div`
   display: flex;
   flex-direction: column;
-  width: 300px;
-  height: 100%;
+  width: 18rem;
   background-color: #52373c;
-  margin-top: 19px;
-  border-radius: 10px;
-  text-align: center;
-  top: 80px;
-  position: sticky;
-  & div {
-    padding: 80px 0;
-  }
-`;
+`
 
 export const FilterTitle = styled.h2`
   background-color: #2b1c1f;
@@ -30,7 +21,7 @@ export const EachFilter = styled.p`
   color: white;
   font-family: Arial, Helvetica, sans-serif;
   border: none;
-  font-weight: 400;
+  font-weight: 1000;
   padding-bottom: 0.5rem;
   /* font-size: 1.2rem; */
   /* padding: 0.5rem 1.5rem; */
@@ -38,5 +29,20 @@ export const EachFilter = styled.p`
 `;
 
 export const Types = styled.section`
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #2b1c1f; 
   padding: 20px;
 `;
+
+export const InputsMaxMin = styled.div`
+  display: flex;
+  width: 100%;
+  & input {
+    width: 67px;
+    border-radius: 4px;
+    margin: 9px 9px 9px 3px;
+    height: 25px;
+    padding: 0 4px;
+  }
+`
