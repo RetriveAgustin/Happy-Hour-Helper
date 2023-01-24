@@ -81,9 +81,7 @@ export const getAllOffers = () => {
 export const createCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/category",
-      "http://localhost:3001/category/",
-      payload
+      "http://localhost:3001/category", payload
     );
     return post;
   };
@@ -92,7 +90,6 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post("http://localhost:3001/products", payload);
-    const post = await axios.post("http://localhost:3001/products", payload);
     return post;
   };
 };
@@ -100,7 +97,6 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/sub-category",
       "http://localhost:3001/sub-category",
       payload
     );
@@ -118,8 +114,6 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/brand",
-      payload
       "http://localhost:3001/brand", payload
     );
     return post;
