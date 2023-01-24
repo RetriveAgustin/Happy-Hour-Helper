@@ -20,7 +20,7 @@ export const Card = ({ name, img, price }) => {
     <div>
     <div className="main-container">
       <div className='img-box'>
-        <img className='image' src={img} alt="not found" />
+        <img className='image' src={img ? img : Wine} alt="not found" />
       </div>
       <div className='price'>
         {price}

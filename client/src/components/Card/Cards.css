@@ -12,6 +12,8 @@
 .img-box {
     display: flex;
     justify-content: center;
+    object-fit: contain;
+    overflow: hidden;
 }
 
 .image {

@@ -4,6 +4,7 @@ import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
 import { Link, useNavigate } from "react-router-dom";
+import logo from './logo.svg'
 
 function Header() {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ function Header() {
   return (
     <>
       <NavContainer>
-        <Title onClick={() => navigate("/")}>Happy Hour Helper</Title>
+        <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
         <Link to='/detail'>
           <button>Detail</button>
         </Link>
