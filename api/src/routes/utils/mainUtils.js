@@ -1,13 +1,60 @@
+const {Product, Brand, Category, Sub_category} = require("../../db");
+
 const getModels = async (model, name) => {
   let results;
 
   if (model) {
-    if (name) {
-      results = await model.findAll({
-        where: { name: name },
-      });
+    if (model === Product) {
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: false,
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: false,
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: false,
+            },
+          ],
+        });
+      } else {
+        results = await model.findAll({
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: false,
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: false,
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: false,
+            },
+          ],
+        });
+      }
     } else {
-      results = await model.findAll();
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+        });
+      } else {
+        results = await model.findAll();
+      }
     }
   } else {
     return null;
@@ -15,6 +62,24 @@ const getModels = async (model, name) => {
 
   return results;
 };
+
+// const getModels = async (model, name) => {
+//   let results;
+
+//   if (model) {
+//     if (name) {
+//       results = await model.findAll({
+//         where: { name: name },
+//       });
+//     } else {
+//       results = await model.findAll();
+//     }
+//   } else {
+//     return null;
+//   }
+
+//   return results;
+// };
 
 const getModelsById = async (model, id) => {
   let results;
@@ -45,34 +110,26 @@ const postModels = async (model, properties) => {
 
 const putModels = async (model, id, properties) => {
   if (properties) {
-    const updated = await model.update(properties, {where: {id}});
+    const updated = await model.update(properties, { where: { id } });
     return updated;
-  }
-  else return null;
+  } else return null;
 };
 
-
-
-
 const deleteModels = async (model, id) => {
-    if (id) {
-        const updatedInstance = await model.destroy({where: {id}})
-        return updatedInstance;
-    }
-    else return null;
-}
-
-
+  if (id) {
+    const updatedInstance = await model.destroy({ where: { id } });
+    return updatedInstance;
+  } else return null;
+};
 
 const restoreModels = async (model, id) => {
   if (id) {
-    const recoveredInstance = await model.restore({where: {id}});
+    const recoveredInstance = await model.restore({ where: { id } });
     return recoveredInstance;
-  }
-  else {
+  } else {
     return null;
   }
-}
+};
 
 // const filterModelByRelation = async (firstModel, secondModel, param, id) => {
 //   const instace = firstModel.findAll({
@@ -89,5 +146,5 @@ module.exports = {
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
 };

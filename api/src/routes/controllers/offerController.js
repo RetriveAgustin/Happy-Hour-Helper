@@ -29,7 +29,7 @@ const getOfferById = async (req, res) => {
 
 const postOffer = async (req, res) => {
   try {
-    const { name, price, img, description, initial_date, expiration_date } =
+    const { name, price, img, description, initial_date, expiration_date, category } =
       req.body;
     const offer = await postModels(Offer, {
       name,
@@ -39,6 +39,9 @@ const postOffer = async (req, res) => {
       initial_date,
       expiration_date,
     });
+
+    await product.addCategory(category);
+
     if (offer) {
       res.status(200).json(offer);
     } else {
