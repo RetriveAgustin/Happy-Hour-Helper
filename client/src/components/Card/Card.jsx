@@ -13,7 +13,7 @@ const AddToCart = styled(Button)({
   fontSize: 12,
 });
 
-export const Card = ({ name, img, price }) => {
+export const Card = ({ name, img, price, stock }) => {
   const [amount, setAmount] = useState(1);
 
   return (
@@ -36,7 +36,7 @@ export const Card = ({ name, img, price }) => {
             <IndeterminateCheckBoxRoundedIcon fontSize="large" />
           </IconButton>
           <input type="number" className="input" value={amount} style={{textAlign: 'center'}}/>
-          <IconButton sx={{color: "#52373c"}} color="secondary" onClick={() => setAmount(amount + 1)} >
+          <IconButton disabled={amount >= stock} sx={{color: "#52373c"}} color="secondary" onClick={() => setAmount(amount + 1)} >
             <AddBoxRoundedIcon fontSize="large" />
           </IconButton>
         </div>
