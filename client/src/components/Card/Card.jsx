@@ -7,18 +7,22 @@ import IndeterminateCheckBoxRoundedIcon from "@mui/icons-material/IndeterminateC
 import Wine from "../../assets/winee.png";
 import "./Cards.css";
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
 
 const AddToCart = styled(Button)({
   textTransform: "none",
   fontSize: 12,
 });
 
-export const Card = ({ name, img, price, stock }) => {
+export const Card = ({ id, name, img, price, stock }) => {
   const [amount, setAmount] = useState(1);
+
+  const navigate = useNavigate()
 
   return (
     <div>
-      <div className="main-container">
+      <div className="main-container" onClick={() => navigate(`/product/${id}`)}>
         <div className="img-box">
           <img className="image" src={img ? img : Wine} alt="not found" />
         </div>
@@ -50,7 +54,7 @@ export const Card = ({ name, img, price, stock }) => {
           >
             Agregar
           </AddToCart>
-        </div>
+        </div>        
       </div>
     </div>
   );

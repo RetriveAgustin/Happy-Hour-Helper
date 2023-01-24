@@ -5,6 +5,7 @@ import {
   GET_SUB_CATEGORIES,
   GET_ALL_PRODUCTS,
   GET_PRODUCTS_BY_CATEGORY,
+  GET_PRODUCT_ID,
 } from "./../actions/actions";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
   brands: [],
   products: [],
   offers: [],
-  productsByCategory: []
+  productsByCategory: [],
+  detail: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -28,6 +30,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, subCategories: action.payload };
     case GET_ALL_PRODUCTS:
       return { ...state, products: action.payload };
+    case GET_PRODUCT_ID:
+      return { ...state, detail: action.payload};
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
     default:

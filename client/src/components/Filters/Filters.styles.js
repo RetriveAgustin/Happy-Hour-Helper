@@ -11,7 +11,6 @@ export const FilterTitle = styled.h2`
   background-color: #2b1c1f;
   margin: 0;
   padding: 0.7rem;
-  border-top-right-radius: 10px;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
   color: white;

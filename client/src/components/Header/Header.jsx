@@ -66,9 +66,6 @@ function Header() {
     <>
       <NavContainer>
         <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
-        <Link to='/detail'>
-          <button>Detail</button>
-        </Link>
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
