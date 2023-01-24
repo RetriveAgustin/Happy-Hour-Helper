@@ -14,7 +14,7 @@ const getProduct = async (req, res) => {
     const product = await getModels(Product, name);
     res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
