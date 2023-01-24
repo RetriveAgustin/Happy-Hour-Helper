@@ -81,7 +81,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/offer/getOffer")
+    fetch("http://localhost:3001/offers/getOffer")
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -119,7 +119,7 @@ export const createSubCategory = (payload) => {
 
 export const createOffer = (payload) => {
   return async function () {
-    const post = await axios.post("http://localhost:3001/offer", payload);
+    const post = await axios.post("http://localhost:3001/offers/postOffer", payload);
     return post;
   };
 };

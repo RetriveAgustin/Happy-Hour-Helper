@@ -47,7 +47,7 @@ const Detail = () => {
                 {prd.capacity} ml
               </SizeButton>
             </div>
-            <h1>{prd.price}</h1>
+            <h1>${prd.price}</h1>
             <ButtonsDiv>
               <AddToCart
                 variant="contained"
