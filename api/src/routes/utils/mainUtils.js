@@ -12,17 +12,17 @@ const getModels = async (model, name) => {
             {
               model: Brand,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
             {
               model: Category,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
             {
               model: Sub_category,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
           ],
         });
@@ -32,17 +32,17 @@ const getModels = async (model, name) => {
             {
               model: Brand,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
             {
               model: Category,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
             {
               model: Sub_category,
               attributes: ["id", "name"],
-              through: false,
+              through: {attributes: []},
             },
           ],
         });
