@@ -120,7 +120,7 @@ const filterProductByBrand = async (req, res) => {
       include: [{ model: Brand, where: { id: brand } }],
     }).then((products) => res.status(200).json(products));
   } catch (error) {
-    res.status(400).error.message;
+    res.status(400).Json({ error: error.message });
   }
 };
 
@@ -134,7 +134,7 @@ const filterProductByCategory = async (req, res) => {
       include: [{ model: Category, where: { id: category } }],
     }).then((products) => res.status(200).json(products));
   } catch (error) {
-    res.status(400).error.message;
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -154,7 +154,7 @@ const putProduct = async (req, res) => {
     const result = await putModels(Product, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -174,7 +174,7 @@ const restoreProduct = async (req, res) => {
     const restored = await restoreModels(Product, id);
     res.status(200).json(restored);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

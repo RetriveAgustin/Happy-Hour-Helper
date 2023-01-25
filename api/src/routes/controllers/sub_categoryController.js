@@ -63,7 +63,7 @@ const putSubCategory = async (req, res) => {
         const result = await putModels(Sub_category, id, properties);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -83,7 +83,7 @@ const restoreSubCategory = async (req, res) => {
     const restored = await restoreModels(Sub_category, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

@@ -14,7 +14,7 @@ const getCategory = async (req, res) => {
     const category = await getModels(Category, name);
     res.status(200).json(category);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -38,7 +38,7 @@ const putCategory = async (req, res) => {
     const result = await putModels(Category, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ const restoreCategory = async (req, res) => {
     const restored = await restoreModels(Category, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

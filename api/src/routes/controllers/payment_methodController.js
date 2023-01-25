@@ -14,7 +14,7 @@ const getPayment = async (req, res) => {
     const payment = await getModels(Payment_method, name);
     res.status(200).json(payment);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -45,7 +45,7 @@ const putPayment = async (req, res) => {
     const result = await putModels(Payment_method, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -65,7 +65,7 @@ const restorePayment = async (req, res) => {
     const restored = await restoreModels(Payment_method, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

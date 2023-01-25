@@ -14,7 +14,7 @@ const getOrder = async (req, res) => {
     const orders = await getModels(Order, name);
     res.status(200).json(order);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -44,7 +44,7 @@ const putOrder = async (req, res) => {
     const result = await putModels(Order, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -64,7 +64,7 @@ const restoreOrder = async (req, res) => {
     const restored = await restoreModels(Order, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

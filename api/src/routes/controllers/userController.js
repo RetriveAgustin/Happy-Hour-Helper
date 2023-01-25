@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
     const users = await getModels(User, name);
     res.status(200).json(users);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -80,7 +80,7 @@ const putUser = async (req, res) => {
     const result = await putModels(User, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -100,7 +100,7 @@ const restoreUser = async (req, res) => {
     const restored = await restoreModels(User, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

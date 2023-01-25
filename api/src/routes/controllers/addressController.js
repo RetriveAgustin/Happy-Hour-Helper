@@ -73,7 +73,7 @@ const restoreAddress = async (req, res) => {
     const restored = await restoreModels(Address, id);
     res.status(200).json(restored);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
