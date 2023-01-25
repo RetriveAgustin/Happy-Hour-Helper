@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  CONNECTION_STRING_DB
+  CONNECTION_STRING_DB,
 } = process.env;
 
 const sequelize = new Sequelize(CONNECTION_STRING_DB, {

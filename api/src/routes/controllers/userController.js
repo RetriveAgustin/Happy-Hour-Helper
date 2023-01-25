@@ -69,8 +69,8 @@ const postUser = async (req, res) => {
     } else {
       res.status(400).json("User couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -89,8 +89,8 @@ const deleteUser = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(User, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 

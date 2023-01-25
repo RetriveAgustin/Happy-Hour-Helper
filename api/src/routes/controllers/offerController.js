@@ -47,8 +47,8 @@ const postOffer = async (req, res) => {
     } else {
       res.status(400).json("Offer couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -67,8 +67,8 @@ const deleteOffer = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Offer, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 

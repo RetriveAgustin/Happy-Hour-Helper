@@ -27,8 +27,8 @@ const postCategory = async (req, res) => {
     } else {
       res.status(400).json("Category couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -47,8 +47,8 @@ const deleteCategory = async (req, res) => {
     const { id } = req.body;
     const category = await deleteModels(Category, id);
     res.status(200).json(category);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 

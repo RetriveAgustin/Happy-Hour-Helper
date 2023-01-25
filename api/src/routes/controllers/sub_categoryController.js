@@ -52,8 +52,8 @@ const postSubCategory = async (req, res) => {
     } else {
       res.status(400).json("Sub-category couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -72,8 +72,8 @@ const deleteSubCategory = async (req, res) => {
         const { id } = req.body;
         const updated = await deleteModels(Sub_category, id);
         res.status(200).json(updated)
-      } catch (err) {
-        res.status(400).json({error: err.message})
+      } catch (error) {
+        res.status(400).json({error: error.message})
       }
 }
 

@@ -33,8 +33,8 @@ const postOrder = async (req, res) => {
     } else {
       res.status(400).json("Order couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -53,8 +53,8 @@ const deleteOrder = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Order, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 

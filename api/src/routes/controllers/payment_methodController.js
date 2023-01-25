@@ -34,8 +34,8 @@ const postPayment = async (req, res) => {
     } else {
       res.status(400).json("Payment method couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -54,8 +54,8 @@ const deletePayment = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Payment_method, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
