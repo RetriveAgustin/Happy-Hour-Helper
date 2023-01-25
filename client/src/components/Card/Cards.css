@@ -1,0 +1,62 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 250px;
+    height: 420px;
+    background-color: #EEECDF;
+    border-radius: 10px;
+}
+
+.img-box {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 300px;
+    object-fit: contain;
+    margin: 0;
+    margin-bottom: 0;
+    align-self: center;
+}
+
+.name {
+   height: 20px; 
+}
+
+.price {
+    display: flex;
+    margin-left: 4px;
+}
+
+.name-tag {
+    margin: 0;
+}
+
+.add-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.sub-add {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 2px;
+}
+
+.input {
+    width: 3rem;
+    height: 2rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
