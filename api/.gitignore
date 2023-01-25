@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -108,3 +109,6 @@ dist
 package-lock.json
 
 happy-hour-helper-firebase-adminsdk-ux3za-a0d5fd845e.json
+=======
+/node_modules
+>>>>>>> 4676af267c0e10de8ce296ce1d8889f01e40d892
