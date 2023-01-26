@@ -7,6 +7,7 @@ import {
   Half2,
   Name,
   Image,
+  DetailsContainer,
   SizeButton,
   ButtonsDiv,
 } from "./Detail.styles";
@@ -36,7 +37,7 @@ const Detail = () => {
       <Wrapper>
         {product && product.map(prd => {
           return (
-            <>
+            <DetailsContainer>
             <Half1>
             <Image src={prd.img} />
           </Half1>
@@ -70,7 +71,7 @@ const Detail = () => {
               </Link>
             </ButtonsDiv>
           </Half2>
-          </>
+          </DetailsContainer>
           )       
         })}
       </Wrapper>

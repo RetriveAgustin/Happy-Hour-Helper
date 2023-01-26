@@ -8,7 +8,7 @@ import {
 } from "../../redux/actions/actions";
 import { Filt, FilterTitle, EachFilter, Types, InputsMaxMin } from "./Filters.styles";
 
-export default function Filters({ setActualFilter }) {
+export default function Filters({ setActualFilter, setFilter }) {
   const dispatch = useDispatch();
 
   // const [filterByCategory, setFilterByCategory] = useState();
@@ -25,14 +25,17 @@ export default function Filters({ setActualFilter }) {
     console.log("valor de filterbycategory", e.target.value);
     // dispatch(getAllProductsByCategory(e.target.value))
     setActualFilter(e.target.value);
+    setFilter(e.target.value);
   };
 
   const handleFilterBySubCategory = (e) => {
     setActualFilter(e.target.value);
+    setFilter(e.target.value);
   };
 
   const handleFilterByBrand = (e) => {
     setActualFilter(e.target.value);
+    setFilter(e.target.value);
   };
 
   // const handleFilters = (e, type) => {

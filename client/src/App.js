@@ -1,3 +1,4 @@
+import React from 'react'
 import { Routes, Route } from "react-router-dom";
 
 import CreateProduct from './components/CreateProduct/CreateProduct'
@@ -9,15 +10,12 @@ import Login from "./Views/Login/Login";
 import Register from "./Views/Register/Register";
 import "./App.css";
 import Detail from "./Views/Detail/Detail";
-import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import AdminOffers from './Views/AdminOffers/AdminOffers';
 import AdminProducts from './Views/AdminProducts/AdminProducts';
 import AdminUsers from './Views/AdminUsers/AdminUsers';
 
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/system";
-
-
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -37,11 +35,10 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/admin" element={<AdminDashboard />} />
       <Route path="/admin/create-product" element={<CreateProduct />} />
+      <Route path="/admin" element={<AdminUsers />} />
       <Route path="/admin/offers" element={<AdminOffers />} />
       <Route path="/admin/products" element={<AdminProducts />} />
-      <Route path="/admin/users" element={<AdminUsers />} />
       <Route path="/user" element={<User />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />

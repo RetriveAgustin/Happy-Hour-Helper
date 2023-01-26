@@ -7,21 +7,30 @@ export const Wrapper = styled.div`
     background-color: #EEECDF;
 `
 
+export const DetailsContainer = styled.div`
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+
 export const Half1 = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     height: 100%;
-    width: 50%;
+    width: 100%;
 `
 export const Half2 = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 20px;
     justify-content: center;
     align-items: left;
     height: 100%;
-    width: 50%;
+    width: 100%;
 `
 export const Image = styled.img`
     width: 30rem;

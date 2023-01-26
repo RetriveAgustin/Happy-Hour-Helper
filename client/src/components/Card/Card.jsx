@@ -22,12 +22,12 @@ export const Card = ({ id, name, img, price, stock }) => {
 
   return (
     <div>
-      <div className="main-container" onClick={() => navigate(`/product/${id}`)}>
-        <div className="img-box">
+      <div className="main-container">
+        <div onClick={() => navigate(`/product/${id}`)} className="img-box">
           <img className="image" src={img ? img : Wine} alt="not found" />
         </div>
-        <div className="price">${price}</div>
-        <div className="name">
+        <div onClick={() => navigate(`/product/${id}`)} className="price">${price}</div>
+        <div onClick={() => navigate(`/product/${id}`)} className="name">
           <h4 className="name-tag">{name}</h4>
         </div>
         <div className="sub-add">
