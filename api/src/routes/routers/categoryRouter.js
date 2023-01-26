@@ -17,6 +17,6 @@ categoryRouter.post("/postCategory", postCategory);
 
 categoryRouter.put("/putCategory", putCategory);
 
-categoryRouter.put("/deleteCategory", deleteCategory);
+categoryRouter.delete("/deleteCategory", deleteCategory);
 
 module.exports = categoryRouter;

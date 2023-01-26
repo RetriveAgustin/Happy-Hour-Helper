@@ -14,7 +14,7 @@ const getDiscount = async (req, res) => {
         const discounts = await getModels(Discount, name);
         res.status(200).json(discounts)
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -27,8 +27,8 @@ const postDiscount = async (req, res) => {
     } else {
       res.status(400).json("Discount couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -38,7 +38,7 @@ const putDiscount = async (req, res) => {
         const result = await putModels(Discount, id, properties);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -47,8 +47,8 @@ const deleteDiscount = async (req, res) => {
         const { id } = req.body;
         const updated = await deleteModels(Discount, id);
         res.status(200).json(updated)
-      } catch (err) {
-        res.status(400).json({error: err.message})
+      } catch (error) {
+        res.status(400).json({error: error.message})
       }
 }
 
@@ -58,7 +58,7 @@ const restoreDiscount = async (req, res) => {
     const restored = await restoreModels(Discount, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

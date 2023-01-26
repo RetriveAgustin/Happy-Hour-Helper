@@ -28,6 +28,10 @@ module.exports = (sequelize) => {
       created_in_google: {
         type: DataTypes.BOOLEAN,
       },
+      is_admin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      }
     },
     {
       paranoid: true,

@@ -1,4 +1,4 @@
-const { Sub_category } = require("../../db");
+const { Sub_category, Category } = require("../../db");
 const {
   getModels,
   postModels,
@@ -10,24 +10,50 @@ const {
 const getSubCategory = async (req, res) => {
     try {
         const { name } = req.query;
-        const subCategory = await getModels(Sub_category, name);
+        let subCategory;
+        if (name) {
+          subCategory = await Sub_category.findAll({
+            where: { name: name },
+            include: [
+              {
+                model: Category,
+                attributes: ["name"],
+              },
+            ],
+          });
+        } else {
+          subCategory = await Sub_category.findAll({
+            include: [
+              {
+                model: Category,
+                attributes: ["name"],
+              },
+            ],
+          });
+        }
         res.status(200).json(subCategory)
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
 const postSubCategory = async (req, res) => {
   try {
-    const { name, has_discount } = req.body;
-    const subCategory = await postModels(Sub_category, {name, has_discount});
+    const { name, has_discount, category } = req.body;
+
+    const subCategory = await Sub_category.create({
+      name: name,
+      has_discount: has_discount,
+      category_id: category
+    })
+
     if (subCategory) {
       res.status(200).json(subCategory);
     } else {
       res.status(400).json("Sub-category couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -37,7 +63,7 @@ const putSubCategory = async (req, res) => {
         const result = await putModels(Sub_category, id, properties);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -46,8 +72,8 @@ const deleteSubCategory = async (req, res) => {
         const { id } = req.body;
         const updated = await deleteModels(Sub_category, id);
         res.status(200).json(updated)
-      } catch (err) {
-        res.status(400).json({error: err.message})
+      } catch (error) {
+        res.status(400).json({error: error.message})
       }
 }
 
@@ -57,7 +83,7 @@ const restoreSubCategory = async (req, res) => {
     const restored = await restoreModels(Sub_category, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 
