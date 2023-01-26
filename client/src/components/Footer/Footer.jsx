@@ -63,9 +63,6 @@ export const Footer = () => {
             <li>
               <a href="###">Preguntas frecuentes</a>
             </li>
-            <li>
-              <a href="###">Preguntas frecuentes</a>
-            </li>
           </ul>
         </Navigation>
 

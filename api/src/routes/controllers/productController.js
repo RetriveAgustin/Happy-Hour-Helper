@@ -14,14 +14,14 @@ const getProduct = async (req, res) => {
     const product = await getModels(Product, name);
     res.status(200).json(product);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
 const getProductById = async (req, res) => {
   try {
-    const { id } = req.body;
-    const product = getModelsById(Product, id);
+    const { id } = req.params;
+    const product = await getModelsById(Product, id);
     res.status(200).json(product);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -38,12 +38,12 @@ const postProduct = async (req, res) => {
       minimum_amount_for_bulk,
       bulk_discount,
       stock,
-      rating,
       has_discount,
       brand,
       category,
       subcategory,
     } = req.body;
+
     const product = await postModels(Product, {
       name,
       img,
@@ -52,14 +52,13 @@ const postProduct = async (req, res) => {
       minimum_amount_for_bulk,
       bulk_discount,
       stock,
-      rating,
       has_discount,
     });
 
     await product.addBrand(brand);
     await product.addCategory(category);
     await product.addSub_category(subcategory);
-
+   
     if (product) {
       res.status(200).json(product);
     } else {
@@ -70,14 +69,17 @@ const postProduct = async (req, res) => {
   }
 };
 
+//se cambió el medio de obtención de las variables, ahora se mandan por body.
+//además ahora se recibe un id, no un nombre, puesto que el producto no tiene acceso a esta información
+//en el home se tendrá que modificar esto para que funcione adecuadamente
 const filterProductByBrand = async (req, res) => {
   try {
-    const { brand } = req.query;
+    const { brand } = req.body;
     Product.findAll({
       where: {
         brand,
       },
-      include: [{ model: Brand, where: { name: brand } }],
+      include: [{ model: Brand, where: { id: brand } }],
     }).then((products) => res.status(200).json(products));
   } catch (error) {
     res.status(400).error.message;
@@ -86,12 +88,12 @@ const filterProductByBrand = async (req, res) => {
 
 const filterProductByCategory = async (req, res) => {
   try {
-    const { category } = req.query;
+    const { category } = req.body;
     Product.findAll({
       where: {
         category,
       },
-      include: [{ model: Category, where: { name: category } }],
+      include: [{ model: Category, where: { id: category } }],
     }).then((products) => res.status(200).json(products));
   } catch (error) {
     res.status(400).error.message;
@@ -99,12 +101,12 @@ const filterProductByCategory = async (req, res) => {
 };
 
 const filterProductBySubCategory = async (req, res) => {
-  const { subcategory } = req.query;
+  const { subcategory } = req.body;
   Product.findAll({
     where: {
       subcategory: subcategory,
     },
-    include: [{ model: Sub_category, where: { name: subcategory } }],
+    include: [{ model: Sub_category, where: { id: subcategory } }],
   }).then((products) => res.json(products));
 };
 

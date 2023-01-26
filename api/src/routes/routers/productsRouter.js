@@ -3,6 +3,7 @@ const productRouter = Router();
 
 const {
   getProduct,
+  getProductById,
   postProduct,
   putProduct,
   deleteProduct,
@@ -15,6 +16,8 @@ const {
 
 productRouter.get("/getProduct", getProduct);
 
+productRouter.get("/getProductId/:id", getProductById);
+
 productRouter.get("/restoreProduct", restoreProduct);
 
 productRouter.post("/postProduct", postProduct);
@@ -23,10 +26,11 @@ productRouter.put("/putProduct", putProduct);
 
 productRouter.delete("/deleteProduct", deleteProduct);
 
-productRouter.get('/product/filterByBrand', filterProductByBrand)
+productRouter.get('/filterByBrand', filterProductByBrand)
 
-productRouter.get('/product/filterBySubCategory', filterProductBySubCategory)
+productRouter.get('/filterBySubCategory', filterProductBySubCategory)
 
-productRouter.get('/product/filterByCategory', filterProductByCategory)
+productRouter.get('/filterByCategory', filterProductByCategory)
+
 
 module.exports = productRouter;

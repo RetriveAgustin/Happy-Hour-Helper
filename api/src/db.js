@@ -45,23 +45,25 @@ Order.belongsToMany(Offer, { through: 'Offers_Order', foreignKey: 'order_id' });
 Offer.belongsToMany(Order, { through: 'Offers_Order', foreignKey: 'offer_id' });
 
 Order.belongsToMany(Product, { through: 'Product_Order', foreignKey: 'order_id' });
-Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id' });
+Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id'});
 
 Offer.hasMany(Product, { foreignKey: 'offer_id' });
 Product.belongsTo(Offer, { foreignKey: 'offer_id' });
 
+Offer.belongsToMany(Category, { through: 'Category_Offer', foreignKey: 'offer_id'});
+Category.belongsToMany(Offer, { through: 'Category_Offer', foreignKey: 'category_id'});
+
+Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'product_id' });
 Brand.belongsToMany(Product, { through: 'Brand_Product', foreignKey: 'brand_id' });
-Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'brand_id' });
 
 Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
 Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });
 
-Product.belongsToMany(Sub_category, { through: "Sub_category_Product" });
-Sub_category.belongsToMany(Product, { through: "Sub_category_Product" });
+Product.belongsToMany(Sub_category, { through: "Sub_category_Product", foreignKey: 'product_id' });
+Sub_category.belongsToMany(Product, { through: "Sub_category_Product", foreignKey: 'sub_cateogry_id' });
 
 Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
 Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
-
 
 
 
