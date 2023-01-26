@@ -24,7 +24,10 @@ export const Card = ({ product }) => {
 
   const handleAdd = (e) => {
     dispatch(addToCart(e.target.value))
+    console.log(e.target.value)
   }
+
+    
 
   const navigate = useNavigate()
 
