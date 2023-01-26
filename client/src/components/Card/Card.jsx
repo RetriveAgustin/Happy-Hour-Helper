@@ -8,27 +8,37 @@ import Wine from "../../assets/winee.png";
 import "./Cards.css";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../redux/actions/actions";
 
 const AddToCart = styled(Button)({
   textTransform: "none",
   fontSize: 12,
 });
 
-export const Card = ({ id, name, img, price, stock }) => {
+export const Card = ({ product }) => {
+  const { id, name, img, price, stock } = product
   const [amount, setAmount] = useState(1);
+  
+  const dispatch = useDispatch()
+
+  const handleAdd = (e) => {
+    dispatch(addToCart(e.target.value))
+  }
 
   const navigate = useNavigate()
 
   return (
     <div>
-      <div className="main-container" onClick={() => navigate(`/product/${id}`)}>
+      <div className="main-container">
+        <div onClick={() => navigate(`/product/${id}`)}>
         <div className="img-box">
           <img className="image" src={img ? img : Wine} alt="not found" />
         </div>
         <div className="price">${price}</div>
         <div className="name">
           <h4 className="name-tag">{name}</h4>
+        </div>
         </div>
         <div className="sub-add">
           <IconButton
@@ -39,7 +49,7 @@ export const Card = ({ id, name, img, price, stock }) => {
           >
             <IndeterminateCheckBoxRoundedIcon fontSize="large" />
           </IconButton>
-          <input type="number" className="input" value={amount} style={{textAlign: 'center'}}/>
+          <input type="number" className="input" value={amount} style={{textAlign: 'center' , borderRadius: '5px', border: '1px solid #bdbdbd'}}/>
           <IconButton disabled={amount >= stock} sx={{color: "#52373c"}} color="secondary" onClick={() => setAmount(amount + 1)} >
             <AddBoxRoundedIcon fontSize="large" />
           </IconButton>
@@ -49,7 +59,8 @@ export const Card = ({ id, name, img, price, stock }) => {
             variant="contained"
             color="secondary"
             startIcon={<ShoppingCartOutlinedIcon />}
-            onClick={undefined}
+            value={product}
+            onClick={(e) => handleAdd(e)}
             sx={{backgroundColor: "#52373c"}}
           >
             Agregar

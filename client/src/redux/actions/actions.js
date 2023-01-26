@@ -8,6 +8,7 @@ export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
+export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -130,6 +131,13 @@ export const createBrand = (payload) => {
     return post;
   };
 };
+
+export const addToCart = (payload) => {
+  return {
+    type: ADD_TO_CART,
+    payload: payload
+  }
+}
 
 // export const getAllProductsByCategory = (category) => {
 //   return async function (dispatch) {

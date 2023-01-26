@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -6,7 +6,7 @@ import AvatarIcon from "./AvatarIcon";
 import { Link, useNavigate } from "react-router-dom";
 import logo from './logo.svg'
 
-function Header() {
+function Header ({ cart }) {
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
