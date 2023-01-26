@@ -1,4 +1,4 @@
-const { Brand, Category, Sub_category } = require("../../db");
+const { Brand } = require("../../db");
 const {
   getModels,
   postModels,
@@ -12,8 +12,8 @@ const getBrand = async (req, res) => {
     const { name } = req.query;
     const brands = await getModels(Brand, name);
     res.status(200).json(brands);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -26,8 +26,8 @@ const postBrand = async (req, res) => {
     } else {
       res.status(400).json("Brand couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -36,8 +36,8 @@ const putBrand = async (req, res) => {
     const { id, properties } = req.body;
     const result = await putModels(Brand, id, properties);
     res.status(200).json(result);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -46,8 +46,8 @@ const deleteBrand = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Brand, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -57,7 +57,7 @@ const restoreBrand = async (req, res) => {
     const restored = await restoreModels(Brand, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

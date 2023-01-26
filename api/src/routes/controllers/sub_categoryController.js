@@ -52,8 +52,8 @@ const postSubCategory = async (req, res) => {
     } else {
       res.status(400).json("Sub-category couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -63,7 +63,7 @@ const putSubCategory = async (req, res) => {
         const result = await putModels(Sub_category, id, properties);
         res.status(200).json(result);
     } catch (error) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: error.message });
     }
 }
 
@@ -72,8 +72,8 @@ const deleteSubCategory = async (req, res) => {
         const { id } = req.body;
         const updated = await deleteModels(Sub_category, id);
         res.status(200).json(updated)
-      } catch (err) {
-        res.status(400).json({error: err.message})
+      } catch (error) {
+        res.status(400).json({error: error.message})
       }
 }
 
@@ -83,7 +83,7 @@ const restoreSubCategory = async (req, res) => {
     const restored = await restoreModels(Sub_category, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

@@ -14,7 +14,7 @@ const getPayment = async (req, res) => {
     const payment = await getModels(Payment_method, name);
     res.status(200).json(payment);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -34,8 +34,8 @@ const postPayment = async (req, res) => {
     } else {
       res.status(400).json("Payment method couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -45,7 +45,7 @@ const putPayment = async (req, res) => {
     const result = await putModels(Payment_method, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -54,8 +54,8 @@ const deletePayment = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Payment_method, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -65,7 +65,7 @@ const restorePayment = async (req, res) => {
     const restored = await restoreModels(Payment_method, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 
