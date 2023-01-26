@@ -2068,6 +2068,20 @@
     "prop-types" "^15.8.1"
     "react-is" "^18.2.0"
 
+"@mui/base@5.0.0-alpha.115":
+  "integrity" "sha512-OGQ84whT/yNYd6xKCGGS6MxqEfjVjk5esXM7HP6bB2Rim7QICUapxZt4nm8q39fpT08rNDkv3xPVqDDwRdRg1g=="
+  "resolved" "https://registry.npmjs.org/@mui/base/-/base-5.0.0-alpha.115.tgz"
+  "version" "5.0.0-alpha.115"
+  dependencies:
+    "@babel/runtime" "^7.20.7"
+    "@emotion/is-prop-valid" "^1.2.0"
+    "@mui/types" "^7.2.3"
+    "@mui/utils" "^5.11.2"
+    "@popperjs/core" "^2.11.6"
+    "clsx" "^1.2.1"
+    "prop-types" "^15.8.1"
+    "react-is" "^18.2.0"
+
 "@mui/core-downloads-tracker@^5.11.5":
   "integrity" "sha512-MIuWGjitOsugpRhp64CQY3ZEVMIu9M/L9ioql6QLSkz73+bGIlC9FEhfi670/GZ8pQIIGmtiGGwofYzlwEWjig=="
   "resolved" "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.11.5.tgz"
@@ -2079,6 +2093,20 @@
   "version" "5.11.0"
   dependencies:
     "@babel/runtime" "^7.20.6"
+
+"@mui/lab@^5.0.0-alpha.117":
+  "integrity" "sha512-g+EN4jnoy6bwf3U/4q+L9gAVXoOky+T+VEDWzOP3BZLVghO63X0oaBx12TPOCnGDJKm0crFsIiyQQmYQkaGJqA=="
+  "resolved" "https://registry.npmjs.org/@mui/lab/-/lab-5.0.0-alpha.117.tgz"
+  "version" "5.0.0-alpha.117"
+  dependencies:
+    "@babel/runtime" "^7.20.7"
+    "@mui/base" "5.0.0-alpha.115"
+    "@mui/system" "^5.11.5"
+    "@mui/types" "^7.2.3"
+    "@mui/utils" "^5.11.2"
+    "clsx" "^1.2.1"
+    "prop-types" "^15.8.1"
+    "react-is" "^18.2.0"
 
 "@mui/material@^5.0.0", "@mui/material@^5.11.5":
   "integrity" "sha512-5fzjBbRYaB5MoEpvA32oalAWltOZ3/kSyuovuVmPc6UF6AG42lTtbdMLpdCygurFSGUMZYTg4Cjij52fKlDDgg=="

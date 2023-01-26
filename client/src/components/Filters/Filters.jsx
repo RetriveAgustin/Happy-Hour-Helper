@@ -5,14 +5,22 @@ import {
   getAllSubCategories,
   getAllBrands,
 } from "../../redux/actions/actions";
-import { Filt, FilterTitle, EachFilter, Types, InputsMaxMin } from "./Filters.styles";
+import { TreeView } from "@mui/lab";
+import { ExpandMore, ChevronRight } from "@mui/icons-material";
+import Category from "./Category";
+import {
+  Filt,
+  FilterTitle,
+  EachFilter,
+  Types,
+  InputsMaxMin,
+} from "./Filters.styles";
 
 export default function Filters({ setActualFilter }) {
   const dispatch = useDispatch();
 
-
   const categories = useSelector((state) => state.categories);
-  const subCategories = useSelector((state) => state.subCategories);
+  // const subCategories = useSelector((state) => state.subCategories);
   const brands = useSelector((state) => state.brands);
 
   const handleFilterByCategory = (e) => {
@@ -39,19 +47,19 @@ export default function Filters({ setActualFilter }) {
       <FilterTitle>Filtrá tu búsqueda</FilterTitle>
       <div>
         <Types>
-          <EachFilter>Categoría</EachFilter>
-          <ul style={{ color: "white" }}>
+          <EachFilter>Categorías</EachFilter>
+          <TreeView
+            aria-label="file system navigator"
+            defaultCollapseIcon={<ExpandMore />}
+            defaultExpandIcon={<ChevronRight />}
+            sx={{ height: "fit-content", flexGrow: 1 }}
+          >
             {categories &&
-              categories.map((cat) => (
-                <option
-                  onClick={(e) => handleFilterByCategory(e)}
-                  style={{ padding: "4px", cursor: "pointer" }}
-                  value={cat.name}
-                >
-                  {cat.name}
-                </option>
-              ))}
-          </ul>
+              categories.map((category) => {
+                return <Category category={category} />;
+              })
+            }
+          </TreeView>
         </Types>
         <Types>
           <EachFilter>Precio</EachFilter>

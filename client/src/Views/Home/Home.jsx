@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import {
-  ImageBackground,
   Background,
   ContainerFilter,
   SectionCards,
-  TextContent,
 } from "./Home.styles";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
@@ -27,10 +25,6 @@ const Home = ({ cart }) => {
   return (
     <Background>
       <Header cart={cart}/>
-      {/* <TextContent>
-        <h1>Bienvenido a Happy Hour Helper</h1>
-      </TextContent>
-      <ImageBackground /> */}
       <ContainerFilter>
         <Filters setActualFilter={setActualFilter} />
         <SectionCards>
