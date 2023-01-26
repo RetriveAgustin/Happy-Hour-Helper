@@ -16,25 +16,17 @@ import {
   InputsMaxMin,
 } from "./Filters.styles";
 
-export default function Filters({ setActualFilter }) {
+export default function Filters({ setFilter }) {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.categories);
   // const subCategories = useSelector((state) => state.subCategories);
-  const brands = useSelector((state) => state.brands);
+  // const brands = useSelector((state) => state.brands);
 
-  const handleFilterByCategory = (e) => {
-    console.log("valor de filterbycategory", e.target.value);
-    setActualFilter(e.target.value);
-  };
-
-  const handleFilterBySubCategory = (e) => {
-    setActualFilter(e.target.value);
-  };
-
-  const handleFilterByBrand = (e) => {
-    setActualFilter(e.target.value);
-  };
+  // const handleFilter = (e) => {
+  //   console.log("valor de filterbycategory", e.target.value);
+  //   setActualFilter(e.target.value);
+  // };
 
   useEffect(() => {
     dispatch(getAllBrands());
@@ -56,11 +48,11 @@ export default function Filters({ setActualFilter }) {
           >
             {categories &&
               categories.map((category) => {
-                return <Category category={category} />;
-              })
-            }
+                return <Category category={category} setFilter={setFilter} />;
+              })}
           </TreeView>
         </Types>
+
         <Types>
           <EachFilter>Precio</EachFilter>
           <option
@@ -77,6 +69,7 @@ export default function Filters({ setActualFilter }) {
             <input type="number" placeholder="Minimo" />
           </InputsMaxMin>
         </Types>
+
         <Types>
           <EachFilter>Descuentos</EachFilter>
           <option
@@ -89,6 +82,7 @@ export default function Filters({ setActualFilter }) {
             Desde 15% Off
           </option>
         </Types>
+
         <Types>
           <EachFilter>Ofertas</EachFilter>
         </Types>

@@ -16,7 +16,7 @@ const Home = ({ cart }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
-  const [actualFilter, setActualFilter] = useState("Todos los productos");
+  const [actualFilter, setFilter] = useState("Todos los productos");
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -26,7 +26,7 @@ const Home = ({ cart }) => {
     <Background>
       <Header cart={cart}/>
       <ContainerFilter>
-        <Filters setActualFilter={setActualFilter} />
+        <Filters setFilter={setFilter} />
         <SectionCards>
           <Section data={products} title={actualFilter}/>
         </SectionCards>
