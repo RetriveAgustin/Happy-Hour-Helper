@@ -4,18 +4,12 @@ import {
   getAllCategories,
   getAllSubCategories,
   getAllBrands,
-  // getAllProductsByCategory,
 } from "../../redux/actions/actions";
 import { Filt, FilterTitle, EachFilter, Types, InputsMaxMin } from "./Filters.styles";
 
 export default function Filters({ setActualFilter }) {
   const dispatch = useDispatch();
 
-  // const [filterByCategory, setFilterByCategory] = useState();
-  // const [filterBySubCategory, setFilterBySubCategory] = useState();
-  // const [filterByBrand, setFilterByBrand] = useState();
-
-  // console.log(filters);
 
   const categories = useSelector((state) => state.categories);
   const subCategories = useSelector((state) => state.subCategories);
@@ -23,7 +17,6 @@ export default function Filters({ setActualFilter }) {
 
   const handleFilterByCategory = (e) => {
     console.log("valor de filterbycategory", e.target.value);
-    // dispatch(getAllProductsByCategory(e.target.value))
     setActualFilter(e.target.value);
   };
 
@@ -34,14 +27,6 @@ export default function Filters({ setActualFilter }) {
   const handleFilterByBrand = (e) => {
     setActualFilter(e.target.value);
   };
-
-  // const handleFilters = (e, type) => {
-  //   console.log(e.target.value, type);
-  //   setFilters({
-  //     ...filters,
-  //     [type]: e.target.value
-  //   })
-  // };
 
   useEffect(() => {
     dispatch(getAllBrands());
@@ -69,39 +54,6 @@ export default function Filters({ setActualFilter }) {
           </ul>
         </Types>
         <Types>
-          <EachFilter>Subcategoría</EachFilter>
-          <ul style={{ color: "white" }}>
-            {subCategories &&
-              subCategories.map((sub) => {
-                return (
-                  <option
-                    onClick={(e) => handleFilterBySubCategory(e)}
-                    style={{ padding: "4px", cursor: "pointer" }}
-                    value={sub.name}
-                  >
-                    {sub.name}
-                  </option>
-                );
-              })}
-          </ul>
-        </Types>
-        <Types>
-          <EachFilter>Marca</EachFilter>
-          <ul style={{ color: "white" }}>
-            {brands.map((brand) => {
-              return (
-                <option
-                  onClick={(e) => handleFilterByBrand(e)}
-                  style={{ padding: "4px", cursor: "pointer" }}
-                  value={brand.name}
-                >
-                  {brand.name}
-                </option>
-              );
-            })}
-          </ul>
-        </Types>
-        <Types>
           <EachFilter>Precio</EachFilter>
           <option
             style={{ padding: "4px", cursor: "pointer", color: "white" }}
@@ -115,11 +67,10 @@ export default function Filters({ setActualFilter }) {
           <InputsMaxMin>
             <input type="number" placeholder="Máximo" />
             <input type="number" placeholder="Minimo" />
-            {/* <button></button> */}
           </InputsMaxMin>
         </Types>
         <Types>
-          <EachFilter>Ofertas</EachFilter>
+          <EachFilter>Descuentos</EachFilter>
           <option
             style={{ padding: "4px", cursor: "pointer", color: "white" }}
             value="De mayor a menor"
