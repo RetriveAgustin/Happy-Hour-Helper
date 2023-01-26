@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
     const users = await getModels(User, name);
     res.status(200).json(users);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -30,48 +30,48 @@ const getUserById = async (req, res) => {
 };
 
 const postUser = async (req, res) => {
-  // try {
-  //   const {
-  //     id,
-  //     token,
-  //     name,
-  //     lastname,
-  //     mail,
-  //     password,
-  //     favourites,
-  //     created_in_google,
-  //   } = req.body;
-  //   let userInfo;
-  //   if (token) {
-  //     userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
-  //   }
-  //   const user = token
-  //     ? await postModels(User, {
-  //         id,
-  //         name,
-  //         lastname,
-  //         mail,
-  //         password,
-  //         favourites,
-  //         created_in_google,
-  //       })
-  //     : await postModels(User, {
-  //         id,
-  //         name,
-  //         lastname,
-  //         mail,
-  //         password,
-  //         favourites,
-  //         created_in_google,
-  //       });
-  //   if (user) {
-  //     res.status(200).json(user);
-  //   } else {
-  //     res.status(400).json("User couldn't be created");
-  //   }
-  // } catch (err) {
-  //   res.status(400).json({ error: err.message });
-  // }
+  try {
+    const {
+      id,
+      token,
+      name,
+      lastname,
+      mail,
+      password,
+      favourites,
+      created_in_google,
+    } = req.body;
+    let userInfo;
+    if (token) {
+      userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
+    }
+    const user = token
+      ? await postModels(User, {
+          id,
+          name,
+          lastname,
+          mail,
+          password,
+          favourites,
+          created_in_google,
+        })
+      : await postModels(User, {
+          id,
+          name,
+          lastname,
+          mail,
+          password,
+          favourites,
+          created_in_google,
+        });
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(400).json("User couldn't be created");
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
 };
 
 const putUser = async (req, res) => {
@@ -80,7 +80,7 @@ const putUser = async (req, res) => {
     const result = await putModels(User, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -89,8 +89,8 @@ const deleteUser = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(User, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -100,7 +100,7 @@ const restoreUser = async (req, res) => {
     const restored = await restoreModels(User, id);
     res.status(200).json(restored)
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 }
 

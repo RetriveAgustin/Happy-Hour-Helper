@@ -13,7 +13,7 @@ const getOffer = async (req, res) => {
     const offer = await getModels(Offer, name);
     res.status(200).json(offer);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -23,7 +23,7 @@ const getOfferById = async (req, res) => {
     const offer = getModelsById(Offer, id);
     res.status(200).json(offer);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -47,8 +47,8 @@ const postOffer = async (req, res) => {
     } else {
       res.status(400).json("Offer couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ const putOffer = async (req, res) => {
     const result = await putModels(Offer, id, properties);
     res.status(200).json(result);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -67,8 +67,8 @@ const deleteOffer = async (req, res) => {
     const { id } = req.body;
     const updated = await deleteModels(Offer, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -78,7 +78,7 @@ const restoreOffer = async (req, res) => {
     const restored = await restoreModels(Offer, id);
     res.status(200).json(restored);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 

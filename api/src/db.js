@@ -1,12 +1,12 @@
-require('dotenv').config();
+-require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DATABASE_URL,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hhh`, {
+const sequelize = new Sequelize(DATABASE_URL, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -65,7 +65,8 @@ Sub_category.belongsToMany(Product, { through: "Sub_category_Product", foreignKe
 Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
 Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
 
-
+Category.hasMany(Sub_category, { foreignKey: 'category_id' });
+Sub_category.belongsTo(Category, { foreignKey: 'category_id' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
