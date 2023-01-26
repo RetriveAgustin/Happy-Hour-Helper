@@ -39,7 +39,7 @@ const rootReducer = (state = initialState, action) => {
     case ADD_TO_CART: 
       return { 
         ...state, 
-        cart: [...state.cart, action.payload]
+        cart: [...state.cart, [action.payloa]]
       }
     default:
       return {
