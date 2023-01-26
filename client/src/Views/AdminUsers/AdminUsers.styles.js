@@ -9,7 +9,7 @@ export const AdminPageContainer = styled.div`
 export const Div = styled.div`
   border: 1px solid #ddd;
   background: #f1f1f1;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 `;
 
 export const ContainerDashboard = styled.div`
