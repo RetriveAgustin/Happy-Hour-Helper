@@ -5,6 +5,7 @@ import {
   Background,
   ContainerFilter,
   SectionCards,
+  TextContent,
 } from "./Home.styles";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
@@ -13,8 +14,7 @@ import { Footer } from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
 import { getAllProducts } from "../../redux/actions/actions";
 
-const Home = () => {
-
+const Home = ({ cart }) => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
 
@@ -24,22 +24,17 @@ const Home = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-
-
   return (
     <Background>
-      <Header />
-      <ImageBackground>
+      <Header cart={cart}/>
+      {/* <TextContent>
         <h1>Bienvenido a Happy Hour Helper</h1>
-      </ImageBackground>
+      </TextContent>
+      <ImageBackground /> */}
       <ContainerFilter>
-        <Filters setActualFilter={setActualFilter}/>
+        <Filters setActualFilter={setActualFilter} />
         <SectionCards>
           <Section data={products} title={actualFilter}/>
-          {/* {products &&
-            products.map((d) => {
-              return <Section key={d.name} title={d.title} data={d.data} />;
-            })} */}
         </SectionCards>
       </ContainerFilter>
       <Footer />
