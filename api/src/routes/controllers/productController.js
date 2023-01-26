@@ -20,7 +20,7 @@ const getProduct = async (req, res) => {
 
 const getProductById = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const product = await getModelsById(Product, id);
     res.status(200).json(product);
   } catch (error) {

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import logo from './logo.svg'
 
-function Header() {
+function Header ({ cart }) {
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
@@ -64,9 +65,9 @@ function Header() {
   return (
     <>
       <NavContainer>
-        <Title onClick={() => navigate("/")}>Happy Hour Helper</Title>
+        <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
         <LinkDiv>
-          <StyledLink onClick={() => navigate("/Home")}>Home</StyledLink>
+          <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
           <StyledLink onClick={() => navigate("/Packages")}>
             Packages

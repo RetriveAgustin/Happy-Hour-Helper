@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createProduct, getAllCategories, getAllSubCategories, getAllBrands } from "./../../redux/actions/actions";
-
+import {
+  createProduct,
+  getAllCategories,
+  getAllSubCategories,
+  getAllBrands,
+} from "./../../redux/actions/actions";
 
 import {
   FormContainer,
@@ -15,18 +19,16 @@ import {
   SubmitButton,
 } from "./CreateProduct.styles";
 
-export default function CreateProduct () {
-  
-  const dispatch = useDispatch()
+export default function CreateProduct() {
+  const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllCategories());
     dispatch(getAllBrands());
     dispatch(getAllSubCategories());
-}, [dispatch])
-  const brandsState = useSelector((state) => state.brands)
-  const categories = useSelector((state) => state.categories)
-  const subCategories = useSelector((state) => state.subCategories) 
-
+  }, [dispatch]);
+  const brandsState = useSelector((state) => state.brands);
+  const categories = useSelector((state) => state.categories);
+  const subCategories = useSelector((state) => state.subCategories);
 
   const [info, setInfo] = useState({
     name: "",
@@ -41,26 +43,35 @@ export default function CreateProduct () {
     category: "",
     subcategory: "",
   });
+  
+  console.log(info)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (info.name && info.price && info.capacity && info.has_discount && info.brand && info.category && info.subcategory)
-    console.log("este es el estado" + info) 
+    if (
+      info.name &&
+      info.price &&
+      info.capacity &&
+      info.has_discount &&
+      info.brand &&
+      info.category &&
+      info.subcategory
+    )
       dispatch(createProduct(info));
-    alert('El producto ha sido creado');
+    alert("El producto ha sido creado");
     setInfo({
-    name: "",
-    img: "",
-    price: "",
-    capacity: "",
-    minimum_amount_for_bulk: "",
-    bulk_discount: "",
-    stock: "",
-    has_discount: false,
-    brand: "",
-    category: "",
-    subcategory: "",
-    })
+      name: "",
+      img: "",
+      price: "",
+      capacity: "",
+      minimum_amount_for_bulk: "",
+      bulk_discount: "",
+      stock: "",
+      has_discount: false,
+      brand: "",
+      category: "",
+      subcategory: "",
+    });
   };
 
   const handleChange = (e) => {
@@ -93,16 +104,10 @@ export default function CreateProduct () {
     }
     setInfo({
       ...info,
-      [prop]: [value],
+      [prop]: value,
     });
   };
 
-  
-
-  console.log(info); 
-
-
-  
   return (
     <FormContainer>
       <ColumnFieldContainer>
