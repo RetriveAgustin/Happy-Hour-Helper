@@ -15,6 +15,8 @@ import {
   Types,
   InputsMaxMin,
 } from "./Filters.styles";
+import FilterListIcon from '@mui/icons-material/FilterList';
+import { Box } from "@mui/system";
 
 export default function Filters({ setFilter }) {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ export default function Filters({ setFilter }) {
           >
             {categories &&
               categories.map((category) => {
-                return <Category category={category} setFilter={setFilter} />;
+                return <Category category={category} setFilter={setFilter} />
               })}
           </TreeView>
         </Types>
