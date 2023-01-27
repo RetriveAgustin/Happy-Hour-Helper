@@ -36,10 +36,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, detail: action.payload};
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
-    case ADD_TO_CART: 
+      case ADD_TO_CART: 
       return { 
         ...state, 
-        cart: [...state.cart, [action.payloa]]
+        cart: [...state.cart, action.payload[0]]
       }
     default:
       return {
