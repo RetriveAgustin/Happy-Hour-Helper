@@ -5,6 +5,7 @@ export const FooterStyles = styled.div`
   height: 100%;
   width: 100%;
   margin-top: 0;
+  border-top: solid 1px #2b1c1f; 
 `;
 
 export const Container = styled.div`

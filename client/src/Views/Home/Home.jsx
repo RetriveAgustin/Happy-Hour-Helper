@@ -1,8 +1,6 @@
 import React, { useState } from "react";
+import styles from "./Home.module.css";
 import { useEffect } from "react";
-import {
-  Background,
-} from "./Home.styles";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
 import { Section } from "../../components/Section/Section";
@@ -22,43 +20,12 @@ const Home = () => {
   
   return (
     <>
+      <div className={styles.background}>
       <Header />
-    <Background>
-      <div style={{color: 'white', marginTop: '6.5rem'}}>Hola Mundo</div>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2><h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2><h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2><h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-      <h2>Hola mundo</h2>
-    </Background>
-    <Footer />
+      <Filters />
+      
+      </div>
+      <Footer />
     </>
   )
   
