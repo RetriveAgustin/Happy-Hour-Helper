@@ -3,6 +3,7 @@ const productRouter = Router();
 
 const {
   getProduct,
+  getProductById,
   postProduct,
   putProduct,
   deleteProduct,
@@ -15,6 +16,8 @@ const {
 } = require("../controllers/productController");
 
 productRouter.get("/getProduct", getProduct);
+
+productRouter.get("/getProductId/:id", getProductById);
 
 productRouter.get("/restoreProduct", restoreProduct);
 

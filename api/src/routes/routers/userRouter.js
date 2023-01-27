@@ -9,7 +9,7 @@ const {
   deleteUser,
   restoreUser,
   getUserById
-} = require("../controllers/UserController");
+} = require("../controllers/userController");
 
 userRouter.get("/getUser", getUser);
 
