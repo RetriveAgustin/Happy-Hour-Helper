@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
 
 function Header({ cart }) {
+
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
@@ -65,11 +66,13 @@ function Header({ cart }) {
   return (
     <>
       <NavContainer>
+
         <img
           src={logo}
           style={{ marginLeft: "3rem", cursor: "pointer" }}
           onClick={() => navigate("/")}
         />
+
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
