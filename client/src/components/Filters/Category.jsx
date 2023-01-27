@@ -5,7 +5,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box } from "@mui/system";
 import Checkbox from "@mui/material/Checkbox";
 
-function Category({ category, setFilter }) {
+function FilterCategories ({ category, setFilter }) {
   const subCategories = useSelector((state) => state.subCategories);
   const products = useSelector((state) => state.products);
   const filteredByCategory = products.filter(product => product.Categories[0].name === category.name)
@@ -95,4 +95,4 @@ function Category({ category, setFilter }) {
   );
 }
 
-export default Category;
+export default FilterCategories;
