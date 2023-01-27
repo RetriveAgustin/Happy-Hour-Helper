@@ -50,7 +50,9 @@ export default function Filters({ setFilter }) {
           >
             {categories &&
               categories.map((category) => {
-                return <Category category={category} setFilter={setFilter} />
+                return <Box>
+                  <Category category={category} setFilter={setFilter} />
+                </Box>
               })}
           </TreeView>
         </Types>
@@ -84,7 +86,6 @@ export default function Filters({ setFilter }) {
             Desde 15% Off
           </option>
         </Types>
-
         <Types>
           <EachFilter>Ofertas</EachFilter>
         </Types>

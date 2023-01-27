@@ -4,6 +4,7 @@ import {
   Background,
   ContainerFilter,
   SectionCards,
+  TextContent,
 } from "./Home.styles";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
