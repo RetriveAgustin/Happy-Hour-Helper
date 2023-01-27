@@ -34,7 +34,7 @@ const Home = () => {
       {/* SECCIONES DEL HOME */}
       {
         !render.filtered ?
-          <GeneralCategories categories={categories} />
+          <GeneralCategories categories={categories} products={products} />
         :
           <FilteredCategory categories={categories} categoryId={render.categoryId} />
       }

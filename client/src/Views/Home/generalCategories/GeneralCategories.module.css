@@ -1,4 +1,5 @@
 .categoryContainer{
+  display: block;
   margin-top: 5.9rem;
   padding: 15px 20px;
 }
