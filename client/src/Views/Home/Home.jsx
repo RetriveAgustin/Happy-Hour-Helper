@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import {
   Background,
-  ContainerFilter,
-  SectionCards,
-  TextContent,
 } from "./Home.styles";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
@@ -12,29 +9,60 @@ import { Section } from "../../components/Section/Section";
 import { Footer } from "../../components/Footer/Footer";
 import Filters from "../../components/Filters/Filters";
 import { getAllProducts } from "../../redux/actions/actions";
+import Category from "../../components/Filters/Category";
 
-const Home = ({ cart }) => {
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.products);
-
-  const [actualFilter, setFilter] = useState("Todos los productos");
+const Home = () => {
+  const dispatch = useDispatch(); 
 
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
+  const products = useSelector((state) => state.products);
+  
   return (
+    <>
+      <Header />
     <Background>
-      <Header cart={cart}/>
-      <ContainerFilter>
-        <Filters setFilter={setFilter} />
-        <SectionCards>
-          <Section data={products} title={actualFilter}/>
-        </SectionCards>
-      </ContainerFilter>
-      <Footer />
+      <div style={{color: 'white', marginTop: '6.5rem'}}>Hola Mundo</div>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2><h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2><h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2><h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
+      <h2>Hola mundo</h2>
     </Background>
-  );
+    <Footer />
+    </>
+  )
+  
+  
 };
 
 export default Home;
