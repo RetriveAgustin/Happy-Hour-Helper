@@ -86,7 +86,6 @@ export default function Filters({ setFilter }) {
             Desde 15% Off
           </option>
         </Types>
-
         <Types>
           <EachFilter>Ofertas</EachFilter>
         </Types>
