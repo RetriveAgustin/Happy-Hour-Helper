@@ -4,8 +4,9 @@ import CreateProduct from './components/CreateProduct/CreateProduct'
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
-import Login from "./Views/Login/Login";
-import Register from "./Views/Register/Register";
+import Login from "./components/Login/Login.jsx";
+import Register from "./components/Register/Register.jsx";
+import { AuthProvider } from "./context/authContext";
 import "./App.css";
 import Detail from "./Views/Detail/Detail";
 import { ThemeProvider } from "@emotion/react";
@@ -22,7 +23,7 @@ function App() {
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
   
   return (
-
+ <AuthProvider>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
@@ -33,6 +34,7 @@ function App() {
       <Route path="*" element={<Home />} />
       <Route path="/product/:id" element={<Detail />}/>
     </Routes>
+ </AuthProvider>
     );
 }
 
