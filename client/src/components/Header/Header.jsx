@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
-<<<<<<< HEAD
+import { useSelector } from 'react-redux';
 
-function Header({ cart }) {
+function Header() {
 
-=======
+  const cart = useSelector((state) => state.cart)
+  const cartAmount = cart.length
 
-function Header({ cart }) {
->>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
@@ -25,6 +24,7 @@ function Header({ cart }) {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: fixed;
   `;
 
   const Title = styled.h2`
@@ -71,19 +71,11 @@ function Header({ cart }) {
   return (
     <>
       <NavContainer>
-<<<<<<< HEAD
-
-=======
->>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
         <img
           src={logo}
           style={{ marginLeft: "3rem", cursor: "pointer" }}
           onClick={() => navigate("/")}
         />
-<<<<<<< HEAD
-
-=======
->>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
@@ -92,6 +84,7 @@ function Header({ cart }) {
           </StyledLink>
           <StyledLink onClick={() => navigate("/Review")}>Review</StyledLink>
           <SearchBar />
+          <h5>{cartAmount}</h5>
           <IconButton onClick={() => navigate("/Cart")}>
             <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
           </IconButton>

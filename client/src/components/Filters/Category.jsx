@@ -7,15 +7,22 @@ import Checkbox from "@mui/material/Checkbox";
 
 function Category({ category, setFilter }) {
   const subCategories = useSelector((state) => state.subCategories);
-  const products = useSelector(state => state.products)
-  const handleFilter = (e) => {
-    console.log("valor de filterbycategory", e.target.value);
-    setFilter(e.target.value);
+  const products = useSelector((state) => state.products);
+  const filteredByCategory = products.filter(product => product.Categories[0].name === category.name)
+
+  const handleCheck = (e) => {
+    const check = e.target.checked;
+    check ? setFilter({
+      products: [...products, filteredByCategory.filter(prd => prd.subCategories[0].id !== check )]
+    }) : setFilter({
+      products: filteredByCategory.filter(prd => prd.subCategories[0].id === check)
+    })
   };
+
 
   return (
     <Box display="flex" flexDirection="row" sx={{ color: "white" }}>
-      <FilterAltIcon fontSize="75" />
+      <FilterAltIcon fontSize="75" onClick={() => setFilter({title: category.name, products: filteredByCategory})} />
       <TreeItem
         nodeId={category.id}
         label={category.name}
@@ -38,6 +45,8 @@ function Category({ category, setFilter }) {
                     <TreeItem nodeId={subCat.id} label={subCat.name} />
                     <Checkbox
                       size="small"
+                      value={subCat.id}
+                      onClick={(e) => handleCheck(e)}
                       sx={{
                         color: "white",
                         "&.Mui-checked": { color: "white" },
@@ -48,22 +57,27 @@ function Category({ category, setFilter }) {
               }
             })}
         </TreeItem>
-
         <TreeItem
           nodeId={category.id.concat("bra")}
           label="Marca"
           sx={{ color: "white" }}
         >
-          {
-            products && products.map(product => {
-              if(product.Categories[0].id === category.id && product.Brands[0].id){
+          {products &&
+            products.map((product) => {
+              if (
+                product.Categories[0].id === category.id &&
+                product.Brands[0].id
+              ) {
                 return (
                   <Box
                     display="flex"
                     justifyContent="space-between"
                     alignItems="center"
                   >
-                    <TreeItem nodeId={product.Brands[0].id} label={product.Brands[0].name} />
+                    <TreeItem
+                      nodeId={product.Brands[0].id}
+                      label={product.Brands[0].name}
+                    />
                     <Checkbox
                       size="small"
                       sx={{
@@ -74,9 +88,7 @@ function Category({ category, setFilter }) {
                   </Box>
                 );
               }
-            })
-          }
-
+            })}
         </TreeItem>
       </TreeItem>
     </Box>

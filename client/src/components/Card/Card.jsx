@@ -23,8 +23,10 @@ export const Card = ({ product }) => {
   const dispatch = useDispatch()
 
   const handleAdd = (e) => {
+    if(!e.target.value) {
+      return
+    }
     dispatch(addToCart(e.target.value))
-    console.log(e.target.value)
   }
 
     
