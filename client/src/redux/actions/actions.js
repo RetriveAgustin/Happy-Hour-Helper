@@ -62,7 +62,7 @@ export const getProductId = (payload) => {
           payload: data
         });
       })
-      .catch((err) => console.log(err));  
+      .catch((err) => console.log(err));
   };
 };
 
@@ -133,11 +133,18 @@ export const createBrand = (payload) => {
 };
 
 export const addToCart = (payload) => {
-  return {
-    type: ADD_TO_CART,
-    payload: payload
-  }
-}
+  return function (dispatch) {
+    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type: ADD_TO_CART,
+          payload: data
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
 // export const getAllProductsByCategory = (category) => {
 //   return async function (dispatch) {
