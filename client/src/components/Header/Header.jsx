@@ -6,6 +6,8 @@ import AvatarIcon from "./AvatarIcon";
 import { Link, useNavigate } from "react-router-dom";
 import logo from './logo.svg'
 
+const Header = () =>{
+
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
@@ -63,7 +65,7 @@ import logo from './logo.svg'
 
   return (
     <>
-      <NavContainer>
+      {/* <NavContainer>
         <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
@@ -77,8 +79,8 @@ import logo from './logo.svg'
             <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
           </IconButton>
           <AvatarIcon />
-        </LinkDiv> */}
-      </NavContainer>
+        </LinkDiv>
+      </NavContainer> */}
     </>
   );
 }
