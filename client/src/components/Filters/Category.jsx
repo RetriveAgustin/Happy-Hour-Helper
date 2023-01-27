@@ -56,7 +56,6 @@ function Category({ category, setFilter }) {
         >
           {
             products && products.map(product => {
-              //let foud = brandList.find(brand => brand !== product.Brands[0].id)
               if(product.Categories[0].id === category.id && product.Brands[0].id){
                 return (
                   <Box

@@ -5,9 +5,14 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
 import { useNavigate } from "react-router-dom";
 import logo from "./logo.svg";
+<<<<<<< HEAD
 
 function Header({ cart }) {
 
+=======
+
+function Header({ cart }) {
+>>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
   const navigate = useNavigate();
 
   const NavContainer = styled.header`
@@ -66,13 +71,19 @@ function Header({ cart }) {
   return (
     <>
       <NavContainer>
+<<<<<<< HEAD
 
+=======
+>>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
         <img
           src={logo}
           style={{ marginLeft: "3rem", cursor: "pointer" }}
           onClick={() => navigate("/")}
         />
+<<<<<<< HEAD
 
+=======
+>>>>>>> f28c10dc99917554417a7ee0814d73985e11acbb
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
