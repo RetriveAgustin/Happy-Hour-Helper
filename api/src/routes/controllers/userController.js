@@ -1,4 +1,5 @@
 const { User } = require("../../db");
+const bcryptjs = require('bcryptjs');
 const admin = require("../utils/firebase-config.js");
 const {
   getModels,
@@ -29,45 +30,39 @@ const getUserById = async (req, res) => {
   }
 };
 
-const postUser = async (req, res) => {
+const registerUser = async (req, res) => {
   try {
-    const {
-      id,
-      token,
-      name,
-      lastname,
-      mail,
-      password,
-      favourites,
-      created_in_google,
-    } = req.body;
-    let userInfo;
-    if (token) {
-      userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
-    }
-    const user = token
-      ? await postModels(User, {
-          id,
-          name,
-          lastname,
-          mail,
-          password,
-          favourites,
-          created_in_google,
-        })
-      : await postModels(User, {
-          id,
-          name,
-          lastname,
-          mail,
-          password,
-          favourites,
-          created_in_google,
-        });
+    const { id, token, name, lastname, mail, password, created_in_google, is_admin } = req.body;
+    userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
+    const passwordHash = password !== null ? await bcryptjs.hash(password, 8) : null;
+    const user = await postModels(User, {id, name, lastname, mail, password: passwordHash, created_in_google, is_admin})
     if (user) {
-      res.status(200).json(user);
+      res.status(200).send('User registered!');
     } else {
-      res.status(400).json("User couldn't be created");
+      res.status(400).send("User couldn't be created");
+    }
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+};
+
+const loginUser = async (req, res) => {
+  try {
+    const { mail, password } = req.body;
+    const user = await User.findAll({where: {
+      mail: mail
+    }})
+    if (user[0]) {
+      const compare = user[0].password === null && user[0].created_in_google === true ? true : await bcryptjs.compare(password, user[0].password);
+      if (compare) {
+        res.status(200).send('User logged!')
+      }
+      else {
+        res.status(400).send('Wrong password!')
+      }
+    }
+    else {
+      res.status(400).send("Email doesn't exist!")
     }
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -107,7 +102,8 @@ const restoreUser = async (req, res) => {
 module.exports = {
   getUser,
   getUserById,
-  postUser,
+  registerUser,
+  loginUser,
   putUser,
   deleteUser,
   restoreUser
