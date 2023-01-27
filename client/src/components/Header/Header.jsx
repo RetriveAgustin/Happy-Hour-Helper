@@ -25,7 +25,7 @@ function NavBar() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} />
+        <img src={Logo} alt="hhh logo" />
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/home")}>
