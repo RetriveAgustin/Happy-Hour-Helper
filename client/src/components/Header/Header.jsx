@@ -4,7 +4,7 @@ import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AvatarIcon from "./AvatarIcon";
 import { Link, useNavigate } from "react-router-dom";
-import logo from './logo.svg'
+import logo from './logo.svg';
 
 function Header ({ cart }) {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ function Header ({ cart }) {
   return (
     <>
       <NavContainer>
-        <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
+        {/* <img src={logo} style={{marginLeft:'3rem', cursor:'pointer'}} onClick={() => navigate("/")}/>
         <LinkDiv>
           <StyledLink onClick={() => navigate("/admin")}>Home</StyledLink>
           <StyledLink onClick={() => navigate("/AboutUs")}>About Us</StyledLink>
@@ -78,7 +78,7 @@ function Header ({ cart }) {
             <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
           </IconButton>
           <AvatarIcon />
-        </LinkDiv>
+        </LinkDiv> */}
       </NavContainer>
     </>
   );
