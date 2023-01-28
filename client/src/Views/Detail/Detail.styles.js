@@ -49,6 +49,7 @@ export const SizeButton = styled.button`
 export const ButtonsDiv = styled.div`
     display: flex;
     align-items: left;
+    margin-top: 1rem;
     gap: 2rem;
     width: 24rem;
 `

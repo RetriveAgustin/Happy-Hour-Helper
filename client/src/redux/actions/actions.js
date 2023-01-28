@@ -8,6 +8,7 @@ export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
+export const ADD_TO_CART = 'ADD_TO_CART';
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -61,7 +62,7 @@ export const getProductId = (payload) => {
           payload: data
         });
       })
-      .catch((err) => console.log(err));  
+      .catch((err) => console.log(err));
   };
 };
 
@@ -128,6 +129,20 @@ export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post("http://localhost:3001/brand", payload);
     return post;
+  };
+};
+
+export const addToCart = (payload) => {
+  return function (dispatch) {
+    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type: ADD_TO_CART,
+          payload: data
+        });
+      })
+      .catch((err) => console.log(err));
   };
 };
 

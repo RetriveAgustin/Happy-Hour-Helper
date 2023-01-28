@@ -6,6 +6,7 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCTS_BY_CATEGORY,
   GET_PRODUCT_ID,
+  ADD_TO_CART,
 } from "./../actions/actions";
 
 const initialState = {
@@ -15,7 +16,8 @@ const initialState = {
   products: [],
   offers: [],
   productsByCategory: [],
-  detail: []
+  detail: [],
+  cart: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -34,6 +36,11 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, detail: action.payload};
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
+    case ADD_TO_CART: 
+      return { 
+        ...state, 
+        cart: [...state.cart, action.payload[0]]
+      }
     default:
       return {
         ...state,
