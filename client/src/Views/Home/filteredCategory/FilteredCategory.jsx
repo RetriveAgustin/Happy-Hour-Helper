@@ -5,17 +5,19 @@ import { Card } from '../../../components/Card/Card'
 
 function FilteredCategory({ categoryId }) {
 
-  //Estado que dicta el número de elementos por "página"
+  // Estado que dicta el número de elementos por "página"
   const [perPage, setPerPage] = useState(8)
 
   const showMore = () => {
-    setPerPage(perPage + 4) 
+    setPerPage(perPage + 4)
   }
 
   const products = useSelector(state => state.products)
 
+  // Se filtran los productos de acuerdo al ID de categoría que se está recibiendo como props
   const currentFilter = products.filter(prod => prod.Categories[0].id === categoryId)
 
+  // Se asigna el nombre de la sección de acuerdo al prop ID
   let currentName = ""
 
   if (categoryId === "dceb1421-ddc6-4018-bb49-08e35aa90ac4") {
@@ -34,7 +36,7 @@ function FilteredCategory({ categoryId }) {
     <div className={styles.container}>
       <h1 className={styles.title}>{currentName}</h1>
     <div className={styles.wrapper}>
-      {currentFilter && currentFilter.slice(0, perPage).map(prod => {
+      {currentFilter && currentFilter.slice(0, perPage).map(prod => { // Se hace slice de los índices presentes, se van aumentando con el onClick en el botón
         return (
           <Card product={prod}/>
         )

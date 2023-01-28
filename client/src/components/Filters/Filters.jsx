@@ -22,14 +22,7 @@ export default function Filters({ render, setRender }) {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.categories);
-  // const subCategories = useSelector((state) => state.subCategories);
-  // const brands = useSelector((state) => state.brands);
-
-  // const handleFilter = (e) => {
-  //   console.log("valor de filterbycategory", e.target.value);
-  //   setActualFilter(e.target.value);
-  // };
-
+  
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllCategories());
