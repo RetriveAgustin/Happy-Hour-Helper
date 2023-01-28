@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Card } from "../Card/Card";
+import  Card  from "../Card/Card";
 import { Container, CardContainer, H1 } from "./Section.styles";
 
-export const Section = ({ title, data }) => {
+const Section = ({ title, data }) => {
 
   return (
     <Container>
@@ -15,3 +15,5 @@ export const Section = ({ title, data }) => {
     </Container>
   );
 };
+
+export default Section;

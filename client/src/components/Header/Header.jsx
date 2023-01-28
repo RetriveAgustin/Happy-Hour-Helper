@@ -8,11 +8,15 @@ import Logo from "./logo.svg";
 import SearchBarMUI from "./SearchBarHeader";
 import { useState } from "react";
 import { LinkDiv, NavContainer } from "./Header.styles";
+import { useSelector } from "react-redux";
+import { Badge } from "@mui/material";
 
 function NavBar() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
+
+  const cart = useSelector((state) => state.cart);
 
   const HandleInput = (searchName) => {
     setSearchValue(searchName);
@@ -25,19 +29,28 @@ function NavBar() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} alt="hhh logo" />
+        <img src={Logo} style={{marginLeft: '3rem'}}/>
       </Link>
       <LinkDiv>
-        <IconButton onClick={() => navigate("/home")}>
+        <IconButton onClick={() => navigate("/")}>
           <HomeIcon sx={{ color: "white", fontSize: 30 }} />
         </IconButton>
         <SearchBarMUI
           InputFunction={(e) => HandleInput(e.target.value)}
           searchValue={HandleSearch}
         />
-        <AvatarIcon />
+        <AvatarIcon/>
         <IconButton onClick={() => navigate("/cart")}>
-          <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
+          <Badge
+            badgeContent={cart.length}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            color='primary'
+          >
+            <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
+          </Badge>
         </IconButton>
       </LinkDiv>
     </NavContainer>

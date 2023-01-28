@@ -16,15 +16,20 @@ const AddToCart = styled(Button)({
   fontSize: 12,
 });
 
-export const Card = ({ product }) => {
+const Card = ({ product }) => {
   const { id, name, img, price, stock } = product
   const [amount, setAmount] = useState(1);
   
   const dispatch = useDispatch()
 
   const handleAdd = (e) => {
+    if(!e.target.value) {
+      return
+    }
     dispatch(addToCart(e.target.value))
   }
+
+    
 
   const navigate = useNavigate()
 
@@ -59,7 +64,7 @@ export const Card = ({ product }) => {
             variant="contained"
             color="secondary"
             startIcon={<ShoppingCartOutlinedIcon />}
-            value={product}
+            value={id}
             onClick={(e) => handleAdd(e)}
             sx={{backgroundColor: "#52373c"}}
           >
@@ -70,3 +75,5 @@ export const Card = ({ product }) => {
     </div>
   );
 };
+
+export default Card;

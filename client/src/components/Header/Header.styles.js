@@ -10,6 +10,8 @@ const NavContainer = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: fixed;
+  z-index: 10000;
 `;
 
 const LinkDiv = styled.div`

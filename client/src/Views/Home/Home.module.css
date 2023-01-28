@@ -1,0 +1,10 @@
+.background {
+  display: flex;
+  flex-direction: row;
+  background-color: #151515;
+  background-size: cover;
+  width: 100%;
+  height: fit-content;
+  min-height: 100vh;
+  /* max-height: fit-content; */
+}

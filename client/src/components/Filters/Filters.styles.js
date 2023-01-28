@@ -1,14 +1,18 @@
 import styled from "styled-components";
 
 export const Filt = styled.div`
+  margin-top: 5.9rem;
   display: flex;
   flex-direction: column;
-  width: 18rem;
+  min-width: 21rem;
   background-color: #52373c;
+  min-height: 100%;
 `
 
 export const FilterTitle = styled.h2`
   background-color: #2b1c1f;
+  display: flex;
+  justify-content: center;
   margin: 0;
   padding: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -30,7 +34,7 @@ export const EachFilter = styled.p`
 export const Types = styled.section`
   display: flex;
   flex-direction: column;
-  border: solid 1px #2b1c1f; 
+  border-bottom: solid 1px #2b1c1f; 
   padding: 20px;
 `;
 
