@@ -7,8 +7,8 @@ import IndeterminateCheckBoxRoundedIcon from "@mui/icons-material/IndeterminateC
 import Wine from "../../assets/winee.png";
 import "./Cards.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/actions";
 
 const AddToCart = styled(Button)({

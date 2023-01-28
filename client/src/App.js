@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 
-import CreateProduct from './components/CreateProduct/CreateProduct'
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
@@ -9,10 +8,7 @@ import Register from "./components/Register/Register.jsx";
 import { AuthProvider } from "./context/authContext";
 import "./App.css";
 import Detail from "./Views/Detail/Detail";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/system";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
-import { useState } from "react";
 
 
 
