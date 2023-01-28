@@ -39,6 +39,7 @@ export const getAllSubCategories = () => {
 };
 
 export const getAllProducts = () => {
+  console.log(process.env.REACT_APP_API_URL);
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
