@@ -4,9 +4,9 @@ export const Filt = styled.div`
   margin-top: 5.9rem;
   display: flex;
   flex-direction: column;
-  width: 18rem;
+  min-width: 21rem;
   background-color: #52373c;
-  height: 100%;
+  min-height: 100%;
 `
 
 export const FilterTitle = styled.h2`

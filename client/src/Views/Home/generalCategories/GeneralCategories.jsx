@@ -11,7 +11,7 @@ function GeneralCategories({categories, products}) {
       categories && categories.map(category => {
         return (
         <div>
-          <h2>{category.name}</h2>
+          <h2 className={styles.title}>{category.name}</h2>
           <Carrousel category={category} products={products} />
         </div>)
       })

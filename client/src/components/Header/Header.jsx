@@ -29,7 +29,7 @@ function NavBar() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} />
+        <img src={Logo} style={{marginLeft: '3rem'}}/>
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/")}>
@@ -39,7 +39,7 @@ function NavBar() {
           InputFunction={(e) => HandleInput(e.target.value)}
           searchValue={HandleSearch}
         />
-        <AvatarIcon />
+        <AvatarIcon/>
         <IconButton onClick={() => navigate("/cart")}>
           <Badge
             badgeContent={cart.length}
@@ -47,7 +47,7 @@ function NavBar() {
               vertical: "bottom",
               horizontal: "left",
             }}
-            sx={{color:'white'}}
+            color='primary'
           >
             <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
           </Badge>
