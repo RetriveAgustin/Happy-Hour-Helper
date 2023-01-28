@@ -32,7 +32,7 @@ function Carrousel({ category, products }) {
   };
 
   return filteredProducts !== false ? (
-    <div style={{ display: "block", width: "80vw", color: "white" }}>
+    <div style={{ display: "block", width: "80vw", color: "black" }}>
       <Carousel centerMode={true} responsive={responsive} infinite={true}>
         <div>
           <Card product={filteredProducts[0]} />
