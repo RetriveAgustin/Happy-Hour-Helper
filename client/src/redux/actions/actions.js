@@ -153,7 +153,7 @@ export const addToCart = (payload) => {
 //       type: GET_PRODUCTS_BY_CATEGORY,
 //       payload: data,
 //     });
-//   };
+//   };//
 // };
 
 // export const getProductsBySubCategory = () => {
