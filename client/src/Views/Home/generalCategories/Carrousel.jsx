@@ -2,13 +2,14 @@ import React from "react";
 import Card from "../../../components/Card/Card";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Skeleton from "@mui/material/Skeleton";
 
 function Carrousel({ category, products }) {
-  let filteredProducts = products.length ? products.filter((instance) => {
-    return instance.Categories[0].id === category.id;
-  })
-  : 
-  false;
+  let filteredProducts = products.length
+    ? products.filter((instance) => {
+        return instance.Categories[0].id === category.id;
+      })
+    : false;
   console.log(filteredProducts);
 
   const responsive = {
@@ -30,13 +31,9 @@ function Carrousel({ category, products }) {
     },
   };
 
-  return (
-    filteredProducts !== false ? <div style={{ display: "block", width: "80vw", color: "white"}}>
-      <Carousel
-        centerMode={true}
-        responsive={responsive}
-        infinite={true}
-      >
+  return filteredProducts !== false ? (
+    <div style={{ display: "block", width: "80vw", color: "black" }}>
+      <Carousel centerMode={true} responsive={responsive} infinite={true}>
         <div>
           <Card product={filteredProducts[0]} />
         </div>
@@ -63,8 +60,75 @@ function Carrousel({ category, products }) {
         </div>
       </Carousel>
     </div>
-    :
-    <p style={{color: "white"}}>cargendo</p>
+  ) : (
+    <div style={{ display: "block", width: "80vw", color: "white" }}>
+      <Carousel centerMode={true} responsive={responsive} infinite={true}>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
+        </div>
+        <div>
+          <Skeleton
+              sx={{ bgcolor: "grey.900" }}
+              variant="rectangular"
+              width="250px"
+              height="440px"
+            />
+        </div>
+      </Carousel>
+    </div>
   );
 }
 
