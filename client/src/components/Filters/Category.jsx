@@ -5,25 +5,31 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box } from "@mui/system";
 import Checkbox from "@mui/material/Checkbox";
 
-function FilterCategories ({ category, setFilter }) {
+function FilterCategories ({ category, render, setRender }) {
   const subCategories = useSelector((state) => state.subCategories);
   const products = useSelector((state) => state.products);
-  const filteredByCategory = products.filter(product => product.Categories[0].name === category.name)
-
-  const handleCheck = (e) => {
-    const check = e.target.checked;
-    check ? setFilter({
-      products: [...products, filteredByCategory.filter(prd => prd.subCategories[0].id !== check )]
-    }) : setFilter({
-      products: filteredByCategory.filter(prd => prd.subCategories[0].id === check)
-    })
-  };
+ 
+  const handleFilter = (e) => {
+    console.log(e)
+    if(e !== render.categoryId){
+    setRender({
+      filtered: true,
+      categoryId: e
+    })} else {
+      setRender({
+        filtered: false,
+        categoryId: ""
+      })
+    }
+  }
 
 
   return (
     <Box display="flex" flexDirection="row" sx={{ color: "white" }}>
-      <FilterAltIcon fontSize="75" onClick={() => setFilter({title: category.name, products: filteredByCategory})} />
-      <TreeItem
+      <div value={render.categoryId} onClick={() => handleFilter(category.id)}>
+      <FilterAltIcon fontSize="75" sx={{cursor: 'pointer'}}/>
+      </div>
+      <TreeItem        
         nodeId={category.id}
         label={category.name}
         sx={{ color: "white" }}
@@ -46,7 +52,7 @@ function FilterCategories ({ category, setFilter }) {
                     <Checkbox
                       size="small"
                       value={subCat.id}
-                      onClick={(e) => handleCheck(e)}
+                      onClick={null}
                       sx={{
                         color: "white",
                         "&.Mui-checked": { color: "white" },

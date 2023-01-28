@@ -30,19 +30,19 @@ const Home = () => {
     <>
       <div className={styles.background}>
       <Header />
-      <Filters />
+      <Filters setRender={setRender} render={render} />
       {/* SECCIONES DEL HOME */}
       {
         !render.filtered ?
           <GeneralCategories categories={categories} />
         :
-          <FilteredCategory categories={categories} categoryId={render.categoryId} />
+          <FilteredCategory categoryId={render.categoryId} />
       }
       </div>
       <Footer />
     </>
   )
-  
+
   
 };
 
