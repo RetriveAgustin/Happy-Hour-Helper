@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './FilteredCategory.module.css'
 import { useSelector } from 'react-redux'
-import { Card } from '../../../components/Card/Card'
+import Card from '../../../components/Card/Card'
 
 function FilteredCategory({ categoryId }) {
 
@@ -13,11 +13,13 @@ function FilteredCategory({ categoryId }) {
   }
 
   const products = useSelector(state => state.products)
-
+  const categories = useSelector(state => state.categories)
   // Se filtran los productos de acuerdo al ID de categoría que se está recibiendo como props
   const currentFilter = products.filter(prod => prod.Categories[0].id === categoryId)
 
+  
   // Se asigna el nombre de la sección de acuerdo al prop ID
+
   let currentName = ""
 
   if (categoryId === "dceb1421-ddc6-4018-bb49-08e35aa90ac4") {

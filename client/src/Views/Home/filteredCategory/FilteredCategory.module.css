@@ -20,15 +20,14 @@
   color: #fff;
     text-shadow:
         0 0 7px #fff,
-        0 0 10px #fff,
-        0 0 21px #fff,
-        0 0 42px #ff0000,
-        0 0 82px #ff0000,
-        0 0 92px #ff0000,
-        0 0 102px #ff0000,
-        0 0 200px #ff0000;
+       
+        0 0 42px #1f2fe9,
+        0 0 82px #1f2fe9,
+        0 0 92px #1f2fe9,
+        0 0 102px #1f2fe9,
+        0 0 200px #1f2fe9;
     font-size: 4rem;
-    font-family: 'Fascinate Inline', cursive;
+    font-family: 'Neonderthaw', cursive;
     margin: 0;
 }
 

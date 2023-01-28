@@ -39,7 +39,6 @@ const Detail = () => {
 
 
   const handleAdd = (e) => {
-    console.log(e)
     if(!e) {
       return
     }
