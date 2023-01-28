@@ -4,18 +4,15 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 function Carrousel({ category, products }) {
-  let filteredProducts = products.filter((instance) => {
+  let filteredProducts = products.length ? products.filter((instance) => {
     return instance.Categories[0].id === category.id;
-  });
-  let presentableProducts = [];
-  for (let i = 0; i < 8; i++) {
-    presentableProducts.push(filteredProducts[i]);
-  }
-  console.log(presentableProducts);
+  })
+  : 
+  false;
+  console.log(filteredProducts);
 
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 5,
     },
@@ -34,38 +31,40 @@ function Carrousel({ category, products }) {
   };
 
   return (
-    <div style={{ display: "block", width: "80vw", color: "white"}}>
+    filteredProducts !== false ? <div style={{ display: "block", width: "80vw", color: "white"}}>
       <Carousel
         centerMode={true}
         responsive={responsive}
         infinite={true}
       >
         <div>
-          <Card product={presentableProducts[0]} />
+          <Card product={filteredProducts[0]} />
         </div>
         <div>
-          <Card product={presentableProducts[1]} />
+          <Card product={filteredProducts[1]} />
         </div>
         <div>
-          <Card product={presentableProducts[2]} />
+          <Card product={filteredProducts[2]} />
         </div>
         <div>
-          <Card product={presentableProducts[3]} />
+          <Card product={filteredProducts[3]} />
         </div>
         <div>
-          <Card product={presentableProducts[4]} />
+          <Card product={filteredProducts[4]} />
         </div>
         <div>
-          <Card product={presentableProducts[5]} />
+          <Card product={filteredProducts[5]} />
         </div>
         <div>
-          <Card product={presentableProducts[6]} />
+          <Card product={filteredProducts[6]} />
         </div>
         <div>
-          <Card product={presentableProducts[7]} />
+          <Card product={filteredProducts[7]} />
         </div>
       </Carousel>
     </div>
+    :
+    <p style={{color: "white"}}>cargendo</p>
   );
 }
 
