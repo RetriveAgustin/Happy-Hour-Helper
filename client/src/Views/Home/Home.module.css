@@ -4,7 +4,7 @@
   background-color: #151515;
   background-size: cover;
   width: 100%;
-  min-height: 100%;
   height: fit-content;
+  min-height: 100vh;
   /* max-height: fit-content; */
 }

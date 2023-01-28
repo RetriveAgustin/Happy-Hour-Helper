@@ -4,7 +4,8 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: fit-content;
+    min-height: 80vh;
     background-color: #EEECDF;
 `
 
@@ -18,7 +19,7 @@ export const Table = styled.div`
     height: fit-content;
     width: 80%;
     background-color: #171717;
-    margin: 2rem 0 2rem 0;
+    margin: 7rem 0 2rem 0;
     padding: 2rem 0 2rem 0;
 `
 

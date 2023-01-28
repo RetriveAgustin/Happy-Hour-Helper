@@ -18,18 +18,11 @@ import {
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box } from "@mui/system";
 
-export default function Filters({ setFilter }) {
+export default function Filters({ render, setRender }) {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.categories);
-  // const subCategories = useSelector((state) => state.subCategories);
-  // const brands = useSelector((state) => state.brands);
-
-  // const handleFilter = (e) => {
-  //   console.log("valor de filterbycategory", e.target.value);
-  //   setActualFilter(e.target.value);
-  // };
-
+  
   useEffect(() => {
     dispatch(getAllBrands());
     dispatch(getAllCategories());
@@ -51,12 +44,11 @@ export default function Filters({ setFilter }) {
             {categories &&
               categories.map((category) => {
                 return <Box>
-                  <Category category={category} setFilter={setFilter} />
+                  <Category category={category} setRender={setRender} render={render} />
                 </Box>
               })}
           </TreeView>
         </Types>
-
         <Types>
           <EachFilter>Precio</EachFilter>
           <option
