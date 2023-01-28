@@ -16,7 +16,7 @@ const AddToCart = styled(Button)({
   fontSize: 12,
 });
 
-export const Card = ({ product }) => {
+const Card = ({ product }) => {
   const { id, name, img, price, stock } = product
   const [amount, setAmount] = useState(1);
   
@@ -75,3 +75,5 @@ export const Card = ({ product }) => {
     </div>
   );
 };
+
+export default Card;

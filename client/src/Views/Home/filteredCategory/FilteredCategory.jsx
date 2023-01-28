@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styles from './FilteredCategory.module.css'
 import { useSelector } from 'react-redux'
-import { Card } from '../../../components/Card/Card'
+import Card from '../../../components/Card/Card'
 
 function FilteredCategory({ categoryId }) {
 

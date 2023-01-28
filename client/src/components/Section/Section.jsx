@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card } from "../Card/Card";
+import  Card  from "../Card/Card";
 import { Container, CardContainer, H1 } from "./Section.styles";
 
 const Section = ({ title, data }) => {
