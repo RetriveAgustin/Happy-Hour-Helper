@@ -17,7 +17,7 @@ const getSubCategory = async (req, res) => {
             include: [
               {
                 model: Category,
-                attributes: ["name"],
+                attributes: ["id", "name"],
               },
             ],
           });
@@ -26,7 +26,7 @@ const getSubCategory = async (req, res) => {
             include: [
               {
                 model: Category,
-                attributes: ["name"],
+                attributes: ["id", "name"],
               },
             ],
           });

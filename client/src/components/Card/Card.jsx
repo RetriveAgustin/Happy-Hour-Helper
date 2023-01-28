@@ -23,8 +23,13 @@ export const Card = ({ product }) => {
   const dispatch = useDispatch()
 
   const handleAdd = (e) => {
+    if(!e.target.value) {
+      return
+    }
     dispatch(addToCart(e.target.value))
   }
+
+    
 
   const navigate = useNavigate()
 
@@ -59,7 +64,7 @@ export const Card = ({ product }) => {
             variant="contained"
             color="secondary"
             startIcon={<ShoppingCartOutlinedIcon />}
-            value={product}
+            value={id}
             onClick={(e) => handleAdd(e)}
             sx={{backgroundColor: "#52373c"}}
           >
