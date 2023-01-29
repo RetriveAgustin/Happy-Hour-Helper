@@ -3,7 +3,7 @@ export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
 export const GET_BRANDS = "GET_BRANDS";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_PRODUCT_ID = "GET_PRODUCT_ID"
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
@@ -13,7 +13,7 @@ export const FILTER_BY_SUBCAT = 'FILTER_BY_SUBCAT';
 
 export const getAllCategories = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/category/getCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -27,7 +27,7 @@ export const getAllCategories = () => {
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/sub-category/getSubCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -41,7 +41,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/products/getProduct")
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -55,12 +55,12 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
           type: GET_PRODUCT_ID,
-          payload: data
+          payload: data,
         });
       })
       .catch((err) => console.log(err));
@@ -69,7 +69,7 @@ export const getProductId = (payload) => {
 
 export const getAllBrands = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/brand/getBrand")
+    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -83,7 +83,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/offer/getOffer")
+    fetch(`${process.env.REACT_APP_API_URL}/getOffer`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -97,14 +97,14 @@ export const getAllOffers = () => {
 
 export const createCategory = (payload) => {
   return async function () {
-    const post = await axios.post("http://localhost:3001/category", payload);
+    const post = await axios.post(`${process.env.REACT_APP_API_URL}/category`, payload);
     return post;
   };
 };
 
 export const createProduct = (payload) => {
   return async function () {
-    const post = await axios.post("http://localhost:3001/products", payload);
+    const post = await axios.post(`${process.env.REACT_APP_API_URL}/products`, payload);
     return post;
   };
 };
@@ -112,7 +112,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      "http://localhost:3001/sub-category",
+    `${process.env.REACT_APP_API_URL}/sub-category`,
       payload
     );
     return post;
@@ -121,21 +121,21 @@ export const createSubCategory = (payload) => {
 
 export const createOffer = (payload) => {
   return async function () {
-    const post = await axios.post("http://localhost:3001/offer", payload);
+    const post = await axios.post(`${process.env.REACT_APP_API_URL}/offer`, payload);
     return post;
   };
 };
 
 export const createBrand = (payload) => {
   return async function () {
-    const post = await axios.post("http://localhost:3001/brand", payload);
+    const post = await axios.post(`${process.env.REACT_APP_API_URL}/brand`, payload);
     return post;
   };
 };
 
 export const addToCart = (payload) => {
   return function (dispatch) {
-    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
     .then((response) => response.json())
       .then((data) => {
         dispatch({
