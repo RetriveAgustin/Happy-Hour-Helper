@@ -16,7 +16,11 @@ export const getAllCategories = () => {
   
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
-      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        response.json();
+        console.log(response);
+      })
       .then((data) => {
         dispatch({
           type: GET_CATEGORIES,
