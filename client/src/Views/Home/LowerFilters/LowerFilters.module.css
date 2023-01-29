@@ -1,0 +1,16 @@
+.wrapper {
+    margin-top: 7rem;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-items: center;
+  width: 80%;
+  height: fit-content;
+  min-height: 80%;
+  gap: 2rem 0;
+}
+
+.name {
+  color: white;
+  font-size: 4rem;
+}

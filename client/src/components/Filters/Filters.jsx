@@ -44,7 +44,7 @@ export default function Filters({ render, setRender }) {
             {categories &&
               categories.map((category) => {
                 return <Box>
-                  <Category category={category} setRender={setRender} render={render} />
+                  <Category category={category} setRender={setRender} render={render}/>
                 </Box>
               })}
           </TreeView>

@@ -14,8 +14,11 @@ function FilteredCategory({ categoryId }) {
 
   const products = useSelector(state => state.products)
   const categories = useSelector(state => state.categories)
+
   // Se filtran los productos de acuerdo al ID de categoría que se está recibiendo como props
   const currentFilter = products.filter(prod => prod.Categories[0].id === categoryId)
+
+  
 
   
   // Se asigna el nombre de la sección de acuerdo al prop ID

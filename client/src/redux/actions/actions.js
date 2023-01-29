@@ -9,6 +9,7 @@ export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const ADD_TO_CART = 'ADD_TO_CART';
+export const FILTER_BY_SUBCAT = 'FILTER_BY_SUBCAT';
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -145,6 +146,13 @@ export const addToCart = (payload) => {
       .catch((err) => console.log(err));
   };
 };
+
+export const filterBySubCat = (payload) => {
+  return {
+    type: FILTER_BY_SUBCAT,
+    payload: payload
+  }
+}
 
 // export const getAllProductsByCategory = (category) => {
 //   return async function (dispatch) {

@@ -13,6 +13,7 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/system";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import { useState } from "react";
+import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
 
 
 
