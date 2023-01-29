@@ -19,6 +19,7 @@ import {
   SearchBarInput,
   SearchButton,
 } from "./AdminDashboard.styles";
+import DrawerComponent from "../drawer/Drawer";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "UserInfo" por los usuarios traidos desde el back en el UseEffect.
@@ -213,6 +214,7 @@ function AdminDashboardUsers() {
 
   return (
     <DashboardInfoContainer>
+      <DrawerComponent />
       <HeaderContainer>
         <label>Filter by:</label>
         <FilterInput defaultValue={searchValues.filter} onChange={HandleSelect}>
