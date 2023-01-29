@@ -12,7 +12,7 @@ export const ADD_TO_CART = "ADD_TO_CART";
 
 export const getAllCategories = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}category/getCategory`)
+    fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -26,7 +26,7 @@ export const getAllCategories = () => {
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}sub-category/getSubCategory`)
+    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -40,7 +40,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}products/getProduct`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -54,7 +54,7 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -68,7 +68,7 @@ export const getProductId = (payload) => {
 
 export const getAllBrands = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}brand/getBrand`)
+    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -82,7 +82,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}getOffer`)
+    fetch(`${process.env.REACT_APP_API_URL}/getOffer`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -97,7 +97,7 @@ export const getAllOffers = () => {
 export const createCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}category`,
+      `${process.env.REACT_APP_API_URL}/category`,
       payload
     );
     return post;
@@ -107,7 +107,7 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}products`,
+      `${process.env.REACT_APP_API_URL}/products`,
       payload
     );
     return post;
@@ -117,7 +117,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}sub-category`,
+      `${process.env.REACT_APP_API_URL}/sub-category`,
       payload
     );
     return post;
@@ -127,7 +127,7 @@ export const createSubCategory = (payload) => {
 export const createOffer = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}offer`,
+      `${process.env.REACT_APP_API_URL}/offer`,
       payload
     );
     return post;
@@ -137,7 +137,7 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}brand`,
+      `${process.env.REACT_APP_API_URL}/brand`,
       payload
     );
     return post;
@@ -146,7 +146,7 @@ export const createBrand = (payload) => {
 
 export const addToCart = (payload) => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}products/getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
