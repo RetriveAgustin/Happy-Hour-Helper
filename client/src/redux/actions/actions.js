@@ -96,14 +96,20 @@ export const getAllOffers = () => {
 
 export const createCategory = (payload) => {
   return async function () {
-    const post = await axios.post(`${process.env.REACT_APP_API_URL}/category`, payload);
+    const post = await axios.post(
+      `${process.env.REACT_APP_API_URL}/category`,
+      payload
+    );
     return post;
   };
 };
 
 export const createProduct = (payload) => {
   return async function () {
-    const post = await axios.post(`${process.env.REACT_APP_API_URL}/products`, payload);
+    const post = await axios.post(
+      `${process.env.REACT_APP_API_URL}/products`,
+      payload
+    );
     return post;
   };
 };
@@ -111,7 +117,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-    `${process.env.REACT_APP_API_URL}/sub-category`,
+      `${process.env.REACT_APP_API_URL}/sub-category`,
       payload
     );
     return post;
@@ -120,14 +126,20 @@ export const createSubCategory = (payload) => {
 
 export const createOffer = (payload) => {
   return async function () {
-    const post = await axios.post(`${process.env.REACT_APP_API_URL}/offer`, payload);
+    const post = await axios.post(
+      `${process.env.REACT_APP_API_URL}/offer`,
+      payload
+    );
     return post;
   };
 };
 
 export const createBrand = (payload) => {
   return async function () {
-    const post = await axios.post(`${process.env.REACT_APP_API_URL}/brand`, payload);
+    const post = await axios.post(
+      `${process.env.REACT_APP_API_URL}/brand`,
+      payload
+    );
     return post;
   };
 };
@@ -135,11 +147,11 @@ export const createBrand = (payload) => {
 export const addToCart = (payload) => {
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
-    .then((response) => response.json())
+      .then((response) => response.json())
       .then((data) => {
         dispatch({
           type: ADD_TO_CART,
-          payload: data
+          payload: data,
         });
       })
       .catch((err) => console.log(err));
