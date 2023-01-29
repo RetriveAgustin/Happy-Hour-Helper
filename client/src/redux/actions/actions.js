@@ -110,6 +110,7 @@ export const createProduct = (payload) => {
       `${process.env.REACT_APP_API_URL}/products`,
       payload
     );
+    console.log(payload);
     return post;
   };
 };

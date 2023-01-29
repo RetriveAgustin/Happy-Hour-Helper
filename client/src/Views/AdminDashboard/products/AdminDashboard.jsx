@@ -21,7 +21,13 @@ import {
 } from "./AdminDashboard.styles";
 import DrawerComponent from "../drawer/Drawer";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../../redux/actions/actions";
+import {
+  getAllProducts,
+  getAllSubCategories,
+  getAllCategories,
+  getAllBrands,
+} from "../../../redux/actions/actions";
+import styled from "styled-components";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "productInfo" por los usuarios traidos desde el back en el UseEffect.
@@ -32,20 +38,40 @@ function AdminDashboardProducts() {
   const dispatch = useDispatch();
 
   const allProducts = useSelector((state) => state.products);
+  const allBrands = useSelector((state) => state.brands);
+  const allCategories = useSelector((state) => state.categories);
+  const allSubCategories = useSelector((state) => state.subCategories);
   const [productInfo, setProductInfo] = useState([]);
   const [searchValues, setSearchValues] = useState({
     value: "",
     filter: "name",
   });
   const [isActive, setIsActive] = useState(false);
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSubCategory, setSelectedSubCategory] = useState("");
 
+  // -----------------------------------------------------------------------
   useEffect(() => {
     dispatch(getAllProducts());
+    dispatch(getAllSubCategories());
+    dispatch(getAllCategories());
+    dispatch(getAllBrands());
   }, [dispatch]);
 
   useEffect(() => {
     setProductInfo(allProducts);
   }, [allProducts]);
+
+  // useEffect(() => {
+  //   setBrandsInfo(allBrands);
+  // }, [allBrands]);
+  // useEffect(() => {
+  //   toShowCategories(allCategories);
+  // }, [allCategories]);
+  // useEffect(() => {
+  //   toShowSubCategories(allSubCategories);
+  // }, [allSubCategories]);
 
   const HandleFilter = (searchname) => {
     setSearchValues({ ...searchValues, value: searchname });
@@ -80,12 +106,85 @@ function AdminDashboardProducts() {
     setSearchValues({ ...searchValues, filter: e.target.value });
   };
 
+  const HandleSelectByCategory = (value) => {
+    if (value) {
+      let filteredProducts = allProducts.filter((el) =>
+        el.Categories[0].id.includes(value)
+      );
+      setSelectedBrand("");
+      setSelectedSubCategory("");
+      return setProductInfo(filteredProducts);
+    }
+  };
+
+  const HandleSelectBySubCategory = (value) => {
+    if (value) {
+      let filteredProducts = allProducts.filter((el) =>
+        el.Sub_categories[0].id.includes(value)
+      );
+      setSelectedBrand("");
+      setSelectedCategory("");
+      return setProductInfo(filteredProducts);
+    }
+  };
+
+  const HandleSelectByBrand = (value) => {
+    if (value) {
+      let filteredProducts = allProducts.filter((el) =>
+        el.Brands[0].id.includes(value)
+      );
+      setSelectedCategory("");
+      setSelectedSubCategory("");
+      return setProductInfo(filteredProducts);
+    }
+    setProductInfo(allProducts);
+  };
+
   return (
     <DashboardInfoContainer>
       <DrawerComponent />
       <HeaderContainer>
+        <label>Brands:</label>
+        <FilterInput
+          defaultValue={selectedBrand}
+          onChange={(e) => HandleSelectByBrand(e.target.value)}
+        >
+          <option value="">None</option>
+          {allBrands
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
+            .map((brand) => (
+              <option value={brand.id}>{brand.name}</option>
+            ))}
+        </FilterInput>
+
+        <label>Categories:</label>
+        <FilterInput
+          defaultValue={selectedCategory}
+          onChange={(e) => HandleSelectByCategory(e.target.value)}
+        >
+          <option value="">None</option>
+          {allCategories
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
+            .map((category) => (
+              <option value={category.id}>{category.name}</option>
+            ))}
+        </FilterInput>
+
+        <label>Sub-Categories:</label>
+        <FilterInput
+          defaultValue={selectedSubCategory}
+          onChange={(e) => HandleSelectBySubCategory(e.target.value)}
+        >
+          <option value="">None</option>
+          {allSubCategories
+            .sort((a, b) => (a.name > b.name ? 1 : -1))
+            .map((subcat) => (
+              <option value={subcat.id}>{subcat.name}</option>
+            ))}
+        </FilterInput>
+
         <label>Filter by:</label>
-        <FilterInput defaultValue={searchValues.filter} onChange={HandleSelect}>
+        <FilterInput>
           <option value="name">Name</option>
           <option value="id">ID</option>
         </FilterInput>

@@ -43,8 +43,6 @@ export default function CreateProduct() {
     category: "",
     subcategory: "",
   });
-  
-  console.log(info)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +50,6 @@ export default function CreateProduct() {
       info.name &&
       info.price &&
       info.capacity &&
-      info.has_discount &&
       info.brand &&
       info.category &&
       info.subcategory

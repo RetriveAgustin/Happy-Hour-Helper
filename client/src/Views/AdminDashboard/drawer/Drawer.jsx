@@ -29,13 +29,17 @@ const DrawerContainer = styled.div`
 function DrawerComponent() {
   const navigate = useNavigate();
   const dashboardSettings = [
-    { name: "Users", icon: <PersonIcon color="white" />, link: "/admin" },
+    {
+      name: "Users",
+      icon: <PersonIcon style={{ color: "#ffffff" }} />,
+      link: "/admin",
+    },
     {
       name: "Products",
-      icon: <LiquorIcon color="white" />,
+      icon: <LiquorIcon style={{ color: "#ffffff" }} />,
       link: "/adminProduct",
     },
-    { name: "Offers", icon: <DiscountIcon color="white" /> },
+    { name: "Offers", icon: <DiscountIcon style={{ color: "#ffffff" }} /> },
   ];
   const createSettings = [{ name: "Create Product", link: "/createproduct" }];
   return (
@@ -58,8 +62,8 @@ function DrawerComponent() {
             <ListItem disablePadding>
               <ListItemButton onClick={() => navigate(e.link)}>
                 <ListItemIcon>
-                  <AddIcon />
-                  <ListItemText primary={e.name} />
+                  <AddIcon style={{ color: "#ffffff" }} />
+                  <ListItemText primary={e.name} style={{ color: "#ffffff" }} />
                 </ListItemIcon>
               </ListItemButton>
             </ListItem>
