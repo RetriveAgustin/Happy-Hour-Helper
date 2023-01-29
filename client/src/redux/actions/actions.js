@@ -12,7 +12,8 @@ export const ADD_TO_CART = "ADD_TO_CART";
 
 export const getAllCategories = () => {
   console.log(process.env.REACT_APP_API_URL);
-console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
+  console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
+  
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
