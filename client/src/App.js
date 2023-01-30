@@ -12,10 +12,10 @@ import Detail from "./Views/Detail/Detail";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/system";
 import { useState } from "react";
-import DrawerComponent from "./Views/AdminDashboard/drawer/Drawer";
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
+import SearchView from "./Views/Search-View/Search-View";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -33,19 +33,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Home />} />
         <Route path="/product/:id" element={<Detail />} />
+        <Route path="/search" element={<SearchView />} />
 
         {/* ---------Rutas Admin ------------------- */}
-        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
-
-        {/* <Route path="/admin/*" element={<DrawerComponent />}>
-          <Route
-            path="users"
-            element={<AdminDashboard props={<UsersDashboard />} />}
-          />
-          <Route path="product" element={<ProductsDashboard />} />
-          <Route path="/adminOffers" element={<DrawerComponent />} />
-          <Route path="createproduct" element={<CreateProduct />} />
-        </Route> */}
         <Route
           path="/admin/*"
           element={<AdminDashboard props={<UsersDashboard />} />}
