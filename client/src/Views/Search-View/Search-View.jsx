@@ -89,14 +89,9 @@ function SearchView() {
       </List> */}
       <DataResultsContainer>
         {mappedProducts?.map((element) => (
-          //   <ListItem>
-          //     <ListItemButton onClick={() => navigate(`/product/${element.id}`)}>
-          //       <ListItemText primary={element.name} />
-          //     </ListItemButton>
-          //   </ListItem>
           <ProductInfoButton onClick={() => navigate(`/product/${element.id}`)}>
             <ProductImage src={element.img} />
-            <div style={{ justifySelf: "end" }}>
+            <div>
               <p>{element.name}</p>
               <h2>${element.price}</h2>
             </div>
