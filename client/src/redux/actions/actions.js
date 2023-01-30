@@ -225,8 +225,8 @@ export const postPayment = (data) => async (dispatch) => {
 
 export const putPayment = (id, properties) => async (dispatch) => {
   try {
-    await axios.put(`http://localhost:3001/payment-methods/putPayment`, { data: {id, properties} });
-    dispatch({ type: 'PUT_PAYMENT', payload: id});
+    const response = await axios.put(`http://localhost:3001/payment-methods/putPayment`, { data: {id, properties} });
+    dispatch({ type: 'PUT_PAYMENT', payload: response.data});
   } catch (error) {
     console.log(error);
   }

@@ -25,22 +25,22 @@ const SidebarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 1rem;
 `;
 
 const SidebarLogoWrapper = styled.img`
-  padding: 0.5rem 5.5rem;
+  padding: 0.5rem 4rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 55%;
   border-radius: 50%;
   text-decoration: none;
+  
 `;
 
 const SidebarToggler = styled.button`
-  cursor: pointer;
   display: ${({ displaySidebar }) => (displaySidebar ? "block" : "none")};
   @media (max-width: 468px) {
     display: block;
@@ -71,7 +71,7 @@ function User({children}) {
       <SidebarContainer>
         <SidebarWrapper>
           <SidebarLogoWrapper
-            src="https://imgs.search.brave.com/g4ZFZq9Aex8IsaczP7FUj-PG_ucqW80TEPMIYDGA9ns/rs:fit:300:300:1/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzhlLzdi/LzQzLzhlN2I0MzNk/YTIyNDI5OTQwZGVh/ZTYxN2ViODRiOGVk/LmpwZw"
+            src="https://cdn.dribbble.com/users/260486/screenshots/3099273/media/0e4a7831499bf2efbbd978b0db663b41.jpg?compress=1&resize=400x300"
             alt="user-profile"
           />
           <SidebarToggler

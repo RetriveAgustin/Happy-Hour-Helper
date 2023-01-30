@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import User from "./User";
-
+import Button from "@mui/material/Button";
 const LayoutUserContainer = styled.div`
   background-color: #171717;
   display: flex;
@@ -104,11 +104,11 @@ const Settings = () => {
           {editing.name ? (
             <>
               <input value={name} onChange={(e) => setName(e.target.value)} />
-              <button onClick={() => handleSave("name", name)}>Guardar</button>
+              <Button variant="outlined" onClick={() => handleSave("name", name)}>Guardar</Button>
             </>
           ) : (
             <>
-              Nombre: {name} <button onClick={() => handleEdit("name")}>Editar</button>
+              Nombre: {name} <Button variant="outlined" onClick={() => handleEdit("name")}>Editar</Button>
             </>
           )}
         </Name>
@@ -116,11 +116,11 @@ const Settings = () => {
           {editing.lastName ? (
               <>
                 <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                <button onClick={() => handleSave("lastName", lastName)}>Guardar</button>
+                <Button variant="outlined" onClick={() => handleSave("lastName", lastName)}>Guardar</Button>
               </>
             ) : (
                 <>
-                Apellido:  {lastName} <button onClick={() => handleEdit("lastName")}>Editar</button>
+                Apellido:  {lastName} <Button variant="outlined" onClick={() => handleEdit("lastName")}>Editar</Button>
               </>
             )}
           </LastName>
@@ -128,11 +128,11 @@ const Settings = () => {
             {editing.email ? (
               <>
                 <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <button onClick={() => handleSave("email", email)}>Guardar</button>
+                <Button variant="outlined" onClick={() => handleSave("email", email)}>Guardar</Button>
               </>
             ) : (
               <>
-                  Email: {email} <button onClick={() => handleEdit("email")}>Editar</button>
+                  Email: {email} <Button variant="outlined" onClick={() => handleEdit("email")}>Editar</Button>
               </>
             )}
           </Email>
@@ -140,15 +140,15 @@ const Settings = () => {
             {editing.password ? (
               <>
                 <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={() => handleSave("password", password)}>Guardar</button>
-                <button onClick={() => setShowPassword(!showPassword)}>
+                <Button variant="outlined" onClick={() => handleSave("password", password)}>Guardar</Button>
+                <Button variant="outlined" onClick={() => setShowPassword(!showPassword)}>
                   {showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
-                </button>
+                </Button>
               </>
             ) : (
               <>
-                Password: ****** <button onClick={() => handleEdit("password")}>Editar</button>
-              </>
+                Password: ****** <Button variant="outlined" onClick={() => handleEdit("password")}>Editar</Button>
+              </> 
             )}
           </Password>
         </UserDetails>
