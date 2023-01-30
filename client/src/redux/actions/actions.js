@@ -11,6 +11,8 @@ export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const ADD_TO_CART = "ADD_TO_CART";
 
 export const getAllCategories = () => {
+  console.log(process.env.REACT_APP_API_URL);
+console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
@@ -157,33 +159,3 @@ export const addToCart = (payload) => {
       .catch((err) => console.log(err));
   };
 };
-
-// export const getAllProductsByCategory = (category) => {
-//   return async function (dispatch) {
-//     const { data } = await axios(`http://localhost:3001/products/filterByCategory?category=${category}`)
-//     dispatch({
-//       type: GET_PRODUCTS_BY_CATEGORY,
-//       payload: data,
-//     });
-//   };
-// };
-
-// export const getProductsBySubCategory = () => {
-//   return async function (dispatch) {
-//     const { data } = await axios (`http://localhost:3001/products/filterByBrand`)
-//     dispatch({
-//       type: GET_PRODUCTS_BY_SUBCATEGORY,
-//       payload : data,
-//     })
-//   };
-// };
-
-// export const getFilterByBrand = () => {
-//   return async function(dispatch) {
-//     const { data } = await axios (`http://localhost:3001/products/filterByBrand`)
-//     dispatch({
-//       type: GET_FILTER_BY_BRAND,
-//       payload: data
-//     })
-//   }
-// };
