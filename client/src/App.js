@@ -17,6 +17,7 @@ import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 import SearchView from "./Views/Search-View/Search-View";
 import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
+import Header from "./components/Header/Header";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <AuthProvider>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />

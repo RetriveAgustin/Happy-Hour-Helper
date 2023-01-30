@@ -9,6 +9,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/actions";
+import Header from "../../components/Header/Header";
 
 function SearchView() {
   const [params] = useSearchParams();
@@ -39,6 +40,7 @@ function SearchView() {
 
   return (
     <div>
+      {/* <Header /> */}
       <h1>My query value is: {queryKey}</h1>
       <button onClick={HandleClick}>Watoncito</button>
       {/* <ul>
