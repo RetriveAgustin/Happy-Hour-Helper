@@ -16,6 +16,7 @@ import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard"
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 import SearchView from "./Views/Search-View/Search-View";
+import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
