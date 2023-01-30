@@ -8,9 +8,9 @@ export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
-export const ADD_TO_CART = 'ADD_TO_CART';
-export const FILTER_BY_SUBCAT = 'FILTER_BY_SUBCAT';
-export const REMOVE_FROM_SUBCAT = 'REMOVE_FROM_SUBCAT';
+export const ADD_TO_CART = "ADD_TO_CART";
+export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
+export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 
 export const getAllCategories = () => {
   console.log(process.env.REACT_APP_API_URL);
@@ -63,7 +63,7 @@ export const getProductId = (payload) => {
       .then((data) => {
         dispatch({
           type: GET_PRODUCT_ID,
-          payload: data
+          payload: data,
         });
       })
       .catch((err) => console.log(err));

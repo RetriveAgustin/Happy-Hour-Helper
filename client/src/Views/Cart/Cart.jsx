@@ -5,20 +5,17 @@ import Header from "../../components/Header/Header";
 import { Table, Wrapper, Cell } from "./Cart.styles";
 
 function Cart() {
+  const cart = useSelector((state) => state.cart);
 
-  const cart = useSelector((state) => state.cart)
-  
-  console.log(cart)
+  console.log(cart);
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Wrapper>
         <Table>
-          {cart.map(e => {
-            return (
-              <div>{e.name}</div>
-            )
+          {cart.map((e) => {
+            return <div>{e.name}</div>;
           })}
         </Table>
       </Wrapper>
