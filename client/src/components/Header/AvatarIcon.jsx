@@ -1,5 +1,5 @@
 import React from "react";
-import { IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 
@@ -44,8 +44,10 @@ function AvatarIcon() {
               <Typography>{setting}</Typography>
             </MenuItem>
           ))} */}
+          <MenuItem onClick={() => navigate("/user")}>Account</MenuItem>
+          <MenuItem>Dashboard</MenuItem>
           <MenuItem onClick={() => navigate("/login")}>
-            <Typography>Log In</Typography>
+            Log In / Register
           </MenuItem>
         </Menu>
       </div>

@@ -11,6 +11,8 @@ export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
 
 export const getAllCategories = () => {
   console.log(process.env.REACT_APP_API_URL);
@@ -160,4 +162,31 @@ export const addToCart = (payload) => {
       })
       .catch((err) => console.log(err));
   };
+};
+
+export const removeFromCart = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: payload,
+    });
+  };
+};
+
+export const getAllAddresses = (userCredentials) => {
+  fetch("http://localhost:3001/address/getAddress")
+    .then((r) => r.json())
+    .then((r) => {
+      const data = r.filter((e) => e.user_id === userCredentials.uid);
+      return data;
+    });
+};
+
+export const getAllPayments = (userCredentials) => {
+  fetch("http://localhost:3001/payment-methods/getPayment")
+    .then((r) => r.json())
+    .then((r) => {
+      const data = r.filter((e) => e.user_id === userCredentials.uid);
+      return data;
+    });
 };

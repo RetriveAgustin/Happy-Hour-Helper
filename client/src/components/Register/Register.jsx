@@ -31,7 +31,6 @@ export default function Register() {
             try {
                 axios.post('http://localhost:3001/users/registerUser', {
                     id: userCredentials.uid,
-                    token: userCredentials.accessToken,
                     name: user.name,
                     lastname: user.lastname,
                     mail: user.email,
