@@ -4,7 +4,6 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
-import Login from "./components/Login/Login.jsx";
 import Register from "./components/Register/Register.jsx";
 import { AuthProvider } from "./context/authContext";
 import "./App.css";
@@ -16,6 +15,7 @@ import SearchView from "./Views/Search-View/Search-View";
 import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"
+// import Login from "./components/Login/Login.jsx";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -30,7 +30,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/user" element={<User />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/product/:id" element={<Detail />} />
         <Route path="/search" element={<SearchView />} />

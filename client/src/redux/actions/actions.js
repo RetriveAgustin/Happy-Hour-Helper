@@ -17,22 +17,24 @@ export const FILTER_PRICE = 'FILTER_PRICE';
 export const GET_USERS = "GET_USERS";
 export const GET_USER_LOGGED= "GET_USER_BY_EMAIL"
 
-export const getUserLogged = (payload) => {
-  return function (dispatch){
-    fetch("http://localhost:3001/users/getUser")
-    .then((response) => response.json())
-    .then((data) => {
-      dispatch({
-        type: GET_USER_LOGGED,
-        payload: data,
-      })
-    })
-  }
-};
+console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
+
+// export const getUserLogged = (payload) => {
+//   return function (dispatch){
+//     fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       dispatch({
+//         type: GET_USER_LOGGED,
+//         payload: data,
+//       })
+//     })
+//   }
+// };
 
 export const getUsers = () => {
   return function (dispatch){
-    fetch("http://localhost:3001/users/getUser")
+    fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
       .then((response)=> response.json())
       .then((data) => {
         dispatch({
@@ -45,7 +47,7 @@ export const getUsers = () => {
 
 export const getAllCategories = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/category/getCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -59,7 +61,7 @@ export const getAllCategories = () => {
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/sub-category/getSubCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -73,7 +75,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/products/getProduct")
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -87,7 +89,7 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -101,7 +103,7 @@ export const getProductId = (payload) => {
 
 export const getAllBrands = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/brand/getBrand")
+    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -115,7 +117,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/offer/getOffer")
+    fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -216,7 +218,7 @@ export const filterByPrice = (payload) => {
 // };
 
 export const getAllAddresses = (userCredentials) => {
-  fetch("http://localhost:3001/address/getAddress")
+  fetch(`${process.env.REACT_APP_API_URL}/address/getAddress`)
     .then((r) => r.json())
     .then((r) => {
       const data = r.filter((e) => e.user_id === userCredentials.uid);
@@ -225,7 +227,7 @@ export const getAllAddresses = (userCredentials) => {
 };
 
 export const getAllPayments = (userCredentials) => {
-  fetch("http://localhost:3001/payment-methods/getPayment")
+  fetch(`${process.env.REACT_APP_API_URL}/payment-methods/getPayment`)
     .then((r) => r.json())
     .then((r) => {
       const data = r.filter((e) => e.user_id === userCredentials.uid);
