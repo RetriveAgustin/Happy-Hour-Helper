@@ -9,14 +9,10 @@ import Register from "./components/Register/Register.jsx";
 import { AuthProvider } from "./context/authContext";
 import "./App.css";
 import Detail from "./Views/Detail/Detail";
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/system";
-import { useState } from "react";
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 import SearchView from "./Views/Search-View/Search-View";
-import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
 import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"

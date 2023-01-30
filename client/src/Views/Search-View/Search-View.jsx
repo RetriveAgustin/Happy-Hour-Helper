@@ -1,15 +1,14 @@
-import {
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  TableContainer,
-} from "@mui/material";
+// import {
+//   List,
+//   ListItem,
+//   ListItemButton,
+//   ListItemText,
+//   TableContainer,
+// } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { getAllProducts } from "../../redux/actions/actions";
-import Header from "../../components/Header/Header";
 import styled from "styled-components";
 
 const SearchViewContainer = styled.div`
