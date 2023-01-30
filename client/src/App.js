@@ -8,7 +8,7 @@ import Register from "./components/Register/Register.jsx";
 import { AuthProvider } from "./context/authContext";
 import "./App.css";
 import Detail from "./Views/Detail/Detail";
-import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
+// import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 
 
 
@@ -23,7 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
-      <Route path="/admin" element={<AdminDashboard />} />
+      {/* <Route path="/admin" element={<AdminDashboard />} /> */}
       <Route path="/user" element={<User />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
