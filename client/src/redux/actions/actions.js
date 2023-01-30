@@ -13,6 +13,7 @@ export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
+export const FILTER_PRICE = 'FILTER_PRICE';
 
 export const getAllCategories = () => {
   console.log(process.env.REACT_APP_API_URL);
@@ -172,6 +173,21 @@ export const removeFromCart = (payload) => {
     });
   };
 };
+export const filterByPrice = (payload) => {
+  return {
+    type: FILTER_PRICE,
+    payload: payload
+  }
+}
+// export const getAllProductsByCategory = (category) => {
+//   return async function (dispatch) {
+//     const { data } = await axios(`http://localhost:3001/products/filterByCategory?category=${category}`)
+//     dispatch({
+//       type: GET_PRODUCTS_BY_CATEGORY,
+//       payload: data,
+//     });
+//   };
+// };
 
 export const getAllAddresses = (userCredentials) => {
   fetch("http://localhost:3001/address/getAddress")
