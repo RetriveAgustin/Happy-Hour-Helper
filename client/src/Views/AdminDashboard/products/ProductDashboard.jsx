@@ -18,8 +18,7 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchButton,
-} from "./AdminDashboard.styles";
-import DrawerComponent from "../drawer/Drawer";
+} from "./ProductDashboard.styles";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllProducts,
@@ -27,14 +26,13 @@ import {
   getAllCategories,
   getAllBrands,
 } from "../../../redux/actions/actions";
-import styled from "styled-components";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "productInfo" por los usuarios traidos desde el back en el UseEffect.
 //  Eliminar la variable "users"
 //  Si despues es necesario modificar algun estilo, se encuentran todos en el archivo "./AdminDashboard.styles.js"
 
-function AdminDashboardProducts() {
+function ProductsDashboard() {
   const dispatch = useDispatch();
 
   const allProducts = useSelector((state) => state.products);
@@ -62,16 +60,6 @@ function AdminDashboardProducts() {
   useEffect(() => {
     setProductInfo(allProducts);
   }, [allProducts]);
-
-  // useEffect(() => {
-  //   setBrandsInfo(allBrands);
-  // }, [allBrands]);
-  // useEffect(() => {
-  //   toShowCategories(allCategories);
-  // }, [allCategories]);
-  // useEffect(() => {
-  //   toShowSubCategories(allSubCategories);
-  // }, [allSubCategories]);
 
   const HandleFilter = (searchname) => {
     setSearchValues({ ...searchValues, value: searchname });
@@ -106,15 +94,25 @@ function AdminDashboardProducts() {
     setSearchValues({ ...searchValues, filter: e.target.value });
   };
 
+  const HandleSelectByBrand = (value) => {
+    if (value) {
+      let filteredProducts = allProducts.filter((el) =>
+        el.Brands[0].id.includes(value)
+      );
+      return setProductInfo(filteredProducts);
+    }
+    setProductInfo(allProducts);
+  };
+
   const HandleSelectByCategory = (value) => {
     if (value) {
       let filteredProducts = allProducts.filter((el) =>
         el.Categories[0].id.includes(value)
       );
-      setSelectedBrand("");
-      setSelectedSubCategory("");
+
       return setProductInfo(filteredProducts);
     }
+    setProductInfo(allProducts);
   };
 
   const HandleSelectBySubCategory = (value) => {
@@ -122,19 +120,7 @@ function AdminDashboardProducts() {
       let filteredProducts = allProducts.filter((el) =>
         el.Sub_categories[0].id.includes(value)
       );
-      setSelectedBrand("");
-      setSelectedCategory("");
-      return setProductInfo(filteredProducts);
-    }
-  };
 
-  const HandleSelectByBrand = (value) => {
-    if (value) {
-      let filteredProducts = allProducts.filter((el) =>
-        el.Brands[0].id.includes(value)
-      );
-      setSelectedCategory("");
-      setSelectedSubCategory("");
       return setProductInfo(filteredProducts);
     }
     setProductInfo(allProducts);
@@ -142,7 +128,6 @@ function AdminDashboardProducts() {
 
   return (
     <DashboardInfoContainer>
-      <DrawerComponent />
       <HeaderContainer>
         <label>Brands:</label>
         <FilterInput
@@ -184,7 +169,7 @@ function AdminDashboardProducts() {
         </FilterInput>
 
         <label>Filter by:</label>
-        <FilterInput>
+        <FilterInput onChange={(e) => HandleSelect(e.target.value)}>
           <option value="name">Name</option>
           <option value="id">ID</option>
         </FilterInput>
@@ -232,4 +217,4 @@ function AdminDashboardProducts() {
   );
 }
 
-export default AdminDashboardProducts;
+export default ProductsDashboard;

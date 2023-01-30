@@ -13,8 +13,9 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/system";
 import { useState } from "react";
 import DrawerComponent from "./Views/AdminDashboard/drawer/Drawer";
-import AdminDashboardUsers from "./Views/AdminDashboard/users/AdminDashboard";
-import AdminDashboardProducts from "./Views/AdminDashboard/products/AdminDashboard";
+import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
+import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
+import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -25,18 +26,35 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/adminProduct" element={<AdminDashboardProducts />} />
-        <Route path="/adminUsers" element={<DrawerComponent />} />
-        <Route path="/adminOffers" element={<DrawerComponent />} />
-        <Route path="/createproduct" element={<CreateProduct />} />
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/admin" element={<AdminDashboardUsers />} />
         <Route path="/user" element={<User />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Home />} />
         <Route path="/product/:id" element={<Detail />} />
+
+        {/* ---------Rutas Admin ------------------- */}
+        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
+
+        {/* <Route path="/admin/*" element={<DrawerComponent />}>
+          <Route
+            path="users"
+            element={<AdminDashboard props={<UsersDashboard />} />}
+          />
+          <Route path="product" element={<ProductsDashboard />} />
+          <Route path="/adminOffers" element={<DrawerComponent />} />
+          <Route path="createproduct" element={<CreateProduct />} />
+        </Route> */}
+        <Route
+          path="/admin/*"
+          element={<AdminDashboard props={<UsersDashboard />} />}
+        />
+        <Route
+          path="/admin/products"
+          element={<AdminDashboard props={<ProductsDashboard />} />}
+        />
+        <Route path="/createproduct" element={<CreateProduct />} />
       </Routes>
     </AuthProvider>
   );

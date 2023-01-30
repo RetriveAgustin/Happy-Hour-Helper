@@ -13,17 +13,19 @@ import LiquorIcon from "@mui/icons-material/Liquor";
 import DiscountIcon from "@mui/icons-material/Discount";
 import AddIcon from "@mui/icons-material/Add";
 import styled from "styled-components";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 
-const DrawerContainer = styled.div`
+const DrawerContainer = styled.nav`
   display: flex;
   flex-direction: column;
-  position: absolute;
+  color: white;
+  position: relative;
   left: 0;
-  background-color: #2b1c1f;
+  background-color: #52373c;
   width: 20vw;
   height: 100vh;
-  border-right: 3px solid gray;
+  border-right: 3px solid #2b1c1f;
 `;
 
 function DrawerComponent() {
@@ -32,12 +34,12 @@ function DrawerComponent() {
     {
       name: "Users",
       icon: <PersonIcon style={{ color: "#ffffff" }} />,
-      link: "/admin",
+      link: "/admin/users",
     },
     {
       name: "Products",
       icon: <LiquorIcon style={{ color: "#ffffff" }} />,
-      link: "/adminProduct",
+      link: "/admin/products",
     },
     { name: "Offers", icon: <DiscountIcon style={{ color: "#ffffff" }} /> },
   ];
@@ -68,6 +70,17 @@ function DrawerComponent() {
               </ListItemButton>
             </ListItem>
           ))}
+        </List>
+        <Divider />
+        <List>
+          <ListItem>
+            <ListItemButton onClick={() => navigate("/")}>
+              <ListItemIcon>
+                <LogoutIcon style={{ color: "#ffffff" }} />
+              </ListItemIcon>
+              <ListItemText primary={"Quit Dashboard"} />
+            </ListItemButton>
+          </ListItem>
         </List>
       </DrawerContainer>
     </>

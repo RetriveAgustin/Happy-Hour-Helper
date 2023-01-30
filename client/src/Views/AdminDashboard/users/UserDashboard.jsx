@@ -18,7 +18,7 @@ import {
   SearchBarContainer,
   SearchBarInput,
   SearchButton,
-} from "./AdminDashboard.styles";
+} from "./UserDashboard.styles";
 import DrawerComponent from "../drawer/Drawer";
 
 //  ---IMPORTANTE---
@@ -26,7 +26,7 @@ import DrawerComponent from "../drawer/Drawer";
 //  Eliminar la variable "users"
 //  Si despues es necesario modificar algun estilo, se encuentran todos en el archivo "./AdminDashboard.styles.js"
 
-function AdminDashboardUsers() {
+function UsersDashboard() {
   const [UserInfo, setUserInfo] = useState([]);
   const [searchValues, setSearchValues] = useState({
     value: "",
@@ -214,7 +214,6 @@ function AdminDashboardUsers() {
 
   return (
     <DashboardInfoContainer>
-      <DrawerComponent />
       <HeaderContainer>
         <label>Filter by:</label>
         <FilterInput defaultValue={searchValues.filter} onChange={HandleSelect}>
@@ -275,4 +274,4 @@ function AdminDashboardUsers() {
   );
 }
 
-export default AdminDashboardUsers;
+export default UsersDashboard;

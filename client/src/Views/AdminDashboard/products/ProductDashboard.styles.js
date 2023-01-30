@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 const DashboardInfoContainer = styled.div`
-  background-color: #2f3542;
+  background-color: #151515;
   color: white;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
