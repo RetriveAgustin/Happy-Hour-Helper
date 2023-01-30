@@ -9,8 +9,7 @@ export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const ADD_TO_CART = 'ADD_TO_CART';
-export const FILTER_BY_SUBCAT = 'FILTER_BY_SUBCAT';
-export const REMOVE_FROM_SUBCAT = 'REMOVE_FROM_SUBCAT';
+export const FILTER_PRICE = 'FILTER_PRICE';
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -148,6 +147,12 @@ export const addToCart = (payload) => {
   };
 };
 
+export const filterByPrice = (payload) => {
+  return {
+    type: FILTER_PRICE,
+    payload: payload
+  }
+}
 // export const getAllProductsByCategory = (category) => {
 //   return async function (dispatch) {
 //     const { data } = await axios(`http://localhost:3001/products/filterByCategory?category=${category}`)
