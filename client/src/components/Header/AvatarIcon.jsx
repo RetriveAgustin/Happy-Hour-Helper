@@ -2,9 +2,14 @@ import React from "react";
 import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useAuth } from "../../context/authContext";
+import LoginO from "../LoginO/Login";
 
-function AvatarIcon() {
+function AvatarIcon({ logout }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const user = useSelector((state) => state.userLogged);
+  // const { logout } = useAuth;
 
   const navigate = useNavigate();
 
@@ -16,7 +21,9 @@ function AvatarIcon() {
     setAnchorElUser(null);
   };
 
-  const settings = ["Account", "Dashboard", "Log In / Register"];
+  const logOutHandler = () => {
+    // logout();
+  }
 
   return (
     <>
@@ -46,9 +53,16 @@ function AvatarIcon() {
           ))} */}
           <MenuItem onClick={() => navigate("/user")}>Account</MenuItem>
           <MenuItem>Dashboard</MenuItem>
-          <MenuItem onClick={() => navigate("/login")}>
-            Log In / Register
-          </MenuItem>
+          {user ? (
+            <MenuItem onClick={logOutHandler}>
+              Log Out
+            </MenuItem>
+          ) : (
+            // <MenuItem onClick={() => navigate("/login")}>
+            //   Log In / Register
+            // </MenuItem>
+            <LoginO/>
+          )}
         </Menu>
       </div>
     </>

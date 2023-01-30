@@ -41,7 +41,7 @@ function DrawerComponent() {
       icon: <LiquorIcon style={{ color: "#ffffff" }} />,
       link: "/admin/products",
     },
-    { name: "Offers", icon: <DiscountIcon style={{ color: "#ffffff" }} /> },
+    // { name: "Offers", icon: <DiscountIcon style={{ color: "#ffffff" }} /> },
   ];
   const createSettings = [{ name: "Create Product", link: "/createproduct" }];
   return (

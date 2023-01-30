@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { getUserLogged } from "../../redux/actions/actions";
 import styles from "./Login.module.css";
 // import {
 //   Principal,
@@ -15,6 +18,8 @@ import styles from "./Login.module.css";
 // } from "./Login.styled.js";
 
 export default function Login() {
+  const dispatch = useDispatch()
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -23,6 +28,7 @@ export default function Login() {
 
   const { login, loginWithGoogle, userCredentials, resetPassword } = useAuth();
   const navigate = useNavigate();
+  
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
@@ -39,6 +45,7 @@ export default function Login() {
         })
         .then((r) => {
           console.log(r.data);
+          dispatch(getUserLogged(user.email))
           navigate("/home");
         });
     } catch (e) {

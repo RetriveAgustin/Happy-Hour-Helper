@@ -14,10 +14,36 @@ export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
 export const FILTER_PRICE = 'FILTER_PRICE';
+export const GET_USERS = "GET_USERS";
+export const GET_USER_LOGGED= "GET_USER_BY_EMAIL"
+
+export const getUserLogged = (payload) => {
+  return function (dispatch){
+    fetch("http://localhost:3001/users/getUser")
+    .then((response) => response.json())
+    .then((data) => {
+      dispatch({
+        type: GET_USER_LOGGED,
+        payload: data,
+      })
+    })
+  }
+};
+
+export const getUsers = () => {
+  return function (dispatch){
+    fetch("http://localhost:3001/users/getUser")
+      .then((response)=> response.json())
+      .then((data) => {
+        dispatch({
+          type: GET_USERS,
+          payload: data,
+        })
+      })
+  }
+}
 
 export const getAllCategories = () => {
-  console.log(process.env.REACT_APP_API_URL);
-console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
     fetch("http://localhost:3001/category/getCategory")
       .then((response) => response.json())

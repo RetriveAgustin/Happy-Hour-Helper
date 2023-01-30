@@ -6,7 +6,8 @@ const {
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
+  getModelsByEmail
 } = require("../utils/mainUtils");
 
 const getUser = async (req, res) => {
@@ -23,6 +24,16 @@ const getUserById = async (req, res) => {
   try {
     const { id } = req.body;
     const user = getModelsById(User, id);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({error: error.message });
+  }
+};
+
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = getModelsByEmail(User, email);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });
