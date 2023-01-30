@@ -15,10 +15,9 @@ import {
   Types,
   InputsMaxMin,
 } from "./Filters.styles";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box } from "@mui/system";
 
-export default function Filters({ render, setRender }) {
+export default function Filters({ render, setRender, Checked, setChecked }) {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.categories);
@@ -44,7 +43,7 @@ export default function Filters({ render, setRender }) {
             {categories &&
               categories.map((category) => {
                 return <Box>
-                  <Category category={category} setRender={setRender} render={render}/>
+                  <Category category={category} setRender={setRender} render={render} Checked={Checked} setChecked={setChecked} />
                 </Box>
               })}
           </TreeView>

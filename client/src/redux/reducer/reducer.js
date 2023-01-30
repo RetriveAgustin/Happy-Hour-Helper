@@ -7,7 +7,6 @@ import {
   GET_PRODUCTS_BY_CATEGORY,
   GET_PRODUCT_ID,
   ADD_TO_CART,
-  FILTER_BY_SUBCAT,
 } from "./../actions/actions";
 
 const initialState = {
@@ -19,7 +18,6 @@ const initialState = {
   productsByCategory: [],
   detail: [],
   cart: [],
-  filteredProducts: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -43,13 +41,6 @@ const rootReducer = (state = initialState, action) => {
         ...state, 
         cart: [...state.cart, action.payload[0]]
       }
-    case FILTER_BY_SUBCAT:
-      const products = state.products;
-      const filter = products?.filter(prd => prd.Sub_categories && prd.Sub_categories[0].name == action.payload);
-      return {
-        ...state,
-        filteredProducts: [...state.filteredProducts, ...filter]
-      }
     default:
       return {
         ...state,
@@ -58,5 +49,3 @@ const rootReducer = (state = initialState, action) => {
 };
 
 export default rootReducer;
-
-//(prd => prd.sub_Categories && prd.sub_Categories[0].name == action.payload);

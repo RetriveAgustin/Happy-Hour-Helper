@@ -13,12 +13,6 @@ import LowerFilters from "./LowerFilters/LowerFilters";
 const Home = () => {
   const dispatch = useDispatch(); 
   const categories = useSelector(state => state.categories);
-  const lowFilters = useSelector(state => state.filteredProducts);
-
-  const [render, setRender] = useState({
-    filtered: false,
-    categoryId: ""
-  })
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -26,15 +20,24 @@ const Home = () => {
 
   const products = useSelector((state) => state.products);
   
+  const [Checked, setChecked] = useState([])
+
+  var LowFilters = products?.filter(prd => (Checked.includes(prd.Sub_categories[0].id)))
+
+  const [render, setRender] = useState({
+    filtered: false,
+    categoryId: ""
+  })
+
   return (
     <>
       <div className={styles.background}>
       <Header />
-      <Filters setRender={setRender} render={render} />
+      <Filters setRender={setRender} render={render} Checked={Checked} setChecked={setChecked} />
       {/* SECCIONES DEL HOME */}
       {
-        lowFilters.length ? 
-          <LowerFilters />
+        LowFilters.length ? 
+          <LowerFilters LowFilters={LowFilters} />
         :
         !render.filtered ?
           <GeneralCategories categories={categories} products={products} />

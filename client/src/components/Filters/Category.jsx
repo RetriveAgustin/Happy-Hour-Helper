@@ -1,42 +1,52 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { TreeItem } from "@mui/lab";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import { Box } from "@mui/system";
 import Checkbox from "@mui/material/Checkbox";
-import { filterBySubCat } from "../../redux/actions/actions";
 
-function FilterCategories ({ category, render, setRender }) {
-
-  const dispatch = useDispatch()
-
+function FilterCategories({
+  category,
+  render,
+  setRender,
+  Checked,
+  setChecked,
+}) {
   const subCategories = useSelector((state) => state.subCategories);
   const products = useSelector((state) => state.products);
-  const filteredProd = useSelector(state => state.filteredProducts);
 
   const handleFilter = (e) => {
-    if(e !== render.categoryId){
-    setRender({
-      filtered: true,
-      categoryId: e
-    })} else {
+    if (e !== render.categoryId) {
+      setRender({
+        filtered: true,
+        categoryId: e,
+      });
+    } else {
       setRender({
         filtered: false,
-        categoryId: ""
-      })
+        categoryId: "",
+      });
     }
-  }
+  };
 
   const handleLowerFilter = (e) => {
-    dispatch(filterBySubCat(e))
-  }
+    const currentIndex = Checked.indexOf(e);
+    const newChecked = [...Checked];
+
+    if (currentIndex === -1) {
+      newChecked.push(e);
+    } else {
+      newChecked.splice(currentIndex, 1);
+    }
+    setChecked(newChecked);
+  };
 
   return (
     <Box display="flex" flexDirection="row" sx={{ color: "white" }}>
       <div value={render.categoryId} onClick={() => handleFilter(category.id)}>
-      <FilterAltIcon fontSize="75" sx={{cursor: 'pointer'}}/>
+        <FilterAltIcon fontSize="75" sx={{ cursor: "pointer" }} />
       </div>
-      <TreeItem        
+      <TreeItem
         nodeId={category.id}
         label={category.name}
         sx={{ color: "white" }}
@@ -58,7 +68,8 @@ function FilterCategories ({ category, render, setRender }) {
                     <TreeItem nodeId={subCat.id} label={subCat.name} />
                     <Checkbox
                       size="small"
-                      onClick={() => handleLowerFilter(subCat.name)}
+                      onChange={() => handleLowerFilter(subCat.id)}
+                      checked={Checked.indexOf(subCat.id) === -1 ? false : true}
                       sx={{
                         color: "white",
                         "&.Mui-checked": { color: "white" },
