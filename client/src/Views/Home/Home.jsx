@@ -22,7 +22,7 @@ const Home = () => {
   
   const [Checked, setChecked] = useState([])
 
-  var LowFilters = products?.filter(prd => (Checked.includes(prd.Sub_categories[0].id)))
+  var LowFilters = products?.filter(prd => (Checked.includes(prd.Sub_categories[0].id) || Checked.includes(prd.Brands[0].id)))
 
   const [render, setRender] = useState({
     filtered: false,
