@@ -13,10 +13,8 @@ export const FILTER_BY_SUBCAT = 'FILTER_BY_SUBCAT';
 export const REMOVE_FROM_SUBCAT = 'REMOVE_FROM_SUBCAT';
 
 export const getAllCategories = () => {
-  console.log(process.env.REACT_APP_API_URL);
-console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
-    fetch("http://localhost:3001/category/getCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -30,7 +28,7 @@ console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/sub-category/getSubCategory")
+    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -44,7 +42,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/products/getProduct")
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -58,7 +56,7 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    fetch(`http://localhost:3001/products/getProductId/${payload}`)
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -72,7 +70,7 @@ export const getProductId = (payload) => {
 
 export const getAllBrands = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/brand/getBrand")
+    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -86,7 +84,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch("http://localhost:3001/offer/getOffer")
+    fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
