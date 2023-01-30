@@ -12,6 +12,7 @@ import User from "./Views/User/User";
 import "./App.css";
 import Settings from "./Views/User/Settings";
 import Address from "./Views/User/Address"
+import Pago from "./Views/User/Pago";
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -23,6 +24,7 @@ function App() {
       <Route path="/" element={<User />}/>
       <Route path="/settings" element={<Settings />}/>
       <Route path="/address" element={<Address />}/>
+      <Route path="/pago" element={<Pago />}/>
       {/* <Route path="/" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/admin" element={<CreateProduct />} />

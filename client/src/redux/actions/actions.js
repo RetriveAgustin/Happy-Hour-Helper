@@ -1,9 +1,24 @@
 import axios from "axios";
-export const GET_CATEGORIES = "GET_CATEGORIES"
-export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES"
-export const GET_BRANDS = "GET_BRANDS"
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS"
-export const GET_OFFERS = "GET_OFFERS"
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
+export const GET_BRANDS = "GET_BRANDS";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_OFFERS = "GET_OFFERS";
+
+//Seccion Address
+export const GET_ADDRESSES = "GET_ADDRESSES";
+export const GET_ADDRESS = "GET_ADDRESS";
+export const CREATE_ADDRESS = "CREATE_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
+
+//Seccion Payment
+export const GET_PAYMENT = "GET_PAYMENT";
+export const POST_PAYMENT = "POST_PAYMENT";
+export const PUT_PAYMENT = "PUT_PAYMENT";
+export const DELETE_PAYMENT = "DELETE_PAYMENT";
+export const RESTORE_PAYMENT = "RESTORE_PAYMENT";
+export const GET_PAYMENT_NAME = "GET_PAYMENT_NAME";
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -53,7 +68,7 @@ export const getAllBrands = () => {
       .then((response) => response.json())
       .then((data) => {
         dispatch({
-          type: GET_BRANDS ,
+          type: GET_BRANDS,
           payload: data,
         });
       })
@@ -87,9 +102,7 @@ export const createCategory = (payload) => {
 
 export const createProduct = (payload) => {
   return async function () {
-    const post = await axios.post(
-      "http://localhost:3001/products", payload
-    );
+    const post = await axios.post("http://localhost:3001/products", payload);
     return post;
   };
 };
@@ -106,20 +119,137 @@ export const createSubCategory = (payload) => {
 
 export const createOffer = (payload) => {
   return async function () {
-    const post = await axios.post(
-      "http://localhost:3001/offer",
-      payload
-    );
+    const post = await axios.post("http://localhost:3001/offer", payload);
     return post;
   };
 };
 
 export const createBrand = (payload) => {
   return async function () {
-    const post = await axios.post(
-      "http://localhost:3001/brand",
-      payload
-    );
+    const post = await axios.post("http://localhost:3001/brand", payload);
     return post;
   };
+};
+
+//SECCION ADDRESS!!!!!!!!!!!!!!!!!
+
+export const getAddress = () => {
+  return async (dispatch) => {
+    const res = await axios.get(`http://localhost:3001/address/getAddress`);
+    const data = res.data;
+    return dispatch({
+      type: GET_ADDRESSES,
+      payload: data,
+    });
+  };
+};
+
+// export const getAddress = (id) => {
+//   return async (dispatch) => {
+//     const res = await axios.get(`http://localhost:3001/address/getAddress/${id}`)
+//     const data = res.data;
+
+//     return dispatch({
+//       type: GET_ADDRESS,
+//       payload: data,
+//     })
+//   }
+// }
+
+export const createAddress = (payload) => {
+  return async (dispatch) => {
+    const res = await axios.post(
+      "http://localhost:3001/address/postAddress",
+      payload
+    );
+    return dispatch({ type: CREATE_ADDRESS, payload: res.data });
+  };
+};
+
+export const updateAddress = (id) => {
+  return async (dispatch) => {
+    const res = await axios.put(
+      `http://localhost:3001/address/putAddress/${id}`
+    );
+    return dispatch({ type: UPDATE_ADDRESS, payload: res.data });
+  };
+};
+
+export const deleteAddress = (id) => {
+  return async (dispatch) => {
+    const res = await axios.delete(
+      `http://localhost:3001/address/deleteAddress/${id}`
+    );
+    return dispatch({
+      type: DELETE_ADDRESS,
+      payload: res.data,
+    });
+  };
+};
+
+//SECCION PAYMENT!!!!!!!!!!!!!!!!
+
+export const getPaymentMethods = () => (dispatch) => {
+  axios
+    .get("http://localhost:3001/payment-methods/getPayment")
+    .then((response) => {
+      dispatch({ type: "GET_PAYMENT", payload: response.data });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const getPaymentByName = (name) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `http://localhost:3001/payment-methods/getPayment?name=${name}`
+    );
+    dispatch({ type: "GET_PAYMENT_NAME", payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postPayment = (data) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:3001/payment-methods/postPayment",
+      data
+    );
+    dispatch({ type: "POST_PAYMENT", payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const putPayment = (id, properties) => async (dispatch) => {
+  try {
+    await axios.put(`http://localhost:3001/payment-methods/putPayment`, { data: {id, properties} });
+    dispatch({ type: 'PUT_PAYMENT', payload: id});
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+export const deletePayment = (id) => async (dispatch) => {
+  try {
+    await axios.delete(`http://localhost:3001/payment-methods/deletePayment`, {data: {id}});
+    dispatch({ type: 'DELETE_PAYMENT', payload: id });
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+export const restorePayment = (id) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      `http://localhost:3001/payment-methods/restorePayment/${id}`
+    );
+    dispatch({ type: "RESTORE_PAYMENT", payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
 };

@@ -1,7 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import User from "./User";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAddress,
+  createAddress,
+  updateAddress,
+  deleteAddress,
+} from "../../redux/actions/actions";
 
 const AdressConteiner = styled.div`
   background-color: #171717;
@@ -31,118 +37,50 @@ const AdressDetails = styled.div`
 `;
 
 const Address = () => {
-  // Crea un estado para almacenar las direcciones
-  const [addresses, setAddresses] = useState([]);
-  // Crea un estado para mostrar y ocultar el formulario de agregar dirección
+  const dispatch = useDispatch();
+  const addresses = useSelector((state) => state.addresses);
   const [showAddForm, setShowAddForm] = useState(false);
-  // Crea un estado para mostrar y ocultar el formulario de editar dirección
   const [showEditForm, setShowEditForm] = useState(false);
-  // Crea un estado para almacenar la dirección a editar
   const [addressToEdit, setAddressToEdit] = useState({});
 
-  // Crea una referencia para los campos de entrada del formulario
-  const nameRef = useRef();
-  const numberRef = useRef();
-  const descriptionRef = useRef();
+  useEffect(() => {
+    dispatch(getAddress());
+  }, [dispatch]);
 
-  const handleAddAddress = async () => {
-    // Obtiene los valores de los campos de entrada
-    const name = nameRef.current.value;
-    const number = numberRef.current.value;
-    const description = descriptionRef.current.value;
-    // Crea un objeto de dirección con los valores obtenidos
-    const newAddress = { name, number, description };
-    try {
-      await axios.post("/address/postAddress", newAddress);
-      const res = await axios.get("/address/getAddress");
-      setAddresses(res.data);
-      setShowAddForm(false);
-      // Limpia los campos de entrada
-      nameRef.current.value = "";
-      numberRef.current.value = "";
-      descriptionRef.current.value = "";
-    } catch (error) {
-      console.log(error);
-    }
+  const handleAddAddress = (address) => {
+    dispatch(createAddress(address));
+    setShowAddForm(false);
   };
 
-  const handleDeleteAddress = async (id) => {
-    try {
-      // Enviar la petición para eliminar la dirección al servidor utilizando axios
-      await axios.delete(`/address/deleteAddress/${id}`);
-      // Recuperar la lista actualizada de direcciones del servidor
-      const res = await axios.get("/address/getAddress");
-      // Actualizar el estado con la lista recuperada
-      setAddresses(res.data);
-    } catch (error) {
-      console.error(error);
-    }
+  const handleDeleteAddress = (id) => {
+    dispatch(deleteAddress(id));
   };
 
-  const handleEditAddress = async () => {
-    // Obtiene los valores de los campos de entrada
-    const name = nameRef.current.value;
-    const number = numberRef.current.value;
-    const description = descriptionRef.current.value;
-    // Crea un objeto de dirección con los valores obtenidos
+  const handleEditAddress = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const number = event.target.number.value;
+    const description = event.target.description.value;
     const updatedAddress = { name, number, description };
-    try {
-      // Enviar la petición para actualizar la dirección al servidor utilizando axios
-      await axios.put("/address/putAddress", updatedAddress);
-      // Recuperar la lista actualizada de direcciones del servidor
-      const res = await axios.get("/address/getAddress");
-      // Actualizar el estado con la lista recuperada
-      setAddresses(res.data);
-      setShowEditForm(false);
-      // Limpia los campos de entrada
-      nameRef.current.value = "";
-      numberRef.current.value = "";
-      descriptionRef.current.value = "";
-    } catch (error) {
-      console.error(error);
-    }
+    dispatch(updateAddress(addressToEdit.id, updatedAddress));
+    setShowEditForm(false);
   };
 
-  const handleSaveAddresses = async () => {
-    try {
-      // Enviar las direcciones actuales al servidor utilizando axios
-      await axios.post("/address/postAddress", addresses);
-      // Recuperar la lista actualizada de direcciones del servidor
-      const res = await axios.get("/address/getAddress");
-      // Actualizar el estado con la lista recuperada
-      setAddresses(res.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  // Función para mostrar el formulario de agregar dirección
   const showAddAddressForm = () => {
     setShowAddForm(true);
   };
 
-  // Función para ocultar el formulario de agregar dirección
   const hideAddAddressForm = () => {
     setShowAddForm(false);
   };
 
-  // Función para mostrar el formulario de editar dirección
   const showEditAddressForm = (address) => {
-    setShowEditForm(true);
     setAddressToEdit(address);
-    // Asigna los valores de la dirección seleccionada a los campos de entrada
-    nameRef.current.value = address.name;
-    numberRef.current.value = address.number;
-    descriptionRef.current.value = address.description;
+    setShowEditForm(true);
   };
 
-  // Función para ocultar el formulario de editar dirección
   const hideEditAddressForm = () => {
     setShowEditForm(false);
-    // Limpia los campos de entrada
-    nameRef.current.value = "";
-    numberRef.current.value = "";
-    descriptionRef.current.value = "";
   };
 
   return (
@@ -150,25 +88,33 @@ const Address = () => {
       <User />
       <AdressCard>
         <AdressDetails>
-          {/* Muestra un botón para agregar una nueva dirección */}
+          {/* Muestra un botón para agregar una nueva dirección  */}
           <button onClick={showAddAddressForm}>Agregar dirección</button>
-          {/* Formulario para agregar una nueva dirección  */}
+          {/* {/ Formulario para agregar una nueva dirección /} */}
           {showAddForm && (
             <div>
-              <form>
-                {/* Campos para ingresar la información de la dirección  */}
-                <input type="text" placeholder="Calle" ref={nameRef}/>
-                <input type="text" placeholder="Numero" ref={numberRef}/>
-                <input type="text" placeholder="Descripcion" ref={descriptionRef}/>
-                <button type="submit" onClick={handleAddAddress}>
-                  Agregar
-                </button>
+              <form onSubmit={(e) => handleAddAddress(e.target)}>
+                {/* {/ Campos para ingresar la información de la dirección /} */}
+                <input type="text" placeholder="Calle" name="name" required />
+                <input
+                  type="text"
+                  placeholder="Numero"
+                  name="number"
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Descripcion"
+                  name="description"
+                  required
+                />
+                <button type="submit">Agregar</button>
                 <button onClick={hideAddAddressForm}>Cancelar</button>
               </form>
             </div>
           )}
-          {/* Muestra una lista de las direcciones actuales  */}
-          <ul>
+          {/* {/ Muestra una lista de las direcciones actuales /} */}
+          {/* <ul>
             {addresses.map((address) => (
               <li key={address.id}>
                 {address.name} {address.number} {address.description}
@@ -180,24 +126,39 @@ const Address = () => {
                 </button>
               </li>
             ))}
-          </ul>
-          {/* Formulario para editar una dirección  */}
+          </ul> */}
+          {/* {/ Formulario para editar una dirección */}
           {showEditForm && (
             <div>
-              <form>
-                {/* Campos para ingresar la información de la dirección */}
-                <input type="text" placeholder="Calle" ref={nameRef}/>
-                <input type="text" placeholder="Numero" ref={numberRef}/>
-                <input type="text" placeholder="Descripcion" ref={descriptionRef}/>
-                <button type="submit" onClick={handleEditAddress}>
-                  Guardar cambios
-                </button>
+              <form onSubmit={handleEditAddress}>
+                {/* Campos para ingresar la información de la dirección  */}
+                <input
+                  type="text"
+                  placeholder="Calle"
+                  name="name"
+                  defaultValue={addressToEdit.name}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Numero"
+                  name="number"
+                  defaultValue={addressToEdit.number}
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Descripcion"
+                  name="description"
+                  defaultValue={addressToEdit.description}
+                  required
+                />
+                <button type="submit">Guardar</button>
                 <button onClick={hideEditAddressForm}>Cancelar</button>
               </form>
             </div>
           )}
         </AdressDetails>
-        <button onClick={handleSaveAddresses}>Guardar direcciones</button>
       </AdressCard>
     </AdressConteiner>
   );
