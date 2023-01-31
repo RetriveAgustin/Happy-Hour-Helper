@@ -1,32 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
-import { getUserLogged } from "../../redux/actions/actions";
-import styles from "./Login.module.css";
-// import {
-//   Principal,
-//   Wrapper,
-//   Form,
-//   Input,
-//   Button,
-//   Title,
-//   Label,
-//   Question,
-// } from "./Login.styled.js";
 
 export default function Login() {
-  const dispatch = useDispatch();
-
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState();
 
-  const { login, loginWithGoogle, userCredentials, resetPassword } = useAuth();
+  const { login, logout, loginWithGoogle, userCredentials, resetPassword } =
+    useAuth();
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) => {
@@ -43,9 +28,8 @@ export default function Login() {
           password: user.password,
         })
         .then((r) => {
-          console.log(r.data);
-          dispatch(getUserLogged(user.email));
-          navigate("/home");
+          navigate("/");
+          localStorage.setItem("User Credentials", result);
         });
     } catch (e) {
       if (e.message === "Firebase: Error (auth/internal-error).")
@@ -61,13 +45,13 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     const result = await loginWithGoogle();
+
     if (result._tokenResponse.isNewUser) {
       try {
         const data = await axios.post(
           "http://localhost:3001/users/registerUser",
           {
             id: result.user.uid,
-            token: result.user.accessToken,
             name: result._tokenResponse.firstName,
             lastname: result._tokenResponse.lastname,
             mail: result._tokenResponse.email,
@@ -116,42 +100,34 @@ export default function Login() {
     }
   };
 
+  const handleLogout = async () => {
+    await logout();
+    console.log("loged out");
+  };
+
   return (
-    <div style={{ backgroundColor: "black" }}>
-      <section>
-        <h2>Log In</h2>
+    <div>
+      {error && <label>{error}</label>}
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="youremail@mail.com"
+          onChange={handleChange}
+        ></input>
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="youremail@mail.com"
-            onChange={handleChange}
-          ></input>
+        <label htmlFor="password">Password</label>
+        <input type="password" name="password" onChange={handleChange}></input>
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-          ></input>
-          {error && (
-            <label style={{ display: "flex", justifyContent: "flex-start" }}>
-              {error}
-            </label>
-          )}
-
-          <button>Login</button>
-        </form>
-        <button onClick={handleGoogleSignIn}>Login with Google</button>
-        <button onClick={handleResetPassword}>Reset password</button>
-        <Link to={"/register"}>
-          <b>
-            Don't have an account? <u> Register here</u>
-          </b>
-        </Link>
-      </section>
+        <button>Login</button>
+        <button onClick={handleLogout}>Logout</button>
+      </form>
+      <button onClick={handleGoogleSignIn}>Login with Google</button>
+      <button onClick={handleResetPassword}>Reset password</button>
+      <Link to={"/register"}>
+        <h5>Don't have an account? Register here</h5>
+      </Link>
     </div>
   );
 }

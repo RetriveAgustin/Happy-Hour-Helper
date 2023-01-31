@@ -30,7 +30,6 @@ const Card = ({ product }) => {
   }
 
     
-
   const navigate = useNavigate()
 
   return (

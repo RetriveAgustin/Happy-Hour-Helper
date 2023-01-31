@@ -3,7 +3,7 @@ import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useAuth } from "../../context/authContext";
+// import { useAuth } from "../../context/authContext";
 import LoginO from "../LoginO/Login";
 
 function AvatarIcon({ logout }) {

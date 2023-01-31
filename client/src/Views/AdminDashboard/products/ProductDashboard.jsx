@@ -1,3 +1,12 @@
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProducts,
+  getAllSubCategories,
+  getAllCategories,
+  getAllBrands,
+} from "../../../redux/actions/actions";
 import {
   Table,
   TableBody,
@@ -5,11 +14,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Search, Clear, Delete } from "@mui/icons-material";
 import {
   DashboardInfoContainer,
   DataOutput,
@@ -19,13 +27,8 @@ import {
   SearchBarInput,
   SearchButton,
 } from "./ProductDashboard.styles";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProducts,
-  getAllSubCategories,
-  getAllCategories,
-  getAllBrands,
-} from "../../../redux/actions/actions";
+import EditProductButton from "./EditPopup/EditProduct";
+import DeleteProduct from "./DeleteProducts/DeleteProduct";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "productInfo" por los usuarios traidos desde el back en el UseEffect.
@@ -183,7 +186,7 @@ function ProductsDashboard() {
               isActive ? ClearData() : SearchData(searchValues.value)
             }
           >
-            {isActive ? <ClearIcon /> : <SearchIcon />}
+            {isActive ? <Clear /> : <Search />}
           </SearchButton>
         </SearchBarContainer>
       </HeaderContainer>
@@ -196,7 +199,16 @@ function ProductsDashboard() {
                   <b>ID</b>
                 </TableCell>
                 <TableCell align="center">
-                  <b>Name</b>
+                  <b>Nombre</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Stock</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Precio</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Opciones</b>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -207,6 +219,14 @@ function ProductsDashboard() {
                 >
                   <TableCell align="center">{row.id}</TableCell>
                   <TableCell align="center">{row.name}</TableCell>
+                  <TableCell align="center">{row.stock}</TableCell>
+                  <TableCell align="center">$ {row.price}</TableCell>
+                  <TableCell align="center">
+                    <ButtonGroup variant="contained" size="small">
+                      <EditProductButton props={row} />
+                      <DeleteProduct props={row} />
+                    </ButtonGroup>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
