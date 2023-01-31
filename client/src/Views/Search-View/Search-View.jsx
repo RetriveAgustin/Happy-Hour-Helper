@@ -75,7 +75,6 @@ function SearchView() {
 
   return (
     <SearchViewContainer>
-      {/* <Header /> */}
       <h1>Resultados para: {queryKey}</h1>
       {/* <List>
         {mappedProducts?.map((element) => (
