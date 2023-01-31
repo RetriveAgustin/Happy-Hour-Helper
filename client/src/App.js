@@ -15,6 +15,7 @@ import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import { AuthProvider } from "./context/authContext";
+import Skeleton from "./components/Skeleton/Skeleton";
 // import Login from "./components/Login/Login.jsx";
 
 function App() {
@@ -25,18 +26,17 @@ function App() {
 
   return (
     <AuthProvider>
-      <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/" element={<Skeleton view={<Home />} />} />
+        <Route path="/cart" element={<Skeleton view={<Cart />} />} />
+        <Route path="/user" element={<Skeleton view={<User />} />} />
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/product/:id" element={<Detail />} />
-        <Route path="/search" element={<SearchView />} />
-        <Route path="/confirm" element={<ConfirmOrder />} />
-        <Route path="/add-payment-method" element={<AddPaymentMethod />} />
-        <Route path="/add-address" element={<AddAddres />} />
+        <Route path="/register" element={<Skeleton view={<Register />} />} />
+        <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
+        <Route path="/search" element={<Skeleton view={<SearchView />} />} />
+        <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
+        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
+        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />} />
 
         {/* ---------Rutas Admin ------------------- */}
         <Route

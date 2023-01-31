@@ -35,7 +35,6 @@ const Home = () => {
   return (
     <>
       <div className={styles.background}>
-        {/* <Header /> */}
         <Filters
           setRender={setRender}
           render={render}
