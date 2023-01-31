@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../redux/actions/actions.js";
+import { addTotal, removeFromCart } from "../../redux/actions/actions.js";
 import { Image, SubAdd } from "../../components/RowCart/RowCart.styles.js";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -17,22 +17,47 @@ const RowCart = ({
   minimum_amount_for_bulk,
 }) => {
   const [amount, setAmount] = useState(1);
+  const [subtotal, setSubtotal] = useState(price * amount);
+  const [division, setDivision] = useState(amount / minimum_amount_for_bulk);
+  const [totalPrice, setTotalPrice] = useState(
+    subtotal - bulk_discount * Math.floor(division)
+  );
   const dispatch = useDispatch();
 
-  const subtot = price * amount;
-  const division = amount / minimum_amount_for_bulk;
-  const totalProd = subtot - bulk_discount * Math.floor(division);
-
-  const totalConDesc = () => {
+  useEffect(() => {
+    setDivision(amount / minimum_amount_for_bulk);
+    setSubtotal(price * amount);
+    setTotalPrice(subtotal - bulk_discount * Math.floor(division));
     if (
       amount >= minimum_amount_for_bulk ||
       amount % minimum_amount_for_bulk === 0
     ) {
-      return totalProd;
+      dispatch(addTotal(totalPrice));
     } else {
-      return subtot;
+      dispatch(addTotal(subtotal));
     }
-  };
+  }, [amount]);
+
+  // const subtot = price * amount;
+  // const division = amount / minimum_amount_for_bulk;
+  // const totalProd = subtot - bulk_discount * Math.floor(division);
+
+  // const totalConDesc = () => {
+  //   if (
+  //     amount >= minimum_amount_for_bulk ||
+  //     amount % minimum_amount_for_bulk === 0
+  //   ) {
+  //     dispatch(addTotal(totalProd));
+  //     return totalProd;
+  //   } else {
+  //     // dispatch(addTotal(subtot));
+  //     return subtot;
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   totalConDesc();
+  // }, [stateTotal]);
 
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -67,10 +92,10 @@ const RowCart = ({
         {bulk_discount}
       </TableCell>
       <TableCell align="right" value="subtotal">
-        {subtot}
+        {subtotal}
       </TableCell>
       <TableCell align="right" value="total">
-        {totalConDesc()}
+        {totalPrice}
       </TableCell>
     </TableRow>
   );

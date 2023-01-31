@@ -11,6 +11,7 @@ import {
   FILTER_PRICE,
   REMOVE_FROM_CART,
   GET_USER_LOGGED,
+  ADD_TOTAL,
 } from "./../actions/actions";
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
   cart: [],
   users: [],
   userLoged: {},
+  total: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -62,6 +64,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload[0]],
+      };
+    case ADD_TOTAL:
+      return {
+        ...state,
+        total: state.total + action.payload,
       };
     case REMOVE_FROM_CART:
       return {

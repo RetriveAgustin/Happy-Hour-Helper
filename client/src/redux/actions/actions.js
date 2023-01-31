@@ -16,6 +16,7 @@ export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
 export const FILTER_PRICE = "FILTER_PRICE";
 export const GET_USERS = "GET_USERS";
 export const GET_USER_LOGGED = "GET_USER_BY_EMAIL";
+export const ADD_TOTAL = "ADD_TOTAL";
 
 console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
 
@@ -47,7 +48,9 @@ export const getUsers = () => {
 
 export const getAllCategories = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/category/getCategory"
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -61,7 +64,10 @@ export const getAllCategories = () => {
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
+    // fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/sub-category/getSubCategory"
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -75,9 +81,13 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
+    // fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/products/getProduct"
+    )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         dispatch({
           type: GET_ALL_PRODUCTS,
           payload: data,
@@ -89,7 +99,10 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
+    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
+    fetch(
+      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -97,13 +110,14 @@ export const getProductId = (payload) => {
           payload: data,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err, "es un error"));
   };
 };
 
 export const getAllBrands = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
+    // fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
+    fetch("https://happy-hour-helper-production.up.railway.app/brand/getBrand")
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -117,7 +131,8 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
+    // fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
+    fetch("https://happy-hour-helper-production.up.railway.app/offer/getOffer")
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -132,7 +147,8 @@ export const getAllOffers = () => {
 export const createCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/category`,
+      // `${process.env.REACT_APP_API_URL}/category`,
+      "https://happy-hour-helper-production.up.railway.app/category",
       payload
     );
     return post;
@@ -142,7 +158,8 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/products`,
+      // `${process.env.REACT_APP_API_URL}/products`,
+      "https://happy-hour-helper-production.up.railway.app/products",
       payload
     );
     return post;
@@ -152,7 +169,8 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/sub-category`,
+      // `${process.env.REACT_APP_API_URL}/sub-category`,
+      "https://happy-hour-helper-production.up.railway.app/sub-category",
       payload
     );
     return post;
@@ -162,7 +180,8 @@ export const createSubCategory = (payload) => {
 export const createOffer = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/offer`,
+      // `${process.env.REACT_APP_API_URL}/offer`,
+      "https://happy-hour-helper-production.up.railway.app/offer",
       payload
     );
     return post;
@@ -172,7 +191,8 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/brand`,
+      // `${process.env.REACT_APP_API_URL}/brand`,
+      "https://happy-hour-helper-production.up.railway.app/brand",
       payload
     );
     return post;
@@ -181,7 +201,10 @@ export const createBrand = (payload) => {
 
 export const addToCart = (payload) => {
   return function (dispatch) {
-    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
+    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
+    fetch(
+      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -193,6 +216,15 @@ export const addToCart = (payload) => {
   };
 };
 
+export const addTotal = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: ADD_TOTAL,
+      payload: payload,
+    });
+  };
+};
+
 export const removeFromCart = (payload) => {
   return function (dispatch) {
     dispatch({
@@ -201,6 +233,7 @@ export const removeFromCart = (payload) => {
     });
   };
 };
+
 export const filterByPrice = (payload) => {
   return {
     type: FILTER_PRICE,

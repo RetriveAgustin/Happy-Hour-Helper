@@ -122,7 +122,7 @@ export default function ConfirmOrder() {
               )}
             </select>
             <Link to={"/add-payment-method"} style={{ color: "#000" }}>
-            <p onClick={handleChange}> + Agregar metodo de pago</p>
+              <p onClick={handleChange}> + Agregar metodo de pago</p>
             </Link>
           </div>
           <div>
@@ -157,7 +157,7 @@ export default function ConfirmOrder() {
               ))}
           </ul>
         </ItemsCart>
-        <h3>Total: ${}</h3>
+        <h3>Total: ${parseFloat(stateTotal).toFixed(2)}</h3>
         <Button onClick={handleFinish}>Finish</Button>
         {success[0] && (
           <label>Se te redireccionará a home en unos segundos...</label>
