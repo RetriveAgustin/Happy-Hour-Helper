@@ -20,7 +20,6 @@ import {
   SearchBarInput,
   SearchButton,
 } from "./UserDashboard.styles";
-import DrawerComponent from "../drawer/Drawer";
 import { getUsers} from "../../../redux/actions/actions";
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "UserInfo" por los usuarios traidos desde el back en el UseEffect.

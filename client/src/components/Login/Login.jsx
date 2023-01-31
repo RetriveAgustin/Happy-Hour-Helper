@@ -26,7 +26,7 @@ export default function Login() {
             axios.post('http://localhost:3001/users/loginUser', {mail: user.email, password: user.password})
             .then(r => {
                 navigate("/");
-                console.log(r.data)
+                localStorage.setItem('User Credentials', result)
             })
         } catch (e) {
             if (e.message === 'Firebase: Error (auth/internal-error).') return setError('Please enter a password');

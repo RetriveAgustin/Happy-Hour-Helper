@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Header from "../../components/Header/Header";
 import { Footer } from "../../components/Footer/Footer";
 import {
   Wrapper,
@@ -43,7 +42,6 @@ const Detail = () => {
 
   return (
     <>
-      {/* <Header /> */}
       <Wrapper>
         {product &&
           product.map((prd) => {

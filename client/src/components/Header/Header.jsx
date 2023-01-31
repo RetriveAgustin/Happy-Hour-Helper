@@ -10,13 +10,17 @@ import { useState } from "react";
 import { LinkDiv, NavContainer } from "./Header.styles";
 import { useSelector } from "react-redux";
 import { Badge } from "@mui/material";
+import LoginBtn from "./loginBtn/LoginBtn";
+import RegisterBtn from "./registerBtn/RegisterBtn";
+import { Stack } from "@mui/system";
 
-function NavBar() {
+function Header() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
 
   const cart = useSelector((state) => state.cart);
+  const user = useSelector((state) => state.userLoged);
 
   const HandleInput = (searchName) => {
     setSearchValue(searchName);
@@ -29,7 +33,7 @@ function NavBar() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} style={{ marginLeft: "3rem" }} />
+        <img src={Logo} style={{ marginLeft: "3rem" }} alt="not found" />
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/")}>
@@ -39,7 +43,16 @@ function NavBar() {
           InputFunction={(e) => HandleInput(e.target.value)}
           searchValue={HandleSearch}
         />
-        <AvatarIcon />
+
+        {user.id ? (
+          <AvatarIcon />
+        ) : (
+          <Stack spacing={2} direction="row">
+            <LoginBtn />
+            <RegisterBtn />
+          </Stack>
+        )}
+
         <IconButton onClick={() => navigate("/cart")}>
           <Badge
             badgeContent={cart.length}
@@ -57,4 +70,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Header;
