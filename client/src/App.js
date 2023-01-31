@@ -9,15 +9,13 @@ import Register from "./components/Register/Register.jsx";
 import Detail from "./Views/Detail/Detail";
 import Header from "./components/Header/Header";
 // import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
-// import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
-// import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
-// import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
+import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
+import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
+import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 // import SearchView from "./Views/Search-View/Search-View";
 // import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
 // import AddAddres from "./components/AddAddress/AddAddress";
 // import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"
-
-
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -27,8 +25,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <Header />
-      <Routes>
+      <Routes element={<Header />}>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/user" element={<User />} />
@@ -41,7 +38,14 @@ function App() {
         {/* <Route path="/add-address" element={<AddAddres />} /> */}
 
         {/* ---------Rutas Admin ------------------- */}
-        {/* <Route
+
+        {/* <Route path="/createproduct" element={<CreateProduct />} /> */}
+
+        {/* <Route path="*" element={<Home />} /> */}
+      </Routes>
+
+      <Routes>
+        <Route
           path="/admin/*"
           element={<AdminDashboard props={<UsersDashboard />} />}
         />
@@ -49,9 +53,6 @@ function App() {
           path="/admin/products"
           element={<AdminDashboard props={<ProductsDashboard />} />}
         />
-        <Route path="/createproduct" element={<CreateProduct />} />
-        
-        <Route path="*" element={<Home />} /> */}
       </Routes>
     </AuthProvider>
   );
