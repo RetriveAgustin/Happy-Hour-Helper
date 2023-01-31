@@ -13,7 +13,6 @@ import Paper from "@mui/material/Paper";
 import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
-import { addTotal } from "../../redux/actions/actions";
 // import accounting from "accounting";
 
 const Cart = () => {
