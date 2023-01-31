@@ -63,7 +63,6 @@ function RegisterBtn() {
     if (!target.value) setErrorName(true);
     else setErrorName(false);
   }
-
   const [errorName, setErrorName] = useState(false);
 
   function handleChangeLastName({ target }) {
@@ -71,7 +70,6 @@ function RegisterBtn() {
     if (!target.value) setErrorLastName(true);
     else setErrorLastName(false);
   }
-
   const [errorLastName, setErrorLastName] = useState(false);
 
   function handleChangeEmail({ target }) {
@@ -79,19 +77,16 @@ function RegisterBtn() {
     if (!target.value) setErrorEmail(true);
     else setErrorEmail(false);
   }
-
   const [errorEmail, setErrorEmail] = useState(false);
 
   function handleChangePassword({ target }) {
     setPassword(target.value);
   }
-
   function handleChangeRepitedPassword({ target }) {
     setRepitedPassword(target.value);
     if (target.value !== password) setErrorPassword(true);
     else setErrorPassword(false);
   }
-
   const [errorPassword, setErrorPassword] = useState(false);
 
   async function handleSubmit() {
@@ -107,7 +102,7 @@ function RegisterBtn() {
 
   return (
     <>
-      <Button onClick={handleOpen} variant="outlined" color="error">
+      <Button onClick={handleOpen} variant="contained" color="error">
         Register
       </Button>
       <Modal

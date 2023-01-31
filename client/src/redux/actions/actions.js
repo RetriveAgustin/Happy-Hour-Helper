@@ -15,22 +15,8 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
 export const FILTER_PRICE = 'FILTER_PRICE';
 export const GET_USERS = "GET_USERS";
-export const GET_USER_LOGGED= "GET_USER_BY_EMAIL"
 
 console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
-
-// export const getUserLogged = (payload) => {
-//   return function (dispatch){
-//     fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       dispatch({
-//         type: GET_USER_LOGGED,
-//         payload: data,
-//       })
-//     })
-//   }
-// };
 
 export const getUsers = () => {
   return function (dispatch){

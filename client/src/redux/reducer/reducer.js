@@ -10,7 +10,6 @@ import {
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
-  GET_USER_LOGGED,
 } from "./../actions/actions";
 
 const initialState = {
@@ -29,8 +28,6 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER_LOGGED:
-      return { ...state, userLoged: action.payload };
     case GET_USERS:
       return { ...state, users: action.payload };
     case GET_CATEGORIES:
