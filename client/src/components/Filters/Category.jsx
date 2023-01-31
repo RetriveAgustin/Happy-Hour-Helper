@@ -15,29 +15,32 @@ function FilterCategories({
 }) {
   const subCategories = useSelector((state) => state.subCategories);
   const products = useSelector((state) => state.products);
-  const brands = useSelector(state => state.brands)
+  const brands = useSelector((state) => state.brands);
 
   let midBrands = [];
   let finalBrands = [];
   let finalProducts = [];
 
-  products && products.map(product =>{
-    if(product.Categories[0].id === category.id){
-      finalProducts.push(product);
-    }
-  })
+  products &&
+    products.map((product) => {
+      if (product.Categories[0].id === category.id) {
+        finalProducts.push(product);
+      }
+    });
 
-  finalProducts && finalProducts.map(product => {
-    if(!midBrands.includes(product.Brands[0].id)){
-      midBrands.push(product.Brands[0].id);
-    }
-  })
+  finalProducts &&
+    finalProducts.map((product) => {
+      if (!midBrands.includes(product.Brands[0].id)) {
+        midBrands.push(product.Brands[0].id);
+      }
+    });
 
-  brands && brands.map(brand => {
-    if(midBrands.includes(brand.id)){
-      finalBrands.push(brand);
-    }
-  })
+  brands &&
+    brands.map((brand) => {
+      if (midBrands.includes(brand.id)) {
+        finalBrands.push(brand);
+      }
+    });
 
   const handleFilter = (e) => {
     if (e !== render.categoryId) {
@@ -107,31 +110,28 @@ function FilterCategories({
         <TreeItem
           nodeId={category.id.concat("bra")}
           label="Marca"
-          sx={{ color: "white" }}          
+          sx={{ color: "white" }}
         >
           {finalBrands &&
             finalBrands.map((brand) => {
-                return (
-                  <Box
-                    display="flex"
-                    justifyContent="space-between"
-                    alignItems="center"
-                  >
-                    <TreeItem
-                      nodeId={brand.id}
-                      label={brand.name}
-                    />
-                    <Checkbox
-                      size="small"
-                      onChange={() => handleLowerFilter(brand.id)}
-                      checked={Checked.indexOf(brand.id) === -1 ? false : true}
-                      sx={{
-                        color: "white",
-                        "&.Mui-checked": { color: "white" },
-                      }}
-                    />
-                  </Box>
-                );
+              return (
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                >
+                  <TreeItem nodeId={brand.id} label={brand.name} />
+                  <Checkbox
+                    size="small"
+                    onChange={() => handleLowerFilter(brand.id)}
+                    checked={Checked.indexOf(brand.id) === -1 ? false : true}
+                    sx={{
+                      color: "white",
+                      "&.Mui-checked": { color: "white" },
+                    }}
+                  />
+                </Box>
+              );
             })}
         </TreeItem>
       </TreeItem>
