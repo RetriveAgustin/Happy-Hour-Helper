@@ -99,6 +99,24 @@ const getModelsById = async (model, id) => {
   return results;
 };
 
+const getModelsByEmail = async (model, email) => {
+  let results;
+
+  if (model) {
+    if (email) {
+      results = await model.findAll({
+        where: { email },
+      });
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+
+  return results;
+};
+
 const postModels = async (model, properties) => {
   if (properties && model) {
     let newInstance = await model.create(properties);
@@ -147,4 +165,5 @@ module.exports = {
   putModels,
   deleteModels,
   restoreModels,
+  getModelsByEmail
 };
