@@ -18,36 +18,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProductId } from "../../redux/actions/actions";
 import { addToCart } from "../../redux/actions/actions";
 
-
-
 const AddToCart = styled(Button)({
   textTransform: "none",
   fontSize: 16,
 });
 
 const Detail = () => {
-  
   const dispatch = useDispatch();
-  
+
   const { id } = useParams();
-  
+
   useEffect(() => {
     dispatch(getProductId(id));
   }, [dispatch, id]);
- 
+
   const product = useSelector((state) => state.detail);
 
-
   const handleAdd = (e) => {
-    if(!e) {
-      return
+    if (!e) {
+      return;
     }
-    dispatch(addToCart(e))
-  }
+    dispatch(addToCart(e));
+  };
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Wrapper>
         {product &&
           product.map((prd) => {

@@ -1,13 +1,13 @@
 const { User } = require("../../db");
 const bcryptjs = require('bcryptjs');
-const admin = require("../utils/firebase-config.js");
 const {
   getModels,
   getModelsById,
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
+  getModelsByEmail
 } = require("../utils/mainUtils");
 
 const getUser = async (req, res) => {
@@ -30,10 +30,20 @@ const getUserById = async (req, res) => {
   }
 };
 
+const getUserByEmail = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = getModelsByEmail(User, email);
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({error: error.message });
+  }
+};
+
 const registerUser = async (req, res) => {
   try {
     const { id, token, name, lastname, mail, password, created_in_google, is_admin } = req.body;
-    userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
+    // userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
     const passwordHash = password !== null ? await bcryptjs.hash(password, 8) : null;
     const user = await postModels(User, {id, name, lastname, mail, password: passwordHash, created_in_google, is_admin})
     if (user) {

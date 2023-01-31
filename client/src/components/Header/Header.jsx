@@ -23,13 +23,13 @@ function NavBar() {
   };
 
   const HandleSearch = () => {
-    navigate(`/search/?name=${searchValue}`);
+    navigate(`/search?name=${searchValue}`);
   };
 
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} style={{marginLeft: '3rem'}}/>
+        <img src={Logo} style={{ marginLeft: "3rem" }} />
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/")}>
@@ -39,7 +39,7 @@ function NavBar() {
           InputFunction={(e) => HandleInput(e.target.value)}
           searchValue={HandleSearch}
         />
-        <AvatarIcon/>
+        <AvatarIcon />
         <IconButton onClick={() => navigate("/cart")}>
           <Badge
             badgeContent={cart.length}
@@ -47,7 +47,7 @@ function NavBar() {
               vertical: "bottom",
               horizontal: "left",
             }}
-            color='primary'
+            color="primary"
           >
             <ShoppingCartIcon sx={{ color: "white", fontSize: 30 }} />
           </Badge>
