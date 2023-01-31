@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
+import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
@@ -13,7 +13,8 @@ import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 import SearchView from "./Views/Search-View/Search-View";
 import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
-import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"
+import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
+import { AuthProvider } from "./context/authContext";
 // import Login from "./components/Login/Login.jsx";
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
           element={<AdminDashboard props={<ProductsDashboard />} />}
         />
         <Route path="/createproduct" element={<CreateProduct />} />
-        
+
         <Route path="*" element={<Home />} />
       </Routes>
     </AuthProvider>
