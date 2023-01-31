@@ -11,7 +11,7 @@ import { LinkDiv, NavContainer } from "./Header.styles";
 import { useSelector } from "react-redux";
 import { Badge } from "@mui/material";
 
-function NavBar() {
+function Header() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
@@ -57,4 +57,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default Header;

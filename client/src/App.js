@@ -15,11 +15,9 @@ import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import { AuthProvider } from "./context/authContext";
+import Skeleton from "./components/SkeletonPage/Skeleton";
 // import Login from "./components/Login/Login.jsx";
 // import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
-import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
-import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
-import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 // import SearchView from "./Views/Search-View/Search-View";
 // import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
 // import AddAddres from "./components/AddAddress/AddAddress";
@@ -33,19 +31,23 @@ function App() {
 
   return (
     <AuthProvider>
-      <Routes element={<Header />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/user" element={<User />} />
+      <Routes>
+        <Route path="/" element={<Skeleton view={<Home />} />} />
+        <Route path="cart" element={<Skeleton view={<Cart />} />} />
+        <Route path="user" element={<Skeleton view={<User />} />} />
+        <Route path="register" element={<Skeleton view={<Register />} />} />
+        <Route path="product/:id" element={<Skeleton view={<Detail />} />} />
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/product/:id" element={<Detail />} />
-        <Route path="/search" element={<SearchView />} />
-        <Route path="/confirm" element={<ConfirmOrder />} />
-        <Route path="/add-payment-method" element={<AddPaymentMethod />} />
-        <Route path="/add-address" element={<AddAddres />} />
+        {/* <Route path="/search" element={<SearchView />} /> */}
+        {/* <Route path="/confirm" element={<ConfirmOrder />} /> */}
+        {/* <Route path="/add-payment-method" element={<AddPaymentMethod />} /> */}
+        {/* <Route path="/add-address" element={<AddAddres />} /> */}
 
         {/* ---------Rutas Admin ------------------- */}
+
+        {/* <Route path="/createproduct" element={<CreateProduct />} /> */}
+
+        {/* <Route path="*" element={<Home />} /> */}
       </Routes>
 
       <Routes>
@@ -57,8 +59,6 @@ function App() {
           path="/admin/products"
           element={<AdminDashboard props={<ProductsDashboard />} />}
         />
-        <Route path="/createproduct" element={<CreateProduct />} />
-        <Route path="*" element={<Home />} /> */}
       </Routes>
     </AuthProvider>
   );
