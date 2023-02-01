@@ -5,12 +5,10 @@ import {
   GET_SUB_CATEGORIES,
   GET_ALL_PRODUCTS,
   GET_ADDRESSES,
-  GET_ADDRESS,
   CREATE_ADDRESS,
   UPDATE_ADDRESS,
   DELETE_ADDRESS,
   GET_PAYMENT,
-  GET_PAYMENT_NAME,
   POST_PAYMENT,
   PUT_PAYMENT,
   DELETE_PAYMENT,
@@ -24,7 +22,6 @@ const initialState = {
   products: [],
   offers: [],
   addresses: [],
-  address: {},
   paymentMethods: [],
 };
 
@@ -42,8 +39,6 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, products: action.payload };
     case GET_ADDRESSES:
       return { ...state, addresses: action.payload };
-    case GET_ADDRESS:
-      return { ...state, address: action.payload };
     case CREATE_ADDRESS:
       return { ...state, addresses: [...state.addresses, action.payload] };
     case UPDATE_ADDRESS:
@@ -60,8 +55,6 @@ const rootReducer = (state = initialState, action) => {
       );
       return { ...state, addresses: filteredAddresses };
     case GET_PAYMENT:
-      return { ...state, paymentMethods: action.payload };
-    case GET_PAYMENT_NAME:
       return { ...state, paymentMethods: action.payload };
     case POST_PAYMENT:
       return {

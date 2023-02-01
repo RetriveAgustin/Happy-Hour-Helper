@@ -18,7 +18,7 @@ export const POST_PAYMENT = "POST_PAYMENT";
 export const PUT_PAYMENT = "PUT_PAYMENT";
 export const DELETE_PAYMENT = "DELETE_PAYMENT";
 export const RESTORE_PAYMENT = "RESTORE_PAYMENT";
-export const GET_PAYMENT_NAME = "GET_PAYMENT_NAME";
+
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -144,32 +144,33 @@ export const getAddress = () => {
   };
 };
 
-// export const getAddress = (id) => {
-//   return async (dispatch) => {
-//     const res = await axios.get(`http://localhost:3001/address/getAddress/${id}`)
-//     const data = res.data;
 
-//     return dispatch({
-//       type: GET_ADDRESS,
-//       payload: data,
-//     })
-//   }
-// }
 
-export const createAddress = (payload) => {
-  return async (dispatch) => {
-    const res = await axios.post(
-      "http://localhost:3001/address/postAddress",
-      payload
-    );
-    return dispatch({ type: CREATE_ADDRESS, payload: res.data });
-  };
+export const createAddress = (data) => async (dispatch) => {
+ try {
+  const response = await axios.post(`http://localhost:3001/address/postAddress`, data);
+  dispatch({type: CREATE_ADDRESS, payload: response.data})
+ } catch (error) {
+  console.log(error)
+ }
 };
+
+// export const postPayment = (data) => async (dispatch) => {
+//   try {
+//     const response = await axios.post(
+//       "http://localhost:3001/payment-methods/postPayment",
+//       data
+//     );
+//     dispatch({ type: "POST_PAYMENT", payload: response.data });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const updateAddress = (id) => {
   return async (dispatch) => {
     const res = await axios.put(
-      `http://localhost:3001/address/putAddress/${id}`
+      `http://localhost:3001/address/putAddress`, {data: {id}}
     );
     return dispatch({ type: UPDATE_ADDRESS, payload: res.data });
   };
@@ -178,7 +179,7 @@ export const updateAddress = (id) => {
 export const deleteAddress = (id) => {
   return async (dispatch) => {
     const res = await axios.delete(
-      `http://localhost:3001/address/deleteAddress/${id}`
+      `http://localhost:3001/address/deleteAddress`, {data: {id}}
     );
     return dispatch({
       type: DELETE_ADDRESS,
@@ -200,16 +201,7 @@ export const getPaymentMethods = () => (dispatch) => {
     });
 };
 
-export const getPaymentByName = (name) => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `http://localhost:3001/payment-methods/getPayment?name=${name}`
-    );
-    dispatch({ type: "GET_PAYMENT_NAME", payload: response.data });
-  } catch (error) {
-    console.log(error);
-  }
-};
+
 
 export const postPayment = (data) => async (dispatch) => {
   try {
@@ -246,7 +238,7 @@ export const deletePayment = (id) => async (dispatch) => {
 export const restorePayment = (id) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `http://localhost:3001/payment-methods/restorePayment/${id}`
+      `http://localhost:3001/payment-methods/restorePayment`, {data: {id}}
     );
     dispatch({ type: "RESTORE_PAYMENT", payload: response.data });
   } catch (error) {

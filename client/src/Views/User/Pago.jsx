@@ -18,7 +18,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import DeleteIcon from '@mui/icons-material/Delete';
 import styled  from 'styled-components';
-import {grey} from '@mui/material/colors'
+
 
 const LayoutUserContainer = styled.div`
   background-color: #171717;
@@ -39,7 +39,7 @@ const UserCard = styled.div`
   box-shadow: 0px 0px 10px 0px #080000;
 `;
 
-const color = grey[500];
+
 
 const Pago = () => {
   const [selectedId, setSelectedId] = useState(0);
@@ -119,6 +119,7 @@ const Pago = () => {
     setSelectedId(id);
     setFormData(data);
     setFormOpen(true);
+    setShowTables(false)
   };
 
   const handleCloseForm = () => {

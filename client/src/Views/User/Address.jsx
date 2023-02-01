@@ -42,13 +42,19 @@ const Address = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [addressToEdit, setAddressToEdit] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    number: "",
+    description: "",
+  });
 
   useEffect(() => {
     dispatch(getAddress());
   }, [dispatch]);
 
-  const handleAddAddress = (address) => {
-    dispatch(createAddress(address));
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    dispatch(createAddress(formData));
     setShowAddForm(false);
   };
 
@@ -64,6 +70,10 @@ const Address = () => {
     const updatedAddress = { name, number, description };
     dispatch(updateAddress(addressToEdit.id, updatedAddress));
     setShowEditForm(false);
+  };
+
+  const handleChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
   const showAddAddressForm = () => {
@@ -93,18 +103,29 @@ const Address = () => {
           {/* {/ Formulario para agregar una nueva dirección /} */}
           {showAddForm && (
             <div>
-              <form onSubmit={(e) => handleAddAddress(e.target)}>
+              <form onSubmit={handleSubmit}>
                 {/* {/ Campos para ingresar la información de la dirección /} */}
-                <input type="text" placeholder="Calle" name="name" required />
                 <input
                   type="text"
+                  placeholder="Calle"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  value={formData.number}
                   placeholder="Numero"
                   name="number"
+                  onChange={handleChange}
                   required
                 />
                 <input
                   type="text"
                   placeholder="Descripcion"
+                  value={formData.description}
+                  onChange={handleChange}
                   name="description"
                   required
                 />
