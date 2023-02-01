@@ -22,7 +22,10 @@ export const getAllCategories = () => {
           payload: data,
         });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        console.log(process.env.REACT_APP_API_URL)
+      });
   };
 };
 
