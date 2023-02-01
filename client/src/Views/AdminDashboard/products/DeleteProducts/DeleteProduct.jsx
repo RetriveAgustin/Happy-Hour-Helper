@@ -1,7 +1,33 @@
 import React from "react";
 import { useState } from "react";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Box, Button, Modal } from "@mui/material";
 import { Delete } from "@mui/icons-material";
+import styled from "styled-components";
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-bottom: 0.5rem;
+`;
+
+const ModalContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  text-align: center;
+  gap: 1rem 0;
+`;
+
+const WarningTitle = styled.div`
+  background-color: red;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 0.5rem 0;
+  border-radius: 5px 5px 0 0;
+`;
 
 function DeleteProduct({ props }) {
   const [open, setOpen] = useState(false);
@@ -35,10 +61,16 @@ function DeleteProduct({ props }) {
       </Button>
       <Modal open={open} onClose={HandleClose}>
         <Box sx={style}>
-          <Typography>Eliminar Producto</Typography>
-          <p>{`Se eliminara el producto: "${props.name}", estas seguro que deseas eliminarlo? Los cambios son permanentes`}</p>
-          <Button onClick={HandleClose}>Cancelar</Button>
-          <Button>Eliminar</Button>
+          <ModalContainer>
+            <WarningTitle>
+              <h1>Eliminar Producto</h1>
+            </WarningTitle>
+            <h4>{`Se eliminara el producto: "${props.name}", estas seguro que deseas eliminarlo? Los cambios son permanentes`}</h4>
+            <ButtonContainer>
+              <Button onClick={HandleClose}>Cancelar</Button>
+              <Button>Eliminar</Button>
+            </ButtonContainer>
+          </ModalContainer>
         </Box>
       </Modal>
     </>
