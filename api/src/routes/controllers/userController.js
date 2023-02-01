@@ -62,6 +62,7 @@ const loginUser = async (req, res) => {
     const user = await User.findAll({where: {
       mail: mail
     }})
+
     if (user[0]) {
       const compare = user[0].password === null && user[0].created_in_google === true ? true : await bcryptjs.compare(password, user[0].password);
       if (compare) {
@@ -71,6 +72,7 @@ const loginUser = async (req, res) => {
         res.status(400).send('Wrong password!')
       }
     }
+
     else {
       res.status(400).send("Email doesn't exist!")
     }
@@ -112,9 +114,10 @@ const restoreUser = async (req, res) => {
 module.exports = {
   getUser,
   getUserById,
+  getUserByEmail,
   registerUser,
   loginUser,
   putUser,
   deleteUser,
-  restoreUser
+  restoreUser,
 };

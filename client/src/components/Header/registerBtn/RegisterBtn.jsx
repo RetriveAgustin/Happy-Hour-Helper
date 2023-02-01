@@ -10,11 +10,10 @@ import {
 } from "@mui/material";
 import {
   Google,
-  IsoTwoTone,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import { FormContainer, SingUpContainer } from "./RegisterBtn.styles";
+import { FormContainer } from "./RegisterBtn.styles";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useAuth } from "../../../context/authContext";
@@ -315,12 +314,6 @@ function RegisterBtn() {
                 Registrarse con Google
               </Button>
             </FormContainer>
-
-            <SingUpContainer>
-              <p>
-                No tienes una cuenta? <span>Registrate</span>
-              </p>
-            </SingUpContainer>
           </Box>
         </Zoom>
       </Modal>

@@ -8,26 +8,63 @@ export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
-export const ADD_TO_CART = "ADD_TO_CART";
-export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
+export const GET_USERS = "GET_USERS";
+export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
+export const GET_LOGGED_USER = "GET_LOGGED_USER";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
+export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = 'FILTER_PRICE';
-export const GET_USERS = "GET_USERS";
+export const ADD_TO_CART = "ADD_TO_CART";
 
 console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
 
 export const getUsers = () => {
   return function (dispatch){
-    fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
+    // fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
+    fetch("https://happy-hour-helper-production.up.railway.app/users/getUser")
       .then((response)=> response.json())
       .then((data) => {
         dispatch({
           type: GET_USERS,
           payload: data,
         })
-      })
+      }
+    )
+  }
+}
+
+export const getLoggedUser = () => {
+  return function (dispatch){
+    fetch("https://happy-hour-helper-production.up.railway.app/users/getUserByEmail")
+      .then((response)=> response.json())
+      .then((data) => {
+        dispatch({
+          type: GET_LOGGED_USER,
+          payload: data,
+        })
+      }
+    )
+  }
+}
+
+export const loginUser = (payload) => {
+  return async function (){
+    const post = await axios.post(
+      "https://happy-hour-helper-production.up.railway.app/users/loginUser",
+      payload
+    );
+    return post;
+  };
+}
+
+export const registerUser = (payload) => {
+  return async function (){
+    const post = await axios.post(
+      "https://happy-hour-helper-production.up.railway.app/users/registerUser",
+      payload
+    );
+    return post;
   }
 }
 
