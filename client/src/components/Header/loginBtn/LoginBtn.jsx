@@ -12,10 +12,8 @@ import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuth } from "../../../context/authContext";
-import { loginUser } from "../../../redux/actions/actions.js";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { getLoggedUser, loginUser } from "../../../redux/actions/actions.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -41,7 +39,6 @@ function LoginBtn() {
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   function handleChangePassword({ target }) {
@@ -55,6 +52,7 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
+  const user = useSelector(state => state.userLoged);
 
   function handleSubmit() {
     try {
@@ -62,6 +60,9 @@ function LoginBtn() {
       // await signInWithEmailAndPassword(getAuth(), mail, password);
 
       const result = dispatch(loginUser({ mail, password }));
+      dispatch(getLoggedUser(mail));
+      console.log("user", {user})
+
       setOpen(false)
       console.log(result);
 

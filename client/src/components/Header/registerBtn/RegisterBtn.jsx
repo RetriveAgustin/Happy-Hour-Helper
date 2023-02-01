@@ -91,7 +91,9 @@ function RegisterBtn() {
   async function handleSubmit() {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(getAuth(), email, password);
+
+      
+
       setLoading(false);
     } catch ({ message }) {
       setLoading(false);
