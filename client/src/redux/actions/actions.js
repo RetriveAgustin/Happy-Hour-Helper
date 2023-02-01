@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useAuth } from "../../context/authContext";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
 export const GET_BRANDS = "GET_BRANDS";
@@ -50,11 +51,13 @@ export const getLoggedUser = () => {
 
 export const loginUser = (payload) => {
   return async function (){
+    const { login } = useAuth();
+    const result = await login(payload); // acá
     const post = await axios.post(
       "https://happy-hour-helper-production.up.railway.app/users/loginUser",
       payload
     );
-    return post;
+    return result;
   };
 }
 

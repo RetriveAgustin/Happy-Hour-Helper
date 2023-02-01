@@ -54,17 +54,17 @@ function LoginBtn() {
   const [error, setError] = useState(false);
   const user = useSelector(state => state.userLoged);
 
-  function handleSubmit() {
+  async function handleSubmit() {
     try {
       setLoading(true);
       // await signInWithEmailAndPassword(getAuth(), mail, password);
 
-      const result = dispatch(loginUser({ mail, password }));
+      const result = await dispatch(loginUser({ mail, password }));
       dispatch(getLoggedUser(mail));
       console.log("user", {user})
 
       setOpen(false)
-      console.log(result);
+      // console.log(result);
 
       setLoading(false);
     } catch (e) {

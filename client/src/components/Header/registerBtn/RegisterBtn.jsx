@@ -14,9 +14,10 @@ import {
   VisibilityOff,
 } from "@mui/icons-material";
 import { FormContainer } from "./RegisterBtn.styles";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuth } from "../../../context/authContext";
+// import { useAuth } from "../../../context/authContext";
+// import { useDispatch } from "react-redux";
+import { registerUser } from "../../../redux/actions/actions";
 
 const style = {
   position: "absolute",
@@ -31,6 +32,8 @@ const style = {
   alignItems: "center",
   borderRadius: "5px",
 };
+
+// const dispatch = useDispatch();
 
 function RegisterBtn() {
   //modals
@@ -91,9 +94,7 @@ function RegisterBtn() {
   async function handleSubmit() {
     try {
       setLoading(true);
-
-      
-
+      // dispatch(registerUser({email, password, name, lastName}))
       setLoading(false);
     } catch ({ message }) {
       setLoading(false);
