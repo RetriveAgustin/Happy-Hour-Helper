@@ -1,5 +1,4 @@
 .container {
-  margin-top: 8rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,8 +6,8 @@
   width: 100vw;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Neonderthaw&display=swap");
 
 .title {
   display: flex;
@@ -18,32 +17,26 @@
   width: 80%;
   height: 6rem;
   color: #fff;
-    text-shadow:
-        0 0 7px #fff,
-       
-        0 0 42px #1f2fe9,
-        0 0 82px #1f2fe9,
-        0 0 92px #1f2fe9,
-        0 0 102px #1f2fe9,
-        0 0 200px #1f2fe9;
-    font-size: 4rem;
-    font-family: 'Neonderthaw', cursive;
-    margin: 0;
+  text-shadow: 0 0 7px #fff, 0 0 42px #1f2fe9, 0 0 82px #1f2fe9,
+    0 0 92px #1f2fe9, 0 0 102px #1f2fe9, 0 0 200px #1f2fe9;
+  font-size: 4rem;
+  font-family: "Neonderthaw", cursive;
+  margin: 0;
 }
 
-.btn{
-    margin: 2rem 0 3rem 0;
-    padding: 0.4rem;
-    color: white;
-    font-weight: 600;
-    background-color: var(--main);
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+.btn {
+  margin: 2rem 0 3rem 0;
+  padding: 0.4rem;
+  color: white;
+  font-weight: 600;
+  background-color: var(--main);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .btn:hover {
-    transform: scale(1.01);
+  transform: scale(1.01);
 }
 
 .wrapper {

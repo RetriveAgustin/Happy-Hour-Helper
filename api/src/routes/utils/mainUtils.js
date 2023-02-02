@@ -56,6 +56,58 @@ const getModels = async (model, name) => {
         results = await model.findAll();
       }
     }
+    if (model === Product) {
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+          ],
+        });
+      } else {
+        results = await model.findAll({
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+          ],
+        });
+      }
+    } else {
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+        });
+      } else {
+        results = await model.findAll();
+      }
+    }
   } else {
     return null;
   }
@@ -88,6 +140,24 @@ const getModelsById = async (model, id) => {
     if (id) {
       results = await model.findAll({
         where: { id },
+      });
+    } else {
+      return null;
+    }
+  } else {
+    return null;
+  }
+
+  return results;
+};
+
+const getModelsByEmail = async (model, mail) => {
+  let results;
+
+  if (model) {
+    if (mail) {
+      results = await model.findAll({
+        where: { mail },
       });
     } else {
       return null;
@@ -147,4 +217,5 @@ module.exports = {
   putModels,
   deleteModels,
   restoreModels,
+  getModelsByEmail
 };

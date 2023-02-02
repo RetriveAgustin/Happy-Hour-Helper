@@ -4,6 +4,7 @@ import {
   getAllCategories,
   getAllSubCategories,
   getAllBrands,
+  filterByPrice,
 } from "../../redux/actions/actions";
 import { TreeView } from "@mui/lab";
 import { ExpandMore, ChevronRight } from "@mui/icons-material";
@@ -15,13 +16,21 @@ import {
   Types,
   InputsMaxMin,
 } from "./Filters.styles";
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { Box } from "@mui/system";
+import { Slider } from "@mui/material";
 
-export default function Filters({ render, setRender }) {
+export default function Filters({ render, setRender, Checked, setChecked }) {
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.categories);
+  const [val, setVal] = useState([0, 99999])
+
+  const updateRange = (e, data) => {
+    setVal(data)
+    dispatch(filterByPrice(val))
+  }
+
+
+  const categories = useSelector((state) => state.root.categories);
   
   useEffect(() => {
     dispatch(getAllBrands());
@@ -44,26 +53,21 @@ export default function Filters({ render, setRender }) {
             {categories &&
               categories.map((category) => {
                 return <Box>
-                  <Category category={category} setRender={setRender} render={render} />
+                  <Category category={category} setRender={setRender} render={render} Checked={Checked} setChecked={setChecked} />
                 </Box>
               })}
           </TreeView>
         </Types>
         <Types>
-          <EachFilter>Precio</EachFilter>
-          <option
-            style={{ padding: "4px", cursor: "pointer", color: "white" }}
-            value="De mayor a menor"
-          >
-            De mayor a menor
-          </option>
-          <option style={{ padding: "4px", cursor: "pointer", color: "white" }}>
-            De menor a mayor
-          </option>
-          <InputsMaxMin>
-            <input type="number" placeholder="Máximo" />
-            <input type="number" placeholder="Minimo" />
-          </InputsMaxMin>
+          <EachFilter>Filtrar por precio</EachFilter>
+          <Slider
+        value={val}
+        min={0}
+        max={99999}
+        sx={{width: '14rem', alignSelf:'center', marginTop: '1rem'}}
+        onChange={updateRange}
+        valueLabelDisplay="auto"
+      />
         </Types>
 
         <Types>

@@ -1,6 +1,18 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-export const CartCont = styled.div`
+export const DivConf = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+  height: 600px;
+  border: 2px solid blue;
+`;
+
+export const ItemsCart = styled.div`
+  margin: 10px;
+`;
+export const OrderCont = styled.div`
   margin-left: 300px;
   margin-right: 300px;
 `;
@@ -14,14 +26,19 @@ export const Title = styled.h2`
   font-weight: 500;
   color: white;
 `;
-export const jump = keyframes`
-  from{
-    transform: translateY(0)
-  }
-  to{
-    transform: translateY(-3px)
-  }
+export const Wrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+  border: solid #171717 2px;
+  margin: 80px;
+  padding-bottom: 20px;
+  background-color: #b5848d;
+  width: 500px;
+  border-radius: 15px;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 27px 12px #7e7877;
 `;
+
 export const Button = styled.button`
   max-width: 100%;
   padding: 11px 13px;
@@ -41,13 +58,3 @@ export const Button = styled.button`
     background: rgb(200, 50, 70);
   }
 `;
-
-export const Cell = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
-    height: 20%;
-    background-color: white;
-    border-radius: 10px;
-`

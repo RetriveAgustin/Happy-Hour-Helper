@@ -7,7 +7,8 @@ const {
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
+  getModelsByEmail
 } = require("../utils/mainUtils");
 
 const getUser = async (req, res) => {
@@ -22,8 +23,20 @@ const getUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const { id } = req.body;
-    const user = getModelsById(User, id);
+    const { id } = req.query;
+    console.log(id)
+    const user = await getModelsById(User, id);
+    console.log(user)
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({error: error.message });
+  }
+};
+
+const getUserByEmail = async (req, res) => {
+  try {
+    const { mail } = req.body;
+    const user = await getModelsByEmail(User, mail);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -33,7 +46,7 @@ const getUserById = async (req, res) => {
 const registerUser = async (req, res) => {
   try {
     const { id, token, name, lastname, mail, password, created_in_google, is_admin } = req.body;
-    userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
+    // userInfo = await admin.auth().verifyIdToken(token); // trae credenciales/datos de usuario
     const passwordHash = password !== null ? await bcryptjs.hash(password, 8) : null;
     const user = await postModels(User, {id, name, lastname, mail, password: passwordHash, created_in_google, is_admin})
     if (user) {
@@ -52,6 +65,7 @@ const loginUser = async (req, res) => {
     const user = await User.findAll({where: {
       mail: mail
     }})
+
     if (user[0]) {
       const compare = user[0].password === null && user[0].created_in_google === true ? true : await bcryptjs.compare(password, user[0].password);
       if (compare) {
@@ -61,6 +75,7 @@ const loginUser = async (req, res) => {
         res.status(400).send('Wrong password!')
       }
     }
+
     else {
       res.status(400).send("Email doesn't exist!")
     }
@@ -102,9 +117,10 @@ const restoreUser = async (req, res) => {
 module.exports = {
   getUser,
   getUserById,
+  getUserByEmail,
   registerUser,
   loginUser,
   putUser,
   deleteUser,
-  restoreUser
+  restoreUser,
 };

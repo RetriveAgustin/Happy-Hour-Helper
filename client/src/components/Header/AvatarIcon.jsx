@@ -1,10 +1,14 @@
 import React from "react";
-import { IconButton, Menu, MenuItem, Tooltip, Typography } from "@mui/material";
+import { IconButton, Menu, MenuItem, Tooltip } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+// import { useAuth } from "../../context/authContext";
 
-function AvatarIcon() {
+function AvatarIcon({ logout }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const user = useSelector((state) => state.root.userLogged);
+  // const { logout } = useAuth;
 
   const navigate = useNavigate();
 
@@ -16,7 +20,9 @@ function AvatarIcon() {
     setAnchorElUser(null);
   };
 
-  const settings = ["Account", "Dashboard", "Log In / Register"];
+  const logOutHandler = () => {
+    // logout();
+  };
 
   return (
     <>
@@ -44,9 +50,9 @@ function AvatarIcon() {
               <Typography>{setting}</Typography>
             </MenuItem>
           ))} */}
-          <MenuItem onClick={() => navigate("/login")}>
-            <Typography>Log In</Typography>
-          </MenuItem>
+          <MenuItem onClick={() => navigate("/user")}>Account</MenuItem>
+          <MenuItem>Dashboard</MenuItem>
+          <MenuItem onClick={logOutHandler}>Log Out</MenuItem>
         </Menu>
       </div>
     </>

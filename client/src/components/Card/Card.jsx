@@ -17,7 +17,7 @@ const AddToCart = styled(Button)({
 });
 
 const Card = ({ product }) => {
-  const { id, name, img, price, stock } = product
+  const { id, name, img, price, stock } = product && product
   const [amount, setAmount] = useState(1);
   
   const dispatch = useDispatch()
@@ -30,7 +30,6 @@ const Card = ({ product }) => {
   }
 
     
-
   const navigate = useNavigate()
 
   return (

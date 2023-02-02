@@ -10,7 +10,6 @@ function Carrousel({ category, products }) {
         return instance.Categories[0].id === category.id;
       })
     : false;
-  console.log(filteredProducts);
 
   const responsive = {
     superLargeDesktop: {

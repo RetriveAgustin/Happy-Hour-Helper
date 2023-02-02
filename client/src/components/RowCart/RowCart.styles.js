@@ -1,18 +1,16 @@
 import styled, { keyframes } from "styled-components";
 
-export const CartCont = styled.div`
-  margin-left: 300px;
-  margin-right: 300px;
+export const Image = styled.img`
+  width: 80px;
+  margin: 0;
+  margin-bottom: 0;
+  align-self: center;
 `;
-
-export const Title = styled.h2`
-  background-color: #2b1c1f;
-  padding: 0.7rem;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  color: white;
+export const SubAdd = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 2px;
 `;
 export const jump = keyframes`
   from{
@@ -39,15 +37,6 @@ export const Button = styled.button`
   transition: all 0.3s ease-out;
   :hover {
     background: rgb(200, 50, 70);
+    animation: ${jump} 0.2s ease-out forwards;
   }
 `;
-
-export const Cell = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
-    height: 20%;
-    background-color: white;
-    border-radius: 10px;
-`
