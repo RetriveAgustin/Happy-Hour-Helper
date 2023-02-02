@@ -232,17 +232,10 @@ export const createBrand = (payload) => {
 };
 
 export const addToCart = (payload) => {
-  return function (dispatch) {
-    fetch(`https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`)
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: ADD_TO_CART,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log(err));
-  };
+  return {
+    type: ADD_TO_CART,
+    payload: payload,
+  }
 };
 
 export const removeFromCart = (payload) => {

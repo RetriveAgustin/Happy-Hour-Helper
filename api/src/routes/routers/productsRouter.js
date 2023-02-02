@@ -11,7 +11,6 @@ const {
   filterProductByBrand,
   filterProductBySubCategory,
   filterProductByCategory,
-  bulkProduct
   
 } = require("../controllers/productController");
 
@@ -22,8 +21,6 @@ productRouter.get("/getProductId/:id", getProductById);
 productRouter.get("/restoreProduct", restoreProduct);
 
 productRouter.post("/postProduct", postProduct);
-
-productRouter.post("/bulkProduct", bulkProduct);
 
 productRouter.put("/putProduct", putProduct);
 
