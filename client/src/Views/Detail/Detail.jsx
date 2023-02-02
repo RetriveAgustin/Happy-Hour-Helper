@@ -31,7 +31,7 @@ const Detail = () => {
     dispatch(getProductId(id));
   }, [dispatch, id]);
 
-  const product = useSelector((state) => state.detail);
+  const product = useSelector((state) => state.root.detail);
 
   const handleAdd = (e) => {
     if (!e) {

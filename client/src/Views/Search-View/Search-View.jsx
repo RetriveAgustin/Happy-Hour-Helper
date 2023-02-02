@@ -63,7 +63,7 @@ function SearchView() {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.root.products);
 
   useEffect(() => {
     setMappedProducts(

@@ -10,9 +10,11 @@ import {
 } from "@mui/material";
 import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useAuth } from "../../../context/authContext";
+import { getLoggedUser, loginUser } from "../../../redux/actions/actions.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../../context/authContext.js";
 
 const style = {
   position: "absolute",
@@ -33,11 +35,14 @@ function LoginBtn() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [mail, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const { login } = useAuth();
 
   function handleChangePassword({ target }) {
     setPassword(target.value);
@@ -50,15 +55,34 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
+  const user = useSelector(state => state.user.userLoged);
 
   async function handleSubmit() {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(getAuth(), email, password);
+      // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente 
+      dispatch(loginUser(login, { mail, password }));
+      const id = localStorage.getItem('User_ID');
+      console.log(id)
+      dispatch(getLoggedUser(id));
+      console.log("user", {user})
+
+      setEmail("");
+      setPassword("");
+      setOpen(false);
+      // console.log(result);
+
       setLoading(false);
-    } catch ({ message }) {
+    } catch (e) {
       setLoading(false);
-      alert(message);
+      if (e.message === "Firebase: Error (auth/internal-error).")
+        return console.log("Please enter a password");
+      if (e.message === "Firebase: Error (auth/invalid-mail).")
+        return console.log("Please enter an mail");
+      if (e.message === "Firebase: Error (auth/wrong-password).")
+        return console.log("Wrong password");
+      if (e.message === "Firebase: Error (auth/user-not-found).")
+        return console.log("The user doesn't exist");
     }
   }
 
@@ -81,9 +105,9 @@ function LoginBtn() {
               <h2 style={{ marginBottom: "50px" }}>Iniciar sesión</h2>
 
               <TextField
-                id="email"
+                id="mail"
                 label="Email"
-                value={email}
+                value={mail}
                 variant="outlined"
                 // sx <-  prop para mandar estilos
                 sx={{
@@ -147,7 +171,7 @@ function LoginBtn() {
                   marginBottom: "15px",
                   textTransform: "none",
                 }}
-                onClick={loading ? "" : handleSubmit}
+                onClick={handleSubmit}
               >
                 {loading ? (
                   <CircularProgress style={{ color: "#fff" }} size={25} />
