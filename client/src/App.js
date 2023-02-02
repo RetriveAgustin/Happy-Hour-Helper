@@ -5,7 +5,6 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
-import Register from "./components/Register/Register.jsx";
 import Detail from "./Views/Detail/Detail";
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
@@ -30,7 +29,6 @@ function App() {
         <Route path="/" element={<Skeleton view={<Home />} />} />
         <Route path="/cart" element={<Skeleton view={<Cart />} />} />
         <Route path="/user" element={<Skeleton view={<User />} />} />
-        <Route path="/register" element={<Skeleton view={<Register />} />} />
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
