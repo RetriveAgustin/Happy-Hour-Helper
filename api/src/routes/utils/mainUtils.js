@@ -99,13 +99,13 @@ const getModelsById = async (model, id) => {
   return results;
 };
 
-const getModelsByEmail = async (model, email) => {
+const getModelsByEmail = async (model, mail) => {
   let results;
 
   if (model) {
-    if (email) {
+    if (mail) {
       results = await model.findAll({
-        where: { email },
+        where: { mail },
       });
     } else {
       return null;

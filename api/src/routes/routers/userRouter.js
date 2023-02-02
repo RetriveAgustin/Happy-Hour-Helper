@@ -3,17 +3,20 @@ const userRouter = Router();
 
 const {
   getUser,
+  getUserById,
+  getUserByEmail,
   registerUser,
   loginUser,
   putUser,
   deleteUser,
   restoreUser,
-  getUserById
 } = require("../controllers/userController");
 
 userRouter.get("/getUser", getUser);
 
 userRouter.get("/getUserById", getUserById);
+
+userRouter.get("/getUserByEmail", getUserByEmail);
 
 userRouter.post("/registerUser", registerUser)
 

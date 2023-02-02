@@ -18,7 +18,7 @@ import accounting from "accounting";
 const Cart = () => {
   const navigate = useNavigate();
 
-  const stateCart = useSelector((state) => state.cart);
+  const stateCart = useSelector((state) => state.root.cart);
   const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
 
   const [total, setTotal] = useState(0);
@@ -51,9 +51,8 @@ const Cart = () => {
                       img={e.img}
                       name={e.name}
                       price={e.price}
-                      bulk_discount={e.bulk_discount}
                       has_discount={e.has_discount}
-                      minimum_amount_for_bulk={e.minimum_amount_for_bulk}
+                      amount={e.amount}
                     />
                   );
                 })}

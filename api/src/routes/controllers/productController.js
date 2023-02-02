@@ -35,8 +35,6 @@ const postProduct = async (req, res) => {
       img,
       price,
       capacity,
-      minimum_amount_for_bulk,
-      bulk_discount,
       stock,
       has_discount,
       brand,
@@ -49,8 +47,6 @@ const postProduct = async (req, res) => {
       img,
       price,
       capacity,
-      minimum_amount_for_bulk,
-      bulk_discount,
       stock,
       has_discount,
     });
@@ -69,43 +65,6 @@ const postProduct = async (req, res) => {
   }
 };
 
-const bulkProduct = async (req, res) => {
-  try {
-    const { instances } = req.body;
-    for (let i = 0; i < instances.length; i++) {
-      const {
-        name,
-        img,
-        price,
-        capacity,
-        minimum_amount_for_bulk,
-        bulk_discount,
-        stock,
-        has_discount,
-        brand,
-        category,
-        subcategory,
-      } = instances[i];
-      ins = await postModels(Product, {
-        name,
-        img,
-        price,
-        capacity,
-        minimum_amount_for_bulk,
-        bulk_discount,
-        stock,
-        has_discount,
-      });
-
-      await ins.addBrand(brand);
-      await ins.addCategory(category);
-      await ins.addSub_category(subcategory);
-    }
-    res.status(200).json("Done");
-  } catch (error) {
-    res.status(400).json({ error: error.message });
-  }
-};
 
 //se cambió el medio de obtención de las variables, ahora se mandan por body.
 //además ahora se recibe un id, no un nombre, puesto que el producto no tiene acceso a esta información
@@ -188,5 +147,4 @@ module.exports = {
   filterProductByBrand,
   filterProductByCategory,
   filterProductBySubCategory,
-  bulkProduct,
 };
