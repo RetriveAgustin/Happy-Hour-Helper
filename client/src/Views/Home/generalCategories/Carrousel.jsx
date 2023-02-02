@@ -33,30 +33,62 @@ function Carrousel({ category, products }) {
   return filteredProducts !== false ? (
     <div style={{ display: "block", width: "80vw", color: "black" }}>
       <Carousel centerMode={true} responsive={responsive} infinite={true}>
-        <div>
-          <Card product={filteredProducts[0]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[1]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[2]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[3]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[4]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[5]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[6]} />
-        </div>
-        <div>
-          <Card product={filteredProducts[7]} />
-        </div>
+        {filteredProducts[0] ? (
+          <div>
+            <Card product={filteredProducts[0]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[1] ? (
+          <div>
+            <Card product={filteredProducts[1]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[2] ? (
+          <div>
+            <Card product={filteredProducts[2]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[3] ? (
+          <div>
+            <Card product={filteredProducts[3]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[4] ? (
+          <div>
+            <Card product={filteredProducts[4]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[5] ? (
+          <div>
+            <Card product={filteredProducts[5]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[6] ? (
+          <div>
+            <Card product={filteredProducts[6]} />
+          </div>
+        ) : (
+          <></>
+        )}
+        {filteredProducts[7] ? (
+          <div>
+            <Card product={filteredProducts[7]} />
+          </div>
+        ) : (
+          <></>
+        )}
       </Carousel>
     </div>
   ) : (
@@ -120,11 +152,11 @@ function Carrousel({ category, products }) {
         </div>
         <div>
           <Skeleton
-              sx={{ bgcolor: "grey.900" }}
-              variant="rectangular"
-              width="250px"
-              height="440px"
-            />
+            sx={{ bgcolor: "grey.900" }}
+            variant="rectangular"
+            width="250px"
+            height="440px"
+          />
         </div>
       </Carousel>
     </div>
