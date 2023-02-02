@@ -1,12 +1,12 @@
-require('dotenv').config();
+-require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,
+  DATABASE_URL,
 } = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/hhh`, {
+const sequelize = new Sequelize(DATABASE_URL, {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 });
@@ -41,29 +41,32 @@ Payment_method.belongsTo(User, { foreignKey: 'user_id' });
 User.hasMany(Order, { foreignKey: 'user_id' });
 Order.belongsTo(User, { foreignKey: 'user_id' });
 
-Order.belongsToMany(Offer, { through: 'Offers_Order' });
-Offer.belongsToMany(Order, { through: 'Offers_Order' });
+Order.belongsToMany(Offer, { through: 'Offers_Order', foreignKey: 'order_id' });
+Offer.belongsToMany(Order, { through: 'Offers_Order', foreignKey: 'offer_id' });
 
-Order.belongsToMany(Product, { through: 'Product_Order' });
-Product.belongsToMany(Order, { through: 'Product_Order' });
+Order.belongsToMany(Product, { through: 'Product_Order', foreignKey: 'order_id' });
+Product.belongsToMany(Order, { through: 'Product_Order', foreignKey: 'product_id'});
 
 Offer.hasMany(Product, { foreignKey: 'offer_id' });
 Product.belongsTo(Offer, { foreignKey: 'offer_id' });
 
-Brand.belongsToMany(Product, { through: 'Brand_Product' });
-Product.belongsToMany(Brand, { through: 'Brand_Product' });
+Offer.belongsToMany(Category, { through: 'Category_Offer', foreignKey: 'offer_id'});
+Category.belongsToMany(Offer, { through: 'Category_Offer', foreignKey: 'category_id'});
 
-Product.belongsToMany(Category, { through: 'Category_Product' });
-Category.belongsToMany(Product, { through: 'Category_Product' });
+Product.belongsToMany(Brand, { through: 'Brand_Product', foreignKey: 'product_id' });
+Brand.belongsToMany(Product, { through: 'Brand_Product', foreignKey: 'brand_id' });
 
-Product.belongsToMany(Sub_category, { through: "Sub_category_Product" });
-Sub_category.belongsToMany(Product, { through: "Sub_category_Product" });
+Product.belongsToMany(Category, { through: 'Category_Product', foreignKey: 'product_id' });
+Category.belongsToMany(Product, { through: 'Category_Product', foreignKey: 'category_id' });
 
-Product.belongsToMany(Discount, { through: 'Discount_Product' });
-Discount.belongsToMany(Product, { through: 'Discount_Product' });
+Product.belongsToMany(Sub_category, { through: "Sub_category_Product", foreignKey: 'product_id' });
+Sub_category.belongsToMany(Product, { through: "Sub_category_Product", foreignKey: 'sub_cateogry_id' });
 
+Product.belongsToMany(Discount, { through: 'Discount_Product', foreignKey: 'product_id' });
+Discount.belongsToMany(Product, { through: 'Discount_Product', foreignKey: 'discount_id' });
 
-
+Category.hasMany(Sub_category, { foreignKey: 'category_id' });
+Sub_category.belongsTo(Category, { foreignKey: 'category_id' });
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

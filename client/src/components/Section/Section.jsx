@@ -1,16 +1,19 @@
-import React from "react";
-import { Card } from "../Card/Card";
+import React, { useState } from "react";
+import  Card  from "../Card/Card";
 import { Container, CardContainer, H1 } from "./Section.styles";
 
-export const Section = ({ title, data }) => {
+const Section = ({ title, data }) => {
+
   return (
     <Container>
       <H1>{title}</H1>
       <CardContainer>
         {
-          data && data.map((d) => <Card key={d.id} />)
+          data && data.map((product) => <Card key={product.id} product={product}/>)
         }
       </CardContainer>
     </Container>
   );
 };
+
+export default Section;

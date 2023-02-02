@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  height: 100vh;
-  text-decoration: none;
-  -webkit-text-decoration: none;
+  width: 100vw;
+  min-height: 100%;
 }

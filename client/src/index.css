@@ -7,6 +7,12 @@
   -webkit-text-decoration: none;
 }
 
+:root {
+  --main: #52373c;
+  --secondary: #EEECDF;
+  --background: #171717;
+}
+
 h1 {
   margin: 0;
 }

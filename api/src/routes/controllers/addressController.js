@@ -13,8 +13,8 @@ const getAddress = async (req, res) => {
     const { name } = req.query;
     const address = getModels(Address, name);
     res.status(200).json(address);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -42,8 +42,8 @@ const postAddress = async (req, res) => {
     } else {
       res.status(400).json("Address couldn't be created");
     }
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -52,8 +52,8 @@ const putAddress = async (req, res) => {
     const { id, properties } = req.body;
     const result = await putModels(Address, id, properties);
     res.status(200).json(result);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -62,8 +62,8 @@ const deleteAddress = (req, res) => {
     const { id } = req.body;
     const updated = deleteModels(Address, id);
     res.status(200).json(updated);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -73,7 +73,7 @@ const restoreAddress = async (req, res) => {
     const restored = await restoreModels(Address, id);
     res.status(200).json(restored);
   } catch (error) {
-    res.status(400).json({ error: err.message });
+    res.status(400).json({ error: error.message });
   }
 };
 
