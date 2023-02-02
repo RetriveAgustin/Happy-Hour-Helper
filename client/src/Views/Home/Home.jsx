@@ -1,36 +1,49 @@
 import React, { useState } from "react";
+import styles from "./Home.module.css";
 import { useEffect } from "react";
-import { ImageBackground, Background } from "./Home.styles";
-
+import { useSelector, useDispatch } from "react-redux";
 import Header from "../../components/Header/Header";
-import { Section } from "../../components/Section/Section";
+import Section from "../../components/Section/Section";
 import { Footer } from "../../components/Footer/Footer";
+import Filters from "../../components/Filters/Filters";
+import { getAllProducts } from "../../redux/actions/actions";
+import Category from "../../components/Filters/Category";
+import GeneralCategories from "./generalCategories/GeneralCategories";
+import FilteredCategory from "./filteredCategory/FilteredCategory";
 
 const Home = () => {
-  // const [data, setData] = useState();
+  const dispatch = useDispatch(); 
+  const categories = useSelector(state => state.categories);
 
-  // const getData = async () => {
-  //   setTimeout(() => {
-  //     setData(response);
-  //   }, 1000);
-  // };
+  const [render, setRender] = useState({
+    filtered: false,
+    categoryId: ""
+  })
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, [dispatch]);
+
+  const products = useSelector((state) => state.products);
+  
   return (
-    <Background>
+    <>
+      <div className={styles.background}>
       <Header />
-      <ImageBackground>
-        <h1>Bienvenido a Happy Hour Helper</h1>
-      </ImageBackground>
-      {/* {data &&
-        data.map(d => {
-          return <Section key={d.title} title={d.title} data={d.data}/>;
-        })} */}
+      <Filters setRender={setRender} render={render} />
+      {/* SECCIONES DEL HOME */}
+      {
+        !render.filtered ?
+          <GeneralCategories categories={categories} products={products} />
+        :
+          <FilteredCategory categoryId={render.categoryId} />
+      }
+      </div>
       <Footer />
-    </Background>
-  );
+    </>
+  )
+
+  
 };
 
 export default Home;
