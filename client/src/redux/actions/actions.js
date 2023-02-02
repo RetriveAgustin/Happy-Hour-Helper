@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useAuth } from "../../context/authContext";
+import axios from "axios"
+
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
 export const GET_BRANDS = "GET_BRANDS";
@@ -17,6 +17,8 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = 'FILTER_PRICE';
 export const ADD_TO_CART = "ADD_TO_CART";
+export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_USER = 'REGISTER_USER';
 
 console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
 
@@ -35,10 +37,9 @@ export const getUsers = () => {
   }
 }
 
-export const getLoggedUser = () => {
+export const getLoggedUser = (mail) => {
   return function (dispatch){
-    fetch("https://happy-hour-helper-production.up.railway.app/users/getUserByEmail")
-      .then((response)=> response.json())
+    axios.get("https://happy-hour-helper-production.up.railway.app/users/getUserByEmail", {mail})
       .then((data) => {
         dispatch({
           type: GET_LOGGED_USER,
@@ -49,25 +50,40 @@ export const getLoggedUser = () => {
   }
 }
 
-export const loginUser = (payload) => {
-  return async function (){
-    const { login } = useAuth();
-    const result = await login(payload); // acá
-    const post = await axios.post(
-      "https://happy-hour-helper-production.up.railway.app/users/loginUser",
-      payload
-    );
-    return result;
+export const loginUser = (login, payload) => { // payload es un obj con mail y password
+  return async function (dispatch){
+    try {
+      const result = await login(payload.mail, payload.password); // acá se guardan las USER CREDENTIALS si el login es exitoso
+      const data = await axios.post(
+        "https://happy-hour-helper-production.up.railway.app/users/loginUser",
+        {mail: payload.mail, password: payload.password}
+      )
+      localStorage.setItem('User_ID', result.user.uid) // por ahora sólo guardamos el user_id en localStorage
+      dispatch({
+        type: LOGIN_USER,
+        payload: result.user
+      })
+    } catch (error) {
+      console.log(error)
+    }
   };
 }
 
-export const registerUser = (payload) => {
-  return async function (){
-    const post = await axios.post(
-      "https://happy-hour-helper-production.up.railway.app/users/registerUser",
-      payload
-    );
-    return post;
+export const registerUser = (register, payload) => {
+  return async function (dispatch){
+    try {
+      const result = await register(payload.email, payload.password);
+      const post = await axios.post(
+        "https://happy-hour-helper-production.up.railway.app/users/registerUser",
+        {id: result.user.uid, name: payload.name, lastname: payload.lastName, mail: payload.email, password: payload.password, created_in_google: false, is_admin: false}
+      );
+      console.log(post)
+      dispatch({
+        type: REGISTER_USER
+      });
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 

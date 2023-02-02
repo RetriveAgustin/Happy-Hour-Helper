@@ -15,9 +15,9 @@ import {
 } from "@mui/icons-material";
 import { FormContainer } from "./RegisterBtn.styles";
 import CircularProgress from "@mui/material/CircularProgress";
-// import { useAuth } from "../../../context/authContext";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerUser } from "../../../redux/actions/actions";
+import { useAuth } from "../../../context/authContext";
 
 const style = {
   position: "absolute",
@@ -33,9 +33,11 @@ const style = {
   borderRadius: "5px",
 };
 
-// const dispatch = useDispatch();
 
 function RegisterBtn() {
+
+  const dispatch = useDispatch();
+
   //modals
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -91,10 +93,14 @@ function RegisterBtn() {
   }
   const [errorPassword, setErrorPassword] = useState(false);
 
+  const { signUp } = useAuth();
+
   async function handleSubmit() {
     try {
+      console.log('register')
       setLoading(true);
-      // dispatch(registerUser({email, password, name, lastName}))
+      console.log(email, password, name, lastName)
+      dispatch(registerUser(signUp, {email, password, name, lastName}))
       setLoading(false);
     } catch ({ message }) {
       setLoading(false);
@@ -113,6 +119,9 @@ function RegisterBtn() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         disableScrollLock
+        sx={{
+          overflow: "scroll"
+        }}
       >
         <Zoom
           in={open}

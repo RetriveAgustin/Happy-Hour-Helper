@@ -18,7 +18,7 @@ import accounting from "accounting";
 const Cart = () => {
   const navigate = useNavigate();
 
-  const stateCart = useSelector((state) => state.cart);
+  const stateCart = useSelector((state) => state.root.cart);
   const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
 
   const [total, setTotal] = useState(0);

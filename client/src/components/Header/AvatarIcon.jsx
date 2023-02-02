@@ -8,7 +8,7 @@ import LoginO from "../LoginO/Login";
 
 function AvatarIcon({ logout }) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const user = useSelector((state) => state.userLogged);
+  const user = useSelector((state) => state.root.userLogged);
   // const { logout } = useAuth;
 
   const navigate = useNavigate();

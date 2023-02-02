@@ -30,7 +30,7 @@ export default function Filters({ render, setRender, Checked, setChecked }) {
   }
 
 
-  const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.root.categories);
   
   useEffect(() => {
     dispatch(getAllBrands());

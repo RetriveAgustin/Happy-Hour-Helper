@@ -26,9 +26,9 @@ export default function CreateProduct() {
     dispatch(getAllBrands());
     dispatch(getAllSubCategories());
   }, [dispatch]);
-  const brandsState = useSelector((state) => state.brands);
-  const categories = useSelector((state) => state.categories);
-  const subCategories = useSelector((state) => state.subCategories);
+  const brandsState = useSelector((state) => state.root.brands);
+  const categories = useSelector((state) => state.root.categories);
+  const subCategories = useSelector((state) => state.root.subCategories);
 
   const [info, setInfo] = useState({
     name: "",

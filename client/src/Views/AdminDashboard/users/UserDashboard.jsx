@@ -28,7 +28,7 @@ import { getUsers} from "../../../redux/actions/actions";
 
 function UsersDashboard() {
   const dispatch = useDispatch()
-  const allUsers = useSelector((state) => state.users);
+  const allUsers = useSelector((state) => state.user.users);
   const [UserInfo, setUserInfo] = useState([]);
   const [searchValues, setSearchValues] = useState({
     value: "",

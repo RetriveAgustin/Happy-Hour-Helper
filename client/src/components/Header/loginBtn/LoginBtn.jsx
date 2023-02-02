@@ -14,6 +14,7 @@ import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getLoggedUser, loginUser } from "../../../redux/actions/actions.js";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../../../context/authContext.js";
 
 const style = {
   position: "absolute",
@@ -41,6 +42,8 @@ function LoginBtn() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+  const { login } = useAuth();
+
   function handleChangePassword({ target }) {
     setPassword(target.value);
   }
@@ -56,10 +59,11 @@ function LoginBtn() {
 
   async function handleSubmit() {
     try {
+      console.log("submit")
       setLoading(true);
       // await signInWithEmailAndPassword(getAuth(), mail, password);
 
-      const result = await dispatch(loginUser({ mail, password }));
+      const result = await dispatch(loginUser(login, { mail, password }));
       dispatch(getLoggedUser(mail));
       console.log("user", {user})
 
@@ -165,7 +169,7 @@ function LoginBtn() {
                   marginBottom: "15px",
                   textTransform: "none",
                 }}
-                onClick={loading ? "" : handleSubmit}
+                onClick={handleSubmit}
               >
                 {loading ? (
                   <CircularProgress style={{ color: "#fff" }} size={25} />

@@ -82,7 +82,7 @@ export default function LoginO() {
         >
           <Box sx={style}>
             <FormContainer>
-              <h2 style={{ marginBottom: "50px" }}>Iniciar sesión</h2>
+              <h2 style={{ marginBottom: "50px" }}>Iniciar sesiónaaa</h2>
 
               <TextField
                 id="email"

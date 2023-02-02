@@ -1,5 +1,4 @@
 import {
-  GET_USERS,
   GET_CATEGORIES,
   GET_BRANDS,
   GET_OFFERS,
@@ -7,7 +6,6 @@ import {
   GET_ALL_PRODUCTS,
   GET_PRODUCTS_BY_CATEGORY,
   GET_PRODUCT_ID,
-  GET_LOGGED_USER,
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
@@ -23,14 +21,10 @@ const initialState = {
   productsByCategory: [],
   detail: [],
   cart: [],
-  users: [],
-  userLoged: {},
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USERS:
-      return { ...state, users: action.payload };
     case GET_CATEGORIES:
       return { ...state, categories: action.payload };
     case GET_BRANDS:
@@ -45,8 +39,6 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, detail: action.payload };
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
-    case GET_LOGGED_USER:
-      return { ...state, userLoged: action.payload};
     case FILTER_PRICE:
       const products = state.prodsCopy;
       return {

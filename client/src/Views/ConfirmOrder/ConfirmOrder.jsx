@@ -14,8 +14,8 @@ import { useAuth } from "../../context/authContext";
 import { render } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
 export default function ConfirmOrder() {
-  const stateCart = useSelector((state) => state.cart);
-  const stateTotal = useSelector((state) => state.total);
+  const stateCart = useSelector((state) => state.root.cart);
+  const stateTotal = useSelector((state) => state.root.total);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
