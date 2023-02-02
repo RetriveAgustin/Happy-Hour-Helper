@@ -1,20 +1,14 @@
 import {
- 
   GET_CATEGORIES,
- 
   GET_BRANDS,
- 
   GET_OFFERS,
- 
   GET_SUB_CATEGORIES,
- 
   GET_ALL_PRODUCTS,
   GET_PRODUCTS_BY_CATEGORY,
   GET_PRODUCT_ID,
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
-
   GET_ADDRESSES,
   CREATE_ADDRESS,
   UPDATE_ADDRESS,
@@ -77,7 +71,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart.filter((e) => e.name !== action.payload)],
       };
-      return { ...state, products: action.payload };
     case GET_ADDRESSES:
       return { ...state, addresses: action.payload };
     case CREATE_ADDRESS:
@@ -93,8 +86,10 @@ const rootReducer = (state = initialState, action) => {
     case DELETE_ADDRESS:
       return {
         ...state,
-        addresses: state.addresses.filter(address => address.id !== action.payload)
-      }
+        addresses: state.addresses.filter(
+          (address) => address.id !== action.payload
+        ),
+      };
     case GET_PAYMENT:
       return { ...state, paymentMethods: action.payload };
     case POST_PAYMENT:
@@ -102,21 +97,23 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         paymentMethods: [...state.paymentMethods, action.payload],
       };
-      case PUT_PAYMENT:
-        return {
-          ...state,
-          paymentMethods: state.paymentMethods.map((payment) => {
-            if (payment.id === action.payload.id) {
-              return { ...payment, ...action.payload.properties }
-            }
-            return payment;
-          })
-        }
+    case PUT_PAYMENT:
+      return {
+        ...state,
+        paymentMethods: state.paymentMethods.map((payment) => {
+          if (payment.id === action.payload.id) {
+            return { ...payment, ...action.payload.properties };
+          }
+          return payment;
+        }),
+      };
     case DELETE_PAYMENT:
       return {
         ...state,
-        paymentMethods: state.paymentMethods.filter(payment => payment.id !== action.payload)
-    }
+        paymentMethods: state.paymentMethods.filter(
+          (payment) => payment.id !== action.payload
+        ),
+      };
     case RESTORE_PAYMENT:
       return {
         ...state,

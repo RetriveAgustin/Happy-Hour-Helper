@@ -1,9 +1,22 @@
-import axios from "axios"
+import axios from "axios";
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
+export const GET_BRANDS = "GET_BRANDS";
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 
-export const GET_CATEGORIES = "GET_CATEGORIES";;
-export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";;
-export const GET_BRANDS = "GET_BRANDS";;
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";;
+//Seccion Address
+export const GET_ADDRESSES = "GET_ADDRESSES";
+export const GET_ADDRESS = "GET_ADDRESS";
+export const CREATE_ADDRESS = "CREATE_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
+
+//Seccion Payment
+export const GET_PAYMENT = "GET_PAYMENT";
+export const POST_PAYMENT = "POST_PAYMENT";
+export const PUT_PAYMENT = "PUT_PAYMENT";
+export const DELETE_PAYMENT = "DELETE_PAYMENT";
+export const RESTORE_PAYMENT = "RESTORE_PAYMENT";
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
@@ -84,21 +97,25 @@ export const registerUser = (register, payload) => {
       console.log(error)
     }
   }
-};
-export const ADD_TO_CART = "ADD_TO_CART";
-//Seccion Address
-export const GET_ADDRESSES = "GET_ADDRESSES";
-export const GET_ADDRESS = "GET_ADDRESS";
-export const CREATE_ADDRESS = "CREATE_ADDRESS";
-export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
-export const DELETE_ADDRESS = "DELETE_ADDRESS";
+}
 
-//Seccion Payment
-export const GET_PAYMENT = "GET_PAYMENT";
-export const POST_PAYMENT = "POST_PAYMENT";
-export const PUT_PAYMENT = "PUT_PAYMENT";
-export const DELETE_PAYMENT = "DELETE_PAYMENT";
-export const RESTORE_PAYMENT = "RESTORE_PAYMENT";
+export const removeFromCart = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: payload,
+    });
+  };
+};
+
+
+export const filterByPrice = (payload) => {
+  return {
+    type: FILTER_PRICE,
+    payload: payload
+  }
+}
+
 
 export const getAllCategories = () => {
   return function (dispatch) {
@@ -245,10 +262,8 @@ export const createBrand = (payload) => {
   };
 };
 
-
 export const addToCart = (payload) => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
     fetch(`https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
@@ -263,17 +278,19 @@ export const addToCart = (payload) => {
 
 //SECCION ADDRESS!!!!!!!!!!!!!!!!!
 
-export const getAddress = () => (dispatch) =>  {
-  axios.get("http://localhost:3001/address/getAddress")
-  .then((response) => {
-    dispatch({type:  GET_ADDRESSES, payload: response.data});
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+
+//SECCION ADDRESS!!!!!!!!!!!!!!!!!
+
+export const getAddress = () => {
+  return async (dispatch) => {
+    const res = await axios.get(`http://localhost:3001/address/getAddress`);
+    const data = res.data;
+    return dispatch({
+      type: "GET_ADDRESSES",
+      payload: data,
+    });
+  };
 };
-
-
 
 export const createAddress = (data) => async (dispatch) => {
   try {
@@ -303,12 +320,11 @@ export const deleteAddress = (id) => {
       { data: { id } }
     );
     return dispatch({
-      type: "DELETE_ADDRESS",
+      type: DELETE_ADDRESS,
       payload: res.data,
     });
   };
 };
-
 
 //SECCION PAYMENT!!!!!!!!!!!!!!!!
 

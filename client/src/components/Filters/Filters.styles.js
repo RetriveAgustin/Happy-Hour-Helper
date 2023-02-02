@@ -49,14 +49,3 @@ export const InputsMaxMin = styled.div`
   }
 `;
 
-export const InputsMaxMin = styled.div`
-  display: flex;
-  width: 100%;
-  & input {
-    width: 67px;
-    border-radius: 4px;
-    margin: 9px 9px 9px 3px;
-    height: 25px;
-    padding: 0 4px;
-  }
-`

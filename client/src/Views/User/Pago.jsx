@@ -192,7 +192,7 @@ const Pago = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {paymentMethods.map((paymentMethod) => (
+              {paymentMethods?.map((paymentMethod) => (
                 <TableRow key={paymentMethod.id}>
                   <TableCell>{paymentMethod.name}</TableCell>
                   <TableCell>{paymentMethod.code}</TableCell>
