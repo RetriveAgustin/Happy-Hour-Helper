@@ -16,7 +16,7 @@ import {
 import { FormContainer } from "./RegisterBtn.styles";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../../../redux/actions/actions";
+import { getLoggedUser, registerUser } from "../../../redux/actions/actions";
 import { useAuth } from "../../../context/authContext";
 
 const style = {
@@ -97,11 +97,13 @@ function RegisterBtn() {
 
   async function handleSubmit() {
     try {
-      console.log('register')
       setLoading(true);
-      console.log(email, password, name, lastName)
       dispatch(registerUser(signUp, {email, password, name, lastName}))
       setLoading(false);
+
+      const id = localStorage.getItem("User_ID");
+      console.log(id)
+      dispatch(getLoggedUser(id));
 
       setName("");
       setLastName("");
