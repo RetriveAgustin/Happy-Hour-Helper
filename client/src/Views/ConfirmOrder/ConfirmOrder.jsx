@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import {
-  DivConf,
+  ButtonDes,
   Title,
   ItemsCart,
   OrderCont,
@@ -13,12 +13,15 @@ import { getAllProducts } from "../../redux/actions/actions";
 import { useAuth } from "../../context/authContext";
 import { render } from "react-dom";
 import { Link, useNavigate } from "react-router-dom";
+import Checkbox from "@mui/material/Checkbox";
+
 export default function ConfirmOrder() {
   const stateCart = useSelector((state) => state.cart);
   const stateTotal = useSelector((state) => state.total);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [buttonActive, setButtonActiv] = useState(true);
   const { userCredentials, loading } = useAuth();
 
   const [success, setSuccess] = useState("");
@@ -31,6 +34,10 @@ export default function ConfirmOrder() {
     address: "",
     payment: "",
   });
+
+  const handleClick = () => {
+    setButtonActiv(!buttonActive);
+  };
 
   useEffect(() => {
     console.log(userCredentials);
@@ -55,27 +62,28 @@ export default function ConfirmOrder() {
   }, [dispatch, loading]);
 
   const handleFinish = () => {
-    try {
-      var day = new Date();
-      var today = day.toLocaleString();
-      const obj = {
-        date: day,
-        delivered: false,
-        canceled: false,
-        adress: options.address,
-        payment_method: options.payment,
-        user_id: userCredentials.uid,
-        products: stateCart,
-        //total: stateTotal
-      };
-      console.log(obj);
-      axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
-        setSuccess(r.data);
-        setTimeout(() => {
-          navigate("/home");
-        }, 3000);
-      });
-    } catch (error) {}
+    // try {
+    //   var day = new Date();
+    //   var today = day.toLocaleString();
+    //   const obj = {
+    //     date: day,
+    //     delivered: false,
+    //     canceled: false,
+    //     adress: options.address,
+    //     payment_method: options.payment,
+    //     user_id: userCredentials.uid,
+    //     products: stateCart,
+    //     //total: stateTotal
+    //   };
+    //   console.log(obj);
+    //   axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
+    //     setSuccess(r.data);
+    //     setTimeout(() => {
+    //       navigate("/home");
+    //     }, 3000);
+    //   });
+    // } catch (error) {}
+    console.log("hhh");
   };
 
   const handleChange = ({ target: { name, value } }) => {
@@ -158,7 +166,18 @@ export default function ConfirmOrder() {
           </ul>
         </ItemsCart>
         <h3>Total: ${parseFloat(stateTotal).toFixed(2)}</h3>
-        <Button onClick={handleFinish}>Finish</Button>
+
+        <div>
+          <Checkbox onChange={handleClick} />
+          <p>Soy mayor de 18 años</p>
+        </div>
+        {!buttonActive ? (
+          <Button onClick={handleFinish}>Finish</Button>
+        ) : (
+          <ButtonDes onClick={handleFinish} disabled={buttonActive}>
+            Finish
+          </ButtonDes>
+        )}
         {success[0] && (
           <label>Se te redireccionará a home en unos segundos...</label>
         )}
