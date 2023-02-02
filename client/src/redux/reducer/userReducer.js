@@ -7,7 +7,7 @@ import {
 
 const initialState = {
     users: [],
-    userLoged: []
+    userLoged: {}
 }
 
 const userReducer = (state = initialState, action) => {
@@ -17,7 +17,7 @@ const userReducer = (state = initialState, action) => {
         case LOGIN_USER:
             return {...state, userLoged: action.payload};
         case GET_LOGGED_USER:
-            return { ...state, userLoged: action.payload};
+            return { ...state, userLoged: action.payload[0]};
         case REGISTER_USER:
             return state;
         default:

@@ -102,6 +102,13 @@ function RegisterBtn() {
       console.log(email, password, name, lastName)
       dispatch(registerUser(signUp, {email, password, name, lastName}))
       setLoading(false);
+
+      setName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setRepitedPassword("");
+      setOpen(false);
     } catch ({ message }) {
       setLoading(false);
       alert(message);

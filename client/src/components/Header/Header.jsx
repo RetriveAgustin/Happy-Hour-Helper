@@ -20,7 +20,6 @@ function Header() {
   const [searchValue, setSearchValue] = useState("");
 
   const cart = useSelector((state) => state.root.cart);
-  console.log(cart)
   const user = useSelector((state) => state.user.userLoged);
 
   const HandleInput = (searchName) => {

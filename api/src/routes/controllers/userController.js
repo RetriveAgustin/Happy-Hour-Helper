@@ -24,7 +24,7 @@ const getUserById = async (req, res) => {
   try {
     const { id } = req.query;
     console.log(id)
-    const user = getModelsById(User, id);
+    const user = await getModelsById(User, id);
     console.log(user)
     res.status(200).json(user);
   } catch (error) {

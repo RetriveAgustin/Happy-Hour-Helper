@@ -20,8 +20,6 @@ export const ADD_TO_CART = "ADD_TO_CART";
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = 'REGISTER_USER';
 
-console.log(`${process.env.REACT_APP_API_URL}/users/getUser`);
-
 export const getUsers = () => {
   return function (dispatch){
     // fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
@@ -124,7 +122,6 @@ export const getAllProducts = () => {
     fetch("https://happy-hour-helper-production.up.railway.app/products/getProduct")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         dispatch({
           type: GET_ALL_PRODUCTS,
           payload: data,
@@ -256,6 +253,7 @@ export const removeFromCart = (payload) => {
     });
   };
 };
+
 export const filterByPrice = (payload) => {
   return {
     type: FILTER_PRICE,
