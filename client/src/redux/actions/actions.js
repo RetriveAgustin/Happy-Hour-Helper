@@ -37,13 +37,14 @@ export const getUsers = () => {
   }
 }
 
-export const getLoggedUser = (mail) => {
+export const getLoggedUser = (id) => {
   return function (dispatch){
-    axios.get("https://happy-hour-helper-production.up.railway.app/users/getUserByEmail", {mail})
+    axios.get(`http://localhost:3001/users/getUserById?id=${id}`)
       .then((data) => {
+        console.log(data)
         dispatch({
           type: GET_LOGGED_USER,
-          payload: data,
+          payload: data.data,
         })
       }
     )

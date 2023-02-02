@@ -22,8 +22,10 @@ const getUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.query;
+    console.log(id)
     const user = getModelsById(User, id);
+    console.log(user)
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -32,8 +34,8 @@ const getUserById = async (req, res) => {
 
 const getUserByEmail = async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = getModelsByEmail(User, email);
+    const { mail } = req.body;
+    const user = await getModelsByEmail(User, mail);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });

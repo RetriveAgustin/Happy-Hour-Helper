@@ -55,16 +55,16 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
-  const user = useSelector(state => state.userLoged);
+  const user = useSelector(state => state.user.userLoged);
 
   async function handleSubmit() {
     try {
-      console.log("submit")
       setLoading(true);
-      // await signInWithEmailAndPassword(getAuth(), mail, password);
-
+      // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente 
       const result = await dispatch(loginUser(login, { mail, password }));
-      dispatch(getLoggedUser(mail));
+      const id = await localStorage.getItem('User_ID');
+      console.log(id)
+      dispatch(getLoggedUser(id));
       console.log("user", {user})
 
       setOpen(false)
