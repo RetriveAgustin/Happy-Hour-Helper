@@ -62,28 +62,27 @@ export default function ConfirmOrder() {
   }, [dispatch, loading]);
 
   const handleFinish = () => {
-    // try {
-    //   var day = new Date();
-    //   var today = day.toLocaleString();
-    //   const obj = {
-    //     date: day,
-    //     delivered: false,
-    //     canceled: false,
-    //     adress: options.address,
-    //     payment_method: options.payment,
-    //     user_id: userCredentials.uid,
-    //     products: stateCart,
-    //     //total: stateTotal
-    //   };
-    //   console.log(obj);
-    //   axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
-    //     setSuccess(r.data);
-    //     setTimeout(() => {
-    //       navigate("/home");
-    //     }, 3000);
-    //   });
-    // } catch (error) {}
-    console.log("hhh");
+    try {
+      var day = new Date();
+      var today = day.toLocaleString();
+      const obj = {
+        date: day,
+        delivered: false,
+        canceled: false,
+        adress: options.address,
+        payment_method: options.payment,
+        user_id: userCredentials.uid,
+        products: stateCart,
+        //total: stateTotal
+      };
+      console.log(obj);
+      axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
+        setSuccess(r.data);
+        setTimeout(() => {
+          navigate("/home");
+        }, 3000);
+      });
+    } catch (error) {}
   };
 
   const handleChange = ({ target: { name, value } }) => {
