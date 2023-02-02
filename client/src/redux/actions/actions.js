@@ -47,6 +47,8 @@ export const getUsers = () => {
 };
 
 export const getAllCategories = () => {
+  console.log(process.env.REACT_APP_API_URL);
+console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
     fetch(
       "https://happy-hour-helper-production.up.railway.app/category/getCategory"
