@@ -27,7 +27,7 @@ const ProfilePicture = styled.img`
 `;
 
 const UserDetails = styled.div`
-  width: 30%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -38,21 +38,25 @@ const UserDetails = styled.div`
 const Name = styled.p`
   font-size: 1.3em;
   color: #ccc;
+  margin-bottom: 1em;
 `;
 
 const LastName = styled.p`
   font-size: 1.3em;
   color: #ccc;
+  margin-bottom: 1em;
 `;
 
 const Email = styled.p`
   font-size: 1.3em;
   color: #ccc;
+  margin-bottom: 1em;
 `;
 
 const Password = styled.p`
   font-size: 1.3em;
   color: #ccc;
+  margin-bottom: 1em;
 `;
 
 const user = {
@@ -88,67 +92,115 @@ const Settings = () => {
     setEditing({ ...editing, [detail]: false });
   };
 
-
-
-
   return (
     <LayoutUserContainer>
-    <User />
-    <UserCard>
-      <ProfilePicture
-        src="https://imgs.search.brave.com/g4ZFZq9Aex8IsaczP7FUj-PG_ucqW80TEPMIYDGA9ns/rs:fit:300:300:1/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzhlLzdi/LzQzLzhlN2I0MzNk/YTIyNDI5OTQwZGVh/ZTYxN2ViODRiOGVk/LmpwZw"
-        alt="user-profile"
-      />
-      <UserDetails>
-        <Name>
-          {editing.name ? (
-            <>
-              <input value={name} onChange={(e) => setName(e.target.value)} />
-              <Button variant="outlined" onClick={() => handleSave("name", name)}>Guardar</Button>
-            </>
-          ) : (
-            <>
-              Nombre: {name} <Button variant="outlined" onClick={() => handleEdit("name")}>Editar</Button>
-            </>
-          )}
-        </Name>
-        <LastName>
-          {editing.lastName ? (
+      <User />
+      <UserCard>
+        <ProfilePicture
+          src="https://imgs.search.brave.com/g4ZFZq9Aex8IsaczP7FUj-PG_ucqW80TEPMIYDGA9ns/rs:fit:300:300:1/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzhlLzdi/LzQzLzhlN2I0MzNk/YTIyNDI5OTQwZGVh/ZTYxN2ViODRiOGVk/LmpwZw"
+          alt="user-profile"
+        />
+        <UserDetails>
+          <Name>
+            {editing.name ? (
               <>
-                <input value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                <Button variant="outlined" onClick={() => handleSave("lastName", lastName)}>Guardar</Button>
+                <input value={name} onChange={(e) => setName(e.target.value)} />
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSave("name", name)}
+                >
+                  Guardar
+                </Button>
               </>
             ) : (
-                <>
-                Apellido:  {lastName} <Button variant="outlined" onClick={() => handleEdit("lastName")}>Editar</Button>
+              <>
+                Nombre: {name}{" "}
+                <Button variant="outlined" onClick={() => handleEdit("name")}>
+                  Editar
+                </Button>
+              </>
+            )}
+          </Name>
+          <LastName>
+            {editing.lastName ? (
+              <>
+                <input
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSave("lastName", lastName)}
+                >
+                  Guardar
+                </Button>
+              </>
+            ) : (
+              <>
+                Apellido: {lastName}{" "}
+                <Button
+                  variant="outlined"
+                  onClick={() => handleEdit("lastName")}
+                >
+                  Editar
+                </Button>
               </>
             )}
           </LastName>
           <Email>
             {editing.email ? (
               <>
-                <input value={email} onChange={(e) => setEmail(e.target.value)} />
-                <Button variant="outlined" onClick={() => handleSave("email", email)}>Guardar</Button>
+                <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSave("email", email)}
+                >
+                  Guardar
+                </Button>
               </>
             ) : (
               <>
-                  Email: {email} <Button variant="outlined" onClick={() => handleEdit("email")}>Editar</Button>
+                Email: {email}{" "}
+                <Button variant="outlined" onClick={() => handleEdit("email")}>
+                  Editar
+                </Button>
               </>
             )}
           </Email>
           <Password>
             {editing.password ? (
               <>
-                <input type={showPassword ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} />
-                <Button variant="outlined" onClick={() => handleSave("password", password)}>Guardar</Button>
-                <Button variant="outlined" onClick={() => setShowPassword(!showPassword)}>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Button
+                  variant="outlined"
+                  onClick={() => handleSave("password", password)}
+                >
+                  Guardar
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   {showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                 </Button>
               </>
             ) : (
               <>
-                Password: ****** <Button variant="outlined" onClick={() => handleEdit("password")}>Editar</Button>
-              </> 
+                Password: ******{" "}
+                <Button
+                  variant="outlined"
+                  onClick={() => handleEdit("password")}
+                >
+                  Editar
+                </Button>
+              </>
             )}
           </Password>
         </UserDetails>
@@ -156,6 +208,5 @@ const Settings = () => {
     </LayoutUserContainer>
   );
 };
-
 
 export default Settings;

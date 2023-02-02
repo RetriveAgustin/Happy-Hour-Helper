@@ -148,16 +148,17 @@ export const addToCart = (payload) => {
 
 //SECCION ADDRESS!!!!!!!!!!!!!!!!!
 
-export const getAddress = () => {
-  return async (dispatch) => {
-    const res = await axios.get(`http://localhost:3001/address/getAddress`);
-    const data = res.data;
-    return dispatch({
-      type: "GET_ADDRESSES",
-      payload: data,
-    });
-  };
+export const getAddress = () => (dispatch) =>  {
+  axios.get("http://localhost:3001/address/getAddress")
+  .then((response) => {
+    dispatch({type:  GET_ADDRESSES, payload: response.data});
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 };
+
+
 
 export const createAddress = (data) => async (dispatch) => {
   try {
@@ -187,11 +188,12 @@ export const deleteAddress = (id) => {
       { data: { id } }
     );
     return dispatch({
-      type: DELETE_ADDRESS,
+      type: "DELETE_ADDRESS",
       payload: res.data,
     });
   };
 };
+
 
 //SECCION PAYMENT!!!!!!!!!!!!!!!!
 

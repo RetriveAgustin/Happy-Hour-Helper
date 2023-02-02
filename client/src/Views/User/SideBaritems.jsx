@@ -26,87 +26,86 @@ export const SIDEBAR_DATA = [
   },
 ];
 
+const ItemsList = styled.ul`
+  list-style: none;
+`;
+
+const ItemContainer = styled.li`
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1rem 0.25rem;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  &:hover {
+    background: #eaeced;
+  }
+  &.active {
+    background-color: #dbe4f3;
+  }
+`;
+
+const ItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  color: #7c7788;
+  font-size: 1em;
+`;
+
+const ItemName = styled.span`
+  margin-left: 0;
+  display: block;
+  text-transform: capitalize;
+  color: #c4c0c0;
+  font-size: 1.8em;
+`;
+
+const ItemIcon = styled.span`
+  margin-left: 0;
+  display: block;
+  text-transform: capitalize;
+  color: white;
+  font-size: 2em;
+  padding: 0.25em;
+`;
 const SidebarItems = ({ displaySidebar }) => {
   const [activeItem, setActiveItem] = useState(0);
   const location = useLocation();
 
-  const ItemsList = styled.ul`
-    list-style: none;
-  `;
-
-  const ItemContainer = styled.li`
-    margin-top: 1.5rem;
-    width: 100%;
-    padding: 1rem 0.25rem;
-    border-radius: 0.2rem;
-    cursor: pointer;
-    &:hover {
-      background: #eaeced;
-    }
-    &.active {
-      background-color: #dbe4f3;
-    }
-  `;
-
-  const ItemWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    color: #7c7788;
-    font-size: 1em;
-  `;
-
-  const ItemName = styled.span`
-    margin-left: 0;
-    display: block;
-    text-transform: capitalize;
-    color: #c4c0c0;
-    font-size: 1.8em;
-  `;
-
-  const ItemIcon = styled.span`
-    margin-left: 0;
-    display: block;
-    text-transform: capitalize;
-    color: white;
-    font-size: 2em;
-    padding: 0.25em;
-  `;
-
   return (
     <ItemsList>
-      <Link to='/settings' style={{ textDecoration: "none" }}>
-        <ItemContainer 
-          className={location.pathname === '/settings' ? "active" : ""}
+      <Link to="/user/settings" style={{ textDecoration: "none" }}>
+        <ItemContainer
+          className={location.pathname === "/user/settings" ? "active" : ""}
         >
           <ItemWrapper>
-            <ItemIcon><PersonOutlineOutlinedIcon /></ItemIcon>
-            <ItemName displaySidebar={displaySidebar}>
-              Settings
-            </ItemName>
+            <ItemIcon>
+              <PersonOutlineOutlinedIcon />
+            </ItemIcon>
+            <ItemName displaySidebar={displaySidebar}>Settings</ItemName>
           </ItemWrapper>
         </ItemContainer>
       </Link>
-      <Link to='/address' style={{ textDecoration: "none" }}>
+      <Link to="/user/address" style={{ textDecoration: "none" }}>
         <ItemContainer
-          className={location.pathname === '/address' ? "active" : ""}
+          className={location.pathname === "/user/address" ? "active" : ""}
         >
           <ItemWrapper>
-            <ItemIcon><HomeIcon /></ItemIcon>
-            <ItemName displaySidebar={displaySidebar}>
-              Address
-            </ItemName>
+            <ItemIcon>
+              <HomeIcon />
+            </ItemIcon>
+            <ItemName displaySidebar={displaySidebar}>Address</ItemName>
           </ItemWrapper>
         </ItemContainer>
       </Link>
-      <Link to='/pago' style={{ textDecoration: "none" }}>
+      <Link to="/user/pago" style={{ textDecoration: "none" }}>
         <ItemContainer
-          className={location.pathname === '/pago' ? "active" : ""}
+          className={location.pathname === "/user/pago" ? "active" : ""}
         >
           <ItemWrapper>
-            <ItemIcon><AddCardIcon /></ItemIcon>
-            <ItemName displaySidebar={displaySidebar}> 
-              Pago
-            </ItemName>
+            <ItemIcon>
+              <AddCardIcon />
+            </ItemIcon>
+            <ItemName displaySidebar={displaySidebar}>Pago</ItemName>
           </ItemWrapper>
         </ItemContainer>
       </Link>

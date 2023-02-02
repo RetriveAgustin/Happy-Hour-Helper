@@ -50,10 +50,10 @@ const rootReducer = (state = initialState, action) => {
       });
       return { ...state, addresses: updatedAddresses };
     case DELETE_ADDRESS:
-      const filteredAddresses = state.addresses.filter(
-        (address) => address.id !== action.payload
-      );
-      return { ...state, addresses: filteredAddresses };
+      return {
+        ...state,
+        addresses: state.addresses.filter(address => address.id !== action.payload)
+      }
     case GET_PAYMENT:
       return { ...state, paymentMethods: action.payload };
     case POST_PAYMENT:

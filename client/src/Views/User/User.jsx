@@ -16,7 +16,6 @@ export const SidebarContainer = styled.div`
   overflow-x: hidden;
   text-decoration: none;
   display: block;
-  
 `;
 
 const SidebarWrapper = styled.div`
@@ -29,15 +28,14 @@ const SidebarWrapper = styled.div`
 `;
 
 const SidebarLogoWrapper = styled.img`
-  padding: 0.5rem 4rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 55%;
+  width: 65%;
   border-radius: 50%;
   text-decoration: none;
-  
+  margin-left: 2.5rem;
 `;
 
 const SidebarToggler = styled.button`
@@ -54,7 +52,7 @@ const Children = styled.div`
   }
 `;
 
-function User({children}) {
+function User({ children }) {
   const [displaySidebar, setDisplaySidebar] = useState(!MOBILE_VIEW);
 
   const handleSidebarDisplay = (e) => {
@@ -77,9 +75,7 @@ function User({children}) {
           <SidebarToggler
             displaySidebar={displaySidebar}
             onClick={handleSidebarDisplay}
-          >
-            
-          </SidebarToggler>
+          ></SidebarToggler>
           <Sidebaritems displaySidebar={displaySidebar} />
         </SidebarWrapper>
       </SidebarContainer>

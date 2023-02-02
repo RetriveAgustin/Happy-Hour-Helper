@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import User from './User';
+import User from "./User";
 import {
   getPaymentMethods,
   postPayment,
@@ -16,9 +16,8 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import DeleteIcon from '@mui/icons-material/Delete';
-import styled  from 'styled-components';
-
+import DeleteIcon from "@mui/icons-material/Delete";
+import styled from "styled-components";
 
 const LayoutUserContainer = styled.div`
   background-color: #171717;
@@ -38,8 +37,6 @@ const UserCard = styled.div`
   background-color: #52373c;
   box-shadow: 0px 0px 10px 0px #080000;
 `;
-
-
 
 const Pago = () => {
   const [selectedId, setSelectedId] = useState(0);
@@ -70,38 +67,33 @@ const Pago = () => {
     setFormOpen(false);
     // added this line to reset the formData after submit
     setFormData({
-    name: "",
-    code: "",
-    expiration_date: "",
-    propetary_name: "",
-    propetary_last_name: "",
+      name: "",
+      code: "",
+      expiration_date: "",
+      propetary_name: "",
+      propetary_last_name: "",
     });
     setShowTables(true);
-    };
-    
-    const handleEdit = (id, data) => {
+  };
+
+  const handleEdit = (id, data) => {
     // Dispatch the putPayment action with the id and updated data
     dispatch(putPayment(id, data));
     setFormOpen(false);
     // added this line to reset the formData after submit
     setFormData({
-    name: "",
-    code: "",
-    expiration_date: "",
-    propetary_name: "",
-    propetary_last_name: "",
+      name: "",
+      code: "",
+      expiration_date: "",
+      propetary_name: "",
+      propetary_last_name: "",
     });
-    setShowTables(true)
-    };
+    setShowTables(true);
+  };
   const handleDelete = (id) => {
     // Dispatch the deletePayment action with the id
     dispatch(deletePayment(id));
   };
-
-  // const handleRestore = (id) => {
-  //   // Dispatch the restorePayment action with the id
-  //   dispatch(restorePayment(id));
-  // };
 
   const handleSelectedId = (event) => {
     setSelectedId(event.target.value);
@@ -119,122 +111,122 @@ const Pago = () => {
     setSelectedId(id);
     setFormData(data);
     setFormOpen(true);
-    setShowTables(false)
+    setShowTables(false);
   };
 
   const handleCloseForm = () => {
     setFormOpen(false);
-    setShowTables(true)
+    setShowTables(true);
   };
 
   const handleOpenForm = () => {
     setFormOpen(true);
-    setShowTables(false)
+    setShowTables(false);
   };
 
   return (
     <LayoutUserContainer>
-    <User   />
-    <UserCard>
-      <form onSubmit={handleSubmit}>
-        {formOpen ? (
-          <>
-            <TextField
-              label="Tarjeta"
-              variant="outlined"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Code"
-              type="number"
-              name="code"
-              value={formData.code}
-              onChange={handleChange}
-            />
-            <TextField
-              type="month"
-              name="expiration_date"
-              value={formData.expiration_date}
-              onChange={handleChange}
-            />
-            <TextField
-              label="First Name"
-              type="text"
-              name="propetary_name"
-              value={formData.propetary_name}
-              onChange={handleChange}
-            />
-            <TextField
-              label="Last Name"
-              type="text"
-              name="propetary_last_name"
-              value={formData.propetary_last_name}
-              onChange={handleChange}
-            />
-            <Button
-              type="submit"
-              onClick={() => handleEdit(selectedId, formData)}
-            >
-              Save Edit
+      <User />
+      <UserCard>
+        <form onSubmit={handleSubmit}>
+          {formOpen ? (
+            <>
+              <TextField
+                label="Tarjeta"
+                variant="outlined"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Code"
+                type="number"
+                name="code"
+                value={formData.code}
+                onChange={handleChange}
+              />
+              <TextField
+                type="month"
+                name="expiration_date"
+                value={formData.expiration_date}
+                onChange={handleChange}
+              />
+              <TextField
+                label="First Name"
+                type="text"
+                name="propetary_name"
+                value={formData.propetary_name}
+                onChange={handleChange}
+              />
+              <TextField
+                label="Last Name"
+                type="text"
+                name="propetary_last_name"
+                value={formData.propetary_last_name}
+                onChange={handleChange}
+              />
+              <Button
+                type="submit"
+                onClick={() => handleEdit(selectedId, formData)}
+              >
+                Save Edit
+              </Button>
+              <Button type="submit">Guardar Nuevo</Button>
+              <Button onClick={handleCloseForm}>Cancelar</Button>
+            </>
+          ) : (
+            <Button type="button" variant="outlined" onClick={handleOpenForm}>
+              Añadir Tarjeta
             </Button>
-            <Button type="submit" >Guardar Nuevo</Button>
-            <Button onClick={handleCloseForm}>Cancel</Button>
-          </>
-        ) : (
-          <Button type="button" variant="outlined"   onClick={handleOpenForm}>
-            Add Payment Method
-          </Button>
+          )}
+        </form>
+        {showTables && (
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Tarjeta</TableCell>
+                <TableCell>Codigo</TableCell>
+                <TableCell>Fecha Expiracion</TableCell>
+                <TableCell>Nombre</TableCell>
+                <TableCell>Apellido</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {paymentMethods.map((paymentMethod) => (
+                <TableRow key={paymentMethod.id}>
+                  <TableCell>{paymentMethod.name}</TableCell>
+                  <TableCell>{paymentMethod.code}</TableCell>
+                  <TableCell>
+                    {formatExpirationDate(paymentMethod.expiration_date)}
+                  </TableCell>
+                  <TableCell>
+                    {paymentMethod.propetary_name}{" "}
+                    {paymentMethod.propetary_last_name}
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() =>
+                        handleEditClick(paymentMethod.id, paymentMethod)
+                      }
+                    >
+                      Editar
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      startIcon={<DeleteIcon />}
+                      onClick={() => handleDelete(paymentMethod.id)}
+                    >
+                      Borrar
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         )}
-      </form>
-      {showTables && (
-      <Table> 
-        <TableHead>
-          <TableRow>
-            <TableCell>Tarjeta</TableCell>
-            <TableCell>Code</TableCell>
-            <TableCell>Expiration Date</TableCell>
-            <TableCell>Proprietary Name</TableCell>
-            <TableCell>Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {paymentMethods.map((paymentMethod) => (
-            <TableRow key={paymentMethod.id}>
-              <TableCell>{paymentMethod.name}</TableCell>
-              <TableCell>{paymentMethod.code}</TableCell>
-              <TableCell>
-                {formatExpirationDate(paymentMethod.expiration_date)}
-              </TableCell>
-              <TableCell>
-                {paymentMethod.propetary_name}{" "}
-                {paymentMethod.propetary_last_name}
-              </TableCell>
-              <TableCell>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={() =>
-                    handleEditClick(paymentMethod.id, paymentMethod)
-                  }
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  startIcon={<DeleteIcon/>}
-                  onClick={() => handleDelete(paymentMethod.id)}
-                >
-                  Delete
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>  
-      </Table>
-      )}
       </UserCard>
     </LayoutUserContainer>
   );
