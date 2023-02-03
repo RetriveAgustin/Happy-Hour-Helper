@@ -26,10 +26,9 @@ const Card = ({ product }) => {
     if(!e.target.value) {
       return
     }
-    dispatch(addToCart(e.target.value))
+    dispatch(addToCart({...product, amount}))
   }
 
-    
   const navigate = useNavigate()
 
   return (

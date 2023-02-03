@@ -35,8 +35,6 @@ export default function CreateProduct() {
     img: "",
     price: "",
     capacity: "",
-    minimum_amount_for_bulk: "",
-    bulk_discount: "",
     stock: "",
     has_discount: false,
     brand: "",
@@ -52,10 +50,10 @@ export default function CreateProduct() {
       info.name &&
       info.price &&
       info.capacity &&
-      info.brand &&
-      info.category &&
-      info.subcategory
-    )
+      info.brand.length &&
+      info.category.length &&
+      info.subcategory.length
+    ) {
       dispatch(createProduct(info));
     alert("El producto ha sido creado");
     setInfo({
@@ -63,14 +61,14 @@ export default function CreateProduct() {
       img: "",
       price: "",
       capacity: "",
-      minimum_amount_for_bulk: "",
-      bulk_discount: "",
       stock: "",
       has_discount: false,
       brand: "",
       category: "",
       subcategory: "",
-    });
+    })} else {
+      alert('Producto no creado')
+    };
   };
 
   const handleChange = (e) => {
@@ -113,10 +111,11 @@ export default function CreateProduct() {
         <h5 style={{ color: "white", fontSize: "2rem", alignText: "center" }}>
           Crea un producto
         </h5>
+        <p style={{color: 'white'}}>Los campos con * son obligatorios</p>
         <TextInput
           type="text"
           name="name"
-          placeholder="Nombre"
+          placeholder="Nombre*"
           value={info.name}
           onChange={(e) => handleChange(e)}
         />
@@ -130,7 +129,7 @@ export default function CreateProduct() {
         <TextInput
           type="number"
           name="price"
-          placeholder="Precio"
+          placeholder="Precio*"
           step="0.01"
           value={info.price}
           onChange={(e) => handleChange(e)}
@@ -138,23 +137,8 @@ export default function CreateProduct() {
         <TextInput
           type="number"
           name="capacity"
-          placeholder="Capacidad"
+          placeholder="Capacidad*"
           value={info.capacity}
-          onChange={(e) => handleChange(e)}
-        />
-        <TextInput
-          type="number"
-          name="minimum_amount_for_bulk"
-          placeholder="Cantidad mínima en bulk"
-          value={info.minimum_amount_for_bulk}
-          onChange={(e) => handleChange(e)}
-        />
-        <TextInput
-          type="number"
-          name="bulk_discount"
-          step="0.01"
-          placeholder="Descuento en bulk"
-          value={info.bulk_discount}
           onChange={(e) => handleChange(e)}
         />
         <TextInput
@@ -164,15 +148,6 @@ export default function CreateProduct() {
           value={info.stock}
           onChange={(e) => handleChange(e)}
         />
-        {/* <TextInput
-          type="number"
-          name="rating"
-          placeholder="Calificación"
-          min='1'
-          max='5'
-          value={info.rating}
-          onChange={(e) => handleChange(e)}
-        /> */}
         <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
           <CheckContainer>
             <h3 style={{ color: "white" }}>¿Descuento?</h3>
@@ -190,18 +165,21 @@ export default function CreateProduct() {
         </div>
       </ColumnFieldContainer>
       <BrandContainer>
+      <span style={{color: 'white'}}>*</span>
         <Selector name="brand" onChange={(e) => handleSelect(e)}>
           <option hidden>Marca</option>
           {brandsState.map((brand) => {
             return <option value={brand.id}>{brand.name}</option>;
           })}
         </Selector>
+      <span style={{color: 'white'}}>*</span>
         <Selector name="category" onChange={(e) => handleSelect(e)}>
           <option hidden>Categoría</option>
           {categories.map((cat) => {
             return <option value={cat.id}>{cat.name}</option>;
           })}
         </Selector>
+      <span style={{color: 'white'}}>*</span>
         <Selector name="subcategory" onChange={(e) => handleSelect(e)}>
           <option hidden>Sub-Categoría</option>
           {subCategories.map((sub) => {

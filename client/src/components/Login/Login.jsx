@@ -11,7 +11,7 @@ export default function Login() {
     })
     const [error, setError] = useState();
 
-    const { login, loginWithGoogle, userCredentials, resetPassword } = useAuth();
+    const { login, logout, loginWithGoogle, userCredentials, resetPassword } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = ({target: {name, value}}) => {
@@ -25,7 +25,8 @@ export default function Login() {
             const result = await login(user.email, user.password);
             axios.post('http://localhost:3001/users/loginUser', {mail: user.email, password: user.password})
             .then(r => {
-                console.log(r.data)
+                navigate("/");
+                localStorage.setItem('User Credentials', result)
             })
         } catch (e) {
             if (e.message === 'Firebase: Error (auth/internal-error).') return setError('Please enter a password');
@@ -42,7 +43,6 @@ export default function Login() {
             try {
                 const data = await axios.post('http://localhost:3001/users/registerUser', {
                     id: result.user.uid,
-                    token: result.user.accessToken,
                     name: result._tokenResponse.firstName, 
                     lastname: result._tokenResponse.lastname, 
                     mail: result._tokenResponse.email, 
@@ -51,6 +51,7 @@ export default function Login() {
                     created_in_google: true, 
                     is_admin: false});
                 if (data.data === "User registered!") {
+                    console.log("llegaaaa");
                     const loginAfterRegister = await axios.post('http://localhost:3001/users/loginUser', {
                         mail: result._tokenResponse.email,
                         password: null
@@ -84,6 +85,11 @@ export default function Login() {
         }
     }
 
+    const handleLogout = async () => {
+        await logout()
+        console.log("loged out");
+    }
+
     return (
     <div>
         {error && <label>{error}</label>}
@@ -95,6 +101,7 @@ export default function Login() {
             <input type='password' name='password' onChange={handleChange}></input>
 
             <button>Login</button>
+            <button onClick={handleLogout}>Logout</button>
         </form>
             <button onClick={handleGoogleSignIn}>Login with Google</button>
             <button onClick={handleResetPassword}>Reset password</button>

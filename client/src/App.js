@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
@@ -26,6 +27,8 @@ function App() {
   //hay que proteger la ruta /user para que los usuarios no puedan ingresar
   //para los links no validos se puede desarrollar un componente de error 404, o redireccionar al home.
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
+  const user = useSelector((state) => state.user.userLoged);
+  console.log(user);
 
   return (
     <AuthProvider>
@@ -36,26 +39,46 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
-        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />} />
-        
-        <Route path="user/settings" element={<Settings />}/>
-        <Route path="user/address" element={<Address />}/>
-        <Route path="user/pago" element={<Pago />}/>
-
+        <Route
+          path="/add-payment-method"
+          element={<Skeleton view={<AddPaymentMethod />} />}
+        />
+        <Route
+          path="/add-address"
+          element={<Skeleton view={<AddAddres />} />}
+        />
 
         {/* ---------Rutas Admin ------------------- */}
-        <Route
-          path="/admin/*"
-          element={<AdminDashboard props={<UsersDashboard />} />}
-        />
-        <Route
-          path="/admin/products"
-          element={<AdminDashboard props={<ProductsDashboard />} />}
-        />
-        <Route path="/createproduct" element={<CreateProduct />} />
 
-        <Route path="*" element={<Skeleton view={<Home />} />} />
+        {user.is_admin ? (
+          <Route
+            path="/admin/*"
+            element={<AdminDashboard props={<UsersDashboard />} />}
+          />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {user.is_admin ? (
+          <Route
+            path="/admin/products"
+            element={<AdminDashboard props={<ProductsDashboard />} />}
+          />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {user.is_admin ? (
+          <Route path="/createproduct" element={<CreateProduct />} />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {/* {user.is_admin ? (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        ) : (
+          <p>No podes acceder a esta pesaña</p>
+        )} */}
       </Routes>
     </AuthProvider>
   );
