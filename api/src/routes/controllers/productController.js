@@ -65,7 +65,6 @@ const postProduct = async (req, res) => {
   }
 };
 
-
 //se cambió el medio de obtención de las variables, ahora se mandan por body.
 //además ahora se recibe un id, no un nombre, puesto que el producto no tiene acceso a esta información
 //en el home se tendrá que modificar esto para que funcione adecuadamente
