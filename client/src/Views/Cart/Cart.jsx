@@ -51,6 +51,7 @@ const Cart = () => {
                       bulk_discount={e.bulk_discount}
                       has_discount={e.has_discount}
                       minimum_amount_for_bulk={e.minimum_amount_for_bulk}
+                      amount={e.amount}
                     />
                   );
                 })}

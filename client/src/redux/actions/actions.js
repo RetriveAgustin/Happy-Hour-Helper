@@ -201,18 +201,10 @@ export const createBrand = (payload) => {
 
 export const addToCart = (payload) => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
-    fetch(
-      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: ADD_TO_CART,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log(err));
+    dispatch({
+      type: ADD_TO_CART,
+      payload: payload,
+    });
   };
 };
 

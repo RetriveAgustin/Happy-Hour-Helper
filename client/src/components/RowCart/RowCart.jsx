@@ -15,8 +15,8 @@ const RowCart = ({
   bulk_discount,
   has_discount,
   minimum_amount_for_bulk,
+  amount,
 }) => {
-  const [amount, setAmount] = useState(1);
   const [subtotal, setSubtotal] = useState(price * amount);
   const [division, setDivision] = useState(amount / minimum_amount_for_bulk);
   const [totalPrice, setTotalPrice] = useState(
@@ -37,6 +37,8 @@ const RowCart = ({
       dispatch(addTotal(subtotal));
     }
   }, [amount]);
+
+  const handleClick = () => {};
 
   // const subtot = price * amount;
   // const division = amount / minimum_amount_for_bulk;
@@ -78,12 +80,12 @@ const RowCart = ({
           <IconButton
             color="secondary"
             disabled={amount === 1}
-            onClick={() => setAmount(amount - 1)}
+            onClick={() => handleClick(amount - 1)}
           >
             -
           </IconButton>
           <input type="number" className="input" value={amount} />
-          <IconButton color="secondary" onClick={() => setAmount(amount + 1)}>
+          <IconButton color="secondary" onClick={() => handleClick(amount + 1)}>
             +
           </IconButton>
         </SubAdd>
