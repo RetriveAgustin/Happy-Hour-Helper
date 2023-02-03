@@ -38,10 +38,10 @@ import DeleteProduct from "./DeleteProducts/DeleteProduct";
 function ProductsDashboard() {
   const dispatch = useDispatch();
 
-  const allProducts = useSelector((state) => state.products);
-  const allBrands = useSelector((state) => state.brands);
-  const allCategories = useSelector((state) => state.categories);
-  const allSubCategories = useSelector((state) => state.subCategories);
+  const allProducts = useSelector((state) => state.root.products);
+  const allBrands = useSelector((state) => state.root.brands);
+  const allCategories = useSelector((state) => state.root.categories);
+  const allSubCategories = useSelector((state) => state.root.subCategories);
   const [productInfo, setProductInfo] = useState([]);
   const [searchValues, setSearchValues] = useState({
     value: "",
@@ -145,7 +145,7 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Categories:</label>
+        <label>Categorias:</label>
         <FilterInput
           defaultValue={selectedCategory}
           onChange={(e) => HandleSelectByCategory(e.target.value)}
@@ -158,7 +158,7 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Sub-Categories:</label>
+        <label>Sub-Categorias:</label>
         <FilterInput
           defaultValue={selectedSubCategory}
           onChange={(e) => HandleSelectBySubCategory(e.target.value)}
@@ -171,9 +171,9 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Filter by:</label>
+        <label>Filtrar por:</label>
         <FilterInput onChange={(e) => HandleSelect(e.target.value)}>
-          <option value="name">Name</option>
+          <option value="name">Nombre</option>
           <option value="id">ID</option>
         </FilterInput>
         <SearchBarContainer>

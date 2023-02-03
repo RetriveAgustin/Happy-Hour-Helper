@@ -22,8 +22,10 @@ const getUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   try {
-    const { id } = req.body;
-    const user = getModelsById(User, id);
+    const { id } = req.query;
+    console.log(id)
+    const user = await getModelsById(User, id);
+    console.log(user)
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -32,8 +34,8 @@ const getUserById = async (req, res) => {
 
 const getUserByEmail = async (req, res) => {
   try {
-    const { email } = req.body;
-    const user = getModelsByEmail(User, email);
+    const { mail } = req.body;
+    const user = await getModelsByEmail(User, mail);
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({error: error.message });
@@ -61,6 +63,7 @@ const loginUser = async (req, res) => {
     const user = await User.findAll({where: {
       mail: mail
     }})
+
     if (user[0]) {
       const compare = user[0].password === null && user[0].created_in_google === true ? true : await bcryptjs.compare(password, user[0].password);
       if (compare) {
@@ -70,6 +73,7 @@ const loginUser = async (req, res) => {
         res.status(400).send('Wrong password!')
       }
     }
+
     else {
       res.status(400).send("Email doesn't exist!")
     }
@@ -111,9 +115,10 @@ const restoreUser = async (req, res) => {
 module.exports = {
   getUser,
   getUserById,
+  getUserByEmail,
   registerUser,
   loginUser,
   putUser,
   deleteUser,
-  restoreUser
+  restoreUser,
 };

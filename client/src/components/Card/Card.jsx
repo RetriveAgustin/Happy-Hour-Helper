@@ -17,44 +17,57 @@ const AddToCart = styled(Button)({
 });
 
 const Card = ({ product }) => {
-  const { id, name, img, price, stock } = product && product
+  const { id, name, img, price, stock } = product && product;
   const [amount, setAmount] = useState(1);
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
 
   const handleAdd = (e) => {
-    if(!e.target.value) {
-      return
+    if (!e.target.value) {
+      return;
     }
-    dispatch(addToCart(e.target.value))
-  }
+    dispatch(addToCart({ ...product, amount }));
+  };
 
-    
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <div>
       <div className="main-container">
         <div onClick={() => navigate(`/product/${id}`)}>
-        <div className="img-box">
-          <img className="image" src={img ? img : Wine} alt="not found" />
-        </div>
-        <div className="price">${price}</div>
-        <div className="name">
-          <h4 className="name-tag">{name}</h4>
-        </div>
+          <div className="img-box">
+            <img className="image" src={img ? img : Wine} alt="not found" />
+          </div>
+          <div className="price">${price}</div>
+          <div className="name">
+            <h4 className="name-tag">{name}</h4>
+          </div>
         </div>
         <div className="sub-add">
           <IconButton
             color="secondary"
-            sx={{color: "#52373c"}}
+            sx={{ color: "#52373c" }}
             disabled={amount === 1}
             onClick={() => setAmount(amount - 1)}
           >
             <IndeterminateCheckBoxRoundedIcon fontSize="large" />
           </IconButton>
-          <input type="number" className="input" value={amount} style={{textAlign: 'center' , borderRadius: '5px', border: '1px solid #bdbdbd'}}/>
-          <IconButton disabled={amount >= stock} sx={{color: "#52373c"}} color="secondary" onClick={() => setAmount(amount + 1)} >
+          <input
+            type="number"
+            className="input"
+            value={amount}
+            style={{
+              textAlign: "center",
+              borderRadius: "5px",
+              border: "1px solid #bdbdbd",
+            }}
+          />
+          <IconButton
+            disabled={amount >= stock}
+            sx={{ color: "#52373c" }}
+            color="secondary"
+            onClick={() => setAmount(amount + 1)}
+          >
             <AddBoxRoundedIcon fontSize="large" />
           </IconButton>
         </div>
@@ -65,11 +78,11 @@ const Card = ({ product }) => {
             startIcon={<ShoppingCartOutlinedIcon />}
             value={id}
             onClick={(e) => handleAdd(e)}
-            sx={{backgroundColor: "#52373c"}}
+            sx={{ backgroundColor: "#52373c" }}
           >
             Agregar
           </AddToCart>
-        </div>        
+        </div>
       </div>
     </div>
   );

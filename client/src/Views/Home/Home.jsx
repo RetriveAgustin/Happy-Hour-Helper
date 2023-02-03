@@ -11,13 +11,13 @@ import LowerFilters from "./LowerFilters/LowerFilters";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
+  const categories = useSelector((state) => state.root.categories);
 
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.root.products);
 
   const [Checked, setChecked] = useState([]);
 

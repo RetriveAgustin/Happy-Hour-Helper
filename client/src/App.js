@@ -5,17 +5,16 @@ import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
-import Register from "./components/Register/Register.jsx";
 import Detail from "./Views/Detail/Detail";
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
 import SearchView from "./Views/Search-View/Search-View";
-import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
-import { AuthProvider } from "./context/authContext";
 import Skeleton from "./components/Skeleton/Skeleton";
+import { AuthProvider } from "./context/authContext";
+// import Header from "./components/Header/Header";
 // import Login from "./components/Login/Login.jsx";
 // import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
 // import SearchView from "./Views/Search-View/Search-View";
@@ -35,20 +34,16 @@ function App() {
         <Route path="/" element={<Skeleton view={<Home />} />} />
         <Route path="/cart" element={<Skeleton view={<Cart />} />} />
         <Route path="/user" element={<Skeleton view={<User />} />} />
+        <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/confirm" element={<ConfirmOrder />} /> */}
         {/* <Route path="/add-payment-method" element={<AddPaymentMethod />} /> */}
         {/* <Route path="/add-address" element={<AddAddres />} /> */}
 
+        <Route path="*" element={<Skeleton view={<Home />} />} />
+
         {/* ---------Rutas Admin ------------------- */}
-
-        {/* <Route path="/createproduct" element={<CreateProduct />} /> */}
-
-        {/* <Route path="*" element={<Home />} /> */}
-      </Routes>
-
-      <Routes>
         <Route
           path="/admin/*"
           element={<AdminDashboard props={<UsersDashboard />} />}
@@ -56,6 +51,10 @@ function App() {
         <Route
           path="/admin/products"
           element={<AdminDashboard props={<ProductsDashboard />} />}
+        />
+        <Route
+          path="/createproduct"
+          element={<AdminDashboard props={<CreateProduct />} />}
         />
       </Routes>
     </AuthProvider>

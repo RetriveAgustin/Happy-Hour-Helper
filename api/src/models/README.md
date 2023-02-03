@@ -49,8 +49,6 @@ Product:
 --> img: string (allowNull: true)
 --> price: float
 --> capacity: numeric
---> minimum-amount-for-bulk: numeric (allowNull: true)
---> bulk-discount: numeric (allowNull: true)
 --> stock: numeric (allowNull: true)
 --> rating: ENUM (0-5) (allowNull: true)
 --> show: boolean

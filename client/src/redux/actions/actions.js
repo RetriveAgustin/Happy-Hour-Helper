@@ -1,37 +1,35 @@
 import axios from "axios";
+
+// ------ Usuarios ----------------
+export const GET_USERS = "GET_USERS";
+export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
+export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_USER = "REGISTER_USER";
+export const GET_LOGGED_USER = "GET_LOGGED_USER";
+
+// ------ Productos ---------------
+export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
+export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
+export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
+
+// ------ Carrito -----------------
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+// ------ Categorias --------------
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_SUB_CATEGORIES = "GET_SUB_CATEGORIES";
 export const GET_BRANDS = "GET_BRANDS";
-export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
-export const GET_OFFERS = "GET_OFFERS";
-export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
-export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
-export const ADD_TO_CART = "ADD_TO_CART";
-export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
-export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
-export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
+export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = "FILTER_PRICE";
-export const GET_USERS = "GET_USERS";
-export const GET_USER_LOGGED = "GET_USER_BY_EMAIL";
-
-// export const getUserLogged = (payload) => {
-//   return function (dispatch){
-//     fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
-//     .then((response) => response.json())
-//     .then((data) => {
-//       dispatch({
-//         type: GET_USER_LOGGED,
-//         payload: data,
-//       })
-//     })
-//   }
-// };
+export const GET_OFFERS = "GET_OFFERS";
 
 export const getUsers = () => {
   return function (dispatch) {
+    // fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
     fetch("https://happy-hour-helper-production.up.railway.app/users/getUser")
       .then((response) => response.json())
       .then((data) => {
@@ -40,6 +38,67 @@ export const getUsers = () => {
           payload: data,
         });
       });
+  };
+};
+
+export const getLoggedUser = (id) => {
+  return function (dispatch) {
+    axios
+      .get(
+        `https://happy-hour-helper-production.up.railway.app/getUserById?id=${id}`
+      )
+      .then((data) => {
+        dispatch({
+          type: GET_LOGGED_USER,
+          payload: data.data,
+        });
+      });
+  };
+};
+
+export const loginUser = (login, payload) => {
+  // payload es un obj con mail y password
+  return async function (dispatch) {
+    try {
+      const result = await login(payload.mail, payload.password); // acá se guardan las USER CREDENTIALS si el login es exitoso
+      const data = await axios.post(
+        "https://happy-hour-helper-production.up.railway.app/users/loginUser",
+        { mail: payload.mail, password: payload.password }
+      );
+      localStorage.setItem("User_ID", result.user.uid); // por ahora sólo guardamos el user_id en localStorage
+      dispatch({
+        type: LOGIN_USER,
+        payload: result.user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const registerUser = (register, payload) => {
+  return async function (dispatch) {
+    try {
+      const result = await register(payload.email, payload.password);
+      const post = await axios.post(
+        "https://happy-hour-helper-production.up.railway.app/users/registerUser",
+        {
+          id: result.user.uid,
+          name: payload.name,
+          lastname: payload.lastName,
+          mail: payload.email,
+          password: payload.password,
+          created_in_google: false,
+          is_admin: false,
+        }
+      );
+      console.log(post);
+      dispatch({
+        type: REGISTER_USER,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -85,7 +144,6 @@ export const getAllProducts = () => {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         dispatch({
           type: GET_ALL_PRODUCTS,
           payload: data,
@@ -198,19 +256,9 @@ export const createBrand = (payload) => {
 };
 
 export const addToCart = (payload) => {
-  return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
-    fetch(
-      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        dispatch({
-          type: ADD_TO_CART,
-          payload: data,
-        });
-      })
-      .catch((err) => console.log(err));
+  return {
+    type: ADD_TO_CART,
+    payload: payload,
   };
 };
 
@@ -222,6 +270,7 @@ export const removeFromCart = (payload) => {
     });
   };
 };
+
 export const filterByPrice = (payload) => {
   return {
     type: FILTER_PRICE,

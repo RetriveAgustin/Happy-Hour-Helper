@@ -40,7 +40,7 @@ function UsersDashboard() {
     dispatch(getUsers());
   }, [dispatch]);
 
-  const allUsers = useSelector((state) => state.users);
+  const allUsers = useSelector((state) => state.user.users);
 
   useEffect(() => {
     setUserInfo(allUsers);
@@ -96,10 +96,10 @@ function UsersDashboard() {
   return (
     <DashboardInfoContainer>
       <HeaderContainer>
-        <label>Filter by:</label>
+        <label>Filtrar por:</label>
         <FilterInput defaultValue={searchValues.filter} onChange={HandleSelect}>
-          <option value="first_name">First Name</option>
-          <option value="last_name">Last Name</option>
+          <option value="first_name">Nombre</option>
+          <option value="last_name">Apellido</option>
           <option value="email">E-mail</option>
           <option value="id">ID</option>
         </FilterInput>
@@ -126,10 +126,10 @@ function UsersDashboard() {
                   <b>ID</b>
                 </TableCell>
                 <TableCell align="center">
-                  <b>First Name</b>
+                  <b>Nombre</b>
                 </TableCell>
                 <TableCell align="center">
-                  <b>Last Name</b>
+                  <b>Apellido</b>
                 </TableCell>
                 <TableCell align="center">
                   <b>E-Mail</b>
