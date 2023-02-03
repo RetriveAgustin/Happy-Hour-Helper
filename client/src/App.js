@@ -1,7 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
-import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
