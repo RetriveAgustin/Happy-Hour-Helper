@@ -29,7 +29,6 @@ const Card = ({ product }) => {
     dispatch(addToCart({...product, amount}))
   }
 
-  console.log(product);
   const navigate = useNavigate()
 
   return (
