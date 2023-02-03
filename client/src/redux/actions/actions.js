@@ -118,6 +118,8 @@ export const filterByPrice = (payload) => {
 
 
 export const getAllCategories = () => {
+  console.log(process.env.REACT_APP_API_URL);
+console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
     fetch("https://happy-hour-helper-production.up.railway.app/category/getCategory")
@@ -284,6 +286,7 @@ export const getAddress = () => {
     });
   };
 };
+<<<<<<< HEAD
 
 export const createAddress = (data) => async (dispatch) => {
   try {
@@ -378,3 +381,5 @@ export const restorePayment = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+=======
+>>>>>>> 326f80447e0164c7a1f4adf21d82184ecffd5973

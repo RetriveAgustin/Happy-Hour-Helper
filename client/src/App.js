@@ -1,13 +1,18 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+<<<<<<< HEAD
 import { useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
+=======
+
+>>>>>>> 326f80447e0164c7a1f4adf21d82184ecffd5973
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 // import Admin from "./Views/Admin/Admin";
 import User from "./Views/User/User";
 import Detail from "./Views/Detail/Detail";
+<<<<<<< HEAD
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
 import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
 import UsersDashboard from "./Views/AdminDashboard/users/UserDashboard";
@@ -21,6 +26,11 @@ import { AuthProvider } from "./context/authContext";
 import Settings from "./Views/User/Settings";
 import Address from "./Views/User/Address"
 import Pago from "./Views/User/Pago";
+=======
+import AdminDashboard from "./Views/AdminDashboard/AdminDashboard";
+
+
+>>>>>>> 326f80447e0164c7a1f4adf21d82184ecffd5973
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
