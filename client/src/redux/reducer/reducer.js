@@ -1,5 +1,4 @@
 import {
-  GET_USERS,
   GET_CATEGORIES,
   GET_BRANDS,
   GET_OFFERS,
@@ -10,8 +9,6 @@ import {
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
-  GET_USER_LOGGED,
-  ADD_TOTAL,
 } from "./../actions/actions";
 
 const initialState = {
@@ -24,17 +21,10 @@ const initialState = {
   productsByCategory: [],
   detail: [],
   cart: [],
-  users: [],
-  userLoged: {},
-  total: 0,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case GET_USER_LOGGED:
-      return { ...state, userLoged: action.payload };
-    case GET_USERS:
-      return { ...state, users: action.payload };
     case GET_CATEGORIES:
       return { ...state, categories: action.payload };
     case GET_BRANDS:
@@ -64,11 +54,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart, action.payload],
-      };
-    case ADD_TOTAL:
-      return {
-        ...state,
-        total: state.total + action.payload,
       };
     case REMOVE_FROM_CART:
       return {

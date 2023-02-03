@@ -8,58 +8,10 @@ import { Divider, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 // import accounting from "accounting";
 
-const RowCart = ({
-  img,
-  name,
-  price,
-  bulk_discount,
-  has_discount,
-  minimum_amount_for_bulk,
-  amount,
-}) => {
-  const [subtotal, setSubtotal] = useState(price * amount);
-  const [division, setDivision] = useState(amount / minimum_amount_for_bulk);
-  const [totalPrice, setTotalPrice] = useState(
-    subtotal - bulk_discount * Math.floor(division)
-  );
+const RowCart = ({ img, name, price, has_discount, amount }) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setDivision(amount / minimum_amount_for_bulk);
-    setSubtotal(price * amount);
-    setTotalPrice(subtotal - bulk_discount * Math.floor(division));
-    if (
-      amount >= minimum_amount_for_bulk ||
-      amount % minimum_amount_for_bulk === 0
-    ) {
-      dispatch(addTotal(totalPrice));
-    } else {
-      dispatch(addTotal(subtotal));
-    }
-  }, [amount]);
-
-  const handleClick = () => {};
-
-  // const subtot = price * amount;
-  // const division = amount / minimum_amount_for_bulk;
-  // const totalProd = subtot - bulk_discount * Math.floor(division);
-
-  // const totalConDesc = () => {
-  //   if (
-  //     amount >= minimum_amount_for_bulk ||
-  //     amount % minimum_amount_for_bulk === 0
-  //   ) {
-  //     dispatch(addTotal(totalProd));
-  //     return totalProd;
-  //   } else {
-  //     // dispatch(addTotal(subtot));
-  //     return subtot;
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   totalConDesc();
-  // }, [stateTotal]);
+  const subtot = price * amount;
 
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -77,27 +29,18 @@ const RowCart = ({
       </TableCell>
       <TableCell align="right" value="quantity">
         <SubAdd>
-          <IconButton
-            color="secondary"
-            disabled={amount === 1}
-            onClick={() => handleClick(amount - 1)}
-          >
+          <IconButton color="secondary" disabled={amount === 1}>
             -
           </IconButton>
           <input type="number" className="input" value={amount} />
-          <IconButton color="secondary" onClick={() => handleClick(amount + 1)}>
-            +
-          </IconButton>
+          <IconButton color="secondary">+</IconButton>
         </SubAdd>
-      </TableCell>
-      <TableCell align="right" value="bulk_discount">
-        {bulk_discount}
       </TableCell>
       <TableCell align="right" value="subtotal">
         {subtotal}
       </TableCell>
       <TableCell align="right" value="total">
-        {totalPrice}
+        {/* {accounting.formatMoney(totalConDesc())} */}
       </TableCell>
     </TableRow>
   );

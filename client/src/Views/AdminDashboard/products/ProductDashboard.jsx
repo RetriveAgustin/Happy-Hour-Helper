@@ -35,10 +35,10 @@ import {
 function ProductsDashboard() {
   const dispatch = useDispatch();
 
-  const allProducts = useSelector((state) => state.products);
-  const allBrands = useSelector((state) => state.brands);
-  const allCategories = useSelector((state) => state.categories);
-  const allSubCategories = useSelector((state) => state.subCategories);
+  const allProducts = useSelector((state) => state.root.products);
+  const allBrands = useSelector((state) => state.root.brands);
+  const allCategories = useSelector((state) => state.root.categories);
+  const allSubCategories = useSelector((state) => state.root.subCategories);
   const [productInfo, setProductInfo] = useState([]);
   const [searchValues, setSearchValues] = useState({
     value: "",

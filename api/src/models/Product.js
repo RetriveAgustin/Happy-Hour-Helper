@@ -22,14 +22,6 @@ module.exports = (sequelize) => {
       capacity: {
         type: DataTypes.INTEGER,
       },
-      minimum_amount_for_bulk: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      bulk_discount: {
-        type: DataTypes.FLOAT,
-        allowNull: true,
-      },
       stock: {
         type: DataTypes.INTEGER,
         allowNull: true,

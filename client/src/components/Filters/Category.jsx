@@ -13,9 +13,9 @@ function FilterCategories({
   Checked,
   setChecked,
 }) {
-  const subCategories = useSelector((state) => state.subCategories);
-  const products = useSelector((state) => state.products);
-  const brands = useSelector((state) => state.brands);
+  const subCategories = useSelector((state) => state.root.subCategories);
+  const products = useSelector((state) => state.root.products);
+  const brands = useSelector((state) => state.root.brands);
 
   let midBrands = [];
   let finalBrands = [];

@@ -17,8 +17,8 @@ import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const navigate = useNavigate();
-  const stateTotal = useSelector((state) => state?.total);
-  const stateCart = useSelector((state) => state.cart);
+
+  const stateCart = useSelector((state) => state.root.cart);
   const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
   // const dispatch = useDispatch();
 
@@ -48,9 +48,7 @@ const Cart = () => {
                       img={e.img}
                       name={e.name}
                       price={e.price}
-                      bulk_discount={e.bulk_discount}
                       has_discount={e.has_discount}
-                      minimum_amount_for_bulk={e.minimum_amount_for_bulk}
                       amount={e.amount}
                     />
                   );

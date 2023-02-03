@@ -10,13 +10,13 @@ import {
 } from "@mui/material";
 import {
   Google,
-  IsoTwoTone,
   Visibility,
   VisibilityOff,
 } from "@mui/icons-material";
-import { FormContainer, SingUpContainer } from "./RegisterBtn.styles";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { FormContainer } from "./RegisterBtn.styles";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDispatch } from "react-redux";
+import { getLoggedUser, registerUser } from "../../../redux/actions/actions";
 import { useAuth } from "../../../context/authContext";
 
 const style = {
@@ -33,7 +33,11 @@ const style = {
   borderRadius: "5px",
 };
 
+
 function RegisterBtn() {
+
+  const dispatch = useDispatch();
+
   //modals
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -63,7 +67,6 @@ function RegisterBtn() {
     if (!target.value) setErrorName(true);
     else setErrorName(false);
   }
-
   const [errorName, setErrorName] = useState(false);
 
   function handleChangeLastName({ target }) {
@@ -71,7 +74,6 @@ function RegisterBtn() {
     if (!target.value) setErrorLastName(true);
     else setErrorLastName(false);
   }
-
   const [errorLastName, setErrorLastName] = useState(false);
 
   function handleChangeEmail({ target }) {
@@ -79,26 +81,36 @@ function RegisterBtn() {
     if (!target.value) setErrorEmail(true);
     else setErrorEmail(false);
   }
-
   const [errorEmail, setErrorEmail] = useState(false);
 
   function handleChangePassword({ target }) {
     setPassword(target.value);
   }
-
   function handleChangeRepitedPassword({ target }) {
     setRepitedPassword(target.value);
     if (target.value !== password) setErrorPassword(true);
     else setErrorPassword(false);
   }
-
   const [errorPassword, setErrorPassword] = useState(false);
+
+  const { signUp } = useAuth();
 
   async function handleSubmit() {
     try {
       setLoading(true);
-      await signInWithEmailAndPassword(getAuth(), email, password);
+      dispatch(registerUser(signUp, {email, password, name, lastName}))
       setLoading(false);
+
+      const id = localStorage.getItem("User_ID");
+      console.log(id)
+      dispatch(getLoggedUser(id));
+
+      setName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setRepitedPassword("");
+      setOpen(false);
     } catch ({ message }) {
       setLoading(false);
       alert(message);
@@ -107,7 +119,7 @@ function RegisterBtn() {
 
   return (
     <>
-      <Button onClick={handleOpen} variant="outlined" color="error">
+      <Button onClick={handleOpen} variant="contained" color="error">
         Register
       </Button>
       <Modal
@@ -116,6 +128,9 @@ function RegisterBtn() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         disableScrollLock
+        sx={{
+          overflow: "scroll"
+        }}
       >
         <Zoom
           in={open}
@@ -320,12 +335,6 @@ function RegisterBtn() {
                 Registrarse con Google
               </Button>
             </FormContainer>
-
-            <SingUpContainer>
-              <p>
-                No tienes una cuenta? <span>Registrate</span>
-              </p>
-            </SingUpContainer>
           </Box>
         </Zoom>
       </Modal>
