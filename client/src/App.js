@@ -24,7 +24,8 @@ function App() {
   //para los links no validos se puede desarrollar un componente de error 404, o redireccionar al home.
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
   const user = useSelector((state) => state.user.userLoged);
-  console.log(user);
+
+  console.log("este es el usuario:", user);
 
   return (
     <AuthProvider>
@@ -35,41 +36,27 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        <Route
-          path="/add-payment-method"
-          element={<Skeleton view={<AddPaymentMethod />} />}
-        />
-        <Route
-          path="/add-address"
-          element={<Skeleton view={<AddAddres />} />}
+        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
+        <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />}
         />
 
         {/* ---------Rutas Admin ------------------- */}
 
-        {user.is_admin ? (
-          <Route
-            path="/admin/*"
-            element={<AdminDashboard props={<UsersDashboard />} />}
-          />
+        {user?.is_admin ? (
+          <>
+            <Route
+              path="/admin/*"
+              element={<AdminDashboard props={<UsersDashboard />} />}
+            />
+            <Route
+              path="/admin/products"
+              element={<AdminDashboard props={<ProductsDashboard />} />}
+            />
+          </>
         ) : (
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
-
-        {user.is_admin ? (
-          <Route
-            path="/admin/products"
-            element={<AdminDashboard props={<ProductsDashboard />} />}
-          />
-        ) : (
-          <Route path="*" element={<Skeleton view={<Home />} />} />
-        )}
-
-        {user.is_admin ? (
-          <Route path="/createproduct" element={<CreateProduct />} />
-        ) : (
-          <Route path="*" element={<Skeleton view={<Home />} />} />
-        )}
-
         {/* {user.is_admin ? (
           <Route path="*" element={<Skeleton view={<Home />} />} />
         ) : (

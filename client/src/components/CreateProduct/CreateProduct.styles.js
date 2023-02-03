@@ -13,10 +13,13 @@ export const TextInput = styled.input`
     border-radius: 5px;
     width: 19rem;
     height: 2.6rem;
+    display: flex;
+    background-color: white;
     text-align: center;
     font-size: 0.9rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 `
+
 export const CheckBox = styled.input`
     color: grey;
     border: solid 1px white;

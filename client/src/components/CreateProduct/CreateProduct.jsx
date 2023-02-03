@@ -6,6 +6,7 @@ import {
   getAllSubCategories,
   getAllBrands,
 } from "./../../redux/actions/actions";
+import axios from "axios";
 
 import {
   FormContainer,
@@ -29,6 +30,12 @@ export default function CreateProduct() {
   const brandsState = useSelector((state) => state.root.brands);
   const categories = useSelector((state) => state.root.categories);
   const subCategories = useSelector((state) => state.root.subCategories);
+
+  const [loading, setLoading] = useState(false)
+  const [url, setUrl] = useState('')
+  const convertBase64 = (file) => {
+
+  }
 
   const [info, setInfo] = useState({
     name: "",
@@ -78,6 +85,18 @@ export default function CreateProduct() {
     });
   };
 
+  const imageUpload = (files) => {
+    const formData = new FormData()
+    formData.append('file', files[0])
+    formData.append('upload_preset', 'hhhupload')
+    axios.post('https://api.cloudinary.com/v1_1/dprhkqxon/image/upload', formData)
+    .then((response) => setInfo({
+      ...info,
+      img: response.data.secure_url
+    }))
+    .catch((err) => console.log(err))
+  }
+
   const handleCheck = (e) => {
     const check = e.target.checked;
     check
@@ -118,12 +137,12 @@ export default function CreateProduct() {
           onChange={(e) => handleChange(e)}
         />
         <TextInput
-          type="text"
+          type="file"
           name="img"
           placeholder="Imagen"
-          value={info.img}
-          onChange={(e) => handleChange(e)}
-        />
+          onChange={(e) => imageUpload(e.target.files)}
+        >
+        </TextInput>
         <TextInput
           type="number"
           name="price"
