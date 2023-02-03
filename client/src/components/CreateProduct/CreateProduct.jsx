@@ -48,9 +48,9 @@ export default function CreateProduct() {
       info.name &&
       info.price &&
       info.capacity &&
-      info.brand.length &&
-      info.category.length &&
-      info.subcategory.length
+      info.brand &&
+      info.category &&
+      info.subcategory
     ) {
       dispatch(createProduct(info));
     alert("El producto ha sido creado");
