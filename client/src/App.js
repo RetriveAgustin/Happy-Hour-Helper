@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
