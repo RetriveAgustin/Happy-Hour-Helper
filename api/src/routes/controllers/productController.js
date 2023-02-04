@@ -125,7 +125,7 @@ const deleteProduct = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-};
+}; 
 
 const restoreProduct = async (req, res) => {
   try {
