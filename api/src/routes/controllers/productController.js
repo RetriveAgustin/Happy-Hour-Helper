@@ -119,7 +119,7 @@ const putProduct = async (req, res) => {
 
 const deleteProduct = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     const updated = await deleteModels(Product, id);
     res.status(200).json(updated);
   } catch (error) {
