@@ -39,7 +39,6 @@ export const getLoggedUser = (id) => {
   return function (dispatch){
     axios.get(`http://localhost:3001/users/getUserById?id=${id}`)
       .then((data) => {
-        console.log(data)
         dispatch({
           type: GET_LOGGED_USER,
           payload: data.data,

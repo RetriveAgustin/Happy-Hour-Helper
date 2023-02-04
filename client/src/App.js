@@ -18,6 +18,8 @@ import { AuthProvider } from "./context/authContext";
 // import Header from "./components/Header/Header";
 // import Login from "./components/Login/Login.jsx";
 
+console.log(process.env.REACT_APP_API_URL);
+
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
   //hay que proteger la ruta /user para que los usuarios no puedan ingresar
