@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes= require('./routes/index.js');
 const cors = require('cors');
-const uploadImage = require('./routes/utils/uploadImage.js');
 require('dotenv').config();
 
 require('./db.js');
