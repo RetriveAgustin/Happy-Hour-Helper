@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
@@ -22,11 +23,15 @@ import { AuthProvider } from "./context/authContext";
 // import AddAddres from "./components/AddAddress/AddAddress";
 // import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"
 
+console.log(process.env.REACT_APP_API_URL);
+
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
   //hay que proteger la ruta /user para que los usuarios no puedan ingresar
   //para los links no validos se puede desarrollar un componente de error 404, o redireccionar al home.
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
+  const user = useSelector((state) => state.user.userLoged);
+  console.log(user);
 
   return (
     <AuthProvider>
@@ -36,26 +41,47 @@ function App() {
         <Route path="/user" element={<Skeleton view={<User />} />} />
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
-        {/* <Route path="/login" element={<Login />} /> */}
-        {/* <Route path="/confirm" element={<ConfirmOrder />} /> */}
-        {/* <Route path="/add-payment-method" element={<AddPaymentMethod />} /> */}
-        {/* <Route path="/add-address" element={<AddAddres />} /> */}
-
-        <Route path="*" element={<Skeleton view={<Home />} />} />
+        <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
+        <Route
+          path="/add-payment-method"
+          element={<Skeleton view={<AddPaymentMethod />} />}
+        />
+        <Route
+          path="/add-address"
+          element={<Skeleton view={<AddAddres />} />}
+        />
 
         {/* ---------Rutas Admin ------------------- */}
-        <Route
-          path="/admin/*"
-          element={<AdminDashboard props={<UsersDashboard />} />}
-        />
-        <Route
-          path="/admin/products"
-          element={<AdminDashboard props={<ProductsDashboard />} />}
-        />
-        <Route
-          path="/createproduct"
-          element={<AdminDashboard props={<CreateProduct />} />}
-        />
+
+        {user.is_admin ? (
+          <Route
+            path="/admin/*"
+            element={<AdminDashboard props={<UsersDashboard />} />}
+          />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {user.is_admin ? (
+          <Route
+            path="/admin/products"
+            element={<AdminDashboard props={<ProductsDashboard />} />}
+          />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {user.is_admin ? (
+          <Route path="/createproduct" element={<CreateProduct />} />
+        ) : (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        )}
+
+        {/* {user.is_admin ? (
+          <Route path="*" element={<Skeleton view={<Home />} />} />
+        ) : (
+          <p>No podes acceder a esta pesaña</p>
+        )} */}
       </Routes>
     </AuthProvider>
   );

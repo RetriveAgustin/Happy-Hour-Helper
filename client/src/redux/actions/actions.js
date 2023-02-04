@@ -26,12 +26,14 @@ export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = "FILTER_PRICE";
-export const GET_OFFERS = "GET_OFFERS";
+export const ADD_TO_CART = "ADD_TO_CART";
+export const LOGIN_USER = "LOGIN_USER";
+export const REGISTER_USER = "REGISTER_USER";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const getUsers = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
-    fetch("https://happy-hour-helper-production.up.railway.app/users/getUser")
+    fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -45,9 +47,7 @@ export const getUsers = () => {
 export const getLoggedUser = (id) => {
   return function (dispatch) {
     axios
-      .get(
-        `https://happy-hour-helper-production.up.railway.app/getUserById?id=${id}`
-      )
+      .get(`${process.env.REACT_APP_API_URL}/users/getUserById?id=${id}`)
       .then((data) => {
         dispatch({
           type: GET_LOGGED_USER,
@@ -63,7 +63,7 @@ export const loginUser = (login, payload) => {
     try {
       const result = await login(payload.mail, payload.password); // acá se guardan las USER CREDENTIALS si el login es exitoso
       const data = await axios.post(
-        "https://happy-hour-helper-production.up.railway.app/users/loginUser",
+        `${process.env.REACT_APP_API_URL}/users/loginUser`,
         { mail: payload.mail, password: payload.password }
       );
       localStorage.setItem("User_ID", result.user.uid); // por ahora sólo guardamos el user_id en localStorage
@@ -82,7 +82,7 @@ export const registerUser = (register, payload) => {
     try {
       const result = await register(payload.email, payload.password);
       const post = await axios.post(
-        "https://happy-hour-helper-production.up.railway.app/users/registerUser",
+        `${process.env.REACT_APP_API_URL}/users/registerUser`,
         {
           id: result.user.uid,
           name: payload.name,
@@ -105,10 +105,7 @@ export const registerUser = (register, payload) => {
 
 export const getAllCategories = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
-    fetch(
-      "https://happy-hour-helper-production.up.railway.app/category/getCategory"
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -122,10 +119,7 @@ export const getAllCategories = () => {
 
 export const getAllSubCategories = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
-    fetch(
-      "https://happy-hour-helper-production.up.railway.app/sub-category/getSubCategory"
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -139,10 +133,7 @@ export const getAllSubCategories = () => {
 
 export const getAllProducts = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
-    fetch(
-      "https://happy-hour-helper-production.up.railway.app/products/getProduct"
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -156,10 +147,7 @@ export const getAllProducts = () => {
 
 export const getProductId = (payload) => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
-    fetch(
-      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
-    )
+    fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -171,10 +159,22 @@ export const getProductId = (payload) => {
   };
 };
 
+export const deleteProduct = (payload) => {
+  return async function (dispatch) {
+    await axios
+      .delete(
+        `${process.env.REACT_APP_API_URL}/products/deleteProduct/` + payload
+      )
+      .then((r) => r.json())
+      .then((r) => {
+        dispatch({ type: DELETE_PRODUCT, payload: payload });
+      });
+  };
+};
+
 export const getAllBrands = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
-    fetch("https://happy-hour-helper-production.up.railway.app/brand/getBrand")
+    fetch(`${process.env.REACT_APP_API_URL}/brand/getBrand`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -188,8 +188,7 @@ export const getAllBrands = () => {
 
 export const getAllOffers = () => {
   return function (dispatch) {
-    // fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
-    fetch("https://happy-hour-helper-production.up.railway.app/offer/getOffer")
+    fetch(`${process.env.REACT_APP_API_URL}/offer/getOffer`)
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -204,8 +203,7 @@ export const getAllOffers = () => {
 export const createCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      // `${process.env.REACT_APP_API_URL}/category`,
-      "https://happy-hour-helper-production.up.railway.app/category",
+      `${process.env.REACT_APP_API_URL}/category`,
       payload
     );
     return post;
@@ -215,8 +213,7 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
-      // `${process.env.REACT_APP_API_URL}/products`,
-      "https://happy-hour-helper-production.up.railway.app/products",
+      `${process.env.REACT_APP_API_URL}/products`,
       payload
     );
     return post;
@@ -226,8 +223,7 @@ export const createProduct = (payload) => {
 export const createSubCategory = (payload) => {
   return async function () {
     const post = await axios.post(
-      // `${process.env.REACT_APP_API_URL}/sub-category`,
-      "https://happy-hour-helper-production.up.railway.app/sub-category",
+      `${process.env.REACT_APP_API_URL}/sub-category`,
       payload
     );
     return post;
@@ -237,8 +233,7 @@ export const createSubCategory = (payload) => {
 export const createOffer = (payload) => {
   return async function () {
     const post = await axios.post(
-      // `${process.env.REACT_APP_API_URL}/offer`,
-      "https://happy-hour-helper-production.up.railway.app/offer",
+      `${process.env.REACT_APP_API_URL}/offer`,
       payload
     );
     return post;
@@ -248,8 +243,7 @@ export const createOffer = (payload) => {
 export const createBrand = (payload) => {
   return async function () {
     const post = await axios.post(
-      // `${process.env.REACT_APP_API_URL}/brand`,
-      "https://happy-hour-helper-production.up.railway.app/brand",
+      `${process.env.REACT_APP_API_URL}/brand`,
       payload
     );
     return post;

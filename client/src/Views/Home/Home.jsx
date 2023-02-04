@@ -18,6 +18,7 @@ const Home = () => {
   }, [dispatch]);
 
   const products = useSelector((state) => state.root.products);
+  console.log(products)
 
   const [Checked, setChecked] = useState([]);
 
