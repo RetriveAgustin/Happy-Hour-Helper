@@ -6,6 +6,7 @@ import {
   getAllSubCategories,
   getAllBrands,
 } from "./../../redux/actions/actions";
+import axios from "axios";
 
 import {
   FormContainer,
@@ -48,9 +49,9 @@ export default function CreateProduct() {
       info.name &&
       info.price &&
       info.capacity &&
-      info.brand.length &&
-      info.category.length &&
-      info.subcategory.length
+      info.brand &&
+      info.category &&
+      info.subcategory
     ) {
       dispatch(createProduct(info));
     alert("El producto ha sido creado");
@@ -78,6 +79,18 @@ export default function CreateProduct() {
     });
   };
 
+  const imageUpload = (files) => {
+    const formData = new FormData()
+    formData.append('file', files[0])
+    formData.append('upload_preset', 'hhhupload')
+    axios.post('https://api.cloudinary.com/v1_1/dprhkqxon/image/upload', formData)
+    .then((response) => setInfo({
+      ...info,
+      img: response.data.secure_url
+    }))
+    .catch((err) => console.log(err))
+  }
+
   const handleCheck = (e) => {
     const check = e.target.checked;
     check
@@ -103,6 +116,8 @@ export default function CreateProduct() {
     });
   };
 
+  const subs = subCategories?.filter(sub => sub.category_id == info.category)
+
   return (
     <FormContainer>
       <ColumnFieldContainer>
@@ -118,12 +133,12 @@ export default function CreateProduct() {
           onChange={(e) => handleChange(e)}
         />
         <TextInput
-          type="text"
+          type="file"
           name="img"
           placeholder="Imagen"
-          value={info.img}
-          onChange={(e) => handleChange(e)}
-        />
+          onChange={(e) => imageUpload(e.target.files)}
+        >
+        </TextInput>
         <TextInput
           type="number"
           name="price"
@@ -178,10 +193,10 @@ export default function CreateProduct() {
           })}
         </Selector>
       <span style={{color: 'white'}}>*</span>
-        <Selector name="subcategory" onChange={(e) => handleSelect(e)}>
+        <Selector name="subcategory" style={info.category ? {background: 'white', color:'black'} : {background:'grey', border: 'grey', color: '#45454b', fontStyle: 'italic'} } onChange={(e) => handleSelect(e)}>
           <option hidden>Sub-Categoría</option>
-          {subCategories.map((sub) => {
-            return <option value={sub.id}>{sub.name}</option>;
+          {subs.map(sub => {
+            return (<option value={sub.id}>{sub.name}</option>)
           })}
         </Selector>
       </BrandContainer>
