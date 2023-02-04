@@ -28,16 +28,20 @@ export default function AddAddres() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:3001/address/postAddress", address)
+        .post("https://happy-hour-helper-production.up.railway.app/address/postAddress", address)
         .then((r) => {
+          console.log('address succes')
           setSuccess(r);
         })
         .then((r) => {
           setTimeout(() => {
+            console.log('address añadida')
             navigate("/confirm");
           }, 2000);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

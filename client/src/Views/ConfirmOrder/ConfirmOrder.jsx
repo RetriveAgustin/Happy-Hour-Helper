@@ -36,16 +36,18 @@ export default function ConfirmOrder() {
     console.log(userCredentials);
     dispatch(getAllProducts());
     if (!address[0] && userCredentials) {
-      fetch("http://localhost:3001/address/getAddress")
+      fetch("https://happy-hour-helper-production.up.railway.app/address/getAddress")
         .then((r) => r.json())
         .then((r) => {
-          console.log(r);
+          if (r[0]) {
           let data = r.filter((e) => e.user_id === userCredentials.uid);
           setAddress(data);
+          }
+          else return null;
         });
     }
     if (!payment[0] && userCredentials) {
-      fetch("http://localhost:3001/payment-methods/getPayment")
+      fetch("https://happy-hour-helper-production.up.railway.app/payment-methods/getPayment")
         .then((r) => r.json())
         .then((r) => {
           const data = r.filter((e) => e.user_id === userCredentials.uid);
@@ -69,7 +71,7 @@ export default function ConfirmOrder() {
         //total: stateTotal
       };
       console.log(obj);
-      axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
+      axios.post("https://happy-hour-helper-production.up.railway.app/orders/postOrder", obj).then((r) => {
         setSuccess(r.data);
         setTimeout(() => {
           navigate("/home");

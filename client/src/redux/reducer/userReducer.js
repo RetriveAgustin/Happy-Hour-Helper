@@ -15,7 +15,7 @@ const userReducer = (state = initialState, action) => {
         case GET_USERS:
             return { ...state, users: action.payload };
         case LOGIN_USER:
-            return {...state, userLoged: action.payload};
+            return state;
         case GET_LOGGED_USER:
             return { ...state, userLoged: action.payload[0]};
         case REGISTER_USER:

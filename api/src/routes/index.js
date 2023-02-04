@@ -8,6 +8,7 @@ const payment_methods = require("./routers/payment_methodsRouter");
 const products = require("./routers/productsRouter");
 const sub_category = require("./routers/sub_categoryRouter");
 const user = require("./routers/userRouter");
+const email = require("./routers/emailRouter");
 
 const { Router } = require('express');
 const router = Router();
@@ -24,7 +25,7 @@ router.use("/payment-methods", payment_methods);
 router.use("/products", products);
 router.use("/sub-category", sub_category);
 router.use("/users", user);
-
+router.use("/emails", email);
 
 
 module.exports = router;

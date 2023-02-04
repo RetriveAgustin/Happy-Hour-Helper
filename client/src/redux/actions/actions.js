@@ -37,9 +37,9 @@ export const getUsers = () => {
 
 export const getLoggedUser = (id) => {
   return function (dispatch){
-    axios.get(`http://localhost:3001/users/getUserById?id=${id}`)
+    axios.get(`https://happy-hour-helper-production.up.railway.app/users/getUserById?id=${id}`)
       .then((data) => {
-        console.log(data)
+        console.log('logged user es', data)
         dispatch({
           type: GET_LOGGED_USER,
           payload: data.data,
@@ -49,21 +49,23 @@ export const getLoggedUser = (id) => {
   }
 }
 
-export const loginUser = (login, payload) => { // payload es un obj con mail y password
+export const loginUser = (user, payload) => { // payload es un obj con mail y password
   return async function (dispatch){
     try {
-      const result = await login(payload.mail, payload.password); // acá se guardan las USER CREDENTIALS si el login es exitoso
       const data = await axios.post(
         "https://happy-hour-helper-production.up.railway.app/users/loginUser",
         {mail: payload.mail, password: payload.password}
       )
-      localStorage.setItem('User_ID', result.user.uid) // por ahora sólo guardamos el user_id en localStorage
+      console.log('dispatch');
       dispatch({
         type: LOGIN_USER,
-        payload: result.user
+        payload: user
       })
-    } catch (error) {
-      console.log(error)
+    } catch (e) {
+      if (e.message === 'Firebase: Error (auth/internal-error).') console.log('Please enter a password');
+      if (e.message === 'Firebase: Error (auth/invalid-email).') console.log('Please enter an email');
+      if (e.message === 'Firebase: Error (auth/wrong-password).') console.log('Wrong password');
+      if (e.message === 'Firebase: Error (auth/user-not-found).') console.log("The user doesn't exist"); 
     }
   };
 }

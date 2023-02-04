@@ -30,7 +30,7 @@ export default function AddPaymentMethod() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:3001/payment-methods/postPayment", payment)
+        .post("https://happy-hour-helper-production.up.railway.app/payment-methods/postPayment", payment)
         .then((r) => {
           setSuccess(r);
         })

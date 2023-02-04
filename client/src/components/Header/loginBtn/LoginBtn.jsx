@@ -46,6 +46,8 @@ function LoginBtn() {
 
   function handleChangePassword({ target }) {
     setPassword(target.value);
+    if (!target.value) setError(true);
+    else setError(false);
   }
 
   function handleChangeEmail({ target }) {
@@ -55,34 +57,34 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
+  const [message, setMessage] = useState('');
   const user = useSelector(state => state.user.userLoged);
 
   async function handleSubmit() {
     try {
       setLoading(true);
-      // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente 
-      dispatch(loginUser(login, { mail, password }));
-      const id = localStorage.getItem('User_ID');
-      console.log(id)
-      dispatch(getLoggedUser(id));
-      console.log("user", {user})
+
+      const result = await login(mail, password);
+      dispatch(loginUser(result.user, { mail, password }));
+      localStorage.setItem('User_ID', result.user.uid);
+      dispatch(getLoggedUser(result.user.uid));
 
       setEmail("");
       setPassword("");
       setOpen(false);
-      // console.log(result);
-
       setLoading(false);
+      
     } catch (e) {
       setLoading(false);
+      setError(true);
       if (e.message === "Firebase: Error (auth/internal-error).")
-        return console.log("Please enter a password");
+        setMessage("Please enter a password");
       if (e.message === "Firebase: Error (auth/invalid-mail).")
-        return console.log("Please enter an mail");
+        setMessage("Please enter an mail");
       if (e.message === "Firebase: Error (auth/wrong-password).")
-        return console.log("Wrong password");
+        setMessage("Wrong password");
       if (e.message === "Firebase: Error (auth/user-not-found).")
-        return console.log("The user doesn't exist");
+        setMessage("The user doesn't exist");
     }
   }
 
@@ -125,9 +127,9 @@ function LoginBtn() {
                 error={error}
                 // si queremos mostrar un mensaje de error
                 helperText={
-                  error && (
+                  error && message.includes('mail') || error && message.includes('user') && (
                     <span style={{ fontSize: "13px", whiteSpace: "nowrap" }}>
-                      Este campo es obligatorio
+                      {message}
                     </span>
                   )
                 }
@@ -142,6 +144,14 @@ function LoginBtn() {
                 variant="outlined"
                 value={password}
                 type={showPassword ? "text" : "password"}
+                error={error}
+                helperText={
+                  error && message.includes('password') && (
+                    <span style={{ fontSize: "13px", whiteSpace: "nowrap" }}>
+                      {message}
+                    </span>
+                  )
+                }
                 onChange={handleChangePassword}
                 InputProps={{
                   endAdornment: (
@@ -189,6 +199,7 @@ function LoginBtn() {
                   backgroundColor: "#d32323",
                   textTransform: "none",
                 }}
+
               >
                 Iniciar sesión con Google
               </Button>

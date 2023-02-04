@@ -46,7 +46,7 @@ function App() {
 
         {/* ---------Rutas Admin ------------------- */}
 
-        {user.is_admin ? (
+        {typeof user === 'object' && user.is_admin ? (
           <Route
             path="/admin/*"
             element={<AdminDashboard props={<UsersDashboard />} />}
@@ -55,7 +55,7 @@ function App() {
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
 
-        {user.is_admin ? (
+        {typeof user === 'object' && user.is_admin ? (
           <Route
             path="/admin/products"
             element={<AdminDashboard props={<ProductsDashboard />} />}
@@ -64,7 +64,7 @@ function App() {
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
 
-        {user.is_admin ? (
+        {typeof user === 'object' && user.is_admin ? (
           <Route path="/createproduct" element={<CreateProduct />} />
         ) : (
           <Route path="*" element={<Skeleton view={<Home />} />} />

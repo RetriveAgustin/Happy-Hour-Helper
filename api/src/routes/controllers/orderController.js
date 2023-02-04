@@ -1,4 +1,5 @@
 const { Order } = require("../../db");
+const nodemailer = require('nodemailer');
 const {
   getModels,
   getModelsById,
@@ -20,14 +21,20 @@ const getOrder = async (req, res) => {
 
 const postOrder = async (req, res) => {
   try {
-    const { date, delivered, canceled, adress, payment_method } = req.body;
+    const { date, delivered, canceled, adress, payment_method, products, user_id } = req.body;
     const order = await postModels(Order, {
       date,
       delivered,
       canceled,
       adress,
       payment_method,
+      user_id
     });
+
+    products.map(async (p) => {
+      await p.addOrder(order);
+    })
+
     if (order) {
       res.status(200).json(order);
     } else {
