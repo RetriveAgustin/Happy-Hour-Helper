@@ -31,12 +31,6 @@ export default function CreateProduct() {
   const categories = useSelector((state) => state.root.categories);
   const subCategories = useSelector((state) => state.root.subCategories);
 
-  const [loading, setLoading] = useState(false)
-  const [url, setUrl] = useState('')
-  const convertBase64 = (file) => {
-
-  }
-
   const [info, setInfo] = useState({
     name: "",
     img: "",
@@ -122,6 +116,8 @@ export default function CreateProduct() {
     });
   };
 
+  const subs = subCategories?.filter(sub => sub.category_id == info.category)
+
   return (
     <FormContainer>
       <ColumnFieldContainer>
@@ -197,10 +193,10 @@ export default function CreateProduct() {
           })}
         </Selector>
       <span style={{color: 'white'}}>*</span>
-        <Selector name="subcategory" onChange={(e) => handleSelect(e)}>
+        <Selector name="subcategory" style={info.category ? {background: 'white', color:'black'} : {background:'grey', border: 'grey', color: '#45454b', fontStyle: 'italic'} } onChange={(e) => handleSelect(e)}>
           <option hidden>Sub-Categoría</option>
-          {subCategories.map((sub) => {
-            return <option value={sub.id}>{sub.name}</option>;
+          {subs.map(sub => {
+            return (<option value={sub.id}>{sub.name}</option>)
           })}
         </Selector>
       </BrandContainer>
