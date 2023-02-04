@@ -26,10 +26,6 @@ export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = "FILTER_PRICE";
-export const ADD_TO_CART = "ADD_TO_CART";
-export const LOGIN_USER = "LOGIN_USER";
-export const REGISTER_USER = "REGISTER_USER";
-export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const getUsers = () => {
   return function (dispatch) {
@@ -298,18 +294,4 @@ export const getAllPayments = (userCredentials) => {
       const data = r.filter((e) => e.user_id === userCredentials.uid);
       return data;
     });
-};
-
-export const deleteProduct = (payload) => {
-  return async function (dispatch) {
-    await axios
-      .delete(
-        "https://happy-hour-helper-production.up.railway.app/products/deleteProduct/" +
-          payload
-      )
-      .then((r) => r.json())
-      .then((r) => {
-        dispatch({ type: DELETE_PRODUCT, payload: payload });
-      });
-  };
 };
