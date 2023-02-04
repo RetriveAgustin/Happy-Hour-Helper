@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
@@ -17,6 +17,8 @@ import Skeleton from "./components/Skeleton/Skeleton";
 import { AuthProvider } from "./context/authContext";
 // import Header from "./components/Header/Header";
 // import Login from "./components/Login/Login.jsx";
+
+console.log(process.env.REACT_APP_API_URL);
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
