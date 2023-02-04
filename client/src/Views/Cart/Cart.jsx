@@ -14,6 +14,7 @@ import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
 import accounting from "accounting";
+import PayButton from "./PayButton";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -86,6 +87,9 @@ const Cart = () => {
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
             <Button onClick={() => navigate("/confirm")}>Checkout</Button>
+
+            <PayButton productItem = {stateCart}/>
+            
           </div>
         </TableContainer>
       </CartCont>

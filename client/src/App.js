@@ -15,6 +15,12 @@ import Header from "./components/Header/Header";
 import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import { AuthProvider } from "./context/authContext";
+import {loadStripe} from "@stripe/stripe-js"
+import CheckOutSucess from "./Views/Cart/checkOutSucces";
+
+
+
+
 // import Login from "./components/Login/Login.jsx";
 
 function App() {
@@ -29,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout-successs" element={<CheckOutSucess />} />
         <Route path="/user" element={<User />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />

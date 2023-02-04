@@ -151,7 +151,7 @@ export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
       // `${process.env.REACT_APP_API_URL}/products`,
-      "https://happy-hour-helper-production.up.railway.app/products",
+      "https://happy-hour-helper-production.up.railway.app/products/postProduct",
       payload
     );
     return post;
