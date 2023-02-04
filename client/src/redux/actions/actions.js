@@ -26,6 +26,7 @@ export const GET_FILTER_BY_BRAND = "GET_FILTER_BY_BRAND";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = "FILTER_PRICE";
+export const GET_OFFERS = "GET_OFFERS";
 
 export const getUsers = () => {
   return function (dispatch) {
