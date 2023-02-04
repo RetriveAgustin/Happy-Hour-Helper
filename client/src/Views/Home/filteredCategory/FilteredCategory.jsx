@@ -38,5 +38,5 @@ function FilteredCategory({ categoryId }) {
     </div>
   )
 }
-
+  
 export default FilteredCategory
