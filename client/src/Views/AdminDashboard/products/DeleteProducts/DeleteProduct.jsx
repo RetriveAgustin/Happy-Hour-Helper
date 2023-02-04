@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { Box, Button, Modal } from "@mui/material";
 import { Delete } from "@mui/icons-material";
@@ -7,8 +7,11 @@ import {
   ModalContainer,
   WarningTitle,
 } from "./DeleteProduct.styles";
+import { useDispatch } from "react-redux";
+import { deleteProduct } from "../../../../redux/actions/actions";
 
 function DeleteProduct({ props }) {
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
   const style = {
@@ -33,6 +36,14 @@ function DeleteProduct({ props }) {
   const HandleClose = () => {
     setOpen(false);
   };
+
+  const HandleDelete = () => {
+    const productId = { id: props.id };
+
+    // const productId = props.id;
+    dispatch(deleteProduct(productId));
+  };
+
   return (
     <>
       <Button color="error" onClick={HandleOpen}>
@@ -47,7 +58,7 @@ function DeleteProduct({ props }) {
             <h4>{`Se eliminara el producto: "${props.name}", estas seguro que deseas eliminarlo? Los cambios son permanentes`}</h4>
             <ButtonContainer>
               <Button onClick={HandleClose}>Cancelar</Button>
-              <Button>Eliminar</Button>
+              <Button onClick={HandleDelete}>Eliminar</Button>
             </ButtonContainer>
           </ModalContainer>
         </Box>

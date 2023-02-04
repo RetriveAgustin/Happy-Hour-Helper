@@ -33,7 +33,11 @@ function Header() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} style={{ marginLeft: "3rem" }} alt="not found" />
+        <img
+          src={Logo}
+          style={{ marginLeft: "3rem" }}
+          alt="Happy Hour Helper"
+        />
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/")}>

@@ -1,4 +1,12 @@
-import { Box, Button, Modal } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  Input,
+  InputAdornment,
+  InputLabel,
+  Modal,
+} from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
 import React from "react";
 import { useState } from "react";
@@ -20,6 +28,7 @@ const ModalFormContainer = styled.form`
 `;
 
 const ButtonContainer = styled.div`
+  margin-top: 2rem;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -56,8 +65,6 @@ function EditProductButton({ props }) {
     img: "",
     price: "",
     capacity: "",
-    minimum_amount_for_bulk: "",
-    bulk_discount: "",
     stock: "",
     has_discount: "",
   });
@@ -76,6 +83,11 @@ function EditProductButton({ props }) {
     setOpen(false);
     setEdit(false);
   };
+
+  const HandleInput = (e) => {
+    setInput({ ...input, [e.target.name]: e.target.value });
+  };
+
   if (edit === false) {
     return (
       <>
@@ -92,12 +104,6 @@ function EditProductButton({ props }) {
                 <h3>$ {props.price}</h3>
               </div>
               <div>
-                <label>Min amount for bulk</label>
-                <h3>{props.minimum_amount_for_bulk}</h3>
-                <br />
-                <label>Bulk discount</label>
-                <h3>{props.bulk_discount}</h3>
-                <br />
                 <label>Stock</label>
                 <h3>{props.stock}</h3>
                 <br />
@@ -107,13 +113,13 @@ function EditProductButton({ props }) {
                 <label>Has discount</label>
                 <h3>{props.has_discount ? "true" : "false"}</h3>
                 <hr />
-                <label>Brand</label>
+                <label>Marca</label>
                 <h4>{props.Brands[0].name}</h4>
                 <br />
-                <label>Category</label>
+                <label>Categoria</label>
                 <h4>{props.Categories[0].name}</h4>
                 <br />
-                <label>Sub Category</label>
+                <label>Sub Categoria</label>
                 <h4>{props.Sub_categories[0].name}</h4>
               </div>
               <ButtonContainer>
@@ -132,57 +138,60 @@ function EditProductButton({ props }) {
           <ListIcon />
         </Button>
         <Modal open={open} onClose={HandleClose}>
-          {/* <Box sx={style}>
-            <h2>{props.id}</h2>
-            <label>Name:</label>
-            <input value={props.name} />
-            <Button onClick={() => setEdit(false)}>Confirm</Button>
-          </Box> */}
           <Box sx={style}>
             <ModalFormContainer>
-              <div>
-                <ProductImg src={props.img} />
+              <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <p>{props.id}</p>
-                <label>Name</label>
-                <br />
-                <input value={input.name} />
-                <br />
+                <ProductImg src={input.img} />
+                <FormControl variant="standart">
+                  <InputLabel>Imagen</InputLabel>
+                  <Input
+                    name="img"
+                    value={input.img}
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </FormControl>
+              </Box>
 
-                <label>Price</label>
-                <br />
-                <input value={input.price} />
-              </div>
-              <div>
-                <label>Min amount for bulk</label>
-                <br />
-                <input value={input.minimum_amount_for_bulk} />
-                <br />
+              <Box
+                sx={{
+                  width: "10vw",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1rem",
+                }}
+              >
+                <FormControl variant="standart" fullWidth>
+                  <InputLabel>Nombre</InputLabel>
+                  <Input
+                    name="name"
+                    value={input.name}
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </FormControl>
 
-                <label>Bulk discount</label>
-                <br />
-                <input value={input.bulk_discount} />
-                <br />
+                <FormControl variant="standart" fullWidth>
+                  <InputLabel>Precio</InputLabel>
+                  <Input
+                    value={input.price}
+                    startAdornment={
+                      <InputAdornment position="start">$</InputAdornment>
+                    }
+                    name="price"
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </FormControl>
 
-                <label>Stock</label>
-                <br />
-                <input value={input.stock} />
-                <br />
+                <FormControl variant="standart" fullWidth>
+                  <InputLabel>Stock</InputLabel>
+                  <Input
+                    name="stock"
+                    value={input.stock}
+                    onChange={(e) => HandleInput(e)}
+                  />
+                </FormControl>
+              </Box>
 
-                <label>Rating</label>
-                <h3>{props.rating}</h3>
-                <br />
-                <label>Has discount</label>
-                <h3>{props.has_discount ? "true" : "false"}</h3>
-                <hr />
-                <label>Brand</label>
-                <h4>{props.Brands[0].name}</h4>
-                <br />
-                <label>Category</label>
-                <h4>{props.Categories[0].name}</h4>
-                <br />
-                <label>Sub Category</label>
-                <h4>{props.Sub_categories[0].name}</h4>
-              </div>
               <ButtonContainer>
                 <Button onClick={() => setEdit(false)}>Cancelar</Button>
                 <Button>Confirmar</Button>

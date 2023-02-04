@@ -17,7 +17,7 @@ import {
   ButtonGroup,
   Button,
 } from "@mui/material";
-import { Search, Clear, Delete } from "@mui/icons-material";
+import { Search, Clear } from "@mui/icons-material";
 import {
   DashboardInfoContainer,
   DataOutput,
@@ -29,6 +29,7 @@ import {
 } from "./ProductDashboard.styles";
 import EditProductButton from "./EditPopup/EditProduct";
 import DeleteProduct from "./DeleteProducts/DeleteProduct";
+import CircularProgress from "@mui/material/CircularProgress";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "productInfo" por los usuarios traidos desde el back en el UseEffect.
@@ -51,6 +52,7 @@ function ProductsDashboard() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   // -----------------------------------------------------------------------
   useEffect(() => {
@@ -62,6 +64,7 @@ function ProductsDashboard() {
 
   useEffect(() => {
     setProductInfo(allProducts);
+    setIsLoading(false);
   }, [allProducts]);
 
   const HandleFilter = (searchname) => {
@@ -213,22 +216,46 @@ function ProductsDashboard() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {productInfo.map((row) => (
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{row.id}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                  <TableCell align="center">{row.stock}</TableCell>
-                  <TableCell align="center">$ {row.price}</TableCell>
-                  <TableCell align="center">
-                    <ButtonGroup variant="contained" size="small">
-                      <EditProductButton props={row} />
-                      <DeleteProduct props={row} />
-                    </ButtonGroup>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {/* {productInfo ? (
+                productInfo.map((row) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{row.id}</TableCell>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.stock}</TableCell>
+                    <TableCell align="center">$ {row.price}</TableCell>
+                    <TableCell align="center">
+                      <ButtonGroup variant="contained" size="small">
+                        <EditProductButton props={row} />
+                        <DeleteProduct props={row} />
+                      </ButtonGroup>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <CircularProgress />
+              )} */}
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                productInfo.map((row) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{row.id}</TableCell>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.stock}</TableCell>
+                    <TableCell align="center">$ {row.price}</TableCell>
+                    <TableCell align="center">
+                      <ButtonGroup variant="contained" size="small">
+                        <EditProductButton props={row} />
+                        <DeleteProduct props={row} />
+                      </ButtonGroup>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </TableContainer>
