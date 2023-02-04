@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
+import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
 import User from "./Views/User/User";
@@ -31,8 +32,14 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
-        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />} />
+        <Route
+          path="/add-payment-method"
+          element={<Skeleton view={<AddPaymentMethod />} />}
+        />
+        <Route
+          path="/add-address"
+          element={<Skeleton view={<AddAddres />} />}
+        />
 
         {/* ---------Rutas Admin ------------------- */}
         <Route

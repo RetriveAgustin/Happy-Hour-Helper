@@ -13,16 +13,19 @@ import Paper from "@mui/material/Paper";
 import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
-// import accounting from "accounting";
+import accounting from "accounting";
 
 const Cart = () => {
   const navigate = useNavigate();
 
   const stateCart = useSelector((state) => state.root.cart);
   const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
-  // const dispatch = useDispatch();
 
-  // const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(0);
+
+  const handleChange = (e) => {
+    setTotal(total + e);
+  };
 
   return (
     <>
@@ -58,7 +61,7 @@ const Cart = () => {
                   <h3>Subtotal</h3>
                 </TableCell>
                 <TableCell align="right">
-                  <h3> {subtotalPrice}</h3>
+                  <h3> {accounting.formatMoney(subtotalPrice)}</h3>
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -66,7 +69,7 @@ const Cart = () => {
                   <h2>Total</h2>
                 </TableCell>
                 <TableCell align="right">
-                  <h2> {parseFloat(stateTotal).toFixed(2)}</h2>
+                  <h2> {accounting.formatMoney(total)}</h2>
                 </TableCell>
               </TableRow>
             </TableBody>

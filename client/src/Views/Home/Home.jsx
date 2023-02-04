@@ -14,10 +14,11 @@ const Home = () => {
   const categories = useSelector((state) => state.root.categories);
 
   useEffect(() => {
+    console.log(products);
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  const products = useSelector((state) => state.root.products);
+  const products = useSelector((state) => state.root?.products);
 
   const [Checked, setChecked] = useState([]);
 
@@ -42,7 +43,7 @@ const Home = () => {
           setChecked={setChecked}
         />
         {/* SECCIONES DEL HOME */}
-        {LowFilters.length ? (
+        {LowFilters.length && LowFilters ? (
           <LowerFilters LowFilters={LowFilters} />
         ) : !render.filtered ? (
           <GeneralCategories categories={categories} products={products} />
