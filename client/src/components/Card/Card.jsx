@@ -29,8 +29,12 @@ const Card = ({ product }) => {
     dispatch(addToCart({ ...product, amount }));
   };
 
+<<<<<<< HEAD
   console.log(product);
   const navigate = useNavigate();
+=======
+  const navigate = useNavigate()
+>>>>>>> 2728d4fe2790f1092cfa9ef29748db83ef6bafe1
 
   return (
     <div>
