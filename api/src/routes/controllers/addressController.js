@@ -11,7 +11,7 @@ const {
 const getAddress = async (req, res) => {
   try {
     const { name } = req.query;
-    const address = getModels(Address, name);
+    const address = await getModels(Address, name);
     res.status(200).json(address);
   } catch (error) {
     res.status(400).json({ error: error.message });
