@@ -9,6 +9,7 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 stripeRouter.post('/create-checkout-session', async (req, res) => {
   
   const line_items = req.body.productItem.map((item) => {
+    console.log(item)
     return {
       price_data: {
         currency: 'ars',
@@ -18,7 +19,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
         },
         unit_amount: item.price * 100,
       },
-      quantity: 1,
+      quantity: item.amount,
     };
   })
   
