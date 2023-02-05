@@ -43,13 +43,21 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
-        <Route path="/createproduct" element={<CreateProduct />} />
-        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />}
+        <Route
+          path="/add-payment-method"
+          element={<Skeleton view={<AddPaymentMethod />} />}
+        />
+        <Route
+          path="/add-address"
+          element={<Skeleton view={<AddAddres />} />}
         />
 
         {/* ---------Rutas Admin ------------------- */}
 
+        <Route
+          path="/createproduct"
+          element={<AdminDashboard props={<CreateProduct />} />}
+        />
         {user?.is_admin ? (
           <>
             <Route
@@ -64,11 +72,6 @@ function App() {
         ) : (
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
-        {/* {user.is_admin ? (
-          <Route path="*" element={<Skeleton view={<Home />} />} />
-        ) : (
-          <p>No podes acceder a esta pesaña</p>
-        )} */}
       </Routes>
     </AuthProvider>
   );
