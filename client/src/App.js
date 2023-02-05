@@ -15,7 +15,12 @@ import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import Skeleton from "./components/Skeleton/Skeleton";
 import { AuthProvider } from "./context/authContext";
-// import Header from "./components/Header/Header";
+import {loadStripe} from "@stripe/stripe-js"
+import CheckOutSucess from "./Views/Cart/checkOutSucces";
+
+
+
+
 // import Login from "./components/Login/Login.jsx";
 
 console.log(process.env.REACT_APP_API_URL);
@@ -42,6 +47,7 @@ function App() {
         <Route path="/createproduct" element={<CreateProduct />} />
         <Route path="/add-address" element={<Skeleton view={<AddAddres />} />}
         />
+        <Route path="/checkout-successs" element={<CheckOutSucess />} />
 
         {/* ---------Rutas Admin ------------------- */}
 
