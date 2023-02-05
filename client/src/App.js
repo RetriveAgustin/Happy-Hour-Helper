@@ -15,7 +15,12 @@ import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import Skeleton from "./components/Skeleton/Skeleton";
 import { AuthProvider } from "./context/authContext";
-// import Header from "./components/Header/Header";
+import {loadStripe} from "@stripe/stripe-js"
+import CheckOutSucess from "./Views/Cart/checkOutSucces";
+
+
+
+
 // import Login from "./components/Login/Login.jsx";
 // import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
 // import SearchView from "./Views/Search-View/Search-View";
@@ -51,6 +56,7 @@ function App() {
           path="/add-address"
           element={<Skeleton view={<AddAddres />} />}
         />
+        <Route path="/checkout-successs" element={<CheckOutSucess />} />
 
         {/* ---------Rutas Admin ------------------- */}
 
