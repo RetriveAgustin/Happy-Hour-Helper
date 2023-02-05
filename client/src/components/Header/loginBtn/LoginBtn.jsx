@@ -61,7 +61,7 @@ function LoginBtn() {
     try {
       setLoading(true);
       // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente 
-      await dispatch(loginUser(login, { mail, password }));
+      dispatch( loginUser(login, { mail, password }));
       const id = localStorage.getItem('User_ID');
       dispatch(getLoggedUser(id));
 
