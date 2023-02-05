@@ -6,6 +6,7 @@ export const GET_ALL_ADDRESSES = "GET_ALL_ADDRESSES";
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
 export const GET_LOGGED_USER = "GET_LOGGED_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
 
 // ------ Productos ---------------
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
@@ -97,6 +98,12 @@ export const registerUser = (register, payload) => {
     } catch (error) {
       console.log(error);
     }
+  };
+};
+
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_USER,
   };
 };
 

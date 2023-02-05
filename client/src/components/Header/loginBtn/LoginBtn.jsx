@@ -54,7 +54,7 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
-  const user = useSelector((state) => state.user.userLoged);
+  const user = useSelector((state) => state.user.userLogged);
 
   async function handleSubmit() {
     try {

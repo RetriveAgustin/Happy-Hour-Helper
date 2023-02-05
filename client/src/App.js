@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
@@ -15,11 +15,10 @@ import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import Skeleton from "./components/Skeleton/Skeleton";
 import { AuthProvider } from "./context/authContext";
-import {loadStripe} from "@stripe/stripe-js"
+import { loadStripe } from "@stripe/stripe-js";
 import CheckOutSucess from "./Views/Cart/checkOutSucces";
-
-
-
+import { getLoggedUser } from "./redux/actions/actions";
+import { useEffect } from "react";
 
 // import Login from "./components/Login/Login.jsx";
 // import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
@@ -35,9 +34,16 @@ function App() {
   //hay que proteger la ruta /user para que los usuarios no puedan ingresar
   //para los links no validos se puede desarrollar un componente de error 404, o redireccionar al home.
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
-  const user = useSelector((state) => state.user.userLoged);
 
-  console.log("este es el usuario:", user);
+  const userId = localStorage.getItem("User_ID");
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getLoggedUser(userId));
+  }, [dispatch]);
+
+  const user = useSelector((state) => state.user.userLogged);
 
   return (
     <AuthProvider>

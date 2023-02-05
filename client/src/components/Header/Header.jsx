@@ -20,7 +20,7 @@ function Header() {
   const [searchValue, setSearchValue] = useState("");
 
   const cart = useSelector((state) => state.root.cart);
-  const user = useSelector((state) => state.user.userLoged);
+  const user = localStorage.getItem("User_ID");
 
   const HandleInput = (searchName) => {
     setSearchValue(searchName);
@@ -48,7 +48,7 @@ function Header() {
           searchValue={HandleSearch}
         />
 
-        {user?.id ? (
+        {user ? (
           <AvatarIcon />
         ) : (
           <Stack spacing={2} direction="row">
