@@ -18,7 +18,7 @@ import styles from "./Login.module.css";
 // } from "./Login.styled.js";
 
 export default function Login() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [user, setUser] = useState({
     email: "",
@@ -28,7 +28,6 @@ export default function Login() {
 
   const { login, loginWithGoogle, userCredentials, resetPassword } = useAuth();
   const navigate = useNavigate();
-  
 
   const handleChange = ({ target: { name, value } }) => {
     setUser({ ...user, [name]: value });
@@ -45,7 +44,7 @@ export default function Login() {
         })
         .then((r) => {
           console.log(r.data);
-          dispatch(getUserLogged(user.email))
+          dispatch(getUserLogged(user.email));
           navigate("/home");
         });
     } catch (e) {
@@ -62,7 +61,6 @@ export default function Login() {
 
   const handleGoogleSignIn = async () => {
     const result = await loginWithGoogle();
-    console.log(result);
     if (result._tokenResponse.isNewUser) {
       try {
         const data = await axios.post(
@@ -119,7 +117,7 @@ export default function Login() {
   };
 
   return (
-    <div  style={{backgroundColor: "black"}}>
+    <div style={{ backgroundColor: "black" }}>
       <section>
         <h2>Log In</h2>
 
@@ -133,7 +131,7 @@ export default function Login() {
           ></input>
 
           <label htmlFor="password">Password</label>
-          <input 
+          <input
             type="password"
             name="password"
             onChange={handleChange}
