@@ -10,7 +10,6 @@ import {
 } from "@mui/material";
 import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
-// import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import CircularProgress from "@mui/material/CircularProgress";
 import { getLoggedUser, loginUser } from "../../../redux/actions/actions.js";
 import { useDispatch, useSelector } from "react-redux";
@@ -55,20 +54,19 @@ function LoginBtn() {
   }
 
   const [error, setError] = useState(false);
-  const user = useSelector(state => state.user.userLoged);
+  const user = useSelector((state) => state.user.userLogged);
 
   async function handleSubmit() {
     try {
       setLoading(true);
-      // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente 
-      dispatch( loginUser(login, { mail, password }));
-      const id = localStorage.getItem('User_ID');
+      // le pasamos la función login por params, ya que react no permite usar hooks fuera de un componente
+      await dispatch(loginUser(login, { mail, password }));
+      const id = localStorage.getItem("User_ID");
       dispatch(getLoggedUser(id));
 
       setEmail("");
       setPassword("");
       setOpen(false);
-      // console.log(result);
 
       setLoading(false);
     } catch (e) {
