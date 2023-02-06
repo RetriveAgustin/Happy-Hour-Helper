@@ -167,11 +167,10 @@ export const deleteProduct = (payload) => {
   return async function (dispatch) {
     await axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/products/deleteProduct/` + payload
+        `${process.env.REACT_APP_API_URL}/products/deleteProduct/${payload}`
       )
-      .then((r) => r.json())
       .then((r) => {
-        dispatch({ type: DELETE_PRODUCT, payload: payload });
+        dispatch({ type: DELETE_PRODUCT, payload: r });
       });
   };
 };

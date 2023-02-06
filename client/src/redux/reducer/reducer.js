@@ -9,6 +9,7 @@ import {
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
+  /* DELETE_PRODUCT */
 } from "./../actions/actions";
 
 const initialState = {
@@ -27,6 +28,8 @@ const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_CATEGORIES:
       return { ...state, categories: action.payload };
+/*     case  DELETE_PRODUCT:
+      return {...state, products.filter(ac)} */
     case GET_BRANDS:
       return { ...state, brands: action.payload };
     case GET_OFFERS:
