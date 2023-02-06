@@ -31,6 +31,12 @@
     align-self: center;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@600&display=swap');
+
 .name {
    height: 20px;
    width: 100%;
@@ -48,6 +54,8 @@
 .name-tag {
     margin: 0;
     text-align: center;
+    font-family: 'Righteous', cursive;
+    color: rgb(68, 68, 68)
 }
 
 .add-btn {
