@@ -22,7 +22,7 @@ const Card = ({ product }) => {
   const [amount, setAmount] = useState(
     stateCart && stateCart.find((e) => e.id === id)
       ? stateCart.find((e) => e.id === id).amount
-      : 0
+      : 1
   );
 
   useEffect(() => {
