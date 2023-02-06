@@ -29,6 +29,12 @@ export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
 export const FILTER_PRICE = "FILTER_PRICE";
 export const GET_OFFERS = "GET_OFFERS";
 
+// ------- adress --------------------
+export const GET_ADDRESSES = "GET_ADDRESSES";
+export const CREATE_ADDRESS = "CREATE_ADDRESS";
+export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
+export const DELETE_ADDRESS = "DELETE_ADDRESS";
+
 export const getUsers = () => {
   return function (dispatch) {
     fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
@@ -41,6 +47,16 @@ export const getUsers = () => {
       });
   };
 };
+
+export const removeFromCart = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: payload,
+    });
+  };
+};
+
 
 export const getLoggedUser = (id) => {
   return function (dispatch) {
@@ -167,11 +183,10 @@ export const deleteProduct = (payload) => {
   return async function (dispatch) {
     await axios
       .delete(
-        `${process.env.REACT_APP_API_URL}/products/deleteProduct/` + payload
+        `${process.env.REACT_APP_API_URL}/products/deleteProduct/${payload}`
       )
-      .then((r) => r.json())
       .then((r) => {
-        dispatch({ type: DELETE_PRODUCT, payload: payload });
+        dispatch({ type: DELETE_PRODUCT, payload: r });
       });
   };
 };
@@ -217,7 +232,7 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/products`,
+      `${process.env.REACT_APP_API_URL}/products/postProduct`,
       payload
     );
     return post;
@@ -261,14 +276,18 @@ export const addToCart = (payload) => {
   };
 };
 
-export const removeFromCart = (payload) => {
-  return function (dispatch) {
-    dispatch({
-      type: REMOVE_FROM_CART,
-      payload: payload,
+//SECCION ADDRESS!!!!!!!!!!!!!!!!!
+
+export const getAddress = () => {
+  return async (dispatch) => {
+    const res = await axios.get(`https://happy-hour-helper-production.up.railway.app/address/getAddress`);
+    const data = res.data;
+    return dispatch({
+      type: GET_ADDRESSES,
+      payload: data,
     });
   };
-};
+}
 
 export const filterByPrice = (payload) => {
   return {
@@ -276,15 +295,20 @@ export const filterByPrice = (payload) => {
     payload: payload,
   };
 };
-// export const getAllProductsByCategory = (category) => {
-//   return async function (dispatch) {
-//     const { data } = await axios(`http://localhost:3001/products/filterByCategory?category=${category}`)
-//     dispatch({
-//       type: GET_PRODUCTS_BY_CATEGORY,
-//       payload: data,
-//     });
-//   };
-// };
+
+export const createAddress = (data) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      `https://happy-hour-helper-production.up.railway.app/address/postAddress`,
+      data
+    );
+    dispatch({ type: "CREATE_ADDRESS", payload: response.data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
 
 export const getAllAddresses = (userCredentials) => {
   fetch(`${process.env.REACT_APP_API_URL}/address/getAddress`)
@@ -295,11 +319,31 @@ export const getAllAddresses = (userCredentials) => {
     });
 };
 
-export const getAllPayments = (userCredentials) => {
-  fetch(`${process.env.REACT_APP_API_URL}/payment-methods/getPayment`)
-    .then((r) => r.json())
-    .then((r) => {
-      const data = r.filter((e) => e.user_id === userCredentials.uid);
-      return data;
+
+
+export const updateAddress = (id, properties) => async (dispatch) => {
+  try {
+    await axios.put(`https://happy-hour-helper-production.up.railway.app/address/putAddress`, 
+      { id, properties }
+    );
+    dispatch({ type: UPDATE_ADDRESS, payload: {id, properties} });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+export const deleteAddress = (id) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `https://happy-hour-helper-production.up.railway.app/address/deleteAddress`,
+      { data: { id } }
+    );
+    dispatch({
+      type: DELETE_ADDRESS,
+      payload: id,
     });
-};
+  } catch (error) {
+    console.log(error)
+  }
+  }

@@ -5,6 +5,7 @@ import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
 import Cart from "./Views/Cart/Cart";
+// import Admin from "./Views/Admin/Admin";
 import User from "./Views/User/User";
 import Detail from "./Views/Detail/Detail";
 import ProductsDashboard from "./Views/AdminDashboard/products/ProductDashboard";
@@ -21,13 +22,9 @@ import { getLoggedUser } from "./redux/actions/actions";
 import { useEffect } from "react";
 
 // import Login from "./components/Login/Login.jsx";
-// import ConfirmOrder from './Views/ConfirmOrder/ConfirmOrder'
-// import SearchView from "./Views/Search-View/Search-View";
-// import LowerFilters from "./Views/Home/LowerFilters/LowerFilters";
-// import AddAddres from "./components/AddAddress/AddAddress";
-// import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod"
+import Settings from "./Views/User/Settings";
+import Address from "./Views/User/Address"
 
-console.log(process.env.REACT_APP_API_URL);
 
 function App() {
   //estos componentes son los views, a partir de ellos se van a presentar distintos componentes acorde a las demandas particulares del cliente.
@@ -54,14 +51,8 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        <Route
-          path="/add-payment-method"
-          element={<Skeleton view={<AddPaymentMethod />} />}
-        />
-        <Route
-          path="/add-address"
-          element={<Skeleton view={<AddAddres />} />}
-        />
+        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
+        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />} />
         <Route path="/checkout-successs" element={<CheckOutSucess />} />
 
         {/* ---------Rutas Admin ------------------- */}

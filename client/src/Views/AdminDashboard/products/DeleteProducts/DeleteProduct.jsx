@@ -38,10 +38,11 @@ function DeleteProduct({ props }) {
   };
 
   const HandleDelete = () => {
-    const productId = { id: props.id };
+    const productId =  props.id;
 
     // const productId = props.id;
     dispatch(deleteProduct(productId));
+    window.location.reload()
   };
 
   return (

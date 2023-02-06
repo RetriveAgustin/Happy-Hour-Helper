@@ -56,6 +56,58 @@ const getModels = async (model, name) => {
         results = await model.findAll();
       }
     }
+    if (model === Product) {
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+          ],
+        });
+      } else {
+        results = await model.findAll({
+          include: [
+            {
+              model: Brand,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+            {
+              model: Sub_category,
+              attributes: ["id", "name"],
+              through: {attributes: []},
+            },
+          ],
+        });
+      }
+    } else {
+      if (name) {
+        results = await model.findAll({
+          where: { name: name },
+        });
+      } else {
+        results = await model.findAll();
+      }
+    }
   } else {
     return null;
   }

@@ -14,7 +14,7 @@ import LoginBtn from "./loginBtn/LoginBtn";
 import RegisterBtn from "./registerBtn/RegisterBtn";
 import { Stack } from "@mui/system";
 
-function Header() {
+function NavBar() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
@@ -74,4 +74,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default NavBar;

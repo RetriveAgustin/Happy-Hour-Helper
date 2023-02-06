@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -11,7 +12,7 @@ import {
 import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getLoggedUser, loginUser } from "../../../redux/actions/actions.js";
+import { getLoggedUser, loginUser, registerUser } from "../../../redux/actions/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../../context/authContext.js";
 
@@ -41,7 +42,7 @@ function LoginBtn() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const { login } = useAuth();
+  const { login, loginWithGoogle } = useAuth();
 
   function handleChangePassword({ target }) {
     setPassword(target.value);
@@ -79,6 +80,55 @@ function LoginBtn() {
         return console.log("Wrong password");
       if (e.message === "Firebase: Error (auth/user-not-found).")
         return console.log("The user doesn't exist");
+    }
+  }
+
+  async function handleGoogleSignIn (){
+    const result = await loginWithGoogle();
+    console.log(result);
+    console.log(result._tokenResponse.email);
+    if (result._tokenResponse.isNewUser) {
+      try {
+        const data = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/registerUser`,
+          {
+            id: result.user.uid,
+            token: result.user.accessToken,
+            name: result._tokenResponse.firstName,
+            lastname: result._tokenResponse.lastname,
+            mail: result._tokenResponse.email,
+            password: null,
+            favourites: null,
+            created_in_google: true,
+            is_admin: false,
+          }
+        );
+        if (data.data === "User registered!") {
+          const loginAfterRegister = await axios.post(
+            `${process.env.REACT_APP_API_URL}/users/loginUser`,
+            {
+              mail: result._tokenResponse.email,
+              password: null,
+            }
+          );
+          if (loginAfterRegister.data === "User logged!") {
+            setOpen(false)
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      const loginGoogle = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/loginUser`,
+        {
+          mail: result._tokenResponse.email,
+          password: null,
+        }
+      );
+      if (loginGoogle.data === "User logged!") {
+        setOpen(false)
+      }
     }
   }
 
@@ -185,6 +235,7 @@ function LoginBtn() {
                   backgroundColor: "#d32323",
                   textTransform: "none",
                 }}
+                onClick={handleGoogleSignIn}
               >
                 Iniciar sesión con Google
               </Button>
