@@ -66,12 +66,12 @@ function App() {
 
         {/* ---------Rutas Admin ------------------- */}
 
-        <Route
-          path="/createproduct"
-          element={<AdminDashboard props={<CreateProduct />} />}
-        />
         {user?.is_admin ? (
           <>
+            <Route
+              path="/createproduct"
+              element={<AdminDashboard props={<CreateProduct />} />}
+            />
             <Route
               path="/admin/*"
               element={<AdminDashboard props={<UsersDashboard />} />}
