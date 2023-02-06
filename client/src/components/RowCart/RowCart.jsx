@@ -8,18 +8,10 @@ import { Divider, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import accounting from "accounting";
 
-const RowCart = ({
-  img,
-  name,
-  price,
-  has_discount,
-  amount
-}) => {
+const RowCart = ({ img, name, price, has_discount, amount }) => {
   const dispatch = useDispatch();
-
+  const [am, setAm] = useState(amount);
   const subtot = price * amount;
-
-
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell
@@ -39,11 +31,12 @@ const RowCart = ({
           <IconButton
             color="secondary"
             disabled={amount === 1}
+            onClick={() => setAm(am - 1)}
           >
             -
           </IconButton>
-          <input type="number" className="input" value={amount} />
-          <IconButton color="secondary">
+          <input type="number" className="input" value={am} />
+          <IconButton color="secondary" onClick={() => setAm(am + 1)}>
             +
           </IconButton>
         </SubAdd>
