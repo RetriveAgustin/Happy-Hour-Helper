@@ -37,7 +37,7 @@ export const ImageInput = styled.input`
 export const ImageContainer = styled.div`
     display: flex;
     flex-direction: row;
-    width: 18rem;
+    width: 16rem;
     justify-content: space-between;
     align-items: center;
 `

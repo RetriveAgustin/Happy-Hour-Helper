@@ -156,10 +156,10 @@ export default function CreateProduct() {
           placeholder="Imagen"
           onChange={(e) => imageUpload(e.target.files)}
         ></ImageInput>
-        <div style={{width: '100px', height: '100px', border: 'solid 1px white', borderRadius: '5px', display: 'flex', justifyContent:'center', alignItems:'center'}}>
-        <img src={info.img} width='90px' alt="Selecciona una imagen" style={{color:'grey'}}/>
+        <div style={{width: '100px', height: '100px', border: 'solid 1px white', borderRadius: '5px', display: 'flex', justifyContent:'flex-end', alignItems:'center', }}>
+        <img src={info.img} width='90px' alt="Selecciona una imagen" style={{color:'grey', position:'absolute', transform:'translate(-4px)'}}/>
+        <button style={{width: '1.2rem', height:'1.2rem',color:'white' , backgroundColor: '#52373C', border:'none', borderRadius: '2px', cursor:'pointer', textAlign:'center', alignSelf:'flex-start', zIndex:'100'}} onClick={clearImg} >X</button>
         </div>
-        <button style={{width: '1.2rem', height:'1.2rem',color:'white' , backgroundColor: '#52373C', border:'none', borderRadius: '2px', cursor:'pointer', textAlign:'center'}} onClick={clearImg} >X</button>
         </ImageContainer>
         <TextInput
           type="number"
