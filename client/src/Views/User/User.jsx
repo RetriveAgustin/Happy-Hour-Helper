@@ -28,24 +28,8 @@ const SidebarWrapper = styled.div`
   font-size: 1rem;
 `;
 
-const SidebarLogoWrapper = styled.img`
-  padding: 0.5rem 4rem;
-  margin-bottom: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 55%;
-  border-radius: 50%;
-  text-decoration: none;
-  
-`;
 
-const SidebarToggler = styled.button`
-  display: ${({ displaySidebar }) => (displaySidebar ? "block" : "none")};
-  @media (max-width: 468px) {
-    display: block;
-  }
-`;
+
 
 const Children = styled.div`
   margin-left: ${({ displaySidebar }) => (displaySidebar ? "15rem" : "5rem")};
@@ -70,16 +54,6 @@ function User({children}) {
     <React.Fragment>
       <SidebarContainer>
         <SidebarWrapper>
-          <SidebarLogoWrapper
-            src="https://cdn.dribbble.com/users/260486/screenshots/3099273/media/0e4a7831499bf2efbbd978b0db663b41.jpg?compress=1&resize=400x300"
-            alt="user-profile"
-          />
-          <SidebarToggler
-            displaySidebar={displaySidebar}
-            onClick={handleSidebarDisplay}
-          >
-            
-          </SidebarToggler>
           <Sidebaritems displaySidebar={displaySidebar} />
         </SidebarWrapper>
       </SidebarContainer>

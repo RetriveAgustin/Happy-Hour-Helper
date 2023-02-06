@@ -18,7 +18,7 @@ import TableRow from "@mui/material/TableRow";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const AdressConteiner = styled.div`
-  background-color: #171717;
+  background-color: #151515;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,7 +29,7 @@ const AdressCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50%;
+  height: 65%;
   width: auto;
   padding: 20px;
   background-color: #52373c;
@@ -38,12 +38,19 @@ const AdressCard = styled.div`
 
 const Address = () => {
   const dispatch = useDispatch();
-  const addresses = useSelector((state) => state.addresses);
+  const addresses = useSelector((state) => state.root.addresses);
   const [showAddForm, setShowAddForm] = useState(false);
   const [showEditForm, setShowEditForm] = useState(false);
   const [showTables, setShowTables] = useState(true);
   const [addressToEdit, setAddressToEdit] = useState({});
   const [formData, setFormData] = useState({
+    name: "",
+    number: "",
+    description: "",
+  });
+
+  
+  const [editFormData, setEditFormData] = useState({
     name: "",
     number: "",
     description: "",
@@ -66,13 +73,22 @@ const Address = () => {
 
   const handleEditAddress = (event) => {
     event.preventDefault();
-    dispatch(updateAddress(addressToEdit.id, updateAddress));
+    const properties = {
+      name: editFormData.name,
+      number: editFormData.number,
+      description: editFormData.description,
+    };
+    dispatch(updateAddress(addressToEdit.id, properties));
     setShowEditForm(false);
     setShowTables(true);
   };
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+
+  const handleChangeEdit = (event) => {
+    setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
   };
 
   const showAddAddressForm = () => {
@@ -87,6 +103,11 @@ const Address = () => {
 
   const showEditAddressForm = (address) => {
     setAddressToEdit(address);
+    setEditFormData({
+      name: address.name,
+      number: address.number,
+      description: address.description,
+    });
     setShowEditForm(true);
     setShowTables(false);
   };
@@ -105,30 +126,31 @@ const Address = () => {
           <div>
             <form onSubmit={handleSubmit}>
               <TextField
-                label="Calle"
+                label="Nombre de la calle"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 type="text"
+                variant="outlined"
               />
               <TextField
-                label="Numero"
+                label="Altura de la calle"
                 value={formData.number}
                 name="number"
                 onChange={handleChange}
                 type="number"
               />
               <TextField
-                label="Descripcion"
+                label="Código postal"
                 value={formData.description}
                 onChange={handleChange}
                 name="description"
                 type="text"
               />
-              <Button variant="outlined" type="submit">
+              <Button variant="contained" type="submit">
                 Agregar
               </Button>
-              <Button variant="outlined" onClick={hideAddAddressForm}>
+              <Button variant="contained" onClick={hideAddAddressForm}>
                 Cancelar
               </Button>
             </form>
@@ -139,26 +161,29 @@ const Address = () => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Calle</TableCell>
-                <TableCell>Numero</TableCell>
-                <TableCell>Descripcion</TableCell>
+                <TableCell sx={{ color: "white" }}>Nombre de la calle</TableCell>
+                <TableCell sx={{ color: "white" }}>Altura de la calle</TableCell>
+                <TableCell sx={{ color: "white" }}>Código postal</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {addresses.map((address) => (
+              {addresses?.map((address) => (
                 <TableRow key={address.id}>
-                  <TableCell>{address.name}</TableCell>
-                  <TableCell>{address.number}</TableCell>
-                  <TableCell>{address.description}</TableCell>
+                  <TableCell sx={{ color: "white" }}>{address.name}</TableCell>
+                  <TableCell sx={{ color: "white" }}>{address.number}</TableCell>
+                  <TableCell sx={{ color: "white" }}>{address.description}</TableCell>
                   <TableCell>
                     <Button
-                      variant="outlined"
+                       variant="contained"
+                       color="secondary"
+                       startIcon={<DeleteIcon />}
                       onClick={() => handleDeleteAddress(address.id)}
                     >
                       Eliminar
                     </Button>
                     <Button
-                      variant="outlined"
+                      variant="contained"
+                      color="primary"
                       onClick={() => showEditAddressForm(address)}
                     >
                       Editar
@@ -172,26 +197,26 @@ const Address = () => {
         {/* {/ Formulario para editar una dirección */}
         {showEditForm && (
           <div>
-            <form onSubmit={handleEditAddress}>
+            <form>
               <TextField
                 label="Calle"
                 name="name"
-                defaultValue={addressToEdit.name}
-                required
+                defaultValue={editFormData.name}
+                onChange={handleChangeEdit}
               />
               <TextField
                 label="Numero"
                 name="number"
-                defaultValue={addressToEdit.number}
-                required
+                defaultValue={editFormData.number}
+                onChange={handleChangeEdit}
               />
               <TextField
                 label="Descripcion"
                 name="description"
-                defaultValue={addressToEdit.description}
-                required
+                defaultValue={editFormData.description}
+                onChange={handleChangeEdit}
               />
-              <Button type="submit">Guardar</Button>
+              <Button type="submit" onClick={handleEditAddress}>Guardar Edicion</Button>
               <Button onClick={hideEditAddressForm}>Cancelar</Button>
             </form>
           </div>

@@ -6,7 +6,6 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 
 //Seccion Address
 export const GET_ADDRESSES = "GET_ADDRESSES";
-export const GET_ADDRESS = "GET_ADDRESS";
 export const CREATE_ADDRESS = "CREATE_ADDRESS";
 export const UPDATE_ADDRESS = "UPDATE_ADDRESS";
 export const DELETE_ADDRESS = "DELETE_ADDRESS";
@@ -17,6 +16,8 @@ export const POST_PAYMENT = "POST_PAYMENT";
 export const PUT_PAYMENT = "PUT_PAYMENT";
 export const DELETE_PAYMENT = "DELETE_PAYMENT";
 export const RESTORE_PAYMENT = "RESTORE_PAYMENT";
+
+
 export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_OFFERS = "GET_OFFERS";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
@@ -28,76 +29,84 @@ export const GET_LOGGED_USER = "GET_LOGGED_USER";
 export const REMOVE_FROM_SUBCAT = "REMOVE_FROM_SUBCAT";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const FILTER_BY_SUBCAT = "FILTER_BY_SUBCAT";
-export const FILTER_PRICE = 'FILTER_PRICE';
+export const FILTER_PRICE = "FILTER_PRICE";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const LOGIN_USER = "LOGIN_USER";
-export const REGISTER_USER = 'REGISTER_USER';
+export const REGISTER_USER = "REGISTER_USER";
 
 export const getUsers = () => {
-  return function (dispatch){
+  return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/users/getUser`)
     fetch("https://happy-hour-helper-production.up.railway.app/users/getUser")
-      .then((response)=> response.json())
+      .then((response) => response.json())
       .then((data) => {
         dispatch({
           type: GET_USERS,
           payload: data,
-        })
-      }
-    )
-  }
-}
+        });
+      });
+  };
+};
 
 export const getLoggedUser = (id) => {
-  return function (dispatch){
-    axios.get(`http://localhost:3001/users/getUserById?id=${id}`)
+  return function (dispatch) {
+    axios
+      .get(`http://localhost:3001/users/getUserById?id=${id}`)
       .then((data) => {
-        console.log(data)
+        console.log(data);
         dispatch({
           type: GET_LOGGED_USER,
           payload: data.data,
-        })
-      }
-    )
-  }
-}
+        });
+      });
+  };
+};
 
-export const loginUser = (login, payload) => { // payload es un obj con mail y password
-  return async function (dispatch){
+export const loginUser = (login, payload) => {
+  // payload es un obj con mail y password
+  return async function (dispatch) {
     try {
       const result = await login(payload.mail, payload.password); // acá se guardan las USER CREDENTIALS si el login es exitoso
       const data = await axios.post(
         "https://happy-hour-helper-production.up.railway.app/users/loginUser",
-        {mail: payload.mail, password: payload.password}
-      )
-      localStorage.setItem('User_ID', result.user.uid) // por ahora sólo guardamos el user_id en localStorage
+        { mail: payload.mail, password: payload.password }
+      );
+      localStorage.setItem("User_ID", result.user.uid); // por ahora sólo guardamos el user_id en localStorage
       dispatch({
         type: LOGIN_USER,
-        payload: result.user
-      })
+        payload: result.user,
+      });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
-}
+};
 
 export const registerUser = (register, payload) => {
-  return async function (dispatch){
+  return async function (dispatch) {
     try {
       const result = await register(payload.email, payload.password);
       const post = await axios.post(
         "https://happy-hour-helper-production.up.railway.app/users/registerUser",
-        {id: result.user.uid, name: payload.name, lastname: payload.lastName, mail: payload.email, password: payload.password, created_in_google: false, is_admin: false}
+        {
+          id: result.user.uid,
+          name: payload.name,
+          lastname: payload.lastName,
+          mail: payload.email,
+          password: payload.password,
+          created_in_google: false,
+          is_admin: false,
+        }
       );
-      console.log(post)
+      console.log(post);
       dispatch({
-        type: REGISTER_USER
+        type: REGISTER_USER,
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-}
+  };
+};
 
 export const removeFromCart = (payload) => {
   return function (dispatch) {
@@ -108,21 +117,19 @@ export const removeFromCart = (payload) => {
   };
 };
 
-
 export const filterByPrice = (payload) => {
   return {
     type: FILTER_PRICE,
-    payload: payload
-  }
-}
-
+    payload: payload,
+  };
+};
 
 export const getAllCategories = () => {
-  console.log(process.env.REACT_APP_API_URL);
-console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
   return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/category/getCategory`)
-    fetch("https://happy-hour-helper-production.up.railway.app/category/getCategory")
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/category/getCategory"
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -137,7 +144,9 @@ console.log(`${process.env.REACT_APP_API_URL}/category/getCategory`);
 export const getAllSubCategories = () => {
   return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/sub-category/getSubCategory`)
-    fetch("https://happy-hour-helper-production.up.railway.app/sub-category/getSubCategory")
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/sub-category/getSubCategory"
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -152,7 +161,9 @@ export const getAllSubCategories = () => {
 export const getAllProducts = () => {
   return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/products/getProduct`)
-    fetch("https://happy-hour-helper-production.up.railway.app/products/getProduct")
+    fetch(
+      "https://happy-hour-helper-production.up.railway.app/products/getProduct"
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -167,7 +178,9 @@ export const getAllProducts = () => {
 export const getProductId = (payload) => {
   return function (dispatch) {
     // fetch(`${process.env.REACT_APP_API_URL}/products/getProductId/${payload}`)
-    fetch(`https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`)
+    fetch(
+      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
+    )
       .then((response) => response.json())
       .then((data) => {
         dispatch({
@@ -265,33 +278,38 @@ export const createBrand = (payload) => {
 };
 
 export const addToCart = (payload) => {
-  return {
-    type: ADD_TO_CART,
-    payload: payload,
-  }
+  return function (dispatch) {
+    fetch(
+      `https://happy-hour-helper-production.up.railway.app/products/getProductId/${payload}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        dispatch({
+          type: ADD_TO_CART,
+          payload: data,
+        });
+      })
+      .catch((err) => console.log(err));
+  };
 };
-
-//SECCION ADDRESS!!!!!!!!!!!!!!!!!
-
 
 //SECCION ADDRESS!!!!!!!!!!!!!!!!!
 
 export const getAddress = () => {
   return async (dispatch) => {
-    const res = await axios.get(`http://localhost:3001/address/getAddress`);
+    const res = await axios.get(`https://happy-hour-helper-production.up.railway.app/address/getAddress`);
     const data = res.data;
     return dispatch({
-      type: "GET_ADDRESSES",
+      type: GET_ADDRESSES,
       payload: data,
     });
   };
 };
-<<<<<<< HEAD
 
 export const createAddress = (data) => async (dispatch) => {
   try {
     const response = await axios.post(
-      `http://localhost:3001/address/postAddress`,
+      `https://happy-hour-helper-production.up.railway.app/address/postAddress`,
       data
     );
     dispatch({ type: "CREATE_ADDRESS", payload: response.data });
@@ -300,48 +318,56 @@ export const createAddress = (data) => async (dispatch) => {
   }
 };
 
-export const updateAddress = (id) => {
-  return async (dispatch) => {
-    const res = await axios.put(`http://localhost:3001/address/putAddress`, {
-      data: { id },
-    });
-    return dispatch({ type: UPDATE_ADDRESS, payload: res.data });
-  };
-};
 
-export const deleteAddress = (id) => {
-  return async (dispatch) => {
-    const res = await axios.delete(
-      `http://localhost:3001/address/deleteAddress`,
+
+export const updateAddress = (id, properties) => async (dispatch) => {
+  try {
+    await axios.put(`https://happy-hour-helper-production.up.railway.app/address/putAddress`, 
+      { id, properties }
+    );
+    dispatch({ type: UPDATE_ADDRESS, payload: {id, properties} });
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+export const deleteAddress = (id) => async (dispatch) => {
+  try {
+    await axios.delete(
+      `https://happy-hour-helper-production.up.railway.app/address/deleteAddress`,
       { data: { id } }
     );
-    return dispatch({
+    dispatch({
       type: DELETE_ADDRESS,
-      payload: res.data,
+      payload: id,
     });
-  };
-};
+  } catch (error) {
+    console.log(error)
+  }
+  }
 
 //SECCION PAYMENT!!!!!!!!!!!!!!!!
 
 export const getPaymentMethods = () => (dispatch) => {
-  axios
-    .get("http://localhost:3001/payment-methods/getPayment")
-    .then((response) => {
-      dispatch({ type: "GET_PAYMENT", payload: response.data });
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    axios
+      .get("https://happy-hour-helper-production.up.railway.app/payment-methods/getPayment")
+      .then((response) => {
+        dispatch({ type: GET_PAYMENT, payload: response.data });
+      });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const postPayment = (data) => async (dispatch) => {
   try {
     const response = await axios.post(
-      "http://localhost:3001/payment-methods/postPayment",
+      "https://happy-hour-helper-production.up.railway.app/payment-methods/postPayment",
       data
     );
-    dispatch({ type: "POST_PAYMENT", payload: response.data });
+    dispatch({ type: POST_PAYMENT, payload: response.data });
   } catch (error) {
     console.log(error);
   }
@@ -349,11 +375,11 @@ export const postPayment = (data) => async (dispatch) => {
 
 export const putPayment = (id, properties) => async (dispatch) => {
   try {
-    const response = await axios.put(
-      `http://localhost:3001/payment-methods/putPayment`,
-      { data: { id, properties } }
+    await axios.put(
+      `https://happy-hour-helper-production.up.railway.app/payment-methods/putPayment`,
+      {id} 
     );
-    dispatch({ type: "PUT_PAYMENT", payload: response.data });
+    dispatch({ type: PUT_PAYMENT, payload: {id, properties} });
   } catch (error) {
     console.log(error);
   }
@@ -361,7 +387,7 @@ export const putPayment = (id, properties) => async (dispatch) => {
 
 export const deletePayment = (id) => async (dispatch) => {
   try {
-    await axios.delete(`http://localhost:3001/payment-methods/deletePayment`, {
+    await axios.delete(`https://happy-hour-helper-production.up.railway.app/payment-methods/deletePayment`, {
       data: { id },
     });
     dispatch({ type: "DELETE_PAYMENT", payload: id });
@@ -381,5 +407,3 @@ export const restorePayment = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-=======
->>>>>>> 326f80447e0164c7a1f4adf21d82184ecffd5973

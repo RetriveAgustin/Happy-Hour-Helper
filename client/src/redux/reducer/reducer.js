@@ -50,6 +50,10 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, detail: action.payload };
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
+    case GET_ADDRESSES:
+      return { ...state, addresses: action.payload };
+    case GET_PAYMENT:
+      return { ...state, paymentMethods: action.payload };
     case FILTER_PRICE:
       const products = state.prodsCopy;
       return {
@@ -71,18 +75,19 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cart: [...state.cart.filter((e) => e.name !== action.payload)],
       };
-    case GET_ADDRESSES:
-      return { ...state, addresses: action.payload };
     case CREATE_ADDRESS:
       return { ...state, addresses: [...state.addresses, action.payload] };
     case UPDATE_ADDRESS:
-      const updatedAddresses = state.addresses.map((address) => {
-        if (address.id === action.payload.id) {
-          return action.payload;
-        }
-        return address;
-      });
-      return { ...state, addresses: updatedAddresses };
+      return {
+        ...state,
+        addresses: state.addresses.map((address) => {
+          if (address.id === action.payload.id) {
+            return { ...address, ...action.payload };
+          }
+          return address;
+        }),
+      };
+
     case DELETE_ADDRESS:
       return {
         ...state,
@@ -90,8 +95,6 @@ const rootReducer = (state = initialState, action) => {
           (address) => address.id !== action.payload
         ),
       };
-    case GET_PAYMENT:
-      return { ...state, paymentMethods: action.payload };
     case POST_PAYMENT:
       return {
         ...state,
@@ -102,7 +105,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         paymentMethods: state.paymentMethods.map((payment) => {
           if (payment.id === action.payload.id) {
-            return { ...payment, ...action.payload.properties };
+            return { ...payment, ...action.payload };
           }
           return payment;
         }),

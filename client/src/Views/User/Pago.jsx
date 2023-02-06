@@ -19,8 +19,10 @@ import TableRow from "@mui/material/TableRow";
 import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "styled-components";
 
+
+
 const LayoutUserContainer = styled.div`
-  background-color: #171717;
+  background-color: #151515;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +33,7 @@ const UserCard = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 50%;
+  height: 65%;
   width: auto;
   padding: 20px;
   background-color: #52373c;
@@ -39,8 +41,11 @@ const UserCard = styled.div`
 `;
 
 const Pago = () => {
-  const [selectedId, setSelectedId] = useState(0);
+  const dispatch = useDispatch();
+  let paymentMethods = useSelector((state) => state.root.paymentMethods);
   const [formOpen, setFormOpen] = useState(false);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [paymentToEdit, setPaymentToEdit] = useState({});
   const [showTables, setShowTables] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
@@ -48,9 +53,15 @@ const Pago = () => {
     expiration_date: "",
     propetary_name: "",
     propetary_last_name: "",
+    user_id: "",
   });
-  const paymentMethods = useSelector((state) => state.paymentMethods);
-  const dispatch = useDispatch();
+  const [editFormData, setEditFormData] = useState({
+    name: "",
+    code: "",
+    expiration_date: "",
+    propetary_name: "",
+    propetary_last_name: "",
+  });
 
   useEffect(() => {
     dispatch(getPaymentMethods());
@@ -59,6 +70,11 @@ const Pago = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
+
+  const handleChangeEdit = (event) => {
+    setEditFormData({ ...editFormData, [event.target.name]: event.target.value });
+  };
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -76,43 +92,51 @@ const Pago = () => {
     setShowTables(true);
   };
 
-  const handleEdit = (id, data) => {
+  const handleEdit = (event) => {
+    event.preventDefault();
+    const properties = {
+      name: editFormData.name,
+      code: editFormData.code,
+      expiration_date: editFormData.expiration_date,
+      propetary_name: editFormData.propetary_name,
+      propetary_last_name: editFormData.propetary_last_name,
+    };
     // Dispatch the putPayment action with the id and updated data
-    dispatch(putPayment(id, data));
-    setFormOpen(false);
+    dispatch(putPayment(paymentToEdit.id, properties));
+    setShowEditForm(false);
     // added this line to reset the formData after submit
-    setFormData({
-      name: "",
-      code: "",
-      expiration_date: "",
-      propetary_name: "",
-      propetary_last_name: "",
-    });
     setShowTables(true);
+
   };
+
+  const handleEditForm = (payment) => {
+    setPaymentToEdit(payment)
+    setEditFormData({
+      name: payment.name,
+      code: payment.code,
+      expiration_date: payment.expiration_date,
+      propetary_name: payment.propetary_name,
+      propetary_last_name: payment.propetary_last_name,
+    });
+    setShowEditForm(true);
+    setShowTables(false);
+  };
+
   const handleDelete = (id) => {
     // Dispatch the deletePayment action with the id
     dispatch(deletePayment(id));
   };
 
-  const handleSelectedId = (event) => {
-    setSelectedId(event.target.value);
-  };
+ 
 
   function formatExpirationDate(expirationDate) {
     const date = new Date(expirationDate);
-    return date.toLocaleDateString("en-US", {
+    date.setMonth(date.getMonth() + 1);
+    return date.toLocaleDateString("en-ES", {
+      year: "numeric",
       month: "2-digit",
-      year: "2-digit",
     });
   }
-
-  const handleEditClick = (id, data) => {
-    setSelectedId(id);
-    setFormData(data);
-    setFormOpen(true);
-    setShowTables(false);
-  };
 
   const handleCloseForm = () => {
     setFormOpen(false);
@@ -123,6 +147,12 @@ const Pago = () => {
     setFormOpen(true);
     setShowTables(false);
   };
+
+
+  const hideEditFormPayment = () => {
+    setShowEditForm(false);
+    setShowTables(true)
+  }
 
   return (
     <LayoutUserContainer>
@@ -152,25 +182,20 @@ const Pago = () => {
                 onChange={handleChange}
               />
               <TextField
-                label="First Name"
+                label="Nombre"
                 type="text"
                 name="propetary_name"
                 value={formData.propetary_name}
                 onChange={handleChange}
               />
               <TextField
-                label="Last Name"
+                label="Apellido"
                 type="text"
                 name="propetary_last_name"
                 value={formData.propetary_last_name}
                 onChange={handleChange}
               />
-              <Button
-                type="submit"
-                onClick={() => handleEdit(selectedId, formData)}
-              >
-                Save Edit
-              </Button>
+              
               <Button type="submit">Guardar Nuevo</Button>
               <Button onClick={handleCloseForm}>Cancelar</Button>
             </>
@@ -183,33 +208,37 @@ const Pago = () => {
         {showTables && (
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell>Tarjeta</TableCell>
-                <TableCell>Codigo</TableCell>
-                <TableCell>Fecha Expiracion</TableCell>
-                <TableCell>Nombre</TableCell>
-                <TableCell>Apellido</TableCell>
+              <TableRow sx={{ color: "white" }}>
+                <TableCell sx={{ color: "white" }}>Tarjeta</TableCell>
+                <TableCell sx={{ color: "white" }}>Codigo </TableCell>
+                <TableCell sx={{ color: "white" }}>Fecha Expiracion</TableCell>
+                <TableCell sx={{ color: "white" }}>Nombre</TableCell>
+                <TableCell sx={{ color: "white" }}>Apellido</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {paymentMethods?.map((paymentMethod) => (
                 <TableRow key={paymentMethod.id}>
-                  <TableCell>{paymentMethod.name}</TableCell>
-                  <TableCell>{paymentMethod.code}</TableCell>
-                  <TableCell>
+                  <TableCell sx={{ color: "white" }}>
+                    {paymentMethod.name}
+                  </TableCell>
+                  <TableCell sx={{ color: "white" }}>
+                    {paymentMethod.code}
+                  </TableCell>
+                  <TableCell sx={{ color: "white" }}>
                     {formatExpirationDate(paymentMethod.expiration_date)}
                   </TableCell>
-                  <TableCell>
-                    {paymentMethod.propetary_name}{" "}
+                  <TableCell sx={{ color: "white" }}>
+                    {paymentMethod.propetary_name}
+                  </TableCell>
+                  <TableCell sx={{ color: "white" }}>
                     {paymentMethod.propetary_last_name}
                   </TableCell>
                   <TableCell>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() =>
-                        handleEditClick(paymentMethod.id, paymentMethod)
-                      }
+                      onClick={() => handleEditForm(paymentMethod)}
                     >
                       Editar
                     </Button>
@@ -226,6 +255,50 @@ const Pago = () => {
               ))}
             </TableBody>
           </Table>
+        )}
+        {showEditForm && (
+          <div>
+            <form onSubmit={handleEdit}>
+            <TextField
+                sx={{ color: "white" }}
+                label="Tarjeta"
+                variant="outlined"
+                name="name"
+                defaultValue={paymentToEdit.name}
+                onChange={handleChangeEdit}
+                
+              />
+              <TextField
+                label="Code"
+                type="number"
+                name="code"
+                defaultValue={paymentToEdit.code}
+                onChange={handleChangeEdit}
+              />
+              <TextField
+                type="month"
+                name="expiration_date"
+                defaultValue={paymentToEdit.expiration_date}
+                onChange={handleChangeEdit}
+              />
+              <TextField
+                label="First Name"
+                type="text"
+                name="propetary_name"
+                defaultValue={paymentToEdit.propetary_name}
+                onChange={handleChangeEdit}
+              />
+              <TextField
+                label="Last Name"
+                type="text"
+                name="propetary_last_name"
+                defaultValue={paymentToEdit.propetary_last_name}
+                onChange={handleChangeEdit}
+              />
+              <Button type="submit">Guardar Edit</Button>
+              <Button onClick={hideEditFormPayment}>Cancelar</Button>
+            </form>
+          </div>
         )}
       </UserCard>
     </LayoutUserContainer>

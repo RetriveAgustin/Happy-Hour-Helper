@@ -1,6 +1,5 @@
 const { User } = require("../../db");
 const bcryptjs = require('bcryptjs');
-const admin = require("../utils/firebase-config.js");
 const {
   getModels,
   getModelsById,
