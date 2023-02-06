@@ -9,7 +9,10 @@ import {
   ADD_TO_CART,
   FILTER_PRICE,
   REMOVE_FROM_CART,
-  /* DELETE_PRODUCT */
+  GET_ADDRESSES,
+  CREATE_ADDRESS,
+  UPDATE_ADDRESS,
+  DELETE_ADDRESS,
 } from "./../actions/actions";
 
 const initialState = {
@@ -22,6 +25,8 @@ const initialState = {
   productsByCategory: [],
   detail: [],
   cart: [],
+  addresses: [],
+  paymentMethods: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -42,6 +47,8 @@ const rootReducer = (state = initialState, action) => {
       return { ...state, detail: action.payload };
     case GET_PRODUCTS_BY_CATEGORY:
       return { ...state, productsByCategory: action.payload };
+    case GET_ADDRESSES:
+      return { ...state, addresses: action.payload };
     case FILTER_PRICE:
       const products = state.prodsCopy;
       return {
@@ -62,6 +69,26 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: [...state.cart.filter((e) => e.name !== action.payload)],
+      };
+    case CREATE_ADDRESS:
+      return { ...state, addresses: [...state.addresses, action.payload] };
+    case UPDATE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.map((address) => {
+          if (address.id === action.payload.id) {
+            return { ...address, ...action.payload };
+          }
+          return address;
+        }),
+      };
+
+    case DELETE_ADDRESS:
+      return {
+        ...state,
+        addresses: state.addresses.filter(
+          (address) => address.id !== action.payload
+        ),
       };
     default:
       return {

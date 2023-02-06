@@ -41,3 +41,13 @@ export const Button = styled.button`
     background: rgb(200, 50, 70);
   }
 `;
+
+export const Cell = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%;
+    height: 20%;
+    background-color: white;
+    border-radius: 10px;
+`
