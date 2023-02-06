@@ -1,8 +1,8 @@
 import styled, { keyframes } from "styled-components";
 
 export const CartCont = styled.div`
-  margin-left: 300px;
-  margin-right: 300px;
+  margin-left: 100px;
+  margin-right: 100px;
 `;
 
 export const Title = styled.h2`
@@ -43,11 +43,11 @@ export const Button = styled.button`
 `;
 
 export const Cell = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 80%;
-    height: 20%;
-    background-color: white;
-    border-radius: 10px;
-`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 80%;
+  height: 20%;
+  background-color: white;
+  border-radius: 10px;
+`;

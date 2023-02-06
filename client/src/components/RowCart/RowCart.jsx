@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeFromCart } from "../../redux/actions/actions.js";
+import {
+  addToCart,
+  changeAmount,
+  removeFromCart,
+} from "../../redux/actions/actions.js";
 import { Image, SubAdd } from "../../components/RowCart/RowCart.styles.js";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
@@ -11,7 +15,19 @@ import accounting from "accounting";
 const RowCart = ({ img, name, price, has_discount, amount }) => {
   const dispatch = useDispatch();
   const [am, setAm] = useState(amount);
-  const subtot = price * amount;
+
+  const subtot = price * am;
+
+  const handleClick = (e) => {
+    if (e === "rest") {
+      dispatch(changeAmount({ am: am - 1, name }));
+      setAm(am - 1);
+    } else {
+      setAm(am + 1);
+      dispatch(changeAmount({ am: am + 1, name }));
+    }
+  };
+
   return (
     <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell
@@ -30,13 +46,21 @@ const RowCart = ({ img, name, price, has_discount, amount }) => {
         <SubAdd>
           <IconButton
             color="secondary"
-            disabled={amount === 1}
-            onClick={() => setAm(am - 1)}
+            type="text"
+            disabled={am === 1}
+            onClick={() => {
+              handleClick("rest");
+            }}
           >
             -
           </IconButton>
           <input type="number" className="input" value={am} />
-          <IconButton color="secondary" onClick={() => setAm(am + 1)}>
+          <IconButton
+            color="secondary"
+            onClick={() => {
+              handleClick("add");
+            }}
+          >
             +
           </IconButton>
         </SubAdd>
@@ -44,9 +68,9 @@ const RowCart = ({ img, name, price, has_discount, amount }) => {
       <TableCell align="right" value="subtotal">
         {accounting.formatMoney(subtot)}
       </TableCell>
-      <TableCell align="right" value="total">
-        {/* {accounting.formatMoney(totalConDesc())} */}
-      </TableCell>
+      {/* <TableCell align="right" value="total">
+        {accounting.formatMoney(totalConDesc())}
+      </TableCell> */}
     </TableRow>
   );
 };

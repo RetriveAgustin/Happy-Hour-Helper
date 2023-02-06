@@ -18,6 +18,7 @@ export const DELETE_PRODUCT = "DELETE_PRODUCT";
 // ------ Carrito -----------------
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const CHANGE_AMOUNT = "CHANGE_AMOUNT";
 
 // ------ Categorias --------------
 export const GET_CATEGORIES = "GET_CATEGORIES";
@@ -56,7 +57,6 @@ export const removeFromCart = (payload) => {
     });
   };
 };
-
 
 export const getLoggedUser = (id) => {
   return function (dispatch) {
@@ -276,18 +276,27 @@ export const addToCart = (payload) => {
   };
 };
 
+export const changeAmount = (payload) => {
+  return {
+    type: CHANGE_AMOUNT,
+    payload: payload,
+  };
+};
+
 //SECCION ADDRESS!!!!!!!!!!!!!!!!!
 
 export const getAddress = () => {
   return async (dispatch) => {
-    const res = await axios.get(`https://happy-hour-helper-production.up.railway.app/address/getAddress`);
+    const res = await axios.get(
+      `https://happy-hour-helper-production.up.railway.app/address/getAddress`
+    );
     const data = res.data;
     return dispatch({
       type: GET_ADDRESSES,
       payload: data,
     });
   };
-}
+};
 
 export const filterByPrice = (payload) => {
   return {
@@ -308,8 +317,6 @@ export const createAddress = (data) => async (dispatch) => {
   }
 };
 
-
-
 export const getAllAddresses = (userCredentials) => {
   fetch(`${process.env.REACT_APP_API_URL}/address/getAddress`)
     .then((r) => r.json())
@@ -319,19 +326,17 @@ export const getAllAddresses = (userCredentials) => {
     });
 };
 
-
-
 export const updateAddress = (id, properties) => async (dispatch) => {
   try {
-    await axios.put(`https://happy-hour-helper-production.up.railway.app/address/putAddress`, 
+    await axios.put(
+      `https://happy-hour-helper-production.up.railway.app/address/putAddress`,
       { id, properties }
     );
-    dispatch({ type: UPDATE_ADDRESS, payload: {id, properties} });
+    dispatch({ type: UPDATE_ADDRESS, payload: { id, properties } });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
-
+};
 
 export const deleteAddress = (id) => async (dispatch) => {
   try {
@@ -344,6 +349,6 @@ export const deleteAddress = (id) => async (dispatch) => {
       payload: id,
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-  }
+};

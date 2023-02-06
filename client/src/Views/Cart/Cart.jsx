@@ -18,13 +18,22 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const stateCart = useSelector((state) => state.root.cart);
-  const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
 
-  const [total, setTotal] = useState(0);
+  const [subtotalPrice, setSubtotalPrice] = useState(
+    stateCart.reduce((acc, item) => item.price * item.amount + acc, 0)
+  );
 
-  const handleChange = (e) => {
-    setTotal(total + e);
-  };
+  useEffect(() => {
+    console.log(stateCart);
+    var suma = stateCart.reduce(
+      (acc, item) => item.price * item.amount + acc,
+      0
+    );
+    console.log(suma);
+    setSubtotalPrice(
+      stateCart.reduce((acc, item) => item.price * item.amount + acc, 0)
+    );
+  }, [stateCart]);
 
   return (
     <>
@@ -54,7 +63,7 @@ const Cart = () => {
                   );
                 })}
               <TableRow>
-                <TableCell colSpan={5}>
+                <TableCell colSpan={3}>
                   <h3>Subtotal</h3>
                 </TableCell>
                 <TableCell align="right">
@@ -73,7 +82,7 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            <PayButton productItem={stateCart} />
+            {/* <PayButton productItem={stateCart} /> */}
           </div>
         </TableContainer>
       </CartCont>

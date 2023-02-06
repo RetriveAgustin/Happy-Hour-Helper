@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -8,7 +8,7 @@ import Wine from "../../assets/winee.png";
 import "./Cards.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/actions";
 
 const AddToCart = styled(Button)({
@@ -18,7 +18,20 @@ const AddToCart = styled(Button)({
 
 const Card = ({ product }) => {
   const { id, name, img, price, stock } = product && product;
-  const [amount, setAmount] = useState(1);
+  const stateCart = useSelector((state) => state.root.cart);
+  const [amount, setAmount] = useState(
+    stateCart && stateCart.find((e) => e.id === id)
+      ? stateCart.find((e) => e.id === id).amount
+      : 0
+  );
+
+  useEffect(() => {
+    if (stateCart) {
+      stateCart.find((e) => (e.id === id ? setAmount(e.amount) : null));
+    } else {
+      console.log("no hay");
+    }
+  }, [stateCart]);
 
   const dispatch = useDispatch();
 
