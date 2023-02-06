@@ -22,6 +22,8 @@ import { getLoggedUser } from "./redux/actions/actions";
 import { useEffect } from "react";
 
 // import Login from "./components/Login/Login.jsx";
+import Settings from "./Views/User/Settings";
+import Address from "./Views/User/Address"
 
 
 function App() {
