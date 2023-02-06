@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
         type: DataTypes.UUID,
       },
       payment_method: {
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
       },
     },
     {

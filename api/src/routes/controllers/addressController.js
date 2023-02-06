@@ -30,8 +30,10 @@ const getAddressById = async (req, res) => {
 
 const postAddress = async (req, res) => {
   try {
-    const { name, number, description, user_id } = req.body;
+    const { name, number, description, user_id, state, city } = req.body;
     const address = await postModels(Address, {
+      state,
+      city,
       name,
       number,
       description,

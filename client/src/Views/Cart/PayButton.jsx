@@ -1,5 +1,8 @@
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
+import CreateAdress from "../../components/CreateAdress/CreateAdress";
+
+
 /* import { url } from "../../../../api" */
 
 const PayButton = ({productItem}) => {
@@ -7,8 +10,8 @@ const PayButton = ({productItem}) => {
     console.log(user.id)
 
 
-    if (user.id)
-    {const handleCheckout = () => {
+
+    if (user.id) {const handleCheckout = () => {
         axios.post("http://localhost:3001/stripe/create-checkout-session" , {
             
             productItem,
@@ -23,6 +26,7 @@ const PayButton = ({productItem}) => {
 
     return (
         <>
+        <CreateAdress/>
         <button onClick={()=> handleCheckout()}>Check Out</button>
         </>
     )}
