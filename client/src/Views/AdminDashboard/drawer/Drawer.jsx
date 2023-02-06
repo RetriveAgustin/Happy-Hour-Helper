@@ -32,18 +32,18 @@ function DrawerComponent() {
   const navigate = useNavigate();
   const dashboardSettings = [
     {
-      name: "Users",
+      name: "Usuarios",
       icon: <PersonIcon style={{ color: "#ffffff" }} />,
       link: "/admin/users",
     },
     {
-      name: "Products",
+      name: "Productos",
       icon: <LiquorIcon style={{ color: "#ffffff" }} />,
       link: "/admin/products",
     },
     // { name: "Offers", icon: <DiscountIcon style={{ color: "#ffffff" }} /> },
   ];
-  const createSettings = [{ name: "Create Product", link: "/createproduct" }];
+  const createSettings = [{ name: "Crear Producto", link: "/createproduct" }];
   return (
     <>
       <DrawerContainer>
@@ -78,7 +78,7 @@ function DrawerComponent() {
               <ListItemIcon>
                 <LogoutIcon style={{ color: "#ffffff" }} />
               </ListItemIcon>
-              <ListItemText primary={"Quit Dashboard"} />
+              <ListItemText primary={"Salir del Dashboard"} />
             </ListItemButton>
           </ListItem>
         </List>

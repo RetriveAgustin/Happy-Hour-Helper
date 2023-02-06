@@ -37,9 +37,7 @@ const Cart = () => {
                 <TableCell>Product </TableCell>
                 <TableCell align="right">Price</TableCell>
                 <TableCell align="right">Qantity</TableCell>
-                <TableCell align="right">Discount</TableCell>
                 <TableCell align="right">Subtotal</TableCell>
-                <TableCell align="right">Total</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -61,14 +59,6 @@ const Cart = () => {
                 </TableCell>
                 <TableCell align="right">
                   <h3> {accounting.formatMoney(subtotalPrice)}</h3>
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell colSpan={5}>
-                  <h2>Total</h2>
-                </TableCell>
-                <TableCell align="right">
-                  <h2> {accounting.formatMoney(total)}</h2>
                 </TableCell>
               </TableRow>
             </TableBody>
