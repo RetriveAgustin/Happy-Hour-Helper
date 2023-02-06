@@ -51,10 +51,10 @@ const rootReducer = (state = initialState, action) => {
         ),
       };
     case ADD_TO_CART:
-      return {
-        ...state,
-        cart: [...state.cart, action.payload],
-      };
+      const newItem = state.cart.find((e) => e.id === action.payload.id);
+      return newItem
+        ? { ...state, cart: [...state.cart] }
+        : { ...state, cart: [...state.cart, action.payload] };
     case REMOVE_FROM_CART:
       return {
         ...state,

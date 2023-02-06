@@ -8,9 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Divider, IconButton } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
 import accounting from "accounting";
@@ -85,13 +83,12 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            <PayButton productItem = {stateCart}/>
-            
+            <PayButton productItem={stateCart} />
           </div>
         </TableContainer>
       </CartCont>
     </>
   );
-}
+};
 
-export default Cart
+export default Cart;
