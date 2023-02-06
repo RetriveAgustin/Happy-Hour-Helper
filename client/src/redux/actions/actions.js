@@ -48,6 +48,16 @@ export const getUsers = () => {
   };
 };
 
+export const removeFromCart = (payload) => {
+  return function (dispatch) {
+    dispatch({
+      type: REMOVE_FROM_CART,
+      payload: payload,
+    });
+  };
+};
+
+
 export const getLoggedUser = (id) => {
   return function (dispatch) {
     axios
