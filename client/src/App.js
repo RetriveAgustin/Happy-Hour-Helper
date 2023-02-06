@@ -22,8 +22,6 @@ import { getLoggedUser } from "./redux/actions/actions";
 import { useEffect } from "react";
 
 // import Login from "./components/Login/Login.jsx";
-import Settings from "./Views/User/Settings";
-import Address from "./Views/User/Address"
 
 
 function App() {
@@ -51,13 +49,9 @@ function App() {
         <Route path="/product/:id" element={<Skeleton view={<Detail />} />} />
         <Route path="/search" element={<Skeleton view={<SearchView />} />} />
         <Route path="/confirm" element={<Skeleton view={<ConfirmOrder />} />} />
-        {/* <Route
-          path="/add-payment-method"
-          element={<Skeleton view={<AddPaymentMethod />} />}
-        />
-        <Route
-          path="/add-address"
-          element={<Skeleton view={<AddAddres />} />}
+        <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
+        <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/add-address" element={<Skeleton view={<AddAddres />} />}
         />
         <Route path="/checkout-successs" element={<CheckOutSucess />} />
 
@@ -69,6 +63,10 @@ function App() {
         />
         {user?.is_admin ? (
           <>
+            <Route
+              path="/createproduct"
+              element={<AdminDashboard props={<CreateProduct />} />}
+            />
             <Route
               path="/admin/*"
               element={<AdminDashboard props={<UsersDashboard />} />}
