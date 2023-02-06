@@ -19,14 +19,7 @@ const style = {
     textAlign: "center"
 
 };
-/* name: {
-    type: DataTypes.STRING,
-  },
-  number: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
-  description: */
+
 export default function CreateAdress() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
