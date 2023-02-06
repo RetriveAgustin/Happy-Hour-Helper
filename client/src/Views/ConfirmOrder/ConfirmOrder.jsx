@@ -33,13 +33,11 @@ export default function ConfirmOrder() {
   });
 
   useEffect(() => {
-    console.log(userCredentials);
     dispatch(getAllProducts());
     if (!address[0] && userCredentials) {
       fetch("http://localhost:3001/address/getAddress")
         .then((r) => r.json())
         .then((r) => {
-          console.log(r);
           let data = r.filter((e) => e.user_id === userCredentials.uid);
           setAddress(data);
         });
@@ -68,7 +66,6 @@ export default function ConfirmOrder() {
         products: stateCart,
         //total: stateTotal
       };
-      console.log(obj);
       axios.post("http://localhost:3001/orders/postOrder", obj).then((r) => {
         setSuccess(r.data);
         setTimeout(() => {
@@ -122,7 +119,7 @@ export default function ConfirmOrder() {
               )}
             </select>
             <Link to={"/add-payment-method"} style={{ color: "#000" }}>
-            <p onClick={handleChange}> + Agregar metodo de pago</p>
+              <p onClick={handleChange}> + Agregar metodo de pago</p>
             </Link>
           </div>
           <div>
