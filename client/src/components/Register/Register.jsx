@@ -29,7 +29,7 @@ export default function Register() {
             const userCredentials = result.user;
             console.log(userCredentials)
             try {
-                axios.post('http://localhost:3001/users/registerUser', {
+                axios.post(`${process.env.REACT_APP_API_URL}/users/registerUser`, {
                     id: userCredentials.uid,
                     name: user.name,
                     lastname: user.lastname,

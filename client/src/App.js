@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ConfirmOrder from "./Views/ConfirmOrder/ConfirmOrder";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Home from "./Views/Home/Home";
@@ -15,6 +15,8 @@ import AddAddres from "./components/AddAddress/AddAddress";
 import AddPaymentMethod from "./components/AddPaymentMethod/AddPaymentMethod";
 import Skeleton from "./components/Skeleton/Skeleton";
 import { AuthProvider } from "./context/authContext";
+import { useEffect } from "react";
+import { getLoggedUser } from "./redux/actions/actions";
 // import Header from "./components/Header/Header";
 // import Login from "./components/Login/Login.jsx";
 
@@ -26,7 +28,14 @@ function App() {
   //para los links no validos se puede desarrollar un componente de error 404, o redireccionar al home.
   //los componentes Navbar y Footer son componentes layout, por ende deben aparecer en todos los views.
   const user = useSelector((state) => state.user.userLoged);
-  console.log(user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (localStorage.getItem('User_ID')) {
+      const id = localStorage.getItem('User_ID');
+      dispatch(getLoggedUser(id));
+      console.log(user)
+    }
+  }, [])
 
   return (
     <AuthProvider>
@@ -48,7 +57,7 @@ function App() {
 
         {/* ---------Rutas Admin ------------------- */}
 
-        {user.is_admin ? (
+        {user && user.is_admin ? (
           <Route
             path="/admin/*"
             element={<AdminDashboard props={<UsersDashboard />} />}
@@ -57,7 +66,7 @@ function App() {
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
 
-        {user.is_admin ? (
+        {user && user.is_admin ? (
           <Route
             path="/admin/products"
             element={<AdminDashboard props={<ProductsDashboard />} />}
@@ -66,7 +75,7 @@ function App() {
           <Route path="*" element={<Skeleton view={<Home />} />} />
         )}
 
-        {user.is_admin ? (
+        {user && user.is_admin ? (
           <Route path="/createproduct" element={<CreateProduct />} />
         ) : (
           <Route path="*" element={<Skeleton view={<Home />} />} />

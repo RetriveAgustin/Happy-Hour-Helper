@@ -44,7 +44,7 @@ function Header() {
           searchValue={HandleSearch}
         />
 
-        {user.id ? (
+        {user && user.id ? (
           <AvatarIcon />
         ) : (
           <Stack spacing={2} direction="row">

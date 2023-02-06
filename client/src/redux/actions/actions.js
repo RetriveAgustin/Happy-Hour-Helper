@@ -264,6 +264,7 @@ export const getAllAddresses = (userCredentials) => {
   fetch(`${process.env.REACT_APP_API_URL}/address/getAddress`)
     .then((r) => r.json())
     .then((r) => {
+      console.log('addresses', r)
       const data = r.filter((e) => e.user_id === userCredentials.uid);
       return data;
     });
@@ -273,6 +274,7 @@ export const getAllPayments = (userCredentials) => {
   fetch(`${process.env.REACT_APP_API_URL}/payment-methods/getPayment`)
     .then((r) => r.json())
     .then((r) => {
+      console.log('payments', r)
       const data = r.filter((e) => e.user_id === userCredentials.uid);
       return data;
     });
