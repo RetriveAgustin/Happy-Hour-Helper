@@ -14,6 +14,7 @@ import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
 import accounting from "accounting";
+import PayButton from "./PayButton";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -38,9 +39,7 @@ const Cart = () => {
                 <TableCell>Product </TableCell>
                 <TableCell align="right">Price</TableCell>
                 <TableCell align="right">Qantity</TableCell>
-                <TableCell align="right">Discount</TableCell>
                 <TableCell align="right">Subtotal</TableCell>
-                <TableCell align="right">Total</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -64,14 +63,7 @@ const Cart = () => {
                   <h3> {accounting.formatMoney(subtotalPrice)}</h3>
                 </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell colSpan={5}>
-                  <h2>Total</h2>
-                </TableCell>
-                <TableCell align="right">
-                  <h2> {accounting.formatMoney(total)}</h2>
-                </TableCell>
-              </TableRow>
+              
             </TableBody>
           </Table>
           <div
@@ -84,7 +76,8 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            <Button onClick={() => navigate("/confirm")}>Checkout</Button>
+            <PayButton productItem = {stateCart}/>
+            
           </div>
         </TableContainer>
       </CartCont>

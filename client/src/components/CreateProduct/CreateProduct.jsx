@@ -6,6 +6,7 @@ import {
   getAllSubCategories,
   getAllBrands,
 } from "./../../redux/actions/actions";
+import axios from "axios";
 
 import {
   FormContainer,
@@ -41,6 +42,8 @@ export default function CreateProduct() {
     category: "",
     subcategory: "",
   });
+  
+  console.log(info)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,25 +51,26 @@ export default function CreateProduct() {
       info.name &&
       info.price &&
       info.capacity &&
-      info.brand.length &&
-      info.category.length &&
-      info.subcategory.length
+      info.brand &&
+      info.category &&
+      info.subcategory
     ) {
       dispatch(createProduct(info));
-    alert("El producto ha sido creado");
-    setInfo({
-      name: "",
-      img: "",
-      price: "",
-      capacity: "",
-      stock: "",
-      has_discount: false,
-      brand: "",
-      category: "",
-      subcategory: "",
-    })} else {
-      alert('Producto no creado')
-    };
+      alert("El producto ha sido creado");
+      setInfo({
+        name: "",
+        img: "",
+        price: "",
+        capacity: "",
+        stock: "",
+        has_discount: false,
+        brand: "",
+        category: "",
+        subcategory: "",
+      });
+    } else {
+      alert("Producto no creado");
+    }
   };
 
   const handleChange = (e) => {
@@ -76,6 +80,21 @@ export default function CreateProduct() {
       ...info,
       [prop]: value,
     });
+  };
+
+  const imageUpload = (files) => {
+    const formData = new FormData();
+    formData.append("file", files[0]);
+    formData.append("upload_preset", "hhhupload");
+    axios
+      .post("https://api.cloudinary.com/v1_1/dprhkqxon/image/upload", formData)
+      .then((response) =>
+        setInfo({
+          ...info,
+          img: response.data.secure_url,
+        })
+      )
+      .catch((err) => console.log(err));
   };
 
   const handleCheck = (e) => {
@@ -103,13 +122,17 @@ export default function CreateProduct() {
     });
   };
 
+  const subs = subCategories?.filter(
+    (sub) => sub.category_id === info.category
+  );
+
   return (
     <FormContainer>
       <ColumnFieldContainer>
         <h5 style={{ color: "white", fontSize: "2rem", alignText: "center" }}>
           Crea un producto
         </h5>
-        <p style={{color: 'white'}}>Los campos con * son obligatorios</p>
+        <p style={{ color: "white" }}>Los campos con * son obligatorios</p>
         <TextInput
           type="text"
           name="name"
@@ -118,12 +141,11 @@ export default function CreateProduct() {
           onChange={(e) => handleChange(e)}
         />
         <TextInput
-          type="text"
+          type="file"
           name="img"
           placeholder="Imagen"
-          value={info.img}
-          onChange={(e) => handleChange(e)}
-        />
+          onChange={(e) => imageUpload(e.target.files)}
+        ></TextInput>
         <TextInput
           type="number"
           name="price"
@@ -163,24 +185,37 @@ export default function CreateProduct() {
         </div>
       </ColumnFieldContainer>
       <BrandContainer>
-      <span style={{color: 'white'}}>*</span>
+        <span style={{ color: "white" }}>*</span>
         <Selector name="brand" onChange={(e) => handleSelect(e)}>
           <option hidden>Marca</option>
           {brandsState.map((brand) => {
             return <option value={brand.id}>{brand.name}</option>;
           })}
         </Selector>
-      <span style={{color: 'white'}}>*</span>
+        <span style={{ color: "white" }}>*</span>
         <Selector name="category" onChange={(e) => handleSelect(e)}>
           <option hidden>Categoría</option>
           {categories.map((cat) => {
             return <option value={cat.id}>{cat.name}</option>;
           })}
         </Selector>
-      <span style={{color: 'white'}}>*</span>
-        <Selector name="subcategory" onChange={(e) => handleSelect(e)}>
+        <span style={{ color: "white" }}>*</span>
+        <Selector
+          name="subcategory"
+          style={
+            info.category
+              ? { background: "white", color: "black" }
+              : {
+                  background: "grey",
+                  border: "grey",
+                  color: "#45454b",
+                  fontStyle: "italic",
+                }
+          }
+          onChange={(e) => handleSelect(e)}
+        >
           <option hidden>Sub-Categoría</option>
-          {subCategories.map((sub) => {
+          {subs.map((sub) => {
             return <option value={sub.id}>{sub.name}</option>;
           })}
         </Selector>

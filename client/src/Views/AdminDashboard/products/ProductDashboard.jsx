@@ -1,3 +1,12 @@
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getAllProducts,
+  getAllSubCategories,
+  getAllCategories,
+  getAllBrands,
+} from "../../../redux/actions/actions";
 import {
   Table,
   TableBody,
@@ -5,11 +14,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  ButtonGroup,
+  Button,
 } from "@mui/material";
-import React, { useState } from "react";
-import { useEffect } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import ClearIcon from "@mui/icons-material/Clear";
+import { Search, Clear } from "@mui/icons-material";
 import {
   DashboardInfoContainer,
   DataOutput,
@@ -19,13 +27,9 @@ import {
   SearchBarInput,
   SearchButton,
 } from "./ProductDashboard.styles";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllProducts,
-  getAllSubCategories,
-  getAllCategories,
-  getAllBrands,
-} from "../../../redux/actions/actions";
+import EditProductButton from "./EditPopup/EditProduct";
+import DeleteProduct from "./DeleteProducts/DeleteProduct";
+import CircularProgress from "@mui/material/CircularProgress";
 
 //  ---IMPORTANTE---
 //  Despues reemplazar el estado "productInfo" por los usuarios traidos desde el back en el UseEffect.
@@ -48,6 +52,7 @@ function ProductsDashboard() {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   // -----------------------------------------------------------------------
   useEffect(() => {
@@ -59,6 +64,7 @@ function ProductsDashboard() {
 
   useEffect(() => {
     setProductInfo(allProducts);
+    setIsLoading(false);
   }, [allProducts]);
 
   const HandleFilter = (searchname) => {
@@ -142,7 +148,7 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Categories:</label>
+        <label>Categorias:</label>
         <FilterInput
           defaultValue={selectedCategory}
           onChange={(e) => HandleSelectByCategory(e.target.value)}
@@ -155,7 +161,7 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Sub-Categories:</label>
+        <label>Sub-Categorias:</label>
         <FilterInput
           defaultValue={selectedSubCategory}
           onChange={(e) => HandleSelectBySubCategory(e.target.value)}
@@ -168,9 +174,9 @@ function ProductsDashboard() {
             ))}
         </FilterInput>
 
-        <label>Filter by:</label>
+        <label>Filtrar por:</label>
         <FilterInput onChange={(e) => HandleSelect(e.target.value)}>
-          <option value="name">Name</option>
+          <option value="name">Nombre</option>
           <option value="id">ID</option>
         </FilterInput>
         <SearchBarContainer>
@@ -183,7 +189,7 @@ function ProductsDashboard() {
               isActive ? ClearData() : SearchData(searchValues.value)
             }
           >
-            {isActive ? <ClearIcon /> : <SearchIcon />}
+            {isActive ? <Clear /> : <Search />}
           </SearchButton>
         </SearchBarContainer>
       </HeaderContainer>
@@ -196,19 +202,60 @@ function ProductsDashboard() {
                   <b>ID</b>
                 </TableCell>
                 <TableCell align="center">
-                  <b>Name</b>
+                  <b>Nombre</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Stock</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Precio</b>
+                </TableCell>
+                <TableCell align="center">
+                  <b>Opciones</b>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {productInfo.map((row) => (
-                <TableRow
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="center">{row.id}</TableCell>
-                  <TableCell align="center">{row.name}</TableCell>
-                </TableRow>
-              ))}
+              {/* {productInfo ? (
+                productInfo.map((row) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{row.id}</TableCell>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.stock}</TableCell>
+                    <TableCell align="center">$ {row.price}</TableCell>
+                    <TableCell align="center">
+                      <ButtonGroup variant="contained" size="small">
+                        <EditProductButton props={row} />
+                        <DeleteProduct props={row} />
+                      </ButtonGroup>
+                    </TableCell>
+                  </TableRow>
+                ))
+              ) : (
+                <CircularProgress />
+              )} */}
+              {isLoading ? (
+                <CircularProgress />
+              ) : (
+                productInfo.map((row) => (
+                  <TableRow
+                    sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  >
+                    <TableCell align="center">{row.id}</TableCell>
+                    <TableCell align="center">{row.name}</TableCell>
+                    <TableCell align="center">{row.stock}</TableCell>
+                    <TableCell align="center">$ {row.price}</TableCell>
+                    <TableCell align="center">
+                      <ButtonGroup variant="contained" size="small">
+                        <EditProductButton props={row} />
+                        <DeleteProduct props={row} />
+                      </ButtonGroup>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
             </TableBody>
           </Table>
         </TableContainer>
