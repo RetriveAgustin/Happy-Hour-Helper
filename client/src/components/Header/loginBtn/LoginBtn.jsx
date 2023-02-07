@@ -12,7 +12,11 @@ import {
 import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
 import { FormContainer, SingUpContainer } from "./LoginBtn.styles.js";
 import CircularProgress from "@mui/material/CircularProgress";
-import { getLoggedUser, loginUser, registerUser } from "../../../redux/actions/actions.js";
+import {
+  getLoggedUser,
+  loginUser,
+  registerUser,
+} from "../../../redux/actions/actions.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../../context/authContext.js";
 
@@ -83,10 +87,9 @@ function LoginBtn() {
     }
   }
 
-  async function handleGoogleSignIn (){
+  async function handleGoogleSignIn() {
     const result = await loginWithGoogle();
-    console.log(result);
-    console.log(result._tokenResponse.email);
+    localStorage.setItem('User_ID', result.user.uid);
     if (result._tokenResponse.isNewUser) {
       try {
         const data = await axios.post(
@@ -112,7 +115,9 @@ function LoginBtn() {
             }
           );
           if (loginAfterRegister.data === "User logged!") {
-            setOpen(false)
+            const id = localStorage.getItem('User_ID');
+            dispatch(getLoggedUser(id));
+            setOpen(false);
           }
         }
       } catch (error) {
@@ -127,7 +132,9 @@ function LoginBtn() {
         }
       );
       if (loginGoogle.data === "User logged!") {
-        setOpen(false)
+        const id = localStorage.getItem('User_ID');
+        dispatch(getLoggedUser(id));
+        setOpen(false);
       }
     }
   }
@@ -240,12 +247,12 @@ function LoginBtn() {
                 Iniciar sesión con Google
               </Button>
             </FormContainer>
-
+{/* 
             <SingUpContainer>
               <p>
                 No tienes una cuenta? <span>Registrate</span>
               </p>
-            </SingUpContainer>
+            </SingUpContainer> */}
           </Box>
         </Zoom>
       </Modal>
