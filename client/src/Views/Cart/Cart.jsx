@@ -19,7 +19,7 @@ const Cart = () => {
 
   const stateCart = useSelector((state) => state.root.cart);
 
-  const [subtotalPrice, setSubtotalPrice] = useState(
+  const [totalPrice, setTotalPrice] = useState(
     stateCart.reduce((acc, item) => item.price * item.amount + acc, 0)
   );
 
@@ -30,7 +30,7 @@ const Cart = () => {
       0
     );
     console.log(suma);
-    setSubtotalPrice(
+    setTotalPrice(
       stateCart.reduce((acc, item) => item.price * item.amount + acc, 0)
     );
   }, [stateCart]);
@@ -64,10 +64,10 @@ const Cart = () => {
                 })}
               <TableRow>
                 <TableCell colSpan={3}>
-                  <h3>Subtotal</h3>
+                  <h3>Total</h3>
                 </TableCell>
                 <TableCell align="right">
-                  <h3> {accounting.formatMoney(subtotalPrice)}</h3>
+                  <h3> {accounting.formatMoney(totalPrice)}</h3>
                 </TableCell>
               </TableRow>
             </TableBody>

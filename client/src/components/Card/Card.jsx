@@ -9,7 +9,7 @@ import "./Cards.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/actions";
+import { addToCart, changeAmount } from "../../redux/actions/actions";
 
 const AddToCart = styled(Button)({
   textTransform: "none",
@@ -42,6 +42,16 @@ const Card = ({ product }) => {
     dispatch(addToCart({ ...product, amount }));
   };
 
+  const handleClick = (e) => {
+    if (e === "rest") {
+      dispatch(changeAmount({ am: amount - 1, name }));
+      setAmount(amount - 1);
+    } else {
+      setAmount(amount + 1);
+      dispatch(changeAmount({ am: amount + 1, name }));
+    }
+  };
+
   const navigate = useNavigate();
 
   return (
@@ -56,46 +66,54 @@ const Card = ({ product }) => {
             <h4 className="name-tag">{name}</h4>
           </div>
         </div>
-        <div className="sub-add">
-          <IconButton
-            color="secondary"
-            sx={{ color: "#52373c" }}
-            disabled={amount === 1}
-            onClick={() => setAmount(amount - 1)}
-          >
-            <IndeterminateCheckBoxRoundedIcon fontSize="large" />
-          </IconButton>
-          <input
-            type="number"
-            className="input"
-            value={amount}
-            style={{
-              textAlign: "center",
-              borderRadius: "5px",
-              border: "1px solid #bdbdbd",
-            }}
-          />
-          <IconButton
-            disabled={amount >= stock}
-            sx={{ color: "#52373c" }}
-            color="secondary"
-            onClick={() => setAmount(amount + 1)}
-          >
-            <AddBoxRoundedIcon fontSize="large" />
-          </IconButton>
-        </div>
-        <div className="add-btn">
-          <AddToCart
-            variant="contained"
-            color="secondary"
-            startIcon={<ShoppingCartOutlinedIcon />}
-            value={id}
-            onClick={(e) => handleAdd(e)}
-            sx={{ backgroundColor: "#52373c" }}
-          >
-            Agregar
-          </AddToCart>
-        </div>
+
+        {!stateCart.find((e) => e.id === id) ? (
+          <div className="add-btn">
+            <AddToCart
+              variant="contained"
+              color="secondary"
+              startIcon={<ShoppingCartOutlinedIcon />}
+              value={id}
+              onClick={(e) => handleAdd(e)}
+              sx={{ backgroundColor: "#52373c" }}
+            >
+              Agregar
+            </AddToCart>
+          </div>
+        ) : (
+          <div className="sub-add">
+            <IconButton
+              color="secondary"
+              sx={{ color: "#52373c" }}
+              disabled={amount === 1}
+              onClick={() => {
+                handleClick("rest");
+              }}
+            >
+              <IndeterminateCheckBoxRoundedIcon fontSize="large" />
+            </IconButton>
+            <input
+              type="number"
+              className="input"
+              value={amount}
+              style={{
+                textAlign: "center",
+                borderRadius: "5px",
+                border: "1px solid #bdbdbd",
+              }}
+            />
+            <IconButton
+              disabled={amount >= stock}
+              sx={{ color: "#52373c" }}
+              color="secondary"
+              onClick={() => {
+                handleClick("add");
+              }}
+            >
+              <AddBoxRoundedIcon fontSize="large" />
+            </IconButton>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -58,8 +58,6 @@ const rootReducer = (state = initialState, action) => {
         ? { ...state, cart: [...state.cart] }
         : { ...state, cart: [...state.cart, action.payload] };
     case CHANGE_AMOUNT:
-      // a todos los que tengan el id del prod en cuestion, cambiar el amount como se le indique
-
       const itemInCart = state.cart.find((e) => {
         return e.name === action.payload.name;
       });
