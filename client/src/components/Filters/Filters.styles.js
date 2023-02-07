@@ -48,3 +48,4 @@ export const InputsMaxMin = styled.div`
     padding: 0 4px;
   }
 `;
+

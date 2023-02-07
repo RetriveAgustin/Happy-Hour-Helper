@@ -14,13 +14,13 @@ import LoginBtn from "./loginBtn/LoginBtn";
 import RegisterBtn from "./registerBtn/RegisterBtn";
 import { Stack } from "@mui/system";
 
-function Header() {
+function NavBar() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
 
   const cart = useSelector((state) => state.root.cart);
-  const user = useSelector((state) => state.user.userLoged);
+  const user = localStorage.getItem("User_ID");
 
   const HandleInput = (searchName) => {
     setSearchValue(searchName);
@@ -33,7 +33,11 @@ function Header() {
   return (
     <NavContainer>
       <Link to="/">
-        <img src={Logo} style={{ marginLeft: "3rem" }} alt="not found" />
+        <img
+          src={Logo}
+          style={{ marginLeft: "3rem" }}
+          alt="Happy Hour Helper"
+        />
       </Link>
       <LinkDiv>
         <IconButton onClick={() => navigate("/")}>
@@ -44,7 +48,7 @@ function Header() {
           searchValue={HandleSearch}
         />
 
-        {user.id ? (
+        {user ? (
           <AvatarIcon />
         ) : (
           <Stack spacing={2} direction="row">
@@ -70,4 +74,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default NavBar;
