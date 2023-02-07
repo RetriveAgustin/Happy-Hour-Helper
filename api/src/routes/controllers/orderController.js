@@ -26,10 +26,16 @@ const postOrder = async (req, res) => {
       delivered,
       canceled,
       adress,
-      payment_method,
+      user_id,
+      products
     });
+
+    products.map(async p => {
+      await p.addOrder(order);
+    })
+
     if (order) {
-      res.status(200).json(order);
+      res.status(200).json('Orden creada con éxito');
     } else {
       res.status(400).json("Order couldn't be created");
     }

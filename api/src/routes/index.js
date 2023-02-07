@@ -22,7 +22,7 @@ router.use("/category", category);
 router.use("/discounts", discounts);
 router.use("/offers", offers);
 router.use("/orders", orders);
-router.use("/payment-methods", payment_methods);
+// router.use("/payment-methods", payment_methods);
 router.use("/products", products);
 router.use("/sub-category", sub_category);
 router.use("/users", user);

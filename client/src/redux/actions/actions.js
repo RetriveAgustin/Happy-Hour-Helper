@@ -310,13 +310,16 @@ export const createAddress = (data) => async (dispatch) => {
 
 
 
-export const getAllAddresses = (userCredentials) => {
+export const getAllAddresses = (id) => {
   fetch(`${process.env.REACT_APP_API_URL}/address/getAddress`)
     .then((r) => r.json())
     .then((r) => {
-      const data = r.filter((e) => e.user_id === userCredentials.uid);
+      console.log('addresses son', r)
+      const data = r.filter((e) => e.user_id === id);
+      console.log('addresses filtrados son', data)
       return data;
-    });
+    })
+    .then(data => data)
 };
 
 
