@@ -21,13 +21,17 @@ const Card = ({ product }) => {
   const stateCart = useSelector((state) => state.root.cart);
   const [amount, setAmount] = useState(
     stateCart && stateCart.find((e) => e.id === id)
-      ? stateCart.find((e) => e.id === id).amount
+      ? stateCart.find((e) => e.amount)
       : 1
   );
 
+  // stateCart && stateCart.find((e) => e.id === id)
+  //   ? stateCart.find((e) => e.id === id).amount
+  //   : 1
+
   useEffect(() => {
     if (stateCart) {
-      stateCart.find((e) => (e.id === id ? setAmount(e.amount) : null));
+      stateCart.find((e) => (e.id === id ? setAmount(e.amount) : 0));
     } else {
       console.log("no hay");
     }
@@ -67,53 +71,50 @@ const Card = ({ product }) => {
           </div>
         </div>
 
-        {!stateCart.find((e) => e.id === id) ? (
-          <div className="add-btn">
-            <AddToCart
-              variant="contained"
-              color="secondary"
-              startIcon={<ShoppingCartOutlinedIcon />}
-              value={id}
-              onClick={(e) => handleAdd(e)}
-              sx={{ backgroundColor: "#52373c" }}
-            >
-              Agregar
-            </AddToCart>
-          </div>
-        ) : (
-          <div className="sub-add">
-            <IconButton
-              color="secondary"
-              sx={{ color: "#52373c" }}
-              disabled={amount === 1}
-              onClick={() => {
-                handleClick("rest");
-              }}
-            >
-              <IndeterminateCheckBoxRoundedIcon fontSize="large" />
-            </IconButton>
-            <input
-              type="number"
-              className="input"
-              value={amount}
-              style={{
-                textAlign: "center",
-                borderRadius: "5px",
-                border: "1px solid #bdbdbd",
-              }}
-            />
-            <IconButton
-              disabled={amount >= stock}
-              sx={{ color: "#52373c" }}
-              color="secondary"
-              onClick={() => {
-                handleClick("add");
-              }}
-            >
-              <AddBoxRoundedIcon fontSize="large" />
-            </IconButton>
-          </div>
-        )}
+        <div className="sub-add">
+          <IconButton
+            color="secondary"
+            sx={{ color: "#52373c" }}
+            disabled={amount === 1}
+            onClick={() => {
+              handleClick("rest");
+            }}
+          >
+            <IndeterminateCheckBoxRoundedIcon fontSize="large" />
+          </IconButton>
+          <input
+            type="number"
+            className="input"
+            value={amount}
+            style={{
+              textAlign: "center",
+              borderRadius: "5px",
+              border: "1px solid #bdbdbd",
+            }}
+          />
+          <IconButton
+            disabled={amount >= stock}
+            sx={{ color: "#52373c" }}
+            color="secondary"
+            onClick={() => {
+              handleClick("add");
+            }}
+          >
+            <AddBoxRoundedIcon fontSize="large" />
+          </IconButton>
+        </div>
+        <div className="add-btn">
+          <AddToCart
+            variant="contained"
+            color="secondary"
+            startIcon={<ShoppingCartOutlinedIcon />}
+            value={id}
+            onClick={(e) => handleAdd(e)}
+            sx={{ backgroundColor: "#52373c" }}
+          >
+            Agregar
+          </AddToCart>
+        </div>
       </div>
     </div>
   );
