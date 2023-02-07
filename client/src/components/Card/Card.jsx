@@ -10,6 +10,20 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/actions";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+export const notify = () =>
+  toast("¡Producto agregado al carrito!", {
+    position: "bottom-left",
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark"
+  });
 
 const AddToCart = styled(Button)({
   textTransform: "none",
@@ -27,6 +41,7 @@ const Card = ({ product }) => {
       return;
     }
     dispatch(addToCart({ ...product, amount }));
+    notify();
   };
 
   const navigate = useNavigate();
