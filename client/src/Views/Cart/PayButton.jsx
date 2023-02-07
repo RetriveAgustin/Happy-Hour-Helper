@@ -31,5 +31,4 @@ const PayButton = ({ productItem }) => {
         )
     }
 }
-
 export default PayButton;
