@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
@@ -87,7 +88,7 @@ function RegisterBtn() {
   }
   const [errorPassword, setErrorPassword] = useState(false);
 
-  const { signUp } = useAuth();
+  const { signUp, loginWithGoogle } = useAuth();
 
   async function handleSubmit() {
     try {
@@ -107,6 +108,58 @@ function RegisterBtn() {
     } catch ({ message }) {
       setLoading(false);
       alert(message);
+    }
+  }
+
+  async function handleGoogleSignIn() {
+    const result = await loginWithGoogle();
+    localStorage.setItem('User_ID', result.user.uid);
+    if (result._tokenResponse.isNewUser) {
+      try {
+        const data = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/registerUser`,
+          {
+            id: result.user.uid,
+            token: result.user.accessToken,
+            name: result._tokenResponse.firstName,
+            lastname: result._tokenResponse.lastname,
+            mail: result._tokenResponse.email,
+            password: null,
+            favourites: null,
+            created_in_google: true,
+            is_admin: false,
+          }
+        );
+        if (data.data === "User registered!") {
+          const loginAfterRegister = await axios.post(
+            `${process.env.REACT_APP_API_URL}/users/loginUser`,
+            {
+              mail: result._tokenResponse.email,
+              password: null,
+            }
+          );
+          if (loginAfterRegister.data === "User logged!") {
+            const id = localStorage.getItem('User_ID');
+            dispatch(getLoggedUser(id));
+            setOpen(false);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      const loginGoogle = await axios.post(
+        `${process.env.REACT_APP_API_URL}/users/loginUser`,
+        {
+          mail: result._tokenResponse.email,
+          password: null,
+        }
+      );
+      if (loginGoogle.data === "User logged!") {
+        const id = localStorage.getItem('User_ID');
+        dispatch(getLoggedUser(id));
+        setOpen(false);
+      }
     }
   }
 
@@ -324,6 +377,7 @@ function RegisterBtn() {
                   backgroundColor: "#d32323",
                   textTransform: "none",
                 }}
+                onClick={handleGoogleSignIn}
               >
                 Registrarse con Google
               </Button>
