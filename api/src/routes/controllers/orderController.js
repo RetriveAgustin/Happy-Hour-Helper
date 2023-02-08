@@ -26,8 +26,9 @@ const postOrder = async (req, res) => {
       delivered,
       canceled,
       address,
-      user_id,
     });
+
+    await order.addUser(user_id)
 
     products.map(async (p) => {
       await order.addProduct(p);
@@ -39,7 +40,8 @@ const postOrder = async (req, res) => {
       res.status(400).json("Order couldn't be created");
     }
   } catch (error) {
-    res.status(400).json({ error });
+    console.log(error);
+    res.status(400).json({ error: error.message });
   }
 };
 
