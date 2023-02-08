@@ -75,8 +75,6 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            <Button onClick={() => navigate("/confirm")}>Checkout</Button>
-
             <PayButton productItem = {stateCart}/>
             
           </div>
