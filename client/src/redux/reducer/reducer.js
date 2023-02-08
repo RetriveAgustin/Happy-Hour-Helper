@@ -61,10 +61,18 @@ const rootReducer = (state = initialState, action) => {
         ),
       };
     case ADD_TO_CART:
-      return {
-        ...state,
-        cart: [...state.cart, action.payload],
-      };
+      const alreadyIn = state.cart.find(prod => prod.id === action.payload.id)
+      if (alreadyIn) {
+        return {
+          ...state,
+          cart: state.cart.map(it => it.id === alreadyIn.id ? {...it, amount: it.amount + action.payload.amount} : it)
+        }
+      } else {
+        return {
+          ...state,
+          cart: [...state.cart, action.payload]
+        }
+      }
     case REMOVE_FROM_CART:
       return {
         ...state,

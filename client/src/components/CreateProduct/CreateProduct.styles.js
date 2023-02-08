@@ -6,6 +6,7 @@ export const FormContainer = styled.div`
     width: 100vw;
     height: 100vh;
     background-color: #171717;
+    justify-content: center;
 `
 export const TextInput = styled.input`
     color: grey;
@@ -18,6 +19,27 @@ export const TextInput = styled.input`
     text-align: center;
     font-size: 0.9rem;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+`
+export const ImageInput = styled.input`
+    color: white;
+    border: solid 1px white;
+    border-radius: 5px;
+    align-items: center;
+    width: 9rem;
+    height: 1.5rem;
+    display: flex;
+    background-color: white;
+    text-align: center;
+    font-size: 0.9rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+`
+
+export const ImageContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 16rem;
+    justify-content: space-between;
+    align-items: center;
 `
 
 export const CheckBox = styled.input`

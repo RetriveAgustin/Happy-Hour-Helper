@@ -8,6 +8,7 @@ import { getAllProducts } from "../../redux/actions/actions";
 import GeneralCategories from "./generalCategories/GeneralCategories";
 import FilteredCategory from "./filteredCategory/FilteredCategory";
 import LowerFilters from "./LowerFilters/LowerFilters";
+import { ToastContainer } from 'react-toastify';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
+
+  
 
   const products = useSelector((state) => state.root.products);
 
@@ -49,7 +52,8 @@ const Home = () => {
         ) : (
           <FilteredCategory categoryId={render.categoryId} />
         )}
-      </div>
+      </div>      
+      <ToastContainer />
       <Footer />
     </>
   );

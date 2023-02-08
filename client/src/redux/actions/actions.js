@@ -232,7 +232,7 @@ export const createCategory = (payload) => {
 export const createProduct = (payload) => {
   return async function () {
     const post = await axios.post(
-      `${process.env.REACT_APP_API_URL}/products`,
+      `${process.env.REACT_APP_API_URL}/products/postProduct`,
       payload
     );
     return post;

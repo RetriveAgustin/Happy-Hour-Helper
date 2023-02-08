@@ -59,10 +59,6 @@ function App() {
 
         {/* ---------Rutas Admin ------------------- */}
 
-        <Route
-          path="/createproduct"
-          element={<AdminDashboard props={<CreateProduct />} />}
-        />
         {user?.is_admin ? (
           <>
             <Route
