@@ -8,7 +8,8 @@ import { getAuth } from 'firebase/auth'
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCG4Zabp_wlJuSvcy4zgfEj940u8feQ-Do",
-  authDomain: "happy-hour-helper.firebaseapp.com",
+  // authDomain: "happy-hour-helper.firebaseapp.com",
+  authDomain: "https://happy-hour-helper-nqwdtexbb-retriveagustin.vercel.app/",
   projectId: "happy-hour-helper",
   storageBucket: "happy-hour-helper.appspot.com",
   messagingSenderId: "385456537481",
