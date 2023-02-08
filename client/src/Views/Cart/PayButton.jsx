@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
-import CreateAdress from "../../components/CreateAdress/CreateAdress";
+import { Button } from "./Cart.styles";
+
 
 
 const PayButton = ({ productItem }) => {
@@ -25,8 +26,8 @@ const PayButton = ({ productItem }) => {
 
         return (
             <>
-                <CreateAdress />
-                <button onClick={() => handleCheckout()}>Check Out</button>
+
+                <Button onClick={() => handleCheckout()}>Check Out</Button>
             </>
         )
     }
