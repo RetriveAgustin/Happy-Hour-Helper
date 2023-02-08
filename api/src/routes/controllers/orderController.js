@@ -1,4 +1,4 @@
-const { Order } = require("../../db");
+const { Order, User } = require("../../db");
 const {
   getModels,
   getModelsById,
@@ -28,7 +28,12 @@ const postOrder = async (req, res) => {
       address,
     });
 
-    await order.addUser(user_id)
+    const user = User.findAll({
+      whrere: {
+        id: user_id
+      }
+    })
+    await user.addOrder(order);
 
     products.map(async (p) => {
       await order.addProduct(p);
