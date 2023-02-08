@@ -24,6 +24,7 @@ export const Half1 = styled.div`
   height: 100%;
   width: 50%;
 `;
+
 export const Half2 = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,10 +33,11 @@ export const Half2 = styled.div`
   height: 100%;
   width: 50%;
 `;
+
 export const Image = styled.img`
   width: 30rem;
   height: 30rem;
-  object-fit: cover;
+  object-fit: contain;
   aspect-ratio: 1 / 1;
 `;
 
@@ -45,6 +47,7 @@ export const Name = styled.h1`
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: grey;
 `;
+
 
 export const SizeButton = styled.button`
   background-color: transparent;
@@ -56,6 +59,12 @@ export const SizeButton = styled.button`
     border: solid 1px #52373c;
   }
 `;
+
+export const PriceTag = styled.h1`
+  @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+  font-family: 'Anton', sans-serif;
+  color: rgb(68, 68, 68);
+`
 
 export const ButtonsDiv = styled.div`
   display: flex;

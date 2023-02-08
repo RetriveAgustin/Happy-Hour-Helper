@@ -9,6 +9,7 @@ import {
   SizeButton,
   ButtonsDiv,
   ImgBox,
+  PriceTag,
 } from "./Detail.styles";
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -19,6 +20,7 @@ import { getProductId } from "../../redux/actions/actions";
 import { addToCart } from "../../redux/actions/actions";
 import { notify } from "../../components/Card/Card";
 import { ToastContainer } from 'react-toastify';
+import accounting from "accounting";
 
 const AddToCart = styled(Button)({
   textTransform: "none",
@@ -64,11 +66,11 @@ const Detail = () => {
                 <Half2>
                   <Name>{prd.name}</Name>
                   <div style={{ padding: "3px" }}>
-                    <SizeButton style={{ border: "solid 1px #52373c" }}>
+                    <SizeButton style={{ border: "solid 1px #52373c", padding: '0.3rem 0.5rem' }}>
                       {prd.capacity} ml
                     </SizeButton>
                   </div>
-                  <h1>$ {prd.price}</h1>
+                  <PriceTag>{accounting.formatMoney(prd.price)}</PriceTag>
                   <ButtonsDiv>
                     <AddToCart
                       variant="contained"

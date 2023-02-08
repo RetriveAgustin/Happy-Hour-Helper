@@ -54,7 +54,7 @@ function App() {
         <Route path="/add-payment-method" element={<Skeleton view={<AddPaymentMethod />} />} />
         <Route path="/add-address" element={<Skeleton view={<AddAddres />} />} />
         <Route path="/checkout-successs" element={<CheckOutSucess />} />
-
+       
         {/* ---------Rutas Admin ------------------- */}
 
         {user?.is_admin ? (
