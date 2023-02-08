@@ -26,5 +26,13 @@ module.exports = {
           } catch (error) {
                console.log(error.message)
           }
+     },
+
+     orderSuccess: async function orderSuccess() {
+          try {
+               
+          } catch (error) {
+               
+          }
      }
 }

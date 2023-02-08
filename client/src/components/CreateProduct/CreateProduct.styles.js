@@ -41,6 +41,10 @@ export const ImageContainer = styled.div`
     justify-content: space-between;
     align-items: center;
 `
+export const ImagePreview = styled.img`
+    height: 100%;
+    border: none;
+`
 
 export const CheckBox = styled.input`
     color: grey;

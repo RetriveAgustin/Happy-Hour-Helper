@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/actions/actions";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import accounting from "accounting";
 
 export const notify = () =>
   toast("¡Producto agregado al carrito!", {
@@ -53,7 +54,7 @@ const Card = ({ product }) => {
           <div className="img-box">
             <img className="image" src={img ? img : Wine} alt="not found" />
           </div>
-          <div className="price">${price}</div>
+          <div className="price">{accounting.formatMoney(price)}</div>
           <div className="name">
             <h4 className="name-tag">{name}</h4>
           </div>
@@ -65,7 +66,7 @@ const Card = ({ product }) => {
             disabled={amount === 1}
             onClick={() => setAmount(amount - 1)}
           >
-            <IndeterminateCheckBoxRoundedIcon fontSize="large" />
+            <IndeterminateCheckBoxRoundedIcon sx={{fontSize: '2.6rem'}} />
           </IconButton>
           <input
             type="number"
@@ -75,6 +76,7 @@ const Card = ({ product }) => {
               textAlign: "center",
               borderRadius: "5px",
               border: "1px solid #bdbdbd",
+              width: '80%',
             }}
           />
           <IconButton
@@ -83,7 +85,7 @@ const Card = ({ product }) => {
             color="secondary"
             onClick={() => setAmount(amount + 1)}
           >
-            <AddBoxRoundedIcon fontSize="large" />
+            <AddBoxRoundedIcon sx={{fontSize: '2.6rem'}} />
           </IconButton>
         </div>
         <div className="add-btn">
@@ -93,7 +95,7 @@ const Card = ({ product }) => {
             startIcon={<ShoppingCartOutlinedIcon />}
             value={id}
             onClick={(e) => handleAdd(e)}
-            sx={{ backgroundColor: "#52373c" }}
+            sx={{ backgroundColor: "#52373c", width: '100%'}}
           >
             Agregar
           </AddToCart>
