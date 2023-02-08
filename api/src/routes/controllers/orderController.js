@@ -11,7 +11,7 @@ const {
 const getOrder = async (req, res) => {
   try {
     const { name } = req.query;
-    const orders = await getModels(Order, name);
+    const order = await getModels(Order, name);
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: error.message });
