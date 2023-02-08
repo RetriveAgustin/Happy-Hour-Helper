@@ -12,7 +12,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
     console.log(item)
     return {
       price_data: {
-        currency: 'ars',
+        currency: 'usd',
         product_data: {
           name: item.name,
           images: [item.img],
