@@ -62,8 +62,7 @@ const Cart = () => {
                 <TableCell align="right">
                   <h3> {accounting.formatMoney(subtotalPrice)}</h3>
                 </TableCell>
-              </TableRow>
-              
+              </TableRow>              
             </TableBody>
           </Table>
           <div
