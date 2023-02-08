@@ -5,7 +5,7 @@ const {
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
 } = require("../utils/mainUtils");
 
 const getOrder = async (req, res) => {
@@ -26,20 +26,20 @@ const postOrder = async (req, res) => {
       delivered,
       canceled,
       address,
-      user_id
+      user_id,
     });
 
-    products.map(async p => {
+    products.map(async (p) => {
       await order.addProduct(p);
-    })
+    });
 
     if (order) {
-      res.status(200).json('Orden creada con éxito');
+      res.status(200).json("Orden creada con éxito");
     } else {
       res.status(400).json("Order couldn't be created");
     }
   } catch (error) {
-    res.status(400).json("cosas");
+    res.status(400).json({ error });
   }
 };
 
@@ -67,16 +67,16 @@ const restoreOrder = async (req, res) => {
   try {
     const { id } = req.body;
     const restored = await restoreModels(Order, id);
-    res.status(200).json(restored)
+    res.status(200).json(restored);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-}
+};
 
 module.exports = {
   getOrder,
   postOrder,
   putOrder,
   deleteOrder,
-  restoreOrder
+  restoreOrder,
 };
