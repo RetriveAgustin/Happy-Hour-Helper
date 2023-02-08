@@ -20,17 +20,17 @@ const getOrder = async (req, res) => {
 
 const postOrder = async (req, res) => {
   try {
-    const { date, delivered, canceled, adress, user_id } = req.body;
+    const { date, delivered, canceled, address, user_id } = req.body;
     const order = await postModels(Order, {
       date,
       delivered,
       canceled,
+      address,
+      user_id
     });
 
-    order.addUser(user_id)
-
     products.map(async p => {
-      await p.addOrder(order);
+      await order.addProduct(p);
     })
 
     if (order) {
@@ -39,7 +39,7 @@ const postOrder = async (req, res) => {
       res.status(400).json("Order couldn't be created");
     }
   } catch (error) {
-    res.status(400).json({ error });
+    res.status(400).json("cosas");
   }
 };
 
