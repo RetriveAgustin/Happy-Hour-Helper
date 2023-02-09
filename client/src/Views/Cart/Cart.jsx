@@ -19,6 +19,7 @@ const Cart = () => {
 
   const stateCart = useSelector((state) => state.root.cart);
   const totalPrice = stateCart.reduce((acc, item) => (item.price * item.amount) + acc, 0);
+  const user = useSelector(state => state.user.userLogged)
 
   const [total, setTotal] = useState(0);
 
@@ -75,7 +76,12 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            <PayButton productItem = {stateCart}/>
+            {
+              user?
+              <PayButton productItem = {stateCart}/>
+              :
+              <></>
+            }
             
           </div>
         </TableContainer>
