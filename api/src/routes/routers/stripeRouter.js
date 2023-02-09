@@ -31,7 +31,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
     });
   
   
-    // res.redirect(303, session.url);
+    res.redirect(303, session.url);
   } catch (error) {
    console.log(error);
   }

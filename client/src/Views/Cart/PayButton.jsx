@@ -17,11 +17,13 @@ const PayButton = ({ productItem }) => {
                 productItem,
                 userId: user.id
 
-            }).then((res) => {
-                if (res.data.url) {
-                    window.location.href = res.data.url
-                }
             })
+            // .then((res) => {
+            //     if (res.data.url) {
+            //         window.location.href = res.data.url
+            //     }
+            // })
+            console.log("lo que tu quieras")
         };
 
         return (
