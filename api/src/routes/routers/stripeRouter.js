@@ -30,7 +30,7 @@ stripeRouter.post("/create-checkout-session", async (req, res) => {
       cancel_url: `${process.env.CLIENT_URL}/cart`,
     });
 
-    res.send({ url: session.url });
+    res.redirect(303, session.url);
   } catch (error) {
     console.log(error);
   }

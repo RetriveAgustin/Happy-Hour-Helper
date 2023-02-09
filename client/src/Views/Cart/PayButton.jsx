@@ -12,12 +12,19 @@ const PayButton = ({ productItem }) => {
 
     if (user.id) {
         const handleCheckout = async () => {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`, {
-
-                productItem,
-                userId: user.id
-
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`, {
+                method: "POST",
+                body: productItem,
+                headers: {
+                    "Content-Type": "application/json"
+                }
             })
+            // axios.post(`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`, {
+
+                // productItem,
+                // userId: user.id
+
+            // })
             // .then((res) => {
             //     if (res.data.url) {
             //         window.location.href = res.data.url
