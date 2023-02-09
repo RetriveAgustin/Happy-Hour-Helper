@@ -11,8 +11,8 @@ const PayButton = ({ productItem }) => {
 
 
     if (user.id) {
-        const handleCheckout = () => {
-            axios.post(`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`, {
+        const handleCheckout = async () => {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`, {
 
                 productItem,
                 userId: user.id
@@ -23,13 +23,15 @@ const PayButton = ({ productItem }) => {
             //         window.location.href = res.data.url
             //     }
             // })
-            console.log("lo que tu quieras")
+            console.log(`response: ${response}`)
         };
 
         return (
             <>
-
-                <Button onClick={() => handleCheckout()}>Check Out</Button>
+                {/* <form action={`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`} method="POST">
+                    <input type="hidden" value={productItem} /> */}
+                    <Button onClick={handleCheckout}>Check Out</Button>
+                {/* </form> */}
             </>
         )
     }else{
