@@ -92,7 +92,7 @@ function EditProductButton({ props }) {
   };
 
   const handleSubmit = () => {
-    dispatch(updateProduct(props.id, input))
+    dispatch(updateProduct(input))
   }
 
   if (edit === false) {
