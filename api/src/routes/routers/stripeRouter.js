@@ -9,7 +9,7 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 stripeRouter.post('/create-checkout-session', async (req, res) => {
   try {
     const line_items = req.body.productItem.map((item) => {
-      console.log(item)
+      // console.log(item)
       return {
         price_data: {
           currency: 'usd',
@@ -31,7 +31,7 @@ stripeRouter.post('/create-checkout-session', async (req, res) => {
     });
   
   
-    res.redirect(303, session.url);
+    // res.redirect(303, session.url);
   } catch (error) {
    console.log(error);
   }
