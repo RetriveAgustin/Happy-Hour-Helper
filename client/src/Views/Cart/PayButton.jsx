@@ -17,12 +17,10 @@ const PayButton = ({ productItem }) => {
 
             })
             .then((res) => {
-                console.log(res)
                 if (res.data.url) {
                     window.location.href = res.data.url
                 }
             })
-            console.log(`response: ${response}`)
         };
 
         return (

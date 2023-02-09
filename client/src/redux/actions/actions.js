@@ -14,6 +14,7 @@ export const GET_PRODUCT_ID = "GET_PRODUCT_ID";
 export const GET_PRODUCTS_BY_CATEGORY = "GET_PRODUCTS_BY_CATEGORY";
 export const GET_PRODUCTS_BY_SUBCATEGORY = "GET_PRODUCTS_BY_SUBCATEGORY";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
 
 // ------ Carrito -----------------
 export const ADD_TO_CART = "ADD_TO_CART";
@@ -275,6 +276,23 @@ export const addToCart = (payload) => {
     payload: payload,
   };
 };
+
+export const updateProduct = (payload) => {
+  console.log(payload)
+  return async () => {
+    const res = await axios.put(`${process.env.REACT_APP_API_URL}/products/putProduct`, {
+      id: payload.id,
+      properties: {
+        name: payload.name,
+        capacity: payload.capacity,
+        img: payload.img,
+        price: payload.price,
+        stock: payload.stock
+      }
+    })
+  return res
+}
+}
 
 //SECCION ADDRESS!!!!!!!!!!!!!!!!!
 

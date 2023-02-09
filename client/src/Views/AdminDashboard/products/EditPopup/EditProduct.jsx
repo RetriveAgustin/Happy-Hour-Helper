@@ -12,6 +12,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux"
+import { updateProduct } from "../../../../redux/actions/actions";
 
 const ModalContainer = styled.div`
   width: 100%;
@@ -90,8 +91,8 @@ function EditProductButton({ props }) {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    dispatch()
+  const handleSubmit = () => {
+    dispatch(updateProduct(props.id, input))
   }
 
   if (edit === false) {
