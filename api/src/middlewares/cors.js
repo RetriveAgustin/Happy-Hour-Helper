@@ -1,4 +1,4 @@
-export const cors = (req, res, next) => {
+const cors = (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
@@ -8,3 +8,5 @@ export const cors = (req, res, next) => {
   res.header("Access-Control-Allow-Nethods", "GET,POST,PUT,DELETE,OPTIONS");
   next();
 };
+
+module.exports = { cors };
