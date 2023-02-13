@@ -18,11 +18,11 @@ const Home = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
-  
 
   const products = useSelector((state) => state.root.products);
 
   const [Checked, setChecked] = useState([]);
+  
 
   var LowFilters = products?.filter(
     (prd) =>

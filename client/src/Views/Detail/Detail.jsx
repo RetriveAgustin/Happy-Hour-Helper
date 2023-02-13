@@ -42,8 +42,6 @@ const Detail = () => {
 
   const [amount, setAmount] = useState(1)
 
-
-
   return (
     <>
       <Wrapper>
@@ -84,20 +82,6 @@ const Detail = () => {
                     >
                       Agregar
                     </AddToCart>
-                    <Link to="/cart" style={{ textDecoration: "none" }}>
-                      <Button
-                        variant="outlined"
-                        color="secondary"
-                        sx={{
-                          textTransform: "none",
-                          color: "#52373c",
-                          border: "1px solid #52373c",
-                          width: 170,
-                        }}
-                      >
-                        Comprar Ahora
-                      </Button>
-                    </Link>
                   </ButtonsDiv>
                 </Half2>
               </>

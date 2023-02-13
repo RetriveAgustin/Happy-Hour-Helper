@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { Button } from "./Cart.styles";
+import { useDispatch, useSelector } from "react-redux";
+import style from './PayButton.module.css'
 
 const PayButton = ({ productItem }) => {
     const user = useSelector((state) => state.user.userLogged)
@@ -25,10 +25,7 @@ const PayButton = ({ productItem }) => {
 
         return (
             <>
-                {/* <form action={`${process.env.REACT_APP_API_URL}/stripe/create-checkout-session`} method="POST">
-                    <input type="hidden" value={productItem} /> */}
-                    <Button onClick={handleCheckout}>Check Out</Button>
-                {/* </form> */}
+                <button className={style.payBtn} onClick={() => handleCheckout()}>Ir a Pagar</button>
             </>
         )
     }else{
