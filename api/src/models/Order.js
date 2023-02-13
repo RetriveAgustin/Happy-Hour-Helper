@@ -18,10 +18,7 @@ module.exports = (sequelize) => {
       canceled: {
         type: DataTypes.BOOLEAN,
       },
-      adress: {
-        type: DataTypes.UUID,
-      },
-      payment_method: {
+      address: {
         type: DataTypes.STRING,
       },
     },

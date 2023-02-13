@@ -13,6 +13,7 @@ import {
   CREATE_ADDRESS,
   UPDATE_ADDRESS,
   DELETE_ADDRESS,
+  UPDATE_PRODUCT
 } from "./../actions/actions";
 
 const initialState = {

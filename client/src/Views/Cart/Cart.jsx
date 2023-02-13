@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { CartCont, Button, Title } from "./Cart.styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,9 +8,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Divider, IconButton } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import Header from "../../components/Header/Header";
 import RowCart from "../../components/RowCart/RowCart";
 import { useNavigate } from "react-router-dom";
 import accounting from "accounting";
@@ -20,7 +18,8 @@ const Cart = () => {
   const navigate = useNavigate();
 
   const stateCart = useSelector((state) => state.root.cart);
-  const subtotalPrice = stateCart.reduce((acc, item) => item.price + acc, 0);
+  const totalPrice = stateCart.reduce((acc, item) => (item.price * item.amount) + acc, 0);
+  const user = useSelector(state => state.user.userLogged)
 
   const [total, setTotal] = useState(0);
 
@@ -37,9 +36,9 @@ const Cart = () => {
             <TableHead>
               <TableRow>
                 <TableCell>Product </TableCell>
-                <TableCell align="right">Price</TableCell>
-                <TableCell align="right">Qantity</TableCell>
-                <TableCell align="right">Subtotal</TableCell>
+                <TableCell>Price</TableCell>
+                <TableCell>Qantity</TableCell>
+                <TableCell>Subtotal</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -50,19 +49,21 @@ const Cart = () => {
                       img={e.img}
                       name={e.name}
                       price={e.price}
+                      bulk_discount={e.bulk_discount}
                       has_discount={e.has_discount}
+                      minimum_amount_for_bulk={e.minimum_amount_for_bulk}
                       amount={e.amount}
                     />
                   );
                 })}
               <TableRow>
                 <TableCell colSpan={5}>
-                  <h3>Subtotal</h3>
+                  <h3>Total</h3>
                 </TableCell>
                 <TableCell align="right">
-                  <h3> {accounting.formatMoney(subtotalPrice)}</h3>
+                  <h3> {accounting.formatMoney(totalPrice)}</h3>
                 </TableCell>
-              </TableRow>              
+              </TableRow>
             </TableBody>
           </Table>
           <div
@@ -75,7 +76,12 @@ const Cart = () => {
           >
             <Button onClick={() => navigate("/")}>Keep buying</Button>
 
-            {/* <PayButton productItem = {stateCart}/> */}
+            {
+              user?
+              <PayButton productItem = {stateCart}/>
+              :
+              <></>
+            }
             
           </div>
         </TableContainer>

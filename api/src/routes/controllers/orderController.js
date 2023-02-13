@@ -1,17 +1,17 @@
-const { Order } = require("../../db");
+const { Order, User } = require("../../db");
 const {
   getModels,
   getModelsById,
   postModels,
   putModels,
   deleteModels,
-  restoreModels
+  restoreModels,
 } = require("../utils/mainUtils");
 
 const getOrder = async (req, res) => {
   try {
     const { name } = req.query;
-    const orders = await getModels(Order, name);
+    const order = await getModels(Order, name);
     res.status(200).json(order);
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -20,20 +20,32 @@ const getOrder = async (req, res) => {
 
 const postOrder = async (req, res) => {
   try {
-    const { date, delivered, canceled, adress, payment_method } = req.body;
+    const { date, delivered, canceled, address, user_id } = req.body;
     const order = await postModels(Order, {
       date,
       delivered,
       canceled,
-      adress,
-      payment_method,
+      address,
     });
+
+    const user = User.findAll({
+      whrere: {
+        id: user_id
+      }
+    })
+    await user.addOrder(order);
+
+    products.map(async (p) => {
+      await order.addProduct(p);
+    });
+
     if (order) {
-      res.status(200).json(order);
+      res.status(200).json("Orden creada con éxito");
     } else {
       res.status(400).json("Order couldn't be created");
     }
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error.message });
   }
 };
@@ -62,16 +74,16 @@ const restoreOrder = async (req, res) => {
   try {
     const { id } = req.body;
     const restored = await restoreModels(Order, id);
-    res.status(200).json(restored)
+    res.status(200).json(restored);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-}
+};
 
 module.exports = {
   getOrder,
   postOrder,
   putOrder,
   deleteOrder,
-  restoreOrder
+  restoreOrder,
 };

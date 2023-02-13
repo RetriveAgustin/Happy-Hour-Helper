@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import ListIcon from "@mui/icons-material/List";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { useEffect } from "react";
+import { useDispatch } from "react-redux"
+import { updateProduct } from "../../../../redux/actions/actions";
 
 const ModalContainer = styled.div`
   width: 100%;
@@ -54,6 +55,8 @@ function EditProductButton({ props }) {
     borderRadius: "5px",
   };
 
+  const dispatch = useDispatch();
+
   // Global States
   const [open, setOpen] = useState(false);
 
@@ -87,6 +90,10 @@ function EditProductButton({ props }) {
   const HandleInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = () => {
+    dispatch(updateProduct(input))
+  }
 
   if (edit === false) {
     return (
@@ -194,7 +201,7 @@ function EditProductButton({ props }) {
 
               <ButtonContainer>
                 <Button onClick={() => setEdit(false)}>Cancelar</Button>
-                <Button>Confirmar</Button>
+                <Button onClick={ handleSubmit }>Confirmar</Button>
               </ButtonContainer>
             </ModalFormContainer>
           </Box>
