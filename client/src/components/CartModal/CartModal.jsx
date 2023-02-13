@@ -7,6 +7,7 @@ import cartpic from "./cart.svg";
 import accounting from "accounting";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { addToCart, removeFromCart } from "../../redux/actions/actions";
+import PayButton from "../../Views/Cart/PayButton";
 
 const CartModal = ({ active }) => {
   const closeSidebar = () => {
@@ -15,6 +16,11 @@ const CartModal = ({ active }) => {
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.root.cart);
+  const totalPrice = cart.reduce(
+    (acc, item) => item.price * item.amount + acc,
+    0
+  );
+  const user = useSelector((state) => state.user.userLogged);
 
   return (
     <div className={style.box}>
@@ -82,12 +88,26 @@ const CartModal = ({ active }) => {
           })
         )}
       </div>
-      <div className={style.checkout}>
-        <div className={style.totalBox}>
-          <h3 className={style.total}>Total a pagar</h3>
-          <p>Total de los productos: </p>
+      {cart.length ? (
+        <div className={style.checkout}>
+          <div className={style.totalBox}>
+            <h3 className={style.total}>Total a pagar</h3>
+            <div className={style.totalSum}>
+              <p className={style.p}>Total de los productos:</p>
+              <p className={style.sum}>{accounting.formatMoney(totalPrice)}</p>
+            </div>
+          </div>
+          <div className={style.payLogin}>
+            {user ? (
+              <PayButton productItem={cart} />
+            ) : (
+              <div className={style.login}>Para comprar debes ingresar</div>
+            )}
+          </div>
         </div>
-      </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

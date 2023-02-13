@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import CreateAdress from "../../components/CreateAdress/CreateAdress";
-
+import style from './PayButton.module.css'
 
 const PayButton = ({ productItem }) => {
     const user = useSelector((state) => state.user.userLogged)
@@ -25,7 +24,7 @@ const PayButton = ({ productItem }) => {
 
         return (
             <>
-                <button onClick={() => handleCheckout()}>Check Out</button>
+                <button className={style.payBtn} onClick={() => handleCheckout()}>Ir a Pagar</button>
             </>
         )
     }

@@ -1,0 +1,10 @@
+.payBtn {
+     background-color: #52373c;
+     border: none;
+     color: white;
+     width: 5rem;
+     height: 2rem;
+     border-radius: 4px;
+     box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+     cursor: pointer;
+}
