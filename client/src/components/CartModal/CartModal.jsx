@@ -31,13 +31,12 @@ const CartModal = ({ active }) => {
       </IconButton>
       <div className={style.cartBox}>
         {!cart.length ? (
-          <>
-            {" "}
+          <div className={style.empty}>
             <img src={cartpic} width="100px" />
             <h3 style={{ color: "white", margin: "1rem" }}>
               Tu carrito está vacío
-            </h3>{" "}
-          </>
+            </h3>
+          </div>
         ) : (
           cart.map((el) => {
             return (

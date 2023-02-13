@@ -1,125 +1,138 @@
 .box {
-     position: fixed;
-     display: flex;
-     flex-direction: column;
-     justify-content: flex-start;
-     padding: 1.7rem;
-     background-color: rgb(46, 46, 46);
-     height: 100%;
-     top: 0px;
-     right: 0px;
-     width: 33rem;
-     z-index: 100000;
-     box-shadow: 0 0 0 2px rgb(56, 56, 56), 0.3em 0.3em 1em 1em rgba(0, 0, 0, 0.3);
-     animation: showBar .2s;
-     overflow-y: scroll;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.7rem;
+  background-color: rgb(46, 46, 46);
+  height: 100%;
+  top: 0px;
+  right: 0px;
+  width: 33rem;
+  z-index: 100000;
+  box-shadow: 0 0 0 2px rgb(56, 56, 56), 0.3em 0.3em 1em 1em rgba(0, 0, 0, 0.3);
+  animation: showBar 0.2s;
+  overflow-y: scroll;
 }
 
 ::-webkit-scrollbar {
-     width: 0.8rem;
-   }
+  width: 0.8rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&display=swap');
 
 .cartName {
-     color: white;
+  color: white;
+  font-family: 'Lobster Two', cursive;
+  font-size: 1.8rem;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  transform: translateY(16rem);
 }
 
 .cartBox {
-     display: flex;
-     flex-direction: column;
-     border-top: solid 1px rgb(75, 75, 75);
-     height: 100vh;
-     margin-top: 2rem;
-     padding: 1rem;
-     align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px rgb(75, 75, 75);
+  height: 100vh;
+  margin-top: 2rem;
+  padding: 1rem;
+  align-items: center;
 }
 
 .prdBox {
-     display: flex;
-     align-items: center;
-     margin: 0.5rem;
-     width: 28rem;
-     height: 8rem;
-     border-radius: 10px;
-     padding: 10px;
-     background-color: #52373c;
-     box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  margin: 0.5rem;
+  width: 28rem;
+  height: 8rem;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #52373c;
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
 }
 
 .prdInfo {
-     display: flex;
-     flex-direction: column;
-     width: 17rem;
-     height: 90%;
-     margin: 1rem;
-     justify-content: space-around;
-     align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 17rem;
+  height: 90%;
+  margin: 1rem;
+  justify-content: space-around;
+  align-items: flex-start;
 }
 
 .imgBox {
-     display: flex;
-     width: 5rem;
-     height: 5rem;
-     border: solid 1px white;    
-     background-color: white;
-     justify-content: center;
-     border-radius: 10px;
-     overflow: hidden;
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+  border: solid 1px white;
+  background-color: white;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .cartImg {
-     object-fit: cover;
+  object-fit: cover;
 }
 
 .prdName {
-     color: white;
-     font-size: 0.8rem;
+  color: white;
+  font-size: 0.8rem;
 }
 
 .size {
-     color: rgb(108, 108, 108);
-     font-size: 0.8rem;
+  color: rgb(108, 108, 108);
+  font-size: 0.8rem;
 }
 
 .price {
-     font-weight: bolder;
-     color: rgb(22, 22, 22);
+  font-weight: bolder;
+  color: rgb(22, 22, 22);
 }
 
 .delQuant {
-     display: flex;
-     flex-direction: column;
-     align-items: center;
-     gap: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
 }
 
 .quant {
-     display: flex;
-     background-color: beige;
-     width: 1.5rem;
-     font-size: 0.8rem;
-     height: 1.5rem;
-     align-items: center;
-     justify-content: center;
-     border-radius: 5px;
+  display: flex;
+  background-color: beige;
+  width: 1.5rem;
+  font-size: 0.8rem;
+  height: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
 }
 
 .quantBox {
-     display: flex;
+  display: flex;
 }
 
 .quantBtn {
-     background-color: transparent;
-     border: none;
-     margin: 5px;
-     color: white;
-     cursor: pointer;
+  background-color: transparent;
+  border: none;
+  margin: 5px;
+  color: white;
+  cursor: pointer;
 }
 
 @keyframes showBar {
-     0% {
-          width: 0;
-     }
-     100% {
-          width: 33rem;
-     }
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 33rem;
+  }
 }
