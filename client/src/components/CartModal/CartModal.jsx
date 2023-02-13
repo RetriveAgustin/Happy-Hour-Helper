@@ -63,7 +63,7 @@ const CartModal = ({ active }) => {
                       onClick={() =>
                         el.amount > 1
                           ? dispatch(addToCart({ ...el, amount: -1 }))
-                          : dispatch(removeFromCart(el.name))
+                          : null
                       }
                     >
                       -
@@ -81,6 +81,12 @@ const CartModal = ({ active }) => {
             );
           })
         )}
+      </div>
+      <div className={style.checkout}>
+        <div className={style.totalBox}>
+          <h3 className={style.total}>Total a pagar</h3>
+          <p>Total de los productos: </p>
+        </div>
       </div>
     </div>
   );

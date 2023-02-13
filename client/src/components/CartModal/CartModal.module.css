@@ -128,6 +128,21 @@
   cursor: pointer;
 }
 
+.checkout {
+  background-color: #bababa;
+  display: flex;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 7rem;
+  border-top-left-radius: 15px; 
+  padding: 1rem;
+}
+
+.total {
+  font-family: 'Lobster Two', cursive;
+}
+
 @keyframes showBar {
   0% {
     width: 0;
