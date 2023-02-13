@@ -22,7 +22,7 @@ import { Slider } from "@mui/material";
 export default function Filters({ render, setRender, Checked, setChecked }) {
   const dispatch = useDispatch();
 
-  const [val, setVal] = useState([0, 99999])
+  const [val, setVal] = useState([0, 40000])
 
   const updateRange = (e, data) => {
     setVal(data)
@@ -63,7 +63,7 @@ export default function Filters({ render, setRender, Checked, setChecked }) {
           <Slider
         value={val}
         min={0}
-        max={99999}
+        max={40000}
         sx={{width: '14rem', alignSelf:'center', marginTop: '1rem'}}
         onChange={updateRange}
         valueLabelDisplay="auto"
