@@ -13,11 +13,15 @@ import { Badge } from "@mui/material";
 import LoginBtn from "./loginBtn/LoginBtn";
 import RegisterBtn from "./registerBtn/RegisterBtn";
 import { Stack } from "@mui/system";
+import CartModal from "../CartModal/CartModal";
 
 function NavBar() {
   const navigate = useNavigate();
 
   const [searchValue, setSearchValue] = useState("");
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar)
 
   const cart = useSelector((state) => state.root.cart);
   const user = localStorage.getItem("User_ID");
@@ -57,7 +61,7 @@ function NavBar() {
           </Stack>
         )}
 
-        <IconButton onClick={() => navigate("/cart")}>
+        <IconButton onClick={showSidebar}>
           <Badge
             badgeContent={cart.length}
             anchorOrigin={{
@@ -70,6 +74,7 @@ function NavBar() {
           </Badge>
         </IconButton>
       </LinkDiv>
+      {sidebar && <CartModal active={setSidebar} />}
     </NavContainer>
   );
 }

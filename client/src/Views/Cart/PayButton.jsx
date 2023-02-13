@@ -25,7 +25,6 @@ const PayButton = ({ productItem }) => {
 
         return (
             <>
-                <CreateAdress />
                 <button onClick={() => handleCheckout()}>Check Out</button>
             </>
         )
